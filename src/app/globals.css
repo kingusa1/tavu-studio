@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  :root {
+    /* Enhanced Warm Sand / Silk Light Mode - Made transparent */
+    --background: 0 0% 100% / 0%;
+    /* Transparent background to show main image */
+    --foreground: 220 26% 14%;
+    /* #1A202C - Deep charcoal */
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 26% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 26% 14%;
+
+    --primary: 215 28% 25%;
+    /* Enhanced Deep Slate - slightly lighter for better contrast */
+    --primary-foreground: 48 30% 98%;
+
+    --secondary: 42 52% 85%;
+    /* Enhanced Warm Beige - more saturated */
+    --secondary-foreground: 215 28% 25%;
+
+    --muted: 40 25% 95%;
+    /* Subtle warm gray */
+    --muted-foreground: 215 15% 50%;
+
+    --accent: 43 74% 66%;
+    /* Enhanced Rich Gold - more vibrant */
+    --accent-foreground: 215 28% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 40 20% 88%;
+    --input: 40 20% 92%;
+    --ring: 43 74% 66%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Enhanced Deep Ocean / Sanctuary Dark Mode */
+    --background: 223 47% 8%;
+    /* #0A0F1C - Slightly lighter for better visibility */
+    --foreground: 40 20% 96%;
+    /* Brighter off-white */
+
+    --card: 223 47% 11%;
+    /* Slightly lighter cards for better layering */
+    --card-foreground: 40 20% 96%;
+
+    --popover: 223 47% 11%;
+    --popover-foreground: 40 20% 96%;
+
+    --primary: 40 20% 96%;
+    --primary-foreground: 223 47% 8%;
+
+    --secondary: 223 35% 18%;
+    /* Enhanced secondary - more visible */
+    --secondary-foreground: 40 20% 96%;
+
+    --muted: 223 30% 16%;
+    --muted-foreground: 215 20% 70%;
+
+    --accent: 43 82% 58%;
+    /* Enhanced Rich Gold - brighter and more saturated */
+    --accent-foreground: 223 47% 8%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 223 30% 18%;
+    --input: 223 30% 18%;
+    --ring: 43 82% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-accent/30 selection:text-accent-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headline tracking-tight;
+  }
+
+  h1 {
+    @apply text-5xl md:text-7xl font-bold leading-[1.1];
+  }
+
+  h2 {
+    @apply text-4xl md:text-6xl font-bold leading-[1.15];
+  }
+
+  h3 {
+    @apply text-3xl md:text-5xl font-semibold leading-[1.2];
+  }
+
+  h4 {
+    @apply text-2xl md:text-4xl font-semibold leading-[1.25];
+  }
+
+  p {
+    @apply font-body leading-relaxed;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--accent) / 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent) / 0.5);
+  }
+}
+
+/* Custom Utilities for Premium Feel */
+@layer utilities {
+  .glass {
+    @apply bg-background/40 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-black/5;
+  }
+
+  .glass-dark {
+    @apply bg-black/30 backdrop-blur-2xl border border-white/5 shadow-2xl shadow-black/10;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text utility */
+  .text-gradient-gold {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-accent via-accent/80 to-accent;
+  }
+}
