@@ -36,15 +36,16 @@ export default function Contact() {
                                 <div>
                                     <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">Address</h3>
                                     <a
-                                        href="https://maps.google.com/?q=CHXW%2BC3R+Abu+Dhabi"
+                                        href="https://share.google/H65MSpZCTdk6RSqrH"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-start gap-4 group"
                                     >
                                         <MapPin className="w-5 h-5 text-accent mt-1 shrink-0 group-hover:scale-110 transition-transform" />
                                         <p className="text-lg font-light leading-relaxed text-foreground/80 group-hover:text-accent transition-colors">
-                                            TAVÚ Wellness Club<br />
-                                            Al Raha Blvd, Al Seef<br />
+                                            TAVÚ Wellness Studio<br />
+                                            Shop 1, Crescent Residence<br />
+                                            Plot 12, Sector RBW4, Shatie Al Raha<br />
                                             Abu Dhabi, UAE
                                         </p>
                                     </a>
@@ -55,7 +56,8 @@ export default function Contact() {
                                     <div className="flex items-start gap-4">
                                         <Clock className="w-5 h-5 text-accent mt-1 shrink-0" />
                                         <p className="text-lg font-light leading-relaxed text-foreground/80">
-                                            Daily: 7:00 AM – 9:00 PM
+                                            Weekdays: 8am - 9pm<br />
+                                            Weekends: 9am - 6pm
                                         </p>
                                     </div>
                                 </div>
@@ -89,7 +91,7 @@ export default function Contact() {
                     {/* Map Column */}
                     <MotionWrapper delay={0.2} direction="up">
                         <div className="h-full min-h-[400px] w-full rounded-2xl border border-white/10 overflow-hidden relative group">
-                            {/* Google Maps Embed - Al Zeina, Abu Dhabi */}
+                            {/* Google Maps Embed - Crescent Residence, Al Raha Beach */}
                             <iframe
                                 src="https://maps.google.com/maps?q=CHXW%2BC3R+Abu+Dhabi&t=&z=17&ie=UTF8&iwloc=&output=embed"
                                 width="100%"
@@ -99,7 +101,7 @@ export default function Contact() {
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 className="absolute inset-0"
-                                title="TAVU Wellness Location - Al Raha Blvd, Abu Dhabi"
+                                title="TAVÚ Wellness Studio - Crescent Residence, Al Raha Beach, Abu Dhabi"
                             />
                         </div>
                     </MotionWrapper>

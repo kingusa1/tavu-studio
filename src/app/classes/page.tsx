@@ -1,3 +1,4 @@
+"use client";
 
 import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
@@ -5,6 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
 import Image from 'next/image';
+import HealCodePricingWidget from '@/components/mindbody/HealCodePricingWidget';
 
 const reformerClasses = [
     {
@@ -41,49 +43,23 @@ const reformerClasses = [
 
 const breathingClasses = [
     {
-        name: 'TAVU FLOW',
+        name: 'TAVÚ FLOW',
         tagline: 'Yin-to-Yang Yoga Ritual',
         description: 'Blending deep grounding with gentle, breath-led flow. Find balance between stillness and movement.',
         level: 'All Levels'
     },
     {
-        name: 'TAVU RELEASE',
+        name: 'TAVÚ RELEASE',
         tagline: 'Myofascial & Yin Mobility',
         description: 'Myofascial softening combined with Yin mobility to unwind tension and reset the body completely.',
         level: 'All Levels'
     },
     {
-        name: 'TAVU CORE',
+        name: 'TAVÚ CORE',
         tagline: 'Mat Pilates Ritual',
         description: 'Mat Pilates ritual mixing grounding alignment with dynamic core strength. Build your center.',
         level: 'All Levels'
-    },
-    {
-        name: 'TAVU MOBILITY',
-        tagline: 'Mobility-Flow Ritual',
-        description: 'Open joints, expand range, and connect breath to movement. Unlock your body\'s full potential.',
-        level: 'All Levels'
-    },
-    {
-        name: 'TAVU POWER',
-        tagline: 'Sculpting & Barre-Inspired',
-        description: 'Sculpting and barre-inspired ritual focused on heat, rhythm, and rising strength. Feel the burn.',
-        level: 'All Levels'
     }
-];
-
-const reformerPricing = [
-    { name: 'Drop-In', price: '160 AED', validity: 'Single class', bonus: null },
-    { name: '8-Class Pack', price: '1,260 AED', validity: '45 days', bonus: '+ 1 Contrast Therapy' },
-    { name: '10-Class Pack', price: '1,420 AED', validity: '60 days', bonus: '+ 2 Contrast Therapy', popular: true },
-    { name: '16-Class Pack', price: '2,020 AED', validity: '75 days', bonus: '+ 2 Contrast Therapy' }
-];
-
-const breathingPricing = [
-    { name: 'Drop-In', price: '120 AED', validity: 'Any Breathing Room class', bonus: null },
-    { name: '5-Class Pack', price: '550 AED', validity: '30 days', bonus: null },
-    { name: '10-Class Pack', price: '1,020 AED', validity: '45 days', bonus: null, popular: true },
-    { name: 'Unlimited Monthly', price: '800 AED', validity: 'No rollovers', bonus: 'Auto-renew optional' }
 ];
 
 function getLevelColor(level: string) {
@@ -107,7 +83,7 @@ export default function ClassesPage() {
                 <div className="absolute inset-0">
                     <Image
                         src="/pillar-movement.png"
-                        alt="TAVU Movement Classes"
+                        alt="TAVÚ Movement Classes"
                         fill
                         className="object-cover opacity-60"
                         priority
@@ -117,13 +93,77 @@ export default function ClassesPage() {
                     <MotionWrapper delay={0} direction="up">
                         <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Our Classes</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-light">
-                            Experience the TAVU method through intentionally designed classes that blend movement, breath, and recovery.
+                            Experience the TAVÚ method through intentionally designed classes that blend movement and breath.
                         </p>
                     </MotionWrapper>
                 </div>
             </section>
 
             <main className="flex-grow">
+                {/* Pre-Opening Packages Section - Moved to Top */}
+                <section className="py-16 bg-accent/5 border-b border-accent/20">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-10">
+                                <span className="inline-block bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold mb-4">
+                                    Pre-Opening Offer
+                                </span>
+                                <h2 className="text-3xl md:text-4xl font-headline text-primary">TAVÚ Pre-Opening — Limited Access</h2>
+                            </div>
+
+                            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                                {/* TAVÚ FORM - Reformer */}
+                                <div className="bg-card border border-border p-8 rounded-2xl text-center hover:shadow-lg transition-shadow">
+                                    <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FORM</h3>
+                                    <p className="text-sm text-accent font-medium mb-4">Reformer Focus</p>
+                                    <p className="text-sm text-foreground/70 mb-4">Focused. Structured. Reformer-only.</p>
+                                    <p className="text-4xl font-headline text-accent mb-2">999 AED</p>
+                                    <p className="text-sm text-foreground/60 mb-2">Validity: 60 days</p>
+                                    <p className="text-sm text-foreground/70 mb-6">10 Reformer Pilates classes</p>
+                                    <HealCodePricingWidget
+                                        serviceId="100073"
+                                        linkType="pricing-link"
+                                        buttonText="Get Your Pass"
+                                    />
+                                </div>
+
+                                {/* TAVÚ FOUNDATION - Mat */}
+                                <div className="bg-card border border-border p-8 rounded-2xl text-center hover:shadow-lg transition-shadow">
+                                    <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FOUNDATION</h3>
+                                    <p className="text-sm text-accent font-medium mb-4">Mat Series</p>
+                                    <p className="text-sm text-foreground/70 mb-4">A softer entry into the TAVÚ method.</p>
+                                    <p className="text-4xl font-headline text-accent mb-2">599 AED</p>
+                                    <p className="text-sm text-foreground/60 mb-2">Validity: 45 days</p>
+                                    <p className="text-sm text-foreground/70 mb-6">8 Mat Pilates / Yoga / Mobility classes</p>
+                                    <HealCodePricingWidget
+                                        serviceId="100075"
+                                        linkType="pricing-link"
+                                        buttonText="Get Your Pass"
+                                    />
+                                </div>
+
+                                {/* TAVÚ FLOW - Combined */}
+                                <div className="bg-card border border-border p-8 rounded-2xl text-center hover:shadow-lg transition-shadow ring-2 ring-accent">
+                                    <span className="inline-block bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-semibold mb-4">
+                                        Best Value
+                                    </span>
+                                    <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FLOW</h3>
+                                    <p className="text-sm text-accent font-medium mb-4">Reformer + Mat</p>
+                                    <p className="text-sm text-foreground/70 mb-4">Balanced movement with flexibility.</p>
+                                    <p className="text-4xl font-headline text-accent mb-2">1,049 AED</p>
+                                    <p className="text-sm text-foreground/60 mb-2">Validity: 60 days</p>
+                                    <p className="text-sm text-foreground/70 mb-6">6 Reformer + 4 Mat classes</p>
+                                    <HealCodePricingWidget
+                                        serviceId="119"
+                                        linkType="contract-link"
+                                        buttonText="Get Your Pass"
+                                    />
+                                </div>
+                            </div>
+                        </MotionWrapper>
+                    </div>
+                </section>
+
                 {/* Reformer Room Section */}
                 <section className="py-20 lg:py-28 bg-background">
                     <div className="container mx-auto px-4">
@@ -141,18 +181,27 @@ export default function ClassesPage() {
                                 <div>
                                     <span className="text-accent font-medium text-sm tracking-wider uppercase">Movement</span>
                                     <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Reformer Room</h2>
-                                    <p className="text-lg text-foreground/70 mb-6 font-light leading-relaxed">
-                                        Small group classes with a maximum of 6 participants. Each 45-minute session challenges your body while maintaining alignment and breath connection.
+                                    <p className="text-lg text-foreground/80 mb-2 font-medium">
+                                        Small-group reformer classes, limited to 8 participants.
                                     </p>
+                                    <p className="text-lg text-foreground/70 mb-6 font-light leading-relaxed">
+                                        A 50-minute, low-impact practice on the reformer—designed to build strength, control, mobility, and alignment. Adaptable, precise, and quietly challenging.
+                                    </p>
+                                    <Link
+                                        href="/schedule"
+                                        className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all"
+                                    >
+                                        Book Your Reformer
+                                    </Link>
                                 </div>
                             </div>
                         </MotionWrapper>
 
                         {/* Class Cards */}
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                             {reformerClasses.map((cls, index) => (
                                 <MotionWrapper key={index} delay={0.05 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group h-full">
+                                    <div className="bg-card border border-border p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
                                         <div className="flex items-center justify-between mb-3">
                                             <h3 className="font-headline text-xl text-primary group-hover:text-accent transition-colors">{cls.name}</h3>
                                             <span className={`text-xs px-2 py-0.5 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
@@ -160,38 +209,17 @@ export default function ClassesPage() {
                                             </span>
                                         </div>
                                         <p className="text-sm font-medium text-accent mb-3 uppercase tracking-wide text-xs">{cls.tagline}</p>
-                                        <p className="text-sm text-foreground/70 leading-relaxed">{cls.description}</p>
+                                        <p className="text-sm text-foreground/70 leading-relaxed flex-grow">{cls.description}</p>
+                                        <Link
+                                            href="/schedule"
+                                            className="mt-4 inline-flex items-center justify-center h-10 px-4 rounded-full border border-accent text-accent font-medium hover:bg-accent hover:text-accent-foreground transition-all text-sm"
+                                        >
+                                            Reserve Your Place
+                                        </Link>
                                     </div>
                                 </MotionWrapper>
                             ))}
                         </div>
-
-                        {/* Pricing Table */}
-                        <MotionWrapper delay={0.3} direction="up">
-                            <div className="glass p-8 rounded-3xl border border-white/10">
-                                <h3 className="text-2xl font-headline text-primary mb-8 text-center">Reformer Pricing</h3>
-                                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                                    {reformerPricing.map((tier, index) => (
-                                        <div
-                                            key={index}
-                                            className={`bg-white/5 p-6 rounded-2xl border border-white/10 text-center transition-all duration-300 hover:bg-white/10 ${tier.popular ? 'ring-1 ring-accent/50 bg-accent/5' : ''}`}
-                                        >
-                                            {tier.popular && (
-                                                <span className="text-[10px] uppercase tracking-widest bg-accent text-white px-2 py-1 rounded-full mb-3 inline-block">
-                                                    Most Popular
-                                                </span>
-                                            )}
-                                            <h4 className="font-medium text-primary mb-2">{tier.name}</h4>
-                                            <p className="text-3xl font-headline text-accent mb-2">{tier.price}</p>
-                                            <p className="text-xs text-foreground/50">{tier.validity}</p>
-                                            {tier.bonus && (
-                                                <p className="text-xs text-emerald-500 mt-2 font-medium">{tier.bonus}</p>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </MotionWrapper>
                     </div>
                 </section>
 
@@ -203,9 +231,18 @@ export default function ClassesPage() {
                                 <div className="order-2 lg:order-1">
                                     <span className="text-accent font-medium text-sm tracking-wider uppercase">Breath</span>
                                     <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Breathing Room</h2>
-                                    <p className="text-lg text-foreground/70 mb-6 font-light leading-relaxed">
-                                        Yoga, Pilates, and movement classes. Sessions range from 45-60 minutes, designed to connect breath to body.
+                                    <p className="text-lg text-foreground/80 mb-2 font-medium">
+                                        A space dedicated to slowing down.
                                     </p>
+                                    <p className="text-lg text-foreground/70 mb-6 font-light leading-relaxed">
+                                        Breath-led practices designed to restore balance, release tension, and reconnect you to your body. Sessions range from 45–60 minutes, inviting softness, presence, and quiet strength.
+                                    </p>
+                                    <Link
+                                        href="/schedule"
+                                        className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all"
+                                    >
+                                        Book Your Class
+                                    </Link>
                                 </div>
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
                                     <Image
@@ -220,112 +257,28 @@ export default function ClassesPage() {
                         </MotionWrapper>
 
                         {/* Class Cards */}
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                             {breathingClasses.map((cls, index) => (
                                 <MotionWrapper key={index} delay={0.05 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-5 rounded-xl hover:shadow-md transition-shadow">
+                                    <div className="bg-card border border-border p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
                                         <div className="flex items-center justify-between mb-2">
-                                            <h3 className="font-semibold text-lg text-primary">{cls.name}</h3>
+                                            <h3 className="font-semibold text-lg text-primary group-hover:text-accent transition-colors">{cls.name}</h3>
                                             <span className={`text-xs px-2 py-1 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
                                                 {cls.level}
                                             </span>
                                         </div>
                                         <p className="text-sm font-medium text-accent mb-2">{cls.tagline}</p>
-                                        <p className="text-sm text-foreground/70">{cls.description}</p>
+                                        <p className="text-sm text-foreground/70 flex-grow">{cls.description}</p>
+                                        <Link
+                                            href="/schedule"
+                                            className="mt-4 inline-flex items-center justify-center h-10 px-4 rounded-full border border-accent text-accent font-medium hover:bg-accent hover:text-accent-foreground transition-all text-sm"
+                                        >
+                                            Reserve Your Place
+                                        </Link>
                                     </div>
                                 </MotionWrapper>
                             ))}
                         </div>
-
-                        {/* Pricing Table */}
-                        <MotionWrapper delay={0.3} direction="up">
-                            <div className="bg-card border border-border p-6 md:p-8 rounded-2xl">
-                                <h3 className="text-xl font-semibold text-primary mb-6">Breathing Room Pricing</h3>
-                                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                                    {breathingPricing.map((tier, index) => (
-                                        <div
-                                            key={index}
-                                            className={`bg-muted/50 p-4 rounded-xl ${tier.popular ? 'ring-2 ring-accent' : ''}`}
-                                        >
-                                            {tier.popular && (
-                                                <span className="text-xs bg-accent text-accent-foreground px-2 py-0.5 rounded-full font-medium mb-2 inline-block">
-                                                    Most Popular
-                                                </span>
-                                            )}
-                                            <h4 className="font-semibold text-primary">{tier.name}</h4>
-                                            <p className="text-2xl font-bold text-accent my-1">{tier.price}</p>
-                                            <p className="text-sm text-foreground/60">{tier.validity}</p>
-                                            {tier.bonus && (
-                                                <p className="text-xs text-emerald-600 mt-2 font-medium">{tier.bonus}</p>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </MotionWrapper>
-                    </div>
-                </section>
-
-                {/* Soft Opening Special */}
-                <section className="py-16 bg-accent/5 border-y border-accent/20">
-                    <div className="container mx-auto px-4">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <div className="text-center mb-8">
-                                <span className="inline-block bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                                    Founding Member Offer
-                                </span>
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary">Soft Opening Special</h2>
-                                <p className="text-foreground/70 mt-2">Limited 45-day founding member access</p>
-                            </div>
-
-                            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                                <div className="bg-card border border-border p-6 rounded-xl text-center">
-                                    <h3 className="font-semibold text-primary mb-2">Reformer 10-Class Pack</h3>
-                                    <p className="text-sm text-foreground/50 line-through">1,420 AED</p>
-                                    <p className="text-3xl font-bold text-accent">1,250 AED</p>
-                                    <span className="inline-block bg-emerald-50 text-emerald-700 text-xs px-2 py-1 rounded-full mt-2 font-medium border border-emerald-200">
-                                        Save 12%
-                                    </span>
-                                </div>
-                                <div className="bg-card border border-border p-6 rounded-xl text-center">
-                                    <h3 className="font-semibold text-primary mb-2">Breathing 10-Class Pack</h3>
-                                    <p className="text-sm text-foreground/50 line-through">1,020 AED</p>
-                                    <p className="text-3xl font-bold text-accent">900 AED</p>
-                                    <span className="inline-block bg-emerald-50 text-emerald-700 text-xs px-2 py-1 rounded-full mt-2 font-medium border border-emerald-200">
-                                        Save 12%
-                                    </span>
-                                </div>
-                            </div>
-                        </MotionWrapper>
-                    </div>
-                </section>
-
-                {/* Policies */}
-                <section className="py-12 bg-background">
-                    <div className="container mx-auto px-4">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <div className="bg-card border border-border p-6 rounded-2xl max-w-4xl mx-auto">
-                                <h3 className="text-lg font-semibold text-primary mb-4">Class Policies</h3>
-                                <div className="grid md:grid-cols-2 gap-4 text-sm text-foreground/70">
-                                    <div className="flex items-start gap-2">
-                                        <span className="text-accent font-bold">•</span>
-                                        <span><strong>Cancellation:</strong> 12-hour strict cancellation policy</span>
-                                    </div>
-                                    <div className="flex items-start gap-2">
-                                        <span className="text-accent font-bold">•</span>
-                                        <span><strong>Minimum Attendance:</strong> 4 people or class may be cancelled</span>
-                                    </div>
-                                    <div className="flex items-start gap-2">
-                                        <span className="text-accent font-bold">•</span>
-                                        <span><strong>Late Arrival:</strong> 10+ mins late = cannot attend</span>
-                                    </div>
-                                    <div className="flex items-start gap-2">
-                                        <span className="text-accent font-bold">•</span>
-                                        <span><strong>Class Types:</strong> Ladies-only and mixed classes available</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </MotionWrapper>
                     </div>
                 </section>
 
@@ -333,9 +286,9 @@ export default function ClassesPage() {
                 <section className="py-16 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-3xl md:text-4xl font-headline mb-4">Ready to Begin Your Journey?</h2>
+                            <h2 className="text-3xl md:text-4xl font-headline mb-4">Begin When Ready</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                                Book your first class today and experience the transformative power of the TAVU method.
+                                Explore the schedule and book your class.
                             </p>
                             <Link
                                 href="/schedule"

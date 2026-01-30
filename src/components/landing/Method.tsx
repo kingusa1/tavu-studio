@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 
 const pillars = [
@@ -20,13 +20,13 @@ const pillars = [
       </svg>
     ),
     color: "blue",
-    stats: { classes: "15+", duration: "55 min", level: "All Levels" }
+    stats: { classes: "15+", duration: "50 min", level: "All Levels" }
   },
   {
     number: "02",
     title: "Breath",
-    subtitle: "Breathwork Rituals",
-    description: "Ancient techniques meet modern science. Regulate your nervous system and tap into states of deep calm or energized focus.",
+    subtitle: "Breathing Room",
+    description: "Breath-led practices designed to restore balance, release tension, and reconnect you to your body. Inviting softness, presence, and quiet strength.",
     benefits: ["Stress Relief", "Energy", "Clarity", "Release"],
     image: "/pillar-breath.png",
     icon: (
@@ -35,25 +35,7 @@ const pillars = [
       </svg>
     ),
     color: "emerald",
-    stats: { classes: "10+", duration: "45 min", level: "Beginner" }
-  },
-  {
-    number: "03",
-    title: "Recovery",
-    subtitle: "Contrast Therapy",
-    description: "The hot-cold ritual that transforms body and mind. Alternating sauna heat and cold plunge activates natural healing.",
-    benefits: ["Recovery", "Sleep", "Resilience", "Wellness"],
-    image: "/pillar-recovery.png",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3v18" />
-        <path d="M8 6l4-3 4 3" />
-        <path d="M8 18l4 3 4-3" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-    color: "amber",
-    stats: { classes: "8+", duration: "30 min", level: "All Levels" }
+    stats: { classes: "10+", duration: "45-60 min", level: "All Levels" }
   }
 ];
 
@@ -86,24 +68,37 @@ export default function Method() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: false, margin: "-200px" });
+  const progressRef = useRef(0);
 
   // Auto-rotate pillars
   useEffect(() => {
-    if (!isAutoPlaying || !isInView) return;
+    if (!isAutoPlaying) {
+      progressRef.current = 0;
+      setProgress(0);
+      return;
+    }
 
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveIndex((current) => (current + 1) % pillars.length);
-          return 0;
-        }
-        return prev + 2;
-      });
+    const interval = setInterval(() => {
+      progressRef.current += 2;
+
+      if (progressRef.current >= 100) {
+        progressRef.current = 0;
+        setActiveIndex((current) => (current + 1) % pillars.length);
+      }
+
+      setProgress(progressRef.current);
     }, 100);
 
-    return () => clearInterval(progressInterval);
-  }, [isAutoPlaying, isInView]);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isAutoPlaying]);
+
+  // Reset progress when slide changes manually
+  useEffect(() => {
+    progressRef.current = 0;
+    setProgress(0);
+  }, [activeIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -182,7 +177,7 @@ export default function Method() {
               The TAVÚ <em className="italic font-light text-accent">Method</em>
             </h2>
             <p className="text-base md:text-lg text-white/50 max-w-xl mx-auto">
-              Three pillars working in harmony to transform how you move, breathe, and recover.
+              Two foundations working in harmony to transform how you move and breathe.
             </p>
           </div>
         </MotionWrapper>
@@ -209,11 +204,9 @@ export default function Method() {
                 >
                   {/* Progress bar for active item */}
                   {isActive && isAutoPlaying && (
-                    <motion.div
+                    <div
                       className={`absolute bottom-0 left-0 h-1 ${pillarColors.bg}`}
-                      initial={{ width: 0 }}
-                      animate={{ width: `${progress}%` }}
-                      transition={{ duration: 0.1 }}
+                      style={{ width: `${progress}%`, transition: 'width 0.1s linear' }}
                     />
                   )}
 

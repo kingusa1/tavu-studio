@@ -43,16 +43,6 @@ const navigation = {
         )
       },
       {
-        title: 'Recovery',
-        description: 'Contrast Therapy & Massage',
-        href: '/recovery',
-        icon: (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
-        )
-      },
-      {
         title: 'Schedule',
         description: 'View & book upcoming sessions',
         href: '/schedule',
@@ -64,7 +54,7 @@ const navigation = {
       },
       {
         title: 'Pricing',
-        description: 'Packages, memberships & bundles',
+        description: 'Pre-opening packages & passes',
         href: '/pricing',
         icon: (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,16 +74,6 @@ const navigation = {
         icon: (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-          </svg>
-        )
-      },
-      {
-        title: 'Our Team',
-        description: 'Meet our expert instructors',
-        href: '/team',
-        icon: (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
         )
       },
@@ -289,8 +269,8 @@ export default function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "bg-white/98 backdrop-blur-xl shadow-lg shadow-black/5 py-3"
-          : "bg-black/20 backdrop-blur-sm py-5"
+          ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5 py-3"
+          : "bg-black/50 backdrop-blur-md py-5"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">

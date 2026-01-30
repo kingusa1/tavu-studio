@@ -22,7 +22,7 @@ const testimonials = [
     role: "Entrepreneur",
     location: "Al Raha",
     image: "/pillar-movement.png",
-    quote: "As someone who sits at a desk all day, the contrast therapy and reformer sessions have been life-changing. My back pain is gone and I feel more energized than ever.",
+    quote: "As someone who sits at a desk all day, the reformer sessions have been life-changing. My back pain is gone and I feel more energized than ever.",
     rating: 5
   },
   {
@@ -31,16 +31,7 @@ const testimonials = [
     role: "Yoga Instructor",
     location: "Dubai",
     image: "/pillar-breath.png",
-    quote: "I've practiced wellness for years, but TAVÚ's approach is unique. The integration of all three pillars creates a holistic experience I haven't found anywhere else.",
-    rating: 5
-  },
-  {
-    id: 4,
-    name: "James Wilson",
-    role: "Professional Athlete",
-    location: "Abu Dhabi",
-    image: "/pillar-recovery.png",
-    quote: "The recovery facilities here are world-class. The contrast therapy has become essential to my training routine. Best investment in my health.",
+    quote: "I've practiced wellness for years, but TAVÚ's approach is unique. The integration of movement and breath creates a holistic experience I haven't found anywhere else.",
     rating: 5
   }
 ];
@@ -48,6 +39,16 @@ const testimonials = [
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Safety guard: ensure currentIndex is within bounds
+  const safeIndex = currentIndex >= testimonials.length ? 0 : currentIndex;
+
+  useEffect(() => {
+    // Reset index if out of bounds (can happen during hot reload)
+    if (currentIndex >= testimonials.length) {
+      setCurrentIndex(0);
+    }
+  }, [currentIndex]);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -140,8 +141,8 @@ export default function Testimonials() {
                     whileHover={{ scale: 1.02 }}
                   >
                     <Image
-                      src={testimonials[currentIndex].image}
-                      alt={testimonials[currentIndex].name}
+                      src={testimonials[safeIndex].image}
+                      alt={testimonials[safeIndex].name}
                       fill
                       className="object-cover"
                       sizes="250px"
@@ -157,7 +158,7 @@ export default function Testimonials() {
                   <div>
                     {/* Rating */}
                     <div className="flex gap-1 mb-6">
-                      {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                      {[...Array(testimonials[safeIndex].rating)].map((_, i) => (
                         <motion.div
                           key={i}
                           initial={{ opacity: 0, scale: 0 }}
@@ -171,16 +172,16 @@ export default function Testimonials() {
 
                     {/* Quote */}
                     <blockquote className="text-xl md:text-2xl text-foreground/80 leading-relaxed mb-8 font-light italic">
-                      "{testimonials[currentIndex].quote}"
+                      "{testimonials[safeIndex].quote}"
                     </blockquote>
 
                     {/* Author */}
                     <div>
                       <p className="text-lg font-headline font-semibold text-primary">
-                        {testimonials[currentIndex].name}
+                        {testimonials[safeIndex].name}
                       </p>
                       <p className="text-sm text-foreground/60">
-                        {testimonials[currentIndex].role} • {testimonials[currentIndex].location}
+                        {testimonials[safeIndex].role} • {testimonials[safeIndex].location}
                       </p>
                     </div>
                   </div>

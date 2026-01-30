@@ -36,10 +36,10 @@ const galleryImages = [
     span: "col-span-1 row-span-1"
   },
   {
-    src: "/pillar-recovery.png",
-    alt: "Contrast Therapy",
-    title: "Recovery",
-    subtitle: "Contrast Therapy",
+    src: "/pillar-breath.png",
+    alt: "Breathing Room",
+    title: "Stillness",
+    subtitle: "Find Your Calm",
     span: "col-span-1 row-span-1"
   },
   {

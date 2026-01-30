@@ -22,13 +22,6 @@ const slides = [
     accent: "from-emerald-500/30",
   },
   {
-    image: "/pillar-recovery.png",
-    title: "Recovery",
-    subtitle: "Contrast Therapy",
-    description: "Restore and rejuvenate your entire being",
-    accent: "from-amber-500/30",
-  },
-  {
     image: "/mood-balanced.png",
     title: "Balance",
     subtitle: "Mind & Body",
@@ -251,7 +244,7 @@ export default function Hero() {
 
       {/* Content */}
       <motion.div
-        className="container mx-auto px-6 relative z-20"
+        className="container mx-auto px-6 relative z-20 pt-24"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -297,13 +290,13 @@ export default function Hero() {
           {/* Subheadline */}
           <MotionWrapper delay={0.4} direction="up">
             <p className="text-lg md:text-xl lg:text-2xl mb-10 text-white/80 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
-              A sanctuary in Abu Dhabi where movement, breath, and recovery converge.
+              A sanctuary in Abu Dhabi where movement and breath converge.
             </p>
           </MotionWrapper>
 
           {/* CTA Buttons */}
           <MotionWrapper delay={0.5} direction="up">
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-24">
               <motion.a
                 href="/schedule"
                 className="inline-flex h-14 items-center justify-center rounded-full bg-accent px-10 font-medium text-accent-foreground transition-all duration-300 hover:bg-accent/90 shadow-lg hover:shadow-xl hover:shadow-accent/25"
@@ -322,87 +315,69 @@ export default function Hero() {
               </motion.a>
             </div>
           </MotionWrapper>
+
+          {/* Navigation Controls - inline with content */}
+          <MotionWrapper delay={0.6} direction="up">
+            <div className="flex flex-col items-center gap-4">
+              {/* Control buttons - centered */}
+              <div className="flex items-center gap-3">
+                {/* Play/Pause */}
+                <motion.button
+                  onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                  className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {isAutoPlaying ? <Pause size={14} /> : <Play size={14} />}
+                </motion.button>
+
+                {/* Prev */}
+                <motion.button
+                  onClick={prevSlide}
+                  className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronLeft size={16} />
+                </motion.button>
+
+                {/* Next */}
+                <motion.button
+                  onClick={nextSlide}
+                  className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronRight size={16} />
+                </motion.button>
+              </div>
+
+              {/* Slide dots with progress - centered below */}
+              <div className="flex items-center gap-2">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className="group relative"
+                  >
+                    <div className={`w-8 h-1 rounded-full transition-all duration-300 ${
+                      index === currentSlide ? "bg-accent" : "bg-white/30 group-hover:bg-white/50"
+                    }`}>
+                      {index === currentSlide && (
+                        <motion.div
+                          className="absolute inset-y-0 left-0 bg-accent/50 rounded-full"
+                          initial={{ width: "0%" }}
+                          animate={{ width: `${progress}%` }}
+                        />
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </MotionWrapper>
         </div>
       </motion.div>
-
-      {/* Navigation Controls */}
-      <div className="absolute bottom-8 left-0 right-0 z-30">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between">
-            {/* Slide dots with progress */}
-            <div className="flex items-center gap-3">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className="group relative"
-                >
-                  <div className={`w-12 h-1 rounded-full transition-all duration-300 ${
-                    index === currentSlide ? "bg-accent" : "bg-white/30 group-hover:bg-white/50"
-                  }`}>
-                    {index === currentSlide && (
-                      <motion.div
-                        className="absolute inset-y-0 left-0 bg-accent/50 rounded-full"
-                        initial={{ width: "0%" }}
-                        animate={{ width: `${progress}%` }}
-                      />
-                    )}
-                  </div>
-                  <span className={`absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-medium transition-opacity drop-shadow ${
-                    index === currentSlide ? "opacity-100 text-accent" : "opacity-0 group-hover:opacity-70 text-white/80"
-                  }`}>
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            {/* Control buttons */}
-            <div className="flex items-center gap-2">
-              {/* Play/Pause */}
-              <motion.button
-                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {isAutoPlaying ? <Pause size={16} /> : <Play size={16} />}
-              </motion.button>
-
-              {/* Prev */}
-              <motion.button
-                onClick={prevSlide}
-                className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ChevronLeft size={18} />
-              </motion.button>
-
-              {/* Next */}
-              <motion.button
-                onClick={nextSlide}
-                className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ChevronRight size={18} />
-              </motion.button>
-            </div>
-
-            {/* Slide counter */}
-            <div className="flex items-center gap-2 text-white/70">
-              <span className="text-2xl font-headline font-semibold text-accent drop-shadow">
-                {String(currentSlide + 1).padStart(2, "0")}
-              </span>
-              <span className="text-sm drop-shadow">/</span>
-              <span className="text-sm drop-shadow">
-                {String(slides.length).padStart(2, "0")}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Side navigation hints */}
       <motion.button

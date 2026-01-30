@@ -7,7 +7,6 @@ const footerLinks = {
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
     { href: '/classes', label: 'Classes' },
-    { href: '/recovery', label: 'Recovery' },
   ],
   connect: [
     { href: '/memberships', label: 'Memberships' },
@@ -103,20 +102,23 @@ export default function Footer() {
             <Link href="/" className="inline-block mb-6">
               <Image
                 src="/logo.png"
-                alt="TAVU Wellness"
+                alt="TAVÚ Wellness"
                 width={140}
                 height={46}
                 className="h-10 w-auto brightness-0 invert"
               />
             </Link>
+            <p className="text-sm opacity-70 mb-2 max-w-xs leading-relaxed">
+              TA grounds the body. VU lifts the spirit.
+            </p>
             <p className="text-sm opacity-70 mb-6 max-w-xs leading-relaxed">
-              Where stillness becomes movement, and movement becomes ritual. Your wellness sanctuary in Abu Dhabi.
+              TAVÚ is the space where both are practiced as one.
             </p>
             <div className="flex gap-5">
               <a href="https://instagram.com/tavustudio.ad" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
                 <InstagramIcon className="h-5 w-5" />
               </a>
-              <a href="https://tiktok.com/@tavustudio.ad" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
+              <a href="https://www.tiktok.com/@tavustudio" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
                 <TikTokIcon className="h-5 w-5" />
               </a>
               <a href="https://www.facebook.com/people/TAV%C3%9A-Wellness/61580985467215/" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
@@ -160,19 +162,27 @@ export default function Footer() {
           <div>
             <h4 className="font-headline text-sm font-semibold uppercase tracking-[0.2em] mb-6 opacity-50">Visit Us</h4>
             <a
-              href="https://maps.google.com/?q=CHXW%2BC3R+Abu+Dhabi"
+              href="https://share.google/H65MSpZCTdk6RSqrH"
               target="_blank"
               rel="noopener noreferrer"
               className="not-italic text-sm opacity-70 leading-relaxed mb-4 block hover:opacity-100 transition-opacity"
             >
-              Al Raha Blvd, Al Seef<br />
+              Shop 1, Crescent Residence<br />
+              Plot 12, Sector RBW4, Shatie Al Raha<br />
               Abu Dhabi, UAE
+            </a>
+            <a
+              href="tel:+971522755551"
+              className="text-sm opacity-70 mb-2 block hover:opacity-100 transition-opacity"
+            >
+              +971 52 275 5551
             </a>
             <p className="text-sm opacity-70 mb-2">
               connect@tavustudio.com
             </p>
             <p className="text-sm opacity-70">
-              Daily: 7am - 9pm
+              Weekdays: 8am - 9pm<br />
+              Weekends: 9am - 6pm
             </p>
           </div>
         </div>
@@ -180,7 +190,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-xs opacity-40">
-            {new Date().getFullYear()} TAVU Wellness Studio. All rights reserved.
+            {new Date().getFullYear()} TAVÚ Wellness Studio. All rights reserved.
           </p>
           <div className="flex gap-8">
             {footerLinks.legal.map(link => (

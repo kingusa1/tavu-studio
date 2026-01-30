@@ -1,14 +1,11 @@
+"use client";
 
+import { useEffect, useRef } from 'react';
 import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
-
-export const metadata = {
-    title: 'Account | TAVU',
-    description: 'Sign in or create your TAVU account',
-};
 
 const accountFeatures = [
     {
@@ -49,8 +46,57 @@ const accountFeatures = [
     }
 ];
 
-// Mindbody sign-in URL for TAVU (subscriber ID: 5748977)
-const MINDBODY_SIGNIN_URL = "https://clients.mindbodyonline.com/classic/ws?studioid=5748977";
+// Mindbody Login Widget Component - with visible text overlay
+function MindbodyLoginWidget() {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Load HealCode script
+        const scriptSrc = "https://widgets.mindbodyonline.com/javascripts/healcode.js";
+        const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+
+        if (!existingScript) {
+            const script = document.createElement("script");
+            script.src = scriptSrc;
+            script.type = "text/javascript";
+            script.async = true;
+            document.body.appendChild(script);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        containerRef.current.innerHTML = `
+            <healcode-widget
+                data-version="0.2"
+                data-link-class="healcode-login-text-link"
+                data-site-id="130043"
+                data-mb-site-id="5748977"
+                data-bw-identity-site="true"
+                data-type="login-link"
+                data-inner-html="Sign In"
+            ></healcode-widget>
+        `;
+    }, []);
+
+    return (
+        <div className="relative w-full h-14 rounded-full bg-accent hover:bg-accent/90 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-accent/25 cursor-pointer">
+            {/* Visible button content */}
+            <span className="absolute inset-0 flex items-center justify-center gap-3 text-accent-foreground font-semibold text-lg pointer-events-none">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+                Sign In to Your Account
+            </span>
+            {/* HealCode widget overlay - invisible but clickable */}
+            <div
+                ref={containerRef}
+                className="absolute inset-0 flex items-center justify-center [&_a]:absolute [&_a]:inset-0 [&_a]:flex [&_a]:items-center [&_a]:justify-center [&_a]:text-transparent [&_a]:no-underline"
+            />
+        </div>
+    );
+}
 
 export default function AccountPage() {
     return (
@@ -86,23 +132,13 @@ export default function AccountPage() {
                                     </svg>
                                 </div>
                                 <h2 className="text-2xl font-headline text-white mb-2">Welcome Back</h2>
-                                <p className="text-white/80 text-sm">Sign in to your TAVU account</p>
+                                <p className="text-white/80 text-sm">Sign in to your TAVÚ account</p>
                             </div>
 
                             {/* Card Body */}
                             <div className="p-8">
-                                {/* Sign In Button */}
-                                <a
-                                    href={MINDBODY_SIGNIN_URL}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center gap-3 w-full py-4 px-6 bg-accent text-accent-foreground font-semibold rounded-full hover:bg-accent/90 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-accent/25 mb-4"
-                                >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                                    </svg>
-                                    Sign In to Your Account
-                                </a>
+                                {/* Mindbody Login Widget */}
+                                <MindbodyLoginWidget />
 
                                 <div className="relative my-6">
                                     <div className="absolute inset-0 flex items-center">

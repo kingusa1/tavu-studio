@@ -7,7 +7,6 @@ import About from '@/components/landing/About';
 import Gallery from '@/components/landing/Gallery';
 import Method from '@/components/landing/Method';
 import Testimonials from '@/components/landing/Testimonials';
-import Membership from '@/components/landing/Membership';
 import SocialFeed from '@/components/landing/SocialFeed';
 import Contact from '@/components/landing/Contact';
 import Footer from '@/components/landing/Footer';
@@ -32,7 +31,6 @@ export default function Home() {
         <Gallery />
         <Method />
         <Testimonials />
-        <Membership />
         <SocialFeed />
         <Contact />
       </main>

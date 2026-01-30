@@ -4,6 +4,7 @@ import './globals.css';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import ScrollProgress from '@/components/common/ScrollProgress';
+import MetaPixel from '@/components/analytics/MetaPixel';
 
 const fontHeadline = Cormorant_Garamond({
   subsets: ['latin'],
@@ -56,6 +57,7 @@ export default function RootLayout({
         />
       </head>
       <body className={cn("font-body antialiased", fontHeadline.variable, fontBody.variable)} suppressHydrationWarning>
+        <MetaPixel />
         <ScrollProgress />
         {children}
         <Toaster />
