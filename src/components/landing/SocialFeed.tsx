@@ -27,14 +27,14 @@ interface InstagramProfile {
 
 // Fallback images when Instagram is not connected
 const fallbackImages = [
-  { src: "/pillar-movement.png", alt: "Movement class", likes: 234, comments: 12 },
-  { src: "/mood-balanced.png", alt: "Wellness moment", likes: 189, comments: 8 },
-  { src: "/pillar-breath.png", alt: "Breathwork session", likes: 312, comments: 15 },
-  { src: "/pillar-recovery.png", alt: "Recovery therapy", likes: 267, comments: 11 },
-  { src: "/mood-stressed.png", alt: "Stress relief", likes: 198, comments: 9 },
-  { src: "/mood-low-energy.png", alt: "Energy boost", likes: 156, comments: 7 },
-  { src: "/mood-stiff.png", alt: "Flexibility training", likes: 223, comments: 10 },
-  { src: "/pillar-movement.png", alt: "Pilates reformer", likes: 289, comments: 14 },
+  { src: "/hero-yoga-pose.png", alt: "Yoga practice at TAVÚ", likes: 234, comments: 12 },
+  { src: "/service-pilates-stretch.png", alt: "Reformer Pilates session", likes: 189, comments: 8 },
+  { src: "/service-yoga-mat.png", alt: "Preparing for practice", likes: 312, comments: 15 },
+  { src: "/service-ice-bath.png", alt: "Ice bath recovery", likes: 267, comments: 11 },
+  { src: "/service-ice-hands.png", alt: "Cold therapy", likes: 198, comments: 9 },
+  { src: "/service-singing-bowl.png", alt: "Sound healing session", likes: 156, comments: 7 },
+  { src: "/service-mat-stretch.png", alt: "Mat stretching", likes: 223, comments: 10 },
+  { src: "/post-4.jpg", alt: "Wellness and beauty", likes: 289, comments: 14 },
 ];
 
 export default function SocialFeed() {

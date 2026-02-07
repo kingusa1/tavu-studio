@@ -8,21 +8,21 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
   {
-    image: "/pillar-movement.png",
+    image: "/hero-yoga-pose.png",
     title: "Movement",
     subtitle: "Reformer Pilates",
     description: "Strengthen your body with precision and grace",
     accent: "from-blue-500/30",
   },
   {
-    image: "/pillar-breath.png",
+    image: "/service-singing-bowl.png",
     title: "Breath",
     subtitle: "Breathwork Rituals",
     description: "Find clarity through the power of breath",
     accent: "from-emerald-500/30",
   },
   {
-    image: "/mood-balanced.png",
+    image: "/hero-water-float.png",
     title: "Balance",
     subtitle: "Mind & Body",
     description: "Achieve harmony in every aspect of life",
@@ -306,12 +306,12 @@ export default function Hero() {
                 Book a Class
               </motion.a>
               <motion.a
-                href="#about"
+                href="#packages"
                 className="inline-flex h-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/30 px-10 font-medium text-white transition-all duration-300 hover:bg-white/20 hover:border-accent hover:text-accent"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Discover More
+                Check Our Packages
               </motion.a>
             </div>
           </MotionWrapper>

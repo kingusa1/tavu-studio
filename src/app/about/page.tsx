@@ -4,6 +4,7 @@ import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function AboutPage() {
     return (
@@ -12,16 +13,21 @@ export default function AboutPage() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
+            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
-                <div className="absolute inset-0 bg-muted">
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                        <p className="text-sm">Hero Image: Add your TAVÚ studio/team hero image here</p>
-                    </div>
+                <div className="absolute inset-0">
+                    <Image
+                        src="/tavu-sign.png"
+                        alt="TAVU Wellness Studio Sign"
+                        fill
+                        className="object-cover"
+                        priority
+                        sizes="100vw"
+                    />
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">About TAVÚ</h1>
+                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">About TAVU</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
                             TA grounds the body. VU lifts the spirit.
                         </p>
@@ -30,24 +36,28 @@ export default function AboutPage() {
             </section>
 
             <main className="flex-grow">
-                {/* Our Story - The TAVÚ Journey */}
+                {/* Our Story - The TAVU Journey */}
                 <section className="py-20 lg:py-28 bg-background">
                     <div className="container mx-auto px-4">
                         <div className="grid lg:grid-cols-2 gap-12 items-center">
                             <MotionWrapper delay={0.1} direction="left">
-                                <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden">
-                                    <div className="w-full h-full flex items-center justify-center text-muted-foreground p-8 text-center">
-                                        <p className="text-sm">About Image: Add your studio interior or founder image here</p>
-                                    </div>
+                                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                                    <Image
+                                        src="/about-studio.png"
+                                        alt="TAVU Studio Interior"
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                    />
                                 </div>
                             </MotionWrapper>
                             <MotionWrapper delay={0.2} direction="right">
                                 <div>
                                     <span className="text-accent font-medium text-sm tracking-wider uppercase">Our Story</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-6">The TAVÚ Journey</h2>
+                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-6">The TAVU Journey</h2>
                                     <div className="space-y-4 text-lg text-foreground/70">
                                         <p>
-                                            TAVÚ was created from a simple belief: that balance is not found in extremes, but in integration.
+                                            TAVU was created from a simple belief: that balance is not found in extremes, but in integration.
                                         </p>
                                         <p>
                                             Our name reflects this philosophy.
@@ -57,10 +67,10 @@ export default function AboutPage() {
                                             <span className="text-accent">VU</span> — elevation, flow, expansion.
                                         </p>
                                         <p>
-                                            Together, they form TAVÚ: a space where the body is supported, the breath is honored, and practice becomes ritual.
+                                            Together, they form TAVU: a space where the body is supported, the breath is honored, and practice becomes ritual.
                                         </p>
                                         <p>
-                                            Rooted in Abu Dhabi, TAVÚ brings reformer Pilates, breath-led practices, and recovery into one considered experience. Every class is designed with intention — to build strength without force, to restore without escape, and to reconnect you to yourself through consistency, not urgency.
+                                            Rooted in Abu Dhabi, TAVU brings reformer Pilates, breath-led practices, and recovery into one considered experience. Every class is designed with intention — to build strength without force, to restore without escape, and to reconnect you to yourself through consistency, not urgency.
                                         </p>
                                         <p className="text-foreground/80 italic">
                                             This is not a place to rush through movement.<br />

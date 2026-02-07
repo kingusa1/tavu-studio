@@ -4,6 +4,7 @@ import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const upcomingEvents = [
     {
@@ -11,21 +12,24 @@ const upcomingEvents = [
         date: 'Coming Soon',
         time: 'TBA',
         description: 'Join us for the grand opening of TAVU Wellness Studio. Experience our facilities, meet our team, and enjoy exclusive founding member offers.',
-        category: 'Launch Event'
+        category: 'Launch Event',
+        image: '/tavu-sign.png'
     },
     {
         title: 'Breathwork Workshop',
         date: 'Coming Soon',
         time: 'TBA',
         description: 'A deep dive into breathwork techniques for stress relief, improved focus, and enhanced athletic performance.',
-        category: 'Workshop'
+        category: 'Workshop',
+        image: '/service-singing-bowl.png'
     },
     {
         title: 'Recovery Science Seminar',
         date: 'Coming Soon',
         time: 'TBA',
         description: 'Learn the science behind contrast therapy, cold exposure, and optimal recovery protocols from wellness experts.',
-        category: 'Seminar'
+        category: 'Seminar',
+        image: '/service-ice-bath.png'
     }
 ];
 
@@ -75,12 +79,17 @@ export default function EventsPage() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center">
+            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
-                <div className="absolute inset-0 bg-muted">
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                        <p className="text-sm">Hero Image: Add your events hero image here</p>
-                    </div>
+                <div className="absolute inset-0">
+                    <Image
+                        src="/about-reach.png"
+                        alt="TAVU Events"
+                        fill
+                        className="object-cover"
+                        priority
+                        sizes="100vw"
+                    />
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
@@ -108,10 +117,14 @@ export default function EventsPage() {
                                 <MotionWrapper key={event.title} delay={0.1 + index * 0.1} direction="up">
                                     <div className="bg-card border border-border rounded-2xl overflow-hidden">
                                         <div className="grid md:grid-cols-3 gap-0">
-                                            <div className="aspect-video md:aspect-auto bg-muted">
-                                                <div className="w-full h-full min-h-[200px] flex items-center justify-center text-muted-foreground p-4 text-center">
-                                                    <p className="text-xs">Event Image</p>
-                                                </div>
+                                            <div className="aspect-video md:aspect-auto relative min-h-[200px]">
+                                                <Image
+                                                    src={event.image}
+                                                    alt={event.title}
+                                                    fill
+                                                    className="object-cover"
+                                                    sizes="(max-width: 768px) 100vw, 33vw"
+                                                />
                                             </div>
                                             <div className="md:col-span-2 p-6 md:p-8">
                                                 <div className="flex items-center gap-3 mb-3">

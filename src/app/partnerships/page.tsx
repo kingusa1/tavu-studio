@@ -4,6 +4,7 @@ import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const partnershipTypes = [
     {
@@ -74,12 +75,17 @@ export default function PartnershipsPage() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center">
+            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
-                <div className="absolute inset-0 bg-muted">
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                        <p className="text-sm">Hero Image: Add your partnerships hero image here</p>
-                    </div>
+                <div className="absolute inset-0">
+                    <Image
+                        src="/about-reach.png"
+                        alt="TAVU Partnerships"
+                        fill
+                        className="object-cover"
+                        priority
+                        sizes="100vw"
+                    />
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
@@ -133,10 +139,14 @@ export default function PartnershipsPage() {
                     <div className="container mx-auto px-4">
                         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                             <MotionWrapper delay={0.1} direction="left">
-                                <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden">
-                                    <div className="w-full h-full flex items-center justify-center text-muted-foreground p-8 text-center">
-                                        <p className="text-sm">Partnership Image: Add your partnership or collaboration image here</p>
-                                    </div>
+                                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                                    <Image
+                                        src="/tavu-sign.png"
+                                        alt="TAVU Wellness Studio"
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                    />
                                 </div>
                             </MotionWrapper>
 

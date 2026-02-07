@@ -6,9 +6,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 
 const images = [
-  { src: "/pillar-breath.png", alt: "Breathwork session" },
-  { src: "/pillar-recovery.png", alt: "Recovery therapy" },
-  { src: "/mood-balanced.png", alt: "Balanced wellness" },
+  { src: "/tavu-sign.png", alt: "TAVÚ lightbox sign on a wall" },
+  { src: "/about-studio.png", alt: "Woman sitting in studio" },
+  { src: "/about-reach.png", alt: "Artistic arm reaching out" },
 ];
 
 export default function About() {

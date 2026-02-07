@@ -3,8 +3,9 @@
 import { useEffect } from 'react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
+import Packages from '@/components/landing/Packages';
+import ServicesExplorer from '@/components/landing/ServicesExplorer';
 import About from '@/components/landing/About';
-import Gallery from '@/components/landing/Gallery';
 import Method from '@/components/landing/Method';
 import Testimonials from '@/components/landing/Testimonials';
 import SocialFeed from '@/components/landing/SocialFeed';
@@ -27,8 +28,9 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <Hero />
+        <Packages />
+        <ServicesExplorer />
         <About />
-        <Gallery />
         <Method />
         <Testimonials />
         <SocialFeed />

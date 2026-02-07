@@ -1,4 +1,3 @@
-
 import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
@@ -6,128 +5,48 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const reformerClasses = [
+const services = [
     {
-        name: 'TA FORM',
-        tagline: 'Foundational Reformer Class',
-        description: 'Focused on alignment, breath, and grounding control. The perfect starting point for your reformer journey.',
-        level: 'Foundation'
+        name: 'Reformer Pilates',
+        description: 'Small-group reformer classes, limited to 8 participants. A 50-minute, low-impact practice designed to build strength, control, mobility, and alignment.',
+        image: '/service-pilates-stretch.png',
+        link: '/services/reformer-pilates',
+        features: ['8 max participants', '50 minutes', 'All levels welcome'],
+        accent: 'from-blue-500/20'
     },
     {
-        name: 'TA FLOW',
-        tagline: 'Breath-Led Reformer Flow',
-        description: 'Gentle, breath-led reformer flow rising from foundational movement. Smooth transitions meet mindful breathing.',
-        level: 'Foundation'
+        name: 'Breathing Room',
+        description: 'Breath-led practices including yoga, mat pilates, and mobility sessions. Designed to restore balance, release tension, and reconnect you to your body.',
+        image: '/service-yoga-mat.png',
+        link: '/services/breathing-room',
+        features: ['45-60 minutes', 'All levels', 'Mat-based practices'],
+        accent: 'from-emerald-500/20'
     },
     {
-        name: 'VU ALIGN',
-        tagline: 'Precision & Alignment',
-        description: 'Stronger reformer sequencing focused on precision, alignment, and fluid strength. Build power with intention.',
-        level: 'Intermediate'
+        name: 'Compression Therapy',
+        description: 'Contrast therapy combining Himalayan Salt Sauna or Infrared Sauna with Ice Bath. Activate your body\'s natural healing response and accelerate recovery.',
+        image: '/service-ice-bath.png',
+        link: '/services/compression-therapy',
+        features: ['60 minutes', 'Hot & cold therapy', 'Private suites available'],
+        accent: 'from-amber-500/20'
     },
     {
-        name: 'VU ELEVATE',
-        tagline: 'Dynamic Flow',
-        description: 'Dynamic reformer flow with expressive transitions and elevated strength. Push your limits with grace.',
-        level: 'Intermediate'
+        name: 'IV Therapy',
+        description: 'Intravenous vitamin and hydration therapy for optimal wellness. Boost energy, enhance recovery, and support your immune system.',
+        image: '/service-ice-hands.png',
+        link: '/services/iv-therapy',
+        features: ['30-45 minutes', 'Custom formulations', 'Medical supervision'],
+        accent: 'from-purple-500/20'
     },
     {
-        name: 'PEAK VU',
-        tagline: 'Advanced Reformer Ritual',
-        description: 'Advanced reformer ritual with seamless transitions and refined control. The ultimate expression of mastery.',
-        level: 'Advanced'
+        name: 'Massage',
+        description: 'Therapeutic and relaxation massage by certified therapists. From stress relief to deep tissue work, find the perfect treatment for your needs.',
+        image: '/post-4.jpg',
+        link: '/services/massage',
+        features: ['45-60 minutes', 'Multiple styles', 'Ladies only'],
+        accent: 'from-rose-500/20'
     }
 ];
-
-const breathingClasses = [
-    {
-        name: 'TAVU FLOW',
-        tagline: 'Yin-to-Yang Yoga Ritual',
-        description: 'Blending deep grounding with gentle, breath-led flow. Find balance between stillness and movement.',
-        level: 'All Levels'
-    },
-    {
-        name: 'TAVU RELEASE',
-        tagline: 'Myofascial & Yin Mobility',
-        description: 'Myofascial softening combined with Yin mobility to unwind tension and reset the body completely.',
-        level: 'All Levels'
-    },
-    {
-        name: 'TAVU CORE',
-        tagline: 'Mat Pilates Ritual',
-        description: 'Mat Pilates ritual mixing grounding alignment with dynamic core strength. Build your center.',
-        level: 'All Levels'
-    },
-    {
-        name: 'TAVU MOBILITY',
-        tagline: 'Mobility-Flow Ritual',
-        description: 'Open joints, expand range, and connect breath to movement. Unlock your body\'s full potential.',
-        level: 'All Levels'
-    },
-    {
-        name: 'TAVU POWER',
-        tagline: 'Sculpting & Barre-Inspired',
-        description: 'Sculpting and barre-inspired ritual focused on heat, rhythm, and rising strength. Feel the burn.',
-        level: 'All Levels'
-    }
-];
-
-const recoveryServices = [
-    {
-        name: 'Standard Contrast Therapy',
-        description: 'Himalayan Salt Sauna + Ice Bath. Alternating hot and cold to activate your body\'s natural healing response.',
-        duration: '60 min',
-        startingPrice: '220 AED'
-    },
-    {
-        name: 'Private Contrast Infrared',
-        description: 'Infrared Sauna + Ice Bath in a private suite. Premium recovery experience with deeper heat penetration.',
-        duration: '60 min',
-        startingPrice: '275 AED'
-    },
-    {
-        name: 'NormaTec Compression',
-        description: 'Advanced compression therapy for athletes, runners, and post-training recovery. Accelerate muscle recovery.',
-        duration: '45 min',
-        startingPrice: '160 AED'
-    }
-];
-
-const massageServices = [
-    {
-        name: 'TA | Destress Massage',
-        description: 'Relaxation-focused massage to melt away stress and tension.',
-        duration: '60 min',
-        price: '300 AED'
-    },
-    {
-        name: 'TA | Relaxing Massage',
-        description: 'Gentle, soothing massage for complete relaxation and restoration.',
-        duration: '60 min',
-        price: '300 AED'
-    },
-    {
-        name: 'TA | Express Head, Neck & Shoulder',
-        description: 'Targeted relief for tension-prone areas. Perfect for busy schedules.',
-        duration: '45 min',
-        price: '220 AED'
-    },
-    {
-        name: 'VU | Deep Tissue Massage',
-        description: 'Intensive therapeutic work for deep muscle release and recovery.',
-        duration: '60 min',
-        price: '300 AED'
-    }
-];
-
-function getLevelColor(level: string) {
-    switch (level) {
-        case 'Foundation': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-        case 'Intermediate': return 'bg-amber-50 text-amber-700 border-amber-200';
-        case 'Advanced': return 'bg-rose-50 text-rose-700 border-rose-200';
-        default: return 'bg-sky-50 text-sky-700 border-sky-200';
-    }
-}
 
 export default function ServicesPage() {
     return (
@@ -135,222 +54,77 @@ export default function ServicesPage() {
             <BackgroundImage />
             <Header />
 
-            {/* Hero Section with Image */}
-            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
-                {/* Image Placeholder - Replace src with your image */}
-                <div className="absolute inset-0 bg-muted">
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                        <p className="text-sm">Hero Image: Add your TAVU services hero image here</p>
-                    </div>
-                </div>
-                <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-16 flex items-center justify-center">
+                <div className="container mx-auto px-4 text-center">
                     <MotionWrapper delay={0} direction="up">
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Our Services</h1>
-                        <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-                            Discover the complete TAVU experience. From reformer classes to recovery therapies,
-                            we offer everything you need for your wellness journey.
+                        <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
+                            What We Offer
+                        </span>
+                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-primary">Our Services</h1>
+                        <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
+                            Discover the complete TAVÚ experience — from reformer classes to recovery therapies,
+                            everything you need for your wellness journey.
                         </p>
                     </MotionWrapper>
                 </div>
             </section>
 
-            <main className="flex-grow">
-                {/* Reformer Room Section */}
-                <section className="py-20 lg:py-28 bg-background">
+            <main className="flex-grow pb-20">
+                {/* Services Grid */}
+                <section className="py-12">
                     <div className="container mx-auto px-4">
-                        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                            <MotionWrapper delay={0.1} direction="left">
-                                <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden">
-                                    {/* Image Placeholder */}
-                                    <div className="w-full h-full flex items-center justify-center text-muted-foreground p-8 text-center">
-                                        <p className="text-sm">Reformer Room Image: Add your reformer studio image here</p>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                            <MotionWrapper delay={0.2} direction="right">
-                                <div>
-                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">Movement</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Reformer Room</h2>
-                                    <p className="text-lg text-foreground/70 mb-6">
-                                        Small group classes with a maximum of 6 participants. Each 45-minute session is designed
-                                        to challenge your body while maintaining alignment and connection to your breath.
-                                    </p>
-                                    <div className="flex gap-4">
-                                        <Link
-                                            href="/schedule"
-                                            className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all"
-                                        >
-                                            Book a Class
-                                        </Link>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {reformerClasses.map((cls, index) => (
+                        <div className="grid gap-8 max-w-6xl mx-auto">
+                            {services.map((service, index) => (
                                 <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-shadow">
-                                        <div className="flex items-center justify-between mb-3">
-                                            <h3 className="font-semibold text-lg text-primary">{cls.name}</h3>
-                                            <span className={`text-xs px-3 py-1 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
-                                                {cls.level}
-                                            </span>
+                                    <Link href={service.link} className="block group">
+                                        <div className={`relative bg-card border border-border rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 ${
+                                            index % 2 === 0 ? '' : 'md:flex-row-reverse'
+                                        }`}>
+                                            <div className={`grid md:grid-cols-2 gap-0 ${index % 2 !== 0 ? 'md:[direction:rtl]' : ''}`}>
+                                                {/* Image */}
+                                                <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[350px] overflow-hidden">
+                                                    <Image
+                                                        src={service.image}
+                                                        alt={service.name}
+                                                        fill
+                                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                    />
+                                                    <div className={`absolute inset-0 bg-gradient-to-t ${service.accent} to-transparent opacity-60`} />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                                                </div>
+
+                                                {/* Content */}
+                                                <div className={`p-8 md:p-12 flex flex-col justify-center ${index % 2 !== 0 ? 'md:[direction:ltr]' : ''}`}>
+                                                    <span className="text-accent text-sm font-semibold uppercase tracking-wider mb-2">
+                                                        {index === 0 ? 'Movement' : index === 1 ? 'Breath' : 'Recovery'}
+                                                    </span>
+                                                    <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4 group-hover:text-accent transition-colors">
+                                                        {service.name}
+                                                    </h2>
+                                                    <p className="text-foreground/70 text-lg leading-relaxed mb-6">
+                                                        {service.description}
+                                                    </p>
+
+                                                    {/* Features */}
+                                                    <div className="flex flex-wrap gap-3 mb-6">
+                                                        {service.features.map((feature, i) => (
+                                                            <span key={i} className="text-sm bg-muted/50 text-foreground/70 px-4 py-2 rounded-full">
+                                                                {feature}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+
+                                                    <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-4 transition-all">
+                                                        <span>Learn More</span>
+                                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <p className="text-sm font-medium text-accent mb-2">{cls.tagline}</p>
-                                        <p className="text-sm text-foreground/70">{cls.description}</p>
-                                    </div>
-                                </MotionWrapper>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Breathing Room Section */}
-                <section className="py-20 lg:py-28 bg-muted/30">
-                    <div className="container mx-auto px-4">
-                        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                            <MotionWrapper delay={0.1} direction="left">
-                                <div className="order-2 lg:order-1">
-                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">Breath</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Breathing Room</h2>
-                                    <p className="text-lg text-foreground/70 mb-6">
-                                        Yoga, Pilates, and movement classes designed to connect breath to body.
-                                        Sessions range from 45-60 minutes, suitable for all levels.
-                                    </p>
-                                    <div className="flex gap-4">
-                                        <Link
-                                            href="/schedule"
-                                            className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all"
-                                        >
-                                            Book a Class
-                                        </Link>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                            <MotionWrapper delay={0.2} direction="right">
-                                <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden order-1 lg:order-2">
-                                    {/* Image Placeholder */}
-                                    <div className="w-full h-full flex items-center justify-center text-muted-foreground p-8 text-center">
-                                        <p className="text-sm">Breathing Room Image: Add your yoga/pilates studio image here</p>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {breathingClasses.map((cls, index) => (
-                                <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-shadow">
-                                        <div className="flex items-center justify-between mb-3">
-                                            <h3 className="font-semibold text-lg text-primary">{cls.name}</h3>
-                                            <span className={`text-xs px-3 py-1 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
-                                                {cls.level}
-                                            </span>
-                                        </div>
-                                        <p className="text-sm font-medium text-accent mb-2">{cls.tagline}</p>
-                                        <p className="text-sm text-foreground/70">{cls.description}</p>
-                                    </div>
-                                </MotionWrapper>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Recovery Section */}
-                <section className="py-20 lg:py-28 bg-background">
-                    <div className="container mx-auto px-4">
-                        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                            <MotionWrapper delay={0.1} direction="left">
-                                <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden">
-                                    {/* Image Placeholder */}
-                                    <div className="w-full h-full flex items-center justify-center text-muted-foreground p-8 text-center">
-                                        <p className="text-sm">Recovery Image: Add your contrast therapy/sauna image here</p>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                            <MotionWrapper delay={0.2} direction="right">
-                                <div>
-                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">Recovery</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Recovery Services</h2>
-                                    <p className="text-lg text-foreground/70 mb-6">
-                                        Restore your body with our contrast therapy and compression services.
-                                        Experience the healing power of hot and cold therapy, designed to accelerate recovery and boost wellness.
-                                    </p>
-                                    <div className="flex gap-4">
-                                        <Link
-                                            href="/schedule"
-                                            className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all"
-                                        >
-                                            Book Recovery
-                                        </Link>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                        </div>
-
-                        <div className="grid md:grid-cols-3 gap-6">
-                            {recoveryServices.map((service, index) => (
-                                <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-shadow h-full flex flex-col">
-                                        <h3 className="font-semibold text-lg text-primary mb-2">{service.name}</h3>
-                                        <p className="text-sm text-foreground/70 mb-4 flex-grow">{service.description}</p>
-                                        <div className="flex justify-between items-center pt-4 border-t border-border">
-                                            <span className="text-sm text-foreground/60">{service.duration}</span>
-                                            <span className="font-semibold text-accent">From {service.startingPrice}</span>
-                                        </div>
-                                    </div>
-                                </MotionWrapper>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Massage Section */}
-                <section className="py-20 lg:py-28 bg-muted/30">
-                    <div className="container mx-auto px-4">
-                        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                            <MotionWrapper delay={0.1} direction="left">
-                                <div className="order-2 lg:order-1">
-                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">Wellness</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Massage Services</h2>
-                                    <p className="text-lg text-foreground/70 mb-4">
-                                        Therapeutic and relaxation massage by certified therapists.
-                                        From stress relief to deep tissue work, find the perfect treatment for your needs.
-                                    </p>
-                                    <p className="text-sm text-pink-600 font-medium mb-6">Ladies Only</p>
-                                    <div className="flex gap-4">
-                                        <Link
-                                            href="/schedule"
-                                            className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all"
-                                        >
-                                            Book Massage
-                                        </Link>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                            <MotionWrapper delay={0.2} direction="right">
-                                <div className="aspect-[4/3] bg-muted rounded-2xl overflow-hidden order-1 lg:order-2">
-                                    {/* Image Placeholder */}
-                                    <div className="w-full h-full flex items-center justify-center text-muted-foreground p-8 text-center">
-                                        <p className="text-sm">Massage Image: Add your massage/spa image here</p>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {massageServices.map((service, index) => (
-                                <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-shadow h-full flex flex-col">
-                                        <h3 className="font-semibold text-primary mb-2">{service.name}</h3>
-                                        <p className="text-sm text-foreground/70 mb-4 flex-grow">{service.description}</p>
-                                        <div className="flex justify-between items-center pt-4 border-t border-border">
-                                            <span className="text-sm text-foreground/60">{service.duration}</span>
-                                            <span className="font-semibold text-accent">{service.price}</span>
-                                        </div>
-                                    </div>
+                                    </Link>
                                 </MotionWrapper>
                             ))}
                         </div>
@@ -358,26 +132,28 @@ export default function ServicesPage() {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-20 lg:py-28 bg-primary text-primary-foreground">
-                    <div className="container mx-auto px-4 text-center">
+                <section className="py-16">
+                    <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-4xl md:text-5xl font-headline mb-6">Ready to Begin?</h2>
-                            <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                                Book your first session today and experience the TAVU difference.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link
-                                    href="/schedule"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
-                                >
-                                    Book a Spot
-                                </Link>
-                                <Link
-                                    href="/memberships"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-transparent border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/10 transition-all text-lg"
-                                >
-                                    View Memberships
-                                </Link>
+                            <div className="max-w-4xl mx-auto text-center glass p-10 md:p-16 rounded-3xl">
+                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Ready to Begin?</h2>
+                                <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
+                                    Start your wellness journey with our pre-opening packages. Limited spots available.
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    <Link
+                                        href="/pricing"
+                                        className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
+                                    >
+                                        View Packages
+                                    </Link>
+                                    <Link
+                                        href="/schedule"
+                                        className="inline-flex items-center justify-center h-14 px-10 rounded-full border-2 border-accent text-accent font-semibold hover:bg-accent hover:text-accent-foreground transition-all text-lg"
+                                    >
+                                        Book a Class
+                                    </Link>
+                                </div>
                             </div>
                         </MotionWrapper>
                     </div>

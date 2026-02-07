@@ -4,6 +4,7 @@ import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const membershipTiers = [
     {
@@ -71,12 +72,17 @@ export default function MembershipsPage() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center">
+            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
-                <div className="absolute inset-0 bg-muted">
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                        <p className="text-sm">Hero Image: Add your membership hero image here</p>
-                    </div>
+                <div className="absolute inset-0">
+                    <Image
+                        src="/post-4.jpg"
+                        alt="TAVU Memberships"
+                        fill
+                        className="object-cover"
+                        priority
+                        sizes="100vw"
+                    />
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
