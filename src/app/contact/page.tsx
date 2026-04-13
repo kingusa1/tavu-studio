@@ -132,7 +132,7 @@ export default function ContactPage() {
                                 <div className="flex items-center justify-between bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-5">
                                     <div className="flex items-center gap-4">
                                         <motion.a
-                                            href="https://instagram.com/tavustudio.ad"
+                                            href="https://instagram.com/tavuwellness.studio"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="w-10 h-10 rounded-full bg-background/50 flex items-center justify-center text-foreground/50 hover:text-accent hover:bg-accent/10 transition-all"

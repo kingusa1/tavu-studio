@@ -308,8 +308,7 @@ export default function Header() {
               height={40}
               className={cn(
                 "transition-all duration-300",
-                isScrolled ? "h-8 w-auto" : "h-10 w-auto",
-                !isScrolled && "brightness-0 invert drop-shadow-md"
+                isScrolled ? "h-8 w-auto brightness-0" : "h-10 w-auto brightness-0 invert drop-shadow-md"
               )}
               priority
             />
@@ -392,7 +391,7 @@ export default function Header() {
               height={32}
               className={cn(
                 "h-7 w-auto transition-all duration-300",
-                !isScrolled && "brightness-0 invert drop-shadow-md"
+                isScrolled ? "brightness-0" : "brightness-0 invert drop-shadow-md"
               )}
               priority
             />

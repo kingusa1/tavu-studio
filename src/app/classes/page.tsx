@@ -111,7 +111,7 @@ export default function ClassesPage() {
                                 <h2 className="text-3xl md:text-4xl font-headline text-primary">TAVÚ Pre-Opening — Limited Access</h2>
                             </div>
 
-                            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                                 {/* TAVÚ FORM - Reformer */}
                                 <div className="bg-card border border-border p-8 rounded-2xl text-center hover:shadow-lg transition-shadow">
                                     <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FORM</h3>
@@ -138,24 +138,6 @@ export default function ClassesPage() {
                                     <HealCodePricingWidget
                                         serviceId="100075"
                                         linkType="pricing-link"
-                                        buttonText="Get Your Pass"
-                                    />
-                                </div>
-
-                                {/* TAVÚ FLOW - Combined */}
-                                <div className="bg-card border border-border p-8 rounded-2xl text-center hover:shadow-lg transition-shadow ring-2 ring-accent">
-                                    <span className="inline-block bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-semibold mb-4">
-                                        Best Value
-                                    </span>
-                                    <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FLOW</h3>
-                                    <p className="text-sm text-accent font-medium mb-4">Reformer + Mat</p>
-                                    <p className="text-sm text-foreground/70 mb-4">Balanced movement with flexibility.</p>
-                                    <p className="text-4xl font-headline text-accent mb-2">1,049 AED</p>
-                                    <p className="text-sm text-foreground/60 mb-2">Validity: 60 days</p>
-                                    <p className="text-sm text-foreground/70 mb-6">6 Reformer + 4 Mat classes</p>
-                                    <HealCodePricingWidget
-                                        serviceId="119"
-                                        linkType="contract-link"
                                         buttonText="Get Your Pass"
                                     />
                                 </div>

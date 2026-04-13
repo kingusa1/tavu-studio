@@ -115,7 +115,7 @@ export default function Footer() {
               TAVÚ is the space where both are practiced as one.
             </p>
             <div className="flex gap-5">
-              <a href="https://instagram.com/tavustudio.ad" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
+              <a href="https://instagram.com/tavuwellness.studio" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
                 <InstagramIcon className="h-5 w-5" />
               </a>
               <a href="https://www.tiktok.com/@tavustudio" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">

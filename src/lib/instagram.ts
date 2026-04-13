@@ -9,6 +9,28 @@
 //
 // Free tier includes: 1 feed, 12 posts, updates every 6 hours
 
+interface BeholdImageSize {
+  mediaUrl: string;
+  width: number;
+  height: number;
+}
+
+interface BeholdRawPost {
+  id: string;
+  mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+  mediaUrl: string;
+  permalink: string;
+  caption?: string;
+  timestamp: string;
+  sizes?: {
+    small?: BeholdImageSize;
+    medium?: BeholdImageSize;
+    large?: BeholdImageSize;
+    full?: BeholdImageSize;
+  };
+  missingVideoThumbnail?: boolean;
+}
+
 export interface BeholdPost {
   id: string;
   mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
@@ -22,7 +44,7 @@ export interface BeholdPost {
 }
 
 export interface BeholdFeedResponse {
-  posts: BeholdPost[];
+  posts: BeholdRawPost[];
   username: string;
   profilePictureUrl: string;
   followersCount: number;
@@ -30,6 +52,28 @@ export interface BeholdFeedResponse {
 }
 
 const BEHOLD_FEED_ID = process.env.BEHOLD_FEED_ID;
+
+function getStableImageUrl(post: BeholdRawPost): string {
+  // Prefer Behold's proxied sizes (stable URLs) over raw Instagram CDN URLs (expire)
+  const sizes = post.sizes;
+  if (sizes) {
+    return sizes.large?.mediaUrl
+      ?? sizes.full?.mediaUrl
+      ?? sizes.medium?.mediaUrl
+      ?? sizes.small?.mediaUrl
+      ?? post.mediaUrl;
+  }
+  return post.mediaUrl;
+}
+
+function getThumbnailUrl(post: BeholdRawPost): string | undefined {
+  if (post.missingVideoThumbnail) return undefined;
+  const sizes = post.sizes;
+  if (sizes) {
+    return sizes.medium?.mediaUrl ?? sizes.small?.mediaUrl;
+  }
+  return undefined;
+}
 
 export async function getInstagramFeed(): Promise<BeholdPost[]> {
   if (!BEHOLD_FEED_ID) {
@@ -53,7 +97,17 @@ export async function getInstagramFeed(): Promise<BeholdPost[]> {
     }
 
     const data: BeholdFeedResponse = await response.json();
-    return data.posts || [];
+    const rawPosts = data.posts || [];
+
+    return rawPosts.map((post): BeholdPost => ({
+      id: post.id,
+      mediaType: post.mediaType,
+      mediaUrl: getStableImageUrl(post),
+      thumbnailUrl: getThumbnailUrl(post),
+      permalink: post.permalink,
+      caption: post.caption,
+      timestamp: post.timestamp,
+    }));
   } catch (error) {
     console.error("Failed to fetch Instagram feed from Behold:", error);
     return [];

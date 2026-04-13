@@ -76,12 +76,12 @@ export default function SocialFeed() {
         likes: post.likesCount || 0,
         comments: post.commentsCount || 0,
       }))
-    : fallbackImages.map((img) => ({ ...img, permalink: "https://instagram.com/tavustudio.ad", isVideo: false }));
+    : fallbackImages.map((img) => ({ ...img, permalink: "https://instagram.com/tavuwellness.studio", isVideo: false }));
 
   // Duplicate for seamless loop
   const allImages = [...displayImages, ...displayImages];
 
-  const instagramHandle = profile?.username || "tavustudio.ad";
+  const instagramHandle = profile?.username || "tavuwellness.studio";
 
   return (
     <section className="py-16 lg:py-24 bg-primary/5 relative overflow-hidden">
@@ -167,7 +167,7 @@ export default function SocialFeed() {
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 sizes="288px"
-                unoptimized={isConnected} // External URLs need unoptimized
+                unoptimized={isConnected} // Behold proxied URLs via behold.pictures
               />
 
               {/* Video indicator */}
