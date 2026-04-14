@@ -9,47 +9,40 @@ import Link from 'next/link';
 
 const massageServices = [
     {
-        name: 'TA | Destress Massage',
-        description: 'Relaxation-focused massage designed to melt away stress and tension. Gentle, flowing strokes calm the nervous system and promote deep relaxation.',
+        name: 'Destress Massage',
+        description: 'Perfect for reducing stress, improving sleep quality, and easing tension in the upper body.',
         duration: '60 min',
         price: '300 AED',
-        benefits: ['Stress relief', 'Relaxation', 'Improved sleep']
+        benefits: ['Stress relief', 'Improved sleep', 'Upper body tension relief']
     },
     {
-        name: 'TA | Relaxing Massage',
-        description: 'A gentle, soothing massage for complete relaxation and restoration. Perfect for those seeking a peaceful escape from daily life.',
+        name: 'Relaxing Massage',
+        description: 'Deep relaxation, helping to calm the nervous system and bring the body into a state of complete tranquility.',
         duration: '60 min',
         price: '300 AED',
-        benefits: ['Full body relaxation', 'Mental calm', 'Tension release']
+        benefits: ['Deep relaxation', 'Calms nervous system', 'Complete tranquility']
     },
     {
-        name: 'TA | Express Head, Neck & Shoulder',
-        description: 'Targeted relief for tension-prone areas. Perfect for busy schedules when you need quick but effective relief.',
+        name: 'Express Head, Neck & Shoulder',
+        description: 'Focuses on relieving headaches and reducing stiffness in the neck and shoulders.',
         duration: '45 min',
         price: '220 AED',
-        benefits: ['Targeted relief', 'Quick session', 'Tension headache relief']
+        benefits: ['Headache relief', 'Neck stiffness relief', 'Shoulder tension release']
     },
     {
-        name: 'VU | Deep Tissue Massage',
-        description: 'Intensive therapeutic work for deep muscle release and recovery. Addresses chronic muscle tension and knots with firm, focused pressure.',
+        name: 'Foot Ritual Massage',
+        description: 'Designed to reduce swelling and boost circulation, leaving your feet feeling light and refreshed.',
+        duration: '30 min',
+        price: '180 AED',
+        benefits: ['Reduces swelling', 'Boosts circulation', 'Light & refreshed feet']
+    },
+    {
+        name: 'Deep Tissue Massage',
+        description: 'Targets deep muscles to release knots, improve mobility, and ease tension.',
         duration: '60 min',
         price: '300 AED',
-        benefits: ['Deep muscle release', 'Chronic pain relief', 'Improved mobility']
+        benefits: ['Deep muscle release', 'Improved mobility', 'Tension relief']
     },
-    {
-        name: 'VU | Sports Massage',
-        description: 'Designed for active individuals and athletes. Combines techniques to enhance performance, prevent injury, and speed recovery.',
-        duration: '60 min',
-        price: '350 AED',
-        benefits: ['Athletic recovery', 'Injury prevention', 'Performance enhancement']
-    },
-    {
-        name: 'VU | Hot Stone Massage',
-        description: 'Heated basalt stones placed on key points while warm oil massage melts away tension. The ultimate in relaxation therapy.',
-        duration: '75 min',
-        price: '400 AED',
-        benefits: ['Deep warmth', 'Muscle relaxation', 'Stress relief']
-    }
 ];
 
 export default function MassagePage() {
@@ -131,15 +124,15 @@ export default function MassagePage() {
                                         <ul className="space-y-1.5">
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                TA Series: Destress, Relaxing, Express, Foot Ritual
+                                                Destress, Relaxing, Express Head/Neck/Shoulder
                                             </li>
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                VU Series: Deep Tissue, Sports, Hot Stone
+                                                Foot Ritual, Deep Tissue
                                             </li>
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                Express and full-session options
+                                                30 to 60 minute sessions available
                                             </li>
                                         </ul>
                                     </div>

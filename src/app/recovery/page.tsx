@@ -11,32 +11,49 @@ export default function RecoveryPage() {
             <BackgroundImage />
             <Header />
 
-            <main className="flex-grow flex items-center justify-center pt-32 pb-16 px-4">
+            <main className="flex-grow pt-32 pb-16 px-4">
                 <div className="container mx-auto">
-                    <div className="max-w-2xl mx-auto text-center">
+                    <div className="max-w-4xl mx-auto">
                         <MotionWrapper delay={0} direction="up">
-                            <span className="inline-block bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
-                                Coming Soon
-                            </span>
-                            <h1 className="text-5xl md:text-6xl font-headline mb-6 text-primary">Recovery Services</h1>
-                            <p className="text-xl text-foreground/70 mb-8 leading-relaxed">
-                                Our recovery services including contrast therapy, massage, and more are coming soon.
-                            </p>
-                            <p className="text-lg text-foreground/60 mb-12">
-                                In the meantime, explore our classes and book your first session.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <div className="text-center mb-14">
+                                <h1 className="text-5xl md:text-7xl font-headline mb-6 text-primary">Recovery</h1>
+                                <p className="text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+                                    Restore, recover, and rejuvenate with our range of recovery services.
+                                </p>
+                            </div>
+                        </MotionWrapper>
+
+                        <div className="grid md:grid-cols-3 gap-8">
+                            <MotionWrapper delay={0.1} direction="up">
+                                <Link href="/services/compression-therapy" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
+                                    <h2 className="font-headline text-2xl text-primary mb-3">Contrast Therapy</h2>
+                                    <p className="text-foreground/70 text-sm mb-4">Sauna + Ice Bath sessions. Shared and private suites available.</p>
+                                    <span className="text-accent font-medium text-sm">From 220 AED →</span>
+                                </Link>
+                            </MotionWrapper>
+                            <MotionWrapper delay={0.15} direction="up">
+                                <Link href="/services/compression-therapy" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
+                                    <h2 className="font-headline text-2xl text-primary mb-3">Compression Therapy</h2>
+                                    <p className="text-foreground/70 text-sm mb-4">NormaTec pulsing compression for faster muscle recovery.</p>
+                                    <span className="text-accent font-medium text-sm">160 AED →</span>
+                                </Link>
+                            </MotionWrapper>
+                            <MotionWrapper delay={0.2} direction="up">
+                                <Link href="/services/massage" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
+                                    <h2 className="font-headline text-2xl text-primary mb-3">Massage</h2>
+                                    <p className="text-foreground/70 text-sm mb-4">Ladies only. Destress, Relaxing, Deep Tissue, and more.</p>
+                                    <span className="text-accent font-medium text-sm">From 180 AED →</span>
+                                </Link>
+                            </MotionWrapper>
+                        </div>
+
+                        <MotionWrapper delay={0.25} direction="up">
+                            <div className="text-center mt-14">
                                 <Link
-                                    href="/classes"
+                                    href="/pricing"
                                     className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
                                 >
-                                    Explore Classes
-                                </Link>
-                                <Link
-                                    href="/schedule"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-all text-lg"
-                                >
-                                    View Schedule
+                                    View All Pricing
                                 </Link>
                             </div>
                         </MotionWrapper>

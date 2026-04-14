@@ -7,29 +7,23 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const services = [
-    {
-        name: 'Standard Contrast Therapy',
-        description: 'Himalayan Salt Sauna + Ice Bath. Alternating hot and cold to activate your body\'s natural healing response.',
-        duration: '60 min',
-        price: '220 AED',
-        features: ['Himalayan Salt Sauna', 'Ice Bath', 'Towels & amenities included']
-    },
-    {
-        name: 'Private Contrast Infrared',
-        description: 'Infrared Sauna + Ice Bath in a private suite. Premium recovery experience with deeper heat penetration.',
-        duration: '60 min',
-        price: '275 AED',
-        features: ['Private Infrared Sauna', 'Private Ice Bath', 'Premium amenities']
-    },
-    {
-        name: 'NormaTec Compression',
-        description: 'Advanced compression therapy for athletes, runners, and post-training recovery. Accelerate muscle recovery.',
-        duration: '45 min',
-        price: '160 AED',
-        features: ['Full leg compression', 'Customizable pressure', 'Perfect post-workout']
-    }
+const contrastPackages = [
+    { name: 'Drop-In', price: '220', description: '60-minute session (Sauna + Ice Bath). Includes full access to sauna + Ice bath. Towels & amenities.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
+    { name: '5-Pack', price: '990', description: 'Valid 30 days from first use.' },
+    { name: '10-Pack', price: '1,850', description: 'Valid 45 days from first use.' },
+    { name: 'Private Contrast Drop-In', price: '275', description: 'Infrared Sauna + Ice Bath, private suite.' },
+    { name: 'Private 5-Pack', price: '1,250', description: 'Valid 30 days.' },
+    { name: 'Private 10-Pack', price: '2,300', description: 'Valid 45 days.' },
 ];
+
+const normatecService = {
+    name: 'Normatec',
+    price: '160',
+    duration: '45 min',
+    description: 'A recovery-focused treatment using pulsing compression to stimulate circulation and support faster muscle recovery.',
+    benefits: ['Boosts circulation', 'Flushes out lactic acid', 'Reduces swelling', 'Speeds up recovery'],
+    recommendedFor: ['After intense training', 'Heavy or tight legs', 'Injury recovery', 'Swelling or fluid retention'],
+};
 
 const benefits = [
     {
@@ -188,47 +182,109 @@ export default function CompressionTherapyPage() {
                     </div>
                 </section>
 
-                {/* Services Section */}
+                {/* Contrast Therapy Pricing */}
                 <section className="py-20 bg-background">
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Our Services</h2>
+                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Contrast Therapy</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Choose the contrast therapy experience that's right for you.
+                                    Sauna + Ice Bath. Shared and private options available.
                                 </p>
                             </div>
                         </MotionWrapper>
 
-                        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                            {services.map((service, index) => (
-                                <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-8 rounded-2xl hover:shadow-xl transition-all h-full flex flex-col">
-                                        <h3 className="font-headline text-xl text-primary mb-2">{service.name}</h3>
-                                        <p className="text-sm text-foreground/70 mb-4 flex-grow">{service.description}</p>
-                                        <ul className="space-y-2 mb-6">
-                                            {service.features.map((feature, i) => (
-                                                <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
-                                                    <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                    {feature}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                        <div className="flex items-center justify-between pt-4 border-t border-border">
-                                            <div>
-                                                <p className="text-sm text-foreground/60">{service.duration}</p>
-                                                <p className="font-semibold text-accent">{service.price}</p>
+                        <div className="max-w-2xl mx-auto">
+                            <MotionWrapper delay={0.2} direction="up">
+                                <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                                    <div className="flex flex-col gap-4 p-6">
+                                        {contrastPackages.map((pkg, i) => (
+                                            <div key={i} className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                                                <div className="flex-grow">
+                                                    <p className="font-semibold text-primary">{pkg.name}</p>
+                                                    <p className="text-sm text-foreground/60 mt-1">{pkg.description}</p>
+                                                    {pkg.note && (
+                                                        <p className="text-xs text-accent font-medium mt-1.5">{pkg.note}</p>
+                                                    )}
+                                                </div>
+                                                <div className="text-right flex-shrink-0">
+                                                    <p className="font-headline text-xl text-accent">{pkg.price}</p>
+                                                    <p className="text-xs text-foreground/50">AED</p>
+                                                </div>
                                             </div>
-                                            <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
-                                                Book →
-                                            </Link>
-                                        </div>
+                                        ))}
                                     </div>
-                                </MotionWrapper>
-                            ))}
+                                    <div className="px-6 pb-6">
+                                        <Link
+                                            href="/schedule"
+                                            className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                        >
+                                            Book Contrast Therapy
+                                        </Link>
+                                    </div>
+                                </div>
+                            </MotionWrapper>
                         </div>
+                    </div>
+                </section>
+
+                {/* Compression Therapy / Normatec */}
+                <section className="py-20 bg-muted/30">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-12">
+                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Compression Therapy</h2>
+                            </div>
+                        </MotionWrapper>
+
+                        <MotionWrapper delay={0.2} direction="up">
+                            <div className="max-w-lg mx-auto bg-card border border-border rounded-2xl p-8">
+                                <div className="flex items-start justify-between gap-4 mb-4">
+                                    <div>
+                                        <h3 className="font-headline text-xl text-primary">{normatecService.name}</h3>
+                                        <p className="text-sm text-foreground/60 mt-1">({normatecService.duration})</p>
+                                    </div>
+                                    <div className="text-right flex-shrink-0">
+                                        <p className="font-headline text-2xl text-accent">{normatecService.price}</p>
+                                        <p className="text-xs text-foreground/50">AED</p>
+                                    </div>
+                                </div>
+                                <p className="text-sm text-foreground/70 mb-6">{normatecService.description}</p>
+
+                                <div className="mb-4">
+                                    <p className="text-sm font-medium text-primary mb-2">Benefits:</p>
+                                    <ul className="space-y-1.5">
+                                        {normatecService.benefits.map((b, i) => (
+                                            <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
+                                                <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                {b}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div className="mb-6">
+                                    <p className="text-sm font-medium text-primary mb-2">Recommended for:</p>
+                                    <ul className="space-y-1.5">
+                                        {normatecService.recommendedFor.map((r, i) => (
+                                            <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
+                                                <span className="w-1.5 h-1.5 bg-accent rounded-full flex-shrink-0" />
+                                                {r}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <Link
+                                    href="/schedule"
+                                    className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                >
+                                    Book Compression Therapy
+                                </Link>
+                            </div>
+                        </MotionWrapper>
                     </div>
                 </section>
 
