@@ -6,7 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
-import HealCodePricingWidget from '@/components/mindbody/HealCodePricingWidget';
+
 
 const classes = [
     {
@@ -188,28 +188,68 @@ export default function ReformerPilatesPage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <span className="inline-block bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                                    Pre-Opening Offer
-                                </span>
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Reformer Package</h2>
+                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Reformer Packages</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Get started with our exclusive pre-opening package.
+                                    All prices include VAT.
                                 </p>
                             </div>
                         </MotionWrapper>
 
                         <MotionWrapper delay={0.2} direction="up">
-                            <div className="max-w-md mx-auto bg-card border border-border p-8 rounded-2xl text-center shadow-xl">
-                                <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FORM</h3>
-                                <p className="text-sm text-accent font-medium mb-2">Reformer Focus</p>
-                                <p className="text-sm text-foreground/70 mb-6">10 Reformer Pilates classes</p>
-                                <p className="text-5xl font-headline text-accent mb-2">999</p>
-                                <p className="text-sm text-foreground/60 mb-6">AED • Validity: 60 days</p>
-                                <HealCodePricingWidget
-                                    serviceId="100073"
-                                    linkType="pricing-link"
-                                    buttonText="Get Your Pass"
-                                />
+                            <div className="max-w-lg mx-auto bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
+                                <div className="flex flex-col gap-4 p-6">
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">Drop-In</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Single reformer session. VAT included.</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">160</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">8-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 45 days.</p>
+                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 1 complimentary Contrast Therapy session</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">1,260</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">10-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 60 days.</p>
+                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 2 complimentary Contrast Therapy sessions</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">1,420</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">16-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 75 days.</p>
+                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 2 complimentary Contrast Therapy sessions</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">2,020</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-6 pb-6">
+                                    <Link
+                                        href="/schedule"
+                                        className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                    >
+                                        Book Reformer
+                                    </Link>
+                                </div>
                             </div>
                         </MotionWrapper>
                     </div>

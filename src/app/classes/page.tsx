@@ -6,7 +6,6 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
 import Image from 'next/image';
-import HealCodePricingWidget from '@/components/mindbody/HealCodePricingWidget';
 
 const reformerClasses = [
     {
@@ -100,46 +99,105 @@ export default function ClassesPage() {
             </section>
 
             <main className="flex-grow">
-                {/* Pre-Opening Packages Section - Moved to Top */}
+                {/* Pricing Section */}
                 <section className="py-16 bg-accent/5 border-b border-accent/20">
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-10">
-                                <span className="inline-block bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                                    Pre-Opening Offer
+                                <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">
+                                    Pricing
                                 </span>
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary">TAVÚ Pre-Opening — Limited Access</h2>
+                                <h2 className="text-3xl md:text-4xl font-headline text-primary">Class Packages</h2>
+                                <p className="text-foreground/60 mt-2">All prices include VAT</p>
                             </div>
 
-                            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-                                {/* TAVÚ FORM - Reformer */}
-                                <div className="bg-card border border-border p-8 rounded-2xl text-center hover:shadow-lg transition-shadow">
-                                    <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FORM</h3>
-                                    <p className="text-sm text-accent font-medium mb-4">Reformer Focus</p>
-                                    <p className="text-sm text-foreground/70 mb-4">Focused. Structured. Reformer-only.</p>
-                                    <p className="text-4xl font-headline text-accent mb-2">999 AED</p>
-                                    <p className="text-sm text-foreground/60 mb-2">Validity: 60 days</p>
-                                    <p className="text-sm text-foreground/70 mb-6">10 Reformer Pilates classes</p>
-                                    <HealCodePricingWidget
-                                        serviceId="100073"
-                                        linkType="pricing-link"
-                                        buttonText="Get Your Pass"
-                                    />
+                            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                                {/* Reformer Pricing */}
+                                <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                                    <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
+                                        <h3 className="font-headline text-xl">Reformer</h3>
+                                    </div>
+                                    <div className="p-5 space-y-3">
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">Drop-In</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Single reformer session</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">160 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">8-Class Pack</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Valid 45 days</p>
+                                                <p className="text-xs text-accent mt-0.5">+ 1 Contrast Therapy session</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">1,260 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">10-Class Pack</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Valid 60 days</p>
+                                                <p className="text-xs text-accent mt-0.5">+ 2 Contrast Therapy sessions</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">1,420 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">16-Class Pack</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Valid 75 days</p>
+                                                <p className="text-xs text-accent mt-0.5">+ 2 Contrast Therapy sessions</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">2,020 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                    </div>
+                                    <div className="px-5 pb-5">
+                                        <Link href="/schedule" className="flex items-center justify-center w-full h-11 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-sm">
+                                            Book Reformer
+                                        </Link>
+                                    </div>
                                 </div>
 
-                                {/* TAVÚ FOUNDATION - Mat */}
-                                <div className="bg-card border border-border p-8 rounded-2xl text-center hover:shadow-lg transition-shadow">
-                                    <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FOUNDATION</h3>
-                                    <p className="text-sm text-accent font-medium mb-4">Mat Series</p>
-                                    <p className="text-sm text-foreground/70 mb-4">A softer entry into the TAVÚ method.</p>
-                                    <p className="text-4xl font-headline text-accent mb-2">599 AED</p>
-                                    <p className="text-sm text-foreground/60 mb-2">Validity: 45 days</p>
-                                    <p className="text-sm text-foreground/70 mb-6">8 Mat Pilates / Yoga / Mobility classes</p>
-                                    <HealCodePricingWidget
-                                        serviceId="100075"
-                                        linkType="pricing-link"
-                                        buttonText="Get Your Pass"
-                                    />
+                                {/* Breathing Room Pricing */}
+                                <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                                    <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
+                                        <h3 className="font-headline text-xl">Breathing Room</h3>
+                                    </div>
+                                    <div className="p-5 space-y-3">
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">Drop-In</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Any class: Mat Pilates, Mobility, Yoga, Breathwork, Yin</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">120 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">5-Class Pack</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Valid 30 days from first use</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">550 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">10-Class Pack</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Valid 45 days from first use</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">1,020 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
+                                            <div>
+                                                <p className="font-semibold text-primary text-sm">Unlimited Monthly</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">30 days unlimited access</p>
+                                                <p className="text-xs text-foreground/40 mt-0.5">No rollovers · Auto-renew optional</p>
+                                            </div>
+                                            <p className="font-headline text-lg text-accent">800 <span className="text-xs text-foreground/50">AED</span></p>
+                                        </div>
+                                    </div>
+                                    <div className="px-5 pb-5">
+                                        <Link href="/schedule" className="flex items-center justify-center w-full h-11 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-sm">
+                                            Book Breathing Room
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </MotionWrapper>

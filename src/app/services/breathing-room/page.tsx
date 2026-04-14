@@ -6,7 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
-import HealCodePricingWidget from '@/components/mindbody/HealCodePricingWidget';
+
 
 const classes = [
     {
@@ -179,28 +179,69 @@ export default function BreathingRoomPage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <span className="inline-block bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                                    Pre-Opening Offer
-                                </span>
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Mat Series Package</h2>
+                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Breathing Room Packages</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    A softer entry into the TAVÚ method.
+                                    All prices include VAT.
                                 </p>
                             </div>
                         </MotionWrapper>
 
                         <MotionWrapper delay={0.2} direction="up">
-                            <div className="max-w-md mx-auto bg-card border border-border p-8 rounded-2xl text-center shadow-xl">
-                                <h3 className="font-headline text-2xl text-primary mb-2">TAVÚ FOUNDATION</h3>
-                                <p className="text-sm text-accent font-medium mb-2">Mat Series</p>
-                                <p className="text-sm text-foreground/70 mb-6">8 Mat Pilates / Yoga / Mobility classes</p>
-                                <p className="text-5xl font-headline text-accent mb-2">599</p>
-                                <p className="text-sm text-foreground/60 mb-6">AED • Validity: 45 days</p>
-                                <HealCodePricingWidget
-                                    serviceId="100075"
-                                    linkType="pricing-link"
-                                    buttonText="Get Your Pass"
-                                />
+                            <div className="max-w-lg mx-auto bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
+                                <div className="flex flex-col gap-4 p-6">
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">Drop-In</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).</p>
+                                            <p className="text-xs text-foreground/40 mt-1">Non-transferable & non-refundable</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">120</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">5-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Perfect for weekly consistency.</p>
+                                            <p className="text-xs text-foreground/50 mt-1">Valid 30 days from first use</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">550</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">10-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Ideal for deeper practice.</p>
+                                            <p className="text-xs text-foreground/50 mt-1">Valid 45 days from first use</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">1,020</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">Unlimited Monthly</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Unlimited access for 30 days.</p>
+                                            <p className="text-xs text-foreground/40 mt-1">No rollovers · Auto-renew optional · Non-transferable & non-refundable</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">800</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="px-6 pb-6">
+                                    <Link
+                                        href="/schedule"
+                                        className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                    >
+                                        Book Breathing Room
+                                    </Link>
+                                </div>
                             </div>
                         </MotionWrapper>
                     </div>
