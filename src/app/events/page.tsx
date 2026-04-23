@@ -13,7 +13,7 @@ const upcomingEvents = [
         time: 'TBA',
         description: 'Join us for the grand opening of TAVU Wellness Studio. Experience our facilities, meet our team, and enjoy exclusive founding member offers.',
         category: 'Launch Event',
-        image: '/tavu-sign.webp'
+        image: '/about-exterior.webp'
     },
     {
         title: 'Breathwork Workshop',
@@ -21,7 +21,7 @@ const upcomingEvents = [
         time: 'TBA',
         description: 'A deep dive into breathwork techniques for stress relief, improved focus, and enhanced athletic performance.',
         category: 'Workshop',
-        image: '/service-singing-bowl.webp'
+        image: '/service-breathing-shelf.webp'
     },
     {
         title: 'Recovery Science Seminar',
@@ -29,7 +29,7 @@ const upcomingEvents = [
         time: 'TBA',
         description: 'Learn the science behind contrast therapy, cold exposure, and optimal recovery protocols from wellness experts.',
         category: 'Seminar',
-        image: '/service-ice-bath.webp'
+        image: '/service-sauna.webp'
     }
 ];
 
@@ -83,8 +83,8 @@ export default function EventsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/about-reach.webp"
-                        alt="TAVU Events"
+                        src="/about-entrance.webp"
+                        alt="TAVÚ Events"
                         fill
                         className="object-cover"
                         priority

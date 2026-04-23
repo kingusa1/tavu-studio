@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Script from "next/script";
 
 interface MindbodyWidgetProps {
   widgetType?: string;
@@ -15,15 +14,21 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
   const containerRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const isHealCode = widgetType.toLowerCase() === "registrations";
-  const scriptSrc = isHealCode ? HEALCODE_SRC : BRANDED_WEB_SRC;
 
   useEffect(() => {
+    if (!containerRef.current || !widgetId) return;
+
+    const baseSrc = isHealCode ? HEALCODE_SRC : BRANDED_WEB_SRC;
+
+    // Swallow common Mindbody widget errors (widget logs JSON parse errors on
+    // unrelated payloads — they aren't fatal, but they break our boundary).
     const handleGlobalError = (event: ErrorEvent) => {
       const msg = event.message || "";
       const file = event.filename || "";
       if (
         msg.includes("healcode") ||
         msg.includes("mindbody") ||
+        msg.includes("is not valid JSON") ||
         file.includes("healcode") ||
         file.includes("mindbody")
       ) {
@@ -32,20 +37,41 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
     };
     window.addEventListener("error", handleGlobalError);
 
-    // If script was already loaded on a previous page, it won't auto-scan our new div.
-    // Remove the cached script so next/script reloads it, which triggers a fresh DOM scan.
-    const existing = document.querySelector(`script[src="${scriptSrc}"]`);
-    if (existing && existing.getAttribute("data-rescan-done") === "true") {
-      existing.remove();
+    // 1) Render the target element INTO the container
+    if (isHealCode) {
+      containerRef.current.innerHTML = `<healcode-widget data-type="registrations" data-widget-partner="object" data-widget-id="${widgetId}" data-widget-version="0"></healcode-widget>`;
+    } else {
+      containerRef.current.innerHTML = `<div class="mindbody-widget" data-widget-type="${widgetType}" data-widget-id="${widgetId}"></div>`;
     }
 
-    const readyTimer = setTimeout(() => setStatus("ready"), 1500);
+    // 2) Remove any previously loaded Mindbody script so a fresh one re-scans the DOM
+    document
+      .querySelectorAll(`script[src^="${baseSrc}"]`)
+      .forEach((el) => el.remove());
+
+    // 3) Inject a fresh script tag. Cache-buster forces browser to re-evaluate
+    //    so its DOM scan picks up the freshly-rendered widget container.
+    const script = document.createElement("script");
+    script.src = `${baseSrc}?v=${Date.now()}`;
+    script.async = true;
+    script.type = "text/javascript";
+
+    script.onload = () => setStatus("ready");
+    script.onerror = () => setStatus("error");
+
+    document.body.appendChild(script);
+
+    // Safety fallback: if onload never fires (network hiccup), still show widget area
+    const readyFallback = setTimeout(() => setStatus("ready"), 3500);
 
     return () => {
-      clearTimeout(readyTimer);
+      clearTimeout(readyFallback);
       window.removeEventListener("error", handleGlobalError);
+      // Clean up our script and widget div so next mount gets a fresh one
+      script.remove();
+      if (containerRef.current) containerRef.current.innerHTML = "";
     };
-  }, [scriptSrc]);
+  }, [widgetId, widgetType, isHealCode]);
 
   if (!widgetId) {
     return (
@@ -92,35 +118,8 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
       role="region"
       aria-label={widgetTitle}
       className={`relative w-full min-h-[600px] flex justify-center bg-transparent overflow-hidden ${isHealCode ? "healcode-container" : ""}`}
-      ref={containerRef}
     >
-      {isHealCode ? (
-        // HealCode custom element — the script upgrades this tag into the widget
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `<healcode-widget data-type="registrations" data-widget-partner="object" data-widget-id="${widgetId}" data-widget-version="0"></healcode-widget>`,
-          }}
-          className="w-full"
-        />
-      ) : (
-        // Branded Web widget — the script scans the DOM for this div
-        <div
-          className="mindbody-widget w-full"
-          data-widget-type={widgetType}
-          data-widget-id={widgetId}
-        />
-      )}
-
-      <Script
-        src={scriptSrc}
-        strategy="afterInteractive"
-        onLoad={() => {
-          const el = document.querySelector(`script[src="${scriptSrc}"]`);
-          if (el) el.setAttribute("data-rescan-done", "true");
-          setStatus("ready");
-        }}
-        onError={() => setStatus("error")}
-      />
+      <div ref={containerRef} className="w-full" />
 
       {status === "loading" && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

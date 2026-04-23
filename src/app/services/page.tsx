@@ -9,7 +9,7 @@ const services = [
     {
         name: 'Reformer Pilates',
         description: 'Small-group reformer classes, limited to 8 participants. A 50-minute, low-impact practice designed to build strength, control, mobility, and alignment.',
-        image: '/service-pilates-stretch.webp',
+        image: '/service-reformer-mirror.webp',
         link: '/services/reformer-pilates',
         features: ['8 max participants', '50 minutes', 'All levels welcome'],
         accent: 'from-blue-500/20'
@@ -17,7 +17,7 @@ const services = [
     {
         name: 'Breathing Room',
         description: 'Breath-led practices including yoga, mat pilates, and mobility sessions. Designed to restore balance, release tension, and reconnect you to your body.',
-        image: '/service-yoga-mat.webp',
+        image: '/service-breathing-props.webp',
         link: '/services/breathing-room',
         features: ['45-60 minutes', 'All levels', 'Mat-based practices'],
         accent: 'from-emerald-500/20'
@@ -25,7 +25,7 @@ const services = [
     {
         name: 'Compression Therapy',
         description: 'Contrast therapy combining Himalayan Salt Sauna or Infrared Sauna with Ice Bath. Activate your body\'s natural healing response and accelerate recovery.',
-        image: '/service-ice-bath.webp',
+        image: '/service-sauna.webp',
         link: '/services/compression-therapy',
         features: ['60 minutes', 'Hot & cold therapy', 'Private suites available'],
         accent: 'from-amber-500/20'
@@ -33,7 +33,7 @@ const services = [
     {
         name: 'IV Therapy',
         description: 'Intravenous vitamin and hydration therapy for optimal wellness. Boost energy, enhance recovery, and support your immune system.',
-        image: '/service-ice-hands.webp',
+        image: '/service-ice-baths.webp',
         link: '/services/iv-therapy',
         features: ['30-45 minutes', 'Custom formulations', 'Medical supervision'],
         accent: 'from-purple-500/20'
@@ -41,7 +41,7 @@ const services = [
     {
         name: 'Massage',
         description: 'Therapeutic and relaxation massage by certified therapists. From stress relief to deep tissue work, find the perfect treatment for your needs.',
-        image: '/post-4.webp',
+        image: '/service-massage-towels.webp',
         link: '/services/massage',
         features: ['45-60 minutes', 'Multiple styles', 'Ladies only'],
         accent: 'from-rose-500/20'

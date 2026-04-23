@@ -25,16 +25,24 @@ interface InstagramProfile {
   mediaCount?: number;
 }
 
-// Fallback images when Instagram is not connected
+// Fallback images when Instagram is not connected — real TAVÚ photos
 const fallbackImages = [
-  { src: "/hero-yoga-pose.webp", alt: "Yoga practice at TAVÚ", likes: 234, comments: 12 },
-  { src: "/service-pilates-stretch.webp", alt: "Reformer Pilates session", likes: 189, comments: 8 },
-  { src: "/service-yoga-mat.webp", alt: "Preparing for practice", likes: 312, comments: 15 },
-  { src: "/service-ice-bath.webp", alt: "Ice bath recovery", likes: 267, comments: 11 },
-  { src: "/service-ice-hands.webp", alt: "Cold therapy", likes: 198, comments: 9 },
-  { src: "/service-singing-bowl.webp", alt: "Sound healing session", likes: 156, comments: 7 },
-  { src: "/service-mat-stretch.webp", alt: "Mat stretching", likes: 223, comments: 10 },
-  { src: "/post-4.webp", alt: "Wellness and beauty", likes: 289, comments: 14 },
+  { src: "/hero-reformer-studio.webp", alt: "TAVÚ Reformer Pilates studio", likes: 234, comments: 12 },
+  { src: "/service-reformer-mirror.webp", alt: "Reformer studio with backlit mirror", likes: 189, comments: 8 },
+  { src: "/service-sauna.webp", alt: "Himalayan salt sauna at TAVÚ", likes: 267, comments: 11 },
+  { src: "/service-ice-baths.webp", alt: "Contrast Therapy ice baths", likes: 312, comments: 15 },
+  { src: "/service-breathing-props.webp", alt: "Breathing Room props", likes: 198, comments: 9 },
+  { src: "/service-breathing-shelf.webp", alt: "Studio equipment shelf", likes: 156, comments: 7 },
+  { src: "/service-massage-towels.webp", alt: "TAVÚ branded towels", likes: 223, comments: 10 },
+  { src: "/about-reception.webp", alt: "TAVÚ reception desk", likes: 289, comments: 14 },
+  { src: "/about-lounge.webp", alt: "TAVÚ lounge space", likes: 254, comments: 11 },
+  { src: "/about-exterior.webp", alt: "TAVÚ studio exterior", likes: 211, comments: 9 },
+  { src: "/about-brand.webp", alt: "TAVÚ branded merchandise", likes: 198, comments: 8 },
+  { src: "/about-entrance.webp", alt: "TAVÚ entrance", likes: 244, comments: 13 },
+  { src: "/amenity-cafe.webp", alt: "TAVÚ café", likes: 167, comments: 6 },
+  { src: "/amenity-coffee.webp", alt: "By the Beach meets TAVÚ coffee", likes: 187, comments: 10 },
+  { src: "/amenity-bathroom.webp", alt: "TAVÚ bathroom suite", likes: 132, comments: 5 },
+  { src: "/service-recovery-equipment.webp", alt: "Recovery equipment", likes: 176, comments: 7 },
 ];
 
 export default function SocialFeed() {

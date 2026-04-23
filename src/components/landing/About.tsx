@@ -6,9 +6,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 
 const images = [
-  { src: "/tavu-sign.webp", alt: "TAVÚ lightbox sign on a wall" },
-  { src: "/about-studio.webp", alt: "Woman sitting in studio" },
-  { src: "/about-reach.webp", alt: "Artistic arm reaching out" },
+  { src: "/about-exterior.webp", alt: "TAVÚ lightbox sign on a wall" },
+  { src: "/about-reception.webp", alt: "Woman sitting in studio" },
+  { src: "/about-lounge.webp", alt: "Artistic arm reaching out" },
 ];
 
 export default function About() {

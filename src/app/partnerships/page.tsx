@@ -79,7 +79,7 @@ export default function PartnershipsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/about-reach.webp"
+                        src="/about-lounge.webp"
                         alt="TAVU Partnerships"
                         fill
                         className="object-cover"
@@ -141,7 +141,7 @@ export default function PartnershipsPage() {
                             <MotionWrapper delay={0.1} direction="left">
                                 <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
                                     <Image
-                                        src="/tavu-sign.webp"
+                                        src="/about-exterior.webp"
                                         alt="TAVU Wellness Studio"
                                         fill
                                         className="object-cover"

@@ -99,8 +99,8 @@ export default function IVTherapyPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-ice-hands.webp"
-                        alt="IV Therapy"
+                        src="/amenity-bathroom.webp"
+                        alt="IV Therapy private suite"
                         fill
                         className="object-cover"
                         priority
@@ -162,7 +162,7 @@ export default function IVTherapyPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/about-reach.webp"
+                                        src="/about-lounge.webp"
                                         alt="IV Therapy Suite"
                                         fill
                                         className="object-cover"

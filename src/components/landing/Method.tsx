@@ -12,7 +12,7 @@ const pillars = [
     subtitle: "Reformer Pilates",
     description: "Controlled, intentional movement that builds strength from the inside out. Using the resistance of the Reformer, we create length, stability, and power.",
     benefits: ["Core Strength", "Flexibility", "Posture", "Mind-Body"],
-    image: "/about-reach.webp",
+    image: "/about-lounge.webp",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M18 8c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 12 0" />
@@ -28,7 +28,7 @@ const pillars = [
     subtitle: "Breathing Room",
     description: "Breath-led practices designed to restore balance, release tension, and reconnect you to your body. Inviting softness, presence, and quiet strength.",
     benefits: ["Stress Relief", "Energy", "Clarity", "Release"],
-    image: "/hero-water-float.webp",
+    image: "/hero-entrance-sign.webp",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22c-4.2 0-8-3.8-8-8.5 0-4.5 8-11.5 8-11.5s8 7 8 11.5c0 4.7-3.8 8.5-8 8.5z" />

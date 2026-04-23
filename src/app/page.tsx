@@ -7,7 +7,6 @@ import Packages from '@/components/landing/Packages';
 import ServicesExplorer from '@/components/landing/ServicesExplorer';
 import About from '@/components/landing/About';
 import Method from '@/components/landing/Method';
-import Testimonials from '@/components/landing/Testimonials';
 import SocialFeed from '@/components/landing/SocialFeed';
 import Contact from '@/components/landing/Contact';
 import Footer from '@/components/landing/Footer';
@@ -32,7 +31,6 @@ export default function Home() {
         <ServicesExplorer />
         <About />
         <Method />
-        <Testimonials />
         <SocialFeed />
         <Contact />
       </main>

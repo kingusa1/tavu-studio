@@ -31,8 +31,8 @@ export default function CompressionTherapyPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-ice-hands.webp"
-                        alt="Compression Therapy"
+                        src="/service-recovery-equipment.webp"
+                        alt="NormaTec Compression Therapy recovery equipment"
                         fill
                         className="object-cover"
                         priority
@@ -79,7 +79,7 @@ export default function CompressionTherapyPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-ice-bath.webp"
+                                        src="/service-recovery-equipment.webp"
                                         alt="NormaTec Compression"
                                         fill
                                         className="object-cover"

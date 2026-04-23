@@ -47,8 +47,8 @@ export default function MembershipsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/post-4.webp"
-                        alt="TAVU Memberships"
+                        src="/about-brand.webp"
+                        alt="TAVÚ Memberships"
                         fill
                         className="object-cover"
                         priority

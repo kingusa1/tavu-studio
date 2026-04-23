@@ -8,25 +8,25 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
   {
-    image: "/hero-yoga-pose.webp",
+    image: "/hero-reformer-studio.webp",
     title: "Movement",
     subtitle: "Reformer Pilates",
     description: "Strengthen your body with precision and grace",
     accent: "from-blue-500/30",
   },
   {
-    image: "/service-singing-bowl.webp",
-    title: "Breath",
-    subtitle: "Breathwork Rituals",
-    description: "Find clarity through the power of breath",
-    accent: "from-emerald-500/30",
+    image: "/hero-ice-baths.webp",
+    title: "Recovery",
+    subtitle: "Contrast Therapy",
+    description: "Sauna and ice bath to reset and restore",
+    accent: "from-cyan-500/30",
   },
   {
-    image: "/hero-water-float.webp",
-    title: "Balance",
-    subtitle: "Mind & Body",
-    description: "Achieve harmony in every aspect of life",
-    accent: "from-purple-500/30",
+    image: "/hero-entrance-sign.webp",
+    title: "Sanctuary",
+    subtitle: "By the Beach",
+    description: "Your private wellness escape in Al Raha",
+    accent: "from-amber-500/30",
   },
 ];
 

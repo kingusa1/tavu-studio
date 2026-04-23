@@ -93,7 +93,7 @@ export default function ContrastTherapyPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-ice-bath.webp"
+                        src="/service-sauna.webp"
                         alt="Contrast Therapy"
                         fill
                         className="object-cover"
@@ -141,7 +141,7 @@ export default function ContrastTherapyPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-ice-hands.webp"
+                                        src="/service-ice-baths.webp"
                                         alt="Contrast Therapy Suite"
                                         fill
                                         className="object-cover"

@@ -12,7 +12,7 @@ const testimonials = [
     name: "Sarah Al-Rashid",
     role: "Wellness Enthusiast",
     location: "Abu Dhabi",
-    image: "/service-mat-stretch.webp",
+    image: "/service-reformer-logo.webp",
     quote: "TAVÚ has completely transformed my relationship with my body. The combination of Pilates and breathwork has given me a sense of calm I never knew was possible.",
     rating: 5
   },
@@ -21,7 +21,7 @@ const testimonials = [
     name: "Michael Chen",
     role: "Entrepreneur",
     location: "Al Raha",
-    image: "/service-ice-bath.webp",
+    image: "/service-sauna.webp",
     quote: "As someone who sits at a desk all day, the reformer sessions have been life-changing. My back pain is gone and I feel more energized than ever.",
     rating: 5
   },
@@ -30,7 +30,7 @@ const testimonials = [
     name: "Fatima Hassan",
     role: "Yoga Instructor",
     location: "Dubai",
-    image: "/service-ice-hands.webp",
+    image: "/service-ice-baths.webp",
     quote: "I've practiced wellness for years, but TAVÚ's approach is unique. The integration of movement and breath creates a holistic experience I haven't found anywhere else.",
     rating: 5
   }

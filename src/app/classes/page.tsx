@@ -81,7 +81,7 @@ export default function ClassesPage() {
                 <div className="absolute inset-0 bg-primary/20 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/hero-yoga-pose.webp"
+                        src="/hero-reformer-studio.webp"
                         alt="TAVU Movement Classes"
                         fill
                         className="object-cover opacity-60"
@@ -211,7 +211,7 @@ export default function ClassesPage() {
                             <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-pilates-stretch.webp"
+                                        src="/service-reformer-mirror.webp"
                                         alt="Reformer Pilates Studio"
                                         fill
                                         className="object-cover"
@@ -286,7 +286,7 @@ export default function ClassesPage() {
                                 </div>
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
                                     <Image
-                                        src="/service-yoga-mat.webp"
+                                        src="/service-breathing-props.webp"
                                         alt="Yoga and Breathing Studio"
                                         fill
                                         className="object-cover"
