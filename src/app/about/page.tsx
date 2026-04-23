@@ -17,7 +17,7 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/tavu-sign.png"
+                        src="/tavu-sign.webp"
                         alt="TAVU Wellness Studio Sign"
                         fill
                         className="object-cover"
@@ -27,7 +27,7 @@ export default function AboutPage() {
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">About TAVU</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">About TAVU</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
                             TA grounds the body. VU lifts the spirit.
                         </p>
@@ -43,7 +43,7 @@ export default function AboutPage() {
                             <MotionWrapper delay={0.1} direction="left">
                                 <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
                                     <Image
-                                        src="/about-studio.png"
+                                        src="/about-studio.webp"
                                         alt="TAVU Studio Interior"
                                         fill
                                         className="object-cover"
@@ -54,7 +54,7 @@ export default function AboutPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div>
                                     <span className="text-accent font-medium text-sm tracking-wider uppercase">Our Story</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-6">The TAVU Journey</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2 mb-6">The TAVU Journey</h2>
                                     <div className="space-y-4 text-lg text-foreground/70">
                                         <p>
                                             TAVU was created from a simple belief: that balance is not found in extremes, but in integration.
@@ -87,7 +87,7 @@ export default function AboutPage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-4xl md:text-5xl font-headline mb-6">Begin When Ready</h2>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline mb-6">Begin When Ready</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Explore the schedule and book your class.
                             </p>

@@ -16,7 +16,7 @@ export default function RecoveryPage() {
                     <div className="max-w-4xl mx-auto">
                         <MotionWrapper delay={0} direction="up">
                             <div className="text-center mb-14">
-                                <h1 className="text-5xl md:text-7xl font-headline mb-6 text-primary">Recovery</h1>
+                                <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">Recovery</h1>
                                 <p className="text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
                                     Restore, recover, and rejuvenate with our range of recovery services.
                                 </p>
@@ -25,7 +25,7 @@ export default function RecoveryPage() {
 
                         <div className="grid md:grid-cols-3 gap-8">
                             <MotionWrapper delay={0.1} direction="up">
-                                <Link href="/services/compression-therapy" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
+                                <Link href="/services/contrast-therapy" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
                                     <h2 className="font-headline text-2xl text-primary mb-3">Contrast Therapy</h2>
                                     <p className="text-foreground/70 text-sm mb-4">Sauna + Ice Bath sessions. Shared and private suites available.</p>
                                     <span className="text-accent font-medium text-sm">From 220 AED →</span>

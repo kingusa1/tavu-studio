@@ -8,21 +8,21 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
   {
-    image: "/hero-yoga-pose.png",
+    image: "/hero-yoga-pose.webp",
     title: "Movement",
     subtitle: "Reformer Pilates",
     description: "Strengthen your body with precision and grace",
     accent: "from-blue-500/30",
   },
   {
-    image: "/service-singing-bowl.png",
+    image: "/service-singing-bowl.webp",
     title: "Breath",
     subtitle: "Breathwork Rituals",
     description: "Find clarity through the power of breath",
     accent: "from-emerald-500/30",
   },
   {
-    image: "/hero-water-float.png",
+    image: "/hero-water-float.webp",
     title: "Balance",
     subtitle: "Mind & Body",
     description: "Achieve harmony in every aspect of life",
@@ -167,7 +167,7 @@ export default function Hero() {
 
         {/* Animated particles */}
         <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
-          {[...Array(30)].map((_, i) => {
+          {[...Array(12)].map((_, i) => {
             const left = ((i * 31 + 17) % 100);
             const delay = (i % 15) * 0.4;
             const duration = 4 + (i % 6) * 0.8;
@@ -220,7 +220,7 @@ export default function Hero() {
       </div>
 
       {/* Slide indicator - current pillar */}
-      <div className="absolute top-1/2 left-6 -translate-y-1/2 z-30 hidden md:block">
+      <div className="absolute top-1/2 left-6 -translate-y-1/2 z-30 hidden xl:block">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -252,14 +252,14 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <MotionWrapper delay={0.1} direction="up">
-            <span className="inline-block text-accent uppercase tracking-[0.4em] text-xs font-semibold mb-6 bg-background/40 backdrop-blur-md px-5 py-2.5 rounded-full border border-accent/20">
-              Abu Dhabi&apos;s Wellness Sanctuary
+            <span className="inline-block text-accent uppercase tracking-[0.15em] sm:tracking-[0.25em] text-[10px] sm:text-xs font-semibold mb-6 bg-background/40 backdrop-blur-md px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-accent/20 text-center max-w-[90vw] leading-tight">
+              Abu Dhabi&apos;s First Private Space for Reformer Pilates &amp; Contrast Therapy
             </span>
           </MotionWrapper>
 
           {/* Animated Headline */}
           <MotionWrapper delay={0.2} direction="up">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-headline font-semibold tracking-tight mb-6 leading-[1.05] drop-shadow-lg">
+            <h1 className="text-4xl sm:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-headline font-semibold tracking-tight mb-6 leading-[1.05] drop-shadow-lg">
               <span className="text-white">Wellness</span>
               <br />
               <AnimatePresence mode="wait">
@@ -289,9 +289,14 @@ export default function Hero() {
 
           {/* Subheadline */}
           <MotionWrapper delay={0.4} direction="up">
-            <p className="text-lg md:text-xl lg:text-2xl mb-10 text-white/80 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md">
-              A sanctuary in Abu Dhabi where movement and breath converge.
-            </p>
+            <div className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 text-white/85 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md space-y-1 px-2">
+              <p>Where movement is practiced</p>
+              <p>and recovery is part of the method</p>
+              <p className="text-sm sm:text-base md:text-lg text-white/70 italic pt-1">Reformer, mat, yoga, mobility, and stretch</p>
+              <p className="pt-4">Supported by contrast and compression</p>
+              <p className="pt-3"><span className="text-accent font-medium">TA</span> — stillness</p>
+              <p><span className="text-accent font-medium">VÚ</span> — flow</p>
+            </div>
           </MotionWrapper>
 
           {/* CTA Buttons */}
@@ -324,6 +329,7 @@ export default function Hero() {
                 {/* Play/Pause */}
                 <motion.button
                   onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                  aria-label={isAutoPlaying ? "Pause slideshow" : "Play slideshow"}
                   className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -334,6 +340,7 @@ export default function Hero() {
                 {/* Prev */}
                 <motion.button
                   onClick={prevSlide}
+                  aria-label="Previous slide"
                   className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -344,6 +351,7 @@ export default function Hero() {
                 {/* Next */}
                 <motion.button
                   onClick={nextSlide}
+                  aria-label="Next slide"
                   className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/80 hover:text-accent hover:border-accent/50 transition-all"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -358,6 +366,7 @@ export default function Hero() {
                   <button
                     key={index}
                     onClick={() => goToSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
                     className="group relative"
                   >
                     <div className={`w-8 h-1 rounded-full transition-all duration-300 ${
@@ -382,6 +391,7 @@ export default function Hero() {
       {/* Side navigation hints */}
       <motion.button
         onClick={prevSlide}
+        aria-label="Previous slide"
         className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-24 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
         whileHover={{ x: -5 }}
       >
@@ -389,6 +399,7 @@ export default function Hero() {
       </motion.button>
       <motion.button
         onClick={nextSlide}
+        aria-label="Next slide"
         className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-24 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
         whileHover={{ x: 5 }}
       >

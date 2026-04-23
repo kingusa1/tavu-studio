@@ -27,14 +27,14 @@ interface InstagramProfile {
 
 // Fallback images when Instagram is not connected
 const fallbackImages = [
-  { src: "/hero-yoga-pose.png", alt: "Yoga practice at TAVÚ", likes: 234, comments: 12 },
-  { src: "/service-pilates-stretch.png", alt: "Reformer Pilates session", likes: 189, comments: 8 },
-  { src: "/service-yoga-mat.png", alt: "Preparing for practice", likes: 312, comments: 15 },
-  { src: "/service-ice-bath.png", alt: "Ice bath recovery", likes: 267, comments: 11 },
-  { src: "/service-ice-hands.png", alt: "Cold therapy", likes: 198, comments: 9 },
-  { src: "/service-singing-bowl.png", alt: "Sound healing session", likes: 156, comments: 7 },
-  { src: "/service-mat-stretch.png", alt: "Mat stretching", likes: 223, comments: 10 },
-  { src: "/post-4.jpg", alt: "Wellness and beauty", likes: 289, comments: 14 },
+  { src: "/hero-yoga-pose.webp", alt: "Yoga practice at TAVÚ", likes: 234, comments: 12 },
+  { src: "/service-pilates-stretch.webp", alt: "Reformer Pilates session", likes: 189, comments: 8 },
+  { src: "/service-yoga-mat.webp", alt: "Preparing for practice", likes: 312, comments: 15 },
+  { src: "/service-ice-bath.webp", alt: "Ice bath recovery", likes: 267, comments: 11 },
+  { src: "/service-ice-hands.webp", alt: "Cold therapy", likes: 198, comments: 9 },
+  { src: "/service-singing-bowl.webp", alt: "Sound healing session", likes: 156, comments: 7 },
+  { src: "/service-mat-stretch.webp", alt: "Mat stretching", likes: 223, comments: 10 },
+  { src: "/post-4.webp", alt: "Wellness and beauty", likes: 289, comments: 14 },
 ];
 
 export default function SocialFeed() {
@@ -92,7 +92,7 @@ export default function SocialFeed() {
               <span className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-4 block">
                 Follow Us
               </span>
-              <h2 className="text-3xl md:text-4xl font-headline font-medium text-primary flex items-center gap-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-medium text-primary flex items-center gap-3">
                 @{instagramHandle}
                 {isLoading && (
                   <Loader2 className="w-5 h-5 animate-spin text-foreground/40" />

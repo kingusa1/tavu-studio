@@ -47,7 +47,7 @@ export default function MembershipsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/post-4.jpg"
+                        src="/post-4.webp"
                         alt="TAVU Memberships"
                         fill
                         className="object-cover"
@@ -57,7 +57,7 @@ export default function MembershipsPage() {
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Memberships</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Memberships</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
                             Join our community and unlock exclusive benefits for your wellness journey
                         </p>
@@ -72,7 +72,7 @@ export default function MembershipsPage() {
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-16">
                                 <span className="text-accent font-medium text-sm tracking-wider uppercase">Tiers</span>
-                                <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2">Membership Options</h2>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2">Membership Options</h2>
                             </div>
                         </MotionWrapper>
 
@@ -118,7 +118,7 @@ export default function MembershipsPage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-4xl md:text-5xl font-headline mb-6">Start Your Membership</h2>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline mb-6">Start Your Membership</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Join the TAVU community and unlock your full wellness potential.
                             </p>

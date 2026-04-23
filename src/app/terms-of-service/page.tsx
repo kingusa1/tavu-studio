@@ -16,7 +16,7 @@ export default function TermsOfService() {
       <main className="flex-grow pt-24">
         <div className="container mx-auto px-4 py-16 sm:py-24">
           <div className="bg-card/80 backdrop-blur-sm p-8 md:p-16 rounded-2xl shadow-2xl border border-white/10 max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary mb-4">Terms of Service</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold text-primary mb-4">Terms of Service</h1>
             <p className="text-sm text-muted-foreground mb-8">Last Updated: January 2025</p>
 
             <div className="space-y-8 text-primary/90">

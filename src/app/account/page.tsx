@@ -112,7 +112,7 @@ export default function AccountPage() {
                             <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                                 Member Portal
                             </span>
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-headline font-medium text-primary mb-6">
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-medium text-primary mb-6">
                                 Your <em className="italic font-light text-primary/75">Account</em>
                             </h1>
                             <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto">

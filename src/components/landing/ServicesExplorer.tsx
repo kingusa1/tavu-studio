@@ -12,7 +12,7 @@ const services = [
         name: 'Reformer Pilates',
         tagline: 'Precision. Strength. Control.',
         description: 'Small-group reformer classes designed to sculpt, strengthen, and align your body with spring-loaded resistance and expert guidance.',
-        image: '/service-pilates-stretch.png',
+        image: '/service-pilates-stretch.webp',
         highlights: ['Max 12 per class', 'Spring-loaded resistance', 'Full-body sculpting', 'Expert instructors'],
         href: '/services/reformer-pilates',
     },
@@ -21,17 +21,26 @@ const services = [
         name: 'Breathing Room',
         tagline: 'Stillness. Depth. Release.',
         description: 'Yoga, mat pilates, and mobility sessions in a dedicated space for grounding breathwork and mindful movement.',
-        image: '/service-yoga-mat.png',
+        image: '/service-yoga-mat.webp',
         highlights: ['Yoga & mat pilates', 'Guided breathwork', 'Mobility sessions', 'Mindful movement'],
         href: '/services/breathing-room',
+    },
+    {
+        id: 'contrast-therapy',
+        name: 'Contrast Therapy',
+        tagline: 'Heat. Cold. Renew.',
+        description: 'Alternating sauna and ice bath sessions to activate your body’s natural healing response. Shared and private suites available.',
+        image: '/service-ice-bath.webp',
+        highlights: ['Sauna + Ice Bath', 'Shared & private suites', 'Boosts circulation', 'Accelerates recovery'],
+        href: '/services/contrast-therapy',
     },
     {
         id: 'compression-therapy',
         name: 'Compression Therapy',
         tagline: 'Recover. Restore. Repeat.',
-        description: 'Contrast therapy featuring compression boots and ice bath sessions to accelerate recovery and reduce inflammation.',
-        image: '/service-ice-bath.png',
-        highlights: ['Compression boots', 'Ice bath sessions', 'Faster recovery', 'Reduced inflammation'],
+        description: 'NormaTec pulsing compression to stimulate circulation, flush lactic acid, and support faster muscle recovery.',
+        image: '/service-ice-hands.webp',
+        highlights: ['NormaTec compression', 'Post-training recovery', 'Reduces swelling', 'Speeds up recovery'],
         href: '/services/compression-therapy',
     },
     {
@@ -39,7 +48,7 @@ const services = [
         name: 'IV Therapy',
         tagline: 'Replenish. Recharge. Glow.',
         description: 'Vitamin and hydration infusions administered by licensed professionals to boost energy, immunity, and overall wellness.',
-        image: '/service-ice-hands.png',
+        image: '/service-ice-hands.webp',
         highlights: ['Vitamin infusions', 'Hydration therapy', 'Licensed professionals', 'Custom blends'],
         href: '/services/iv-therapy',
     },
@@ -48,7 +57,7 @@ const services = [
         name: 'Massage',
         tagline: 'Unwind. Heal. Breathe.',
         description: 'Therapeutic and relaxation massage treatments tailored to release tension, improve circulation, and restore balance.',
-        image: '/post-4.jpg',
+        image: '/post-4.webp',
         highlights: ['Deep tissue', 'Sports recovery', 'Relaxation', 'Custom treatments'],
         href: '/services/massage',
     },
@@ -138,7 +147,7 @@ export default function ServicesExplorer() {
 
                             {/* Info */}
                             <div>
-                                <h3 className="text-3xl md:text-4xl font-headline text-primary mb-2">
+                                <h3 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-2">
                                     {active.name}
                                 </h3>
                                 <p className="text-accent font-medium text-sm tracking-wide uppercase mb-4">

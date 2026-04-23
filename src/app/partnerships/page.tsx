@@ -79,7 +79,7 @@ export default function PartnershipsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/about-reach.png"
+                        src="/about-reach.webp"
                         alt="TAVU Partnerships"
                         fill
                         className="object-cover"
@@ -89,7 +89,7 @@ export default function PartnershipsPage() {
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Partnerships</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Partnerships</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
                             Collaborate with TAVU to bring wellness to your organization or brand
                         </p>
@@ -104,7 +104,7 @@ export default function PartnershipsPage() {
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-16">
                                 <span className="text-accent font-medium text-sm tracking-wider uppercase">Opportunities</span>
-                                <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2">Partnership Types</h2>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2">Partnership Types</h2>
                             </div>
                         </MotionWrapper>
 
@@ -141,7 +141,7 @@ export default function PartnershipsPage() {
                             <MotionWrapper delay={0.1} direction="left">
                                 <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
                                     <Image
-                                        src="/tavu-sign.png"
+                                        src="/tavu-sign.webp"
                                         alt="TAVU Wellness Studio"
                                         fill
                                         className="object-cover"
@@ -153,7 +153,7 @@ export default function PartnershipsPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div>
                                     <span className="text-accent font-medium text-sm tracking-wider uppercase">Benefits</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-8">Why Partner with TAVU</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2 mb-8">Why Partner with TAVU</h2>
 
                                     <div className="space-y-6">
                                         {whyPartner.map((item, index) => (
@@ -178,7 +178,7 @@ export default function PartnershipsPage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-4xl md:text-5xl font-headline mb-6">Let's Work Together</h2>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline mb-6">Let's Work Together</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 We're always looking for like-minded partners who share our passion for wellness.
                                 Get in touch to discuss collaboration opportunities.

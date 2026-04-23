@@ -115,16 +115,16 @@ export default function Footer() {
               TAVÚ is the space where both are practiced as one.
             </p>
             <div className="flex gap-5">
-              <a href="https://instagram.com/tavuwellness.studio" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
+              <a href="https://instagram.com/tavuwellness.studio" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Instagram" className="opacity-60 hover:opacity-100 transition-opacity">
                 <InstagramIcon className="h-5 w-5" />
               </a>
-              <a href="https://www.tiktok.com/@tavustudio" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
+              <a href="https://www.tiktok.com/@tavustudio" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on TikTok" className="opacity-60 hover:opacity-100 transition-opacity">
                 <TikTokIcon className="h-5 w-5" />
               </a>
-              <a href="https://www.facebook.com/people/TAV%C3%9A-Wellness/61580985467215/" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
+              <a href="https://www.facebook.com/people/TAV%C3%9A-Wellness/61580985467215/" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Facebook" className="opacity-60 hover:opacity-100 transition-opacity">
                 <FacebookIcon className="h-5 w-5" />
               </a>
-              <a href="https://wa.me/971522755551" target="_blank" rel="noopener noreferrer" className="opacity-60 hover:opacity-100 transition-opacity">
+              <a href="https://wa.me/971522755551" target="_blank" rel="noopener noreferrer" aria-label="Contact TAVÚ on WhatsApp" className="opacity-60 hover:opacity-100 transition-opacity">
                 <WhatsAppIcon className="h-5 w-5" />
               </a>
             </div>

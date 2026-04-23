@@ -15,7 +15,7 @@ export default function SchedulePage() {
                 <div className="max-w-5xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
                         <div className="text-center mb-12">
-                            <h1 className="text-5xl md:text-6xl font-headline mb-6 text-primary">Schedule</h1>
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl font-headline mb-6 text-primary">Schedule</h1>
                             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                                 Book your next session. Browse our class schedule and reserve your spot.
                             </p>
@@ -24,8 +24,7 @@ export default function SchedulePage() {
 
                     <MotionWrapper delay={0.1} direction="up">
                         <div className="bg-white rounded-2xl p-4 min-h-[700px] shadow-sm">
-                            {/* Schedule Widget from Mindbody - User ID: dc43537beda */}
-                            <MindbodyWidget widgetType="Schedules" widgetId="dc43537beda" />
+                            <MindbodyWidget key="schedules-widget" widgetType="Schedules" widgetId="dc43537beda" />
                         </div>
                     </MotionWrapper>
 

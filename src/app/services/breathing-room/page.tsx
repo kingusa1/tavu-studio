@@ -56,7 +56,7 @@ export default function BreathingRoomPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-yoga-mat.png"
+                        src="/service-yoga-mat.webp"
                         alt="Breathing Room"
                         fill
                         className="object-cover"
@@ -69,7 +69,7 @@ export default function BreathingRoomPage() {
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                             Breath
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Breathing Room</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Breathing Room</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto">
                             A space dedicated to slowing down. Breath-led practices designed to restore balance and reconnect you to your body.
                         </p>
@@ -84,7 +84,7 @@ export default function BreathingRoomPage() {
                         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                             <MotionWrapper delay={0.1} direction="left">
                                 <div>
-                                    <h2 className="text-3xl md:text-4xl font-headline text-primary mb-6">The Breathing Room</h2>
+                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">The Breathing Room</h2>
                                     <p className="text-lg text-foreground/70 mb-6 leading-relaxed">
                                         Our breathing room is a sanctuary for presence and breath. From yoga flows to mat pilates,
                                         each session is designed to help you release tension, build strength, and find inner calm.
@@ -110,7 +110,7 @@ export default function BreathingRoomPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-singing-bowl.png"
+                                        src="/service-singing-bowl.webp"
                                         alt="Breathing Room Studio"
                                         fill
                                         className="object-cover"
@@ -142,7 +142,7 @@ export default function BreathingRoomPage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Our Classes</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Our Classes</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
                                     Yoga, pilates, and mobility practices for every body.
                                 </p>
@@ -179,7 +179,7 @@ export default function BreathingRoomPage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Breathing Room Packages</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Breathing Room Packages</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
                                     All prices include VAT.
                                 </p>
@@ -251,7 +251,7 @@ export default function BreathingRoomPage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-3xl md:text-4xl font-headline mb-4">Ready to Begin?</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">Ready to Begin?</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Book your first breathing room class and find your calm.
                             </p>

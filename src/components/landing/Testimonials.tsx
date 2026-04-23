@@ -12,7 +12,7 @@ const testimonials = [
     name: "Sarah Al-Rashid",
     role: "Wellness Enthusiast",
     location: "Abu Dhabi",
-    image: "/service-mat-stretch.png",
+    image: "/service-mat-stretch.webp",
     quote: "TAVÚ has completely transformed my relationship with my body. The combination of Pilates and breathwork has given me a sense of calm I never knew was possible.",
     rating: 5
   },
@@ -21,7 +21,7 @@ const testimonials = [
     name: "Michael Chen",
     role: "Entrepreneur",
     location: "Al Raha",
-    image: "/service-ice-bath.png",
+    image: "/service-ice-bath.webp",
     quote: "As someone who sits at a desk all day, the reformer sessions have been life-changing. My back pain is gone and I feel more energized than ever.",
     rating: 5
   },
@@ -30,7 +30,7 @@ const testimonials = [
     name: "Fatima Hassan",
     role: "Yoga Instructor",
     location: "Dubai",
-    image: "/service-ice-hands.png",
+    image: "/service-ice-hands.webp",
     quote: "I've practiced wellness for years, but TAVÚ's approach is unique. The integration of movement and breath creates a holistic experience I haven't found anywhere else.",
     rating: 5
   }
@@ -112,7 +112,7 @@ export default function Testimonials() {
             <span className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6 block">
               Testimonials
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-headline font-medium text-primary mb-6">
+            <h2 className="text-4xl sm:text-4xl sm:text-5xl md:text-6xl font-headline font-medium text-primary mb-6">
               What Our <em className="italic font-light text-primary/75">Members</em> Say
             </h2>
             <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto font-light">
@@ -216,6 +216,7 @@ export default function Testimonials() {
               <motion.button
                 key={index}
                 onClick={() => goToSlide(index)}
+                aria-label={`Go to testimonial ${index + 1}`}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   currentIndex === index
                     ? "w-8 bg-accent"
@@ -245,6 +246,7 @@ export default function Testimonials() {
               <motion.button
                 key={testimonial.id}
                 onClick={() => goToSlide(index)}
+                aria-label={`View testimonial from ${testimonial.name}`}
                 className={`relative w-16 h-16 rounded-xl overflow-hidden transition-all duration-300 ${
                   currentIndex === index
                     ? "ring-2 ring-accent ring-offset-2 ring-offset-background scale-110"

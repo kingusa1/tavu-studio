@@ -28,7 +28,7 @@ export default function Contact() {
                             <span className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-8 block">
                                 The Location
                             </span>
-                            <h2 className="text-4xl md:text-5xl font-headline font-medium mb-12">
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline font-medium mb-12">
                                 Visit the <em className="italic font-light text-primary/80">Sanctuary</em>
                             </h2>
 

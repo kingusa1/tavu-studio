@@ -13,7 +13,7 @@ const upcomingEvents = [
         time: 'TBA',
         description: 'Join us for the grand opening of TAVU Wellness Studio. Experience our facilities, meet our team, and enjoy exclusive founding member offers.',
         category: 'Launch Event',
-        image: '/tavu-sign.png'
+        image: '/tavu-sign.webp'
     },
     {
         title: 'Breathwork Workshop',
@@ -21,7 +21,7 @@ const upcomingEvents = [
         time: 'TBA',
         description: 'A deep dive into breathwork techniques for stress relief, improved focus, and enhanced athletic performance.',
         category: 'Workshop',
-        image: '/service-singing-bowl.png'
+        image: '/service-singing-bowl.webp'
     },
     {
         title: 'Recovery Science Seminar',
@@ -29,7 +29,7 @@ const upcomingEvents = [
         time: 'TBA',
         description: 'Learn the science behind contrast therapy, cold exposure, and optimal recovery protocols from wellness experts.',
         category: 'Seminar',
-        image: '/service-ice-bath.png'
+        image: '/service-ice-bath.webp'
     }
 ];
 
@@ -83,7 +83,7 @@ export default function EventsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/about-reach.png"
+                        src="/about-reach.webp"
                         alt="TAVU Events"
                         fill
                         className="object-cover"
@@ -93,7 +93,7 @@ export default function EventsPage() {
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Events</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Events</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
                             Workshops, seminars, and community gatherings to deepen your practice
                         </p>
@@ -108,7 +108,7 @@ export default function EventsPage() {
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-16">
                                 <span className="text-accent font-medium text-sm tracking-wider uppercase">Calendar</span>
-                                <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2">Upcoming Events</h2>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2">Upcoming Events</h2>
                             </div>
                         </MotionWrapper>
 
@@ -151,7 +151,7 @@ export default function EventsPage() {
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-16">
                                 <span className="text-accent font-medium text-sm tracking-wider uppercase">What We Offer</span>
-                                <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2">Event Types</h2>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2">Event Types</h2>
                             </div>
                         </MotionWrapper>
 
@@ -175,7 +175,7 @@ export default function EventsPage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-4xl md:text-5xl font-headline mb-6">Stay Updated</h2>
+                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline mb-6">Stay Updated</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Register to receive notifications about upcoming events, workshops, and exclusive member gatherings.
                             </p>

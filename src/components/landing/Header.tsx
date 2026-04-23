@@ -53,8 +53,18 @@ const navigation = {
         )
       },
       {
+        title: 'Contrast Therapy',
+        description: 'Sauna + Ice Bath sessions',
+        href: '/services/contrast-therapy',
+        icon: (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        )
+      },
+      {
         title: 'Compression Therapy',
-        description: 'Contrast therapy & ice bath',
+        description: 'NormaTec recovery',
         href: '/services/compression-therapy',
         icon: (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -362,7 +372,21 @@ export default function Header() {
               Register
             </Link>
 
-            {/* Book CTA */}
+            {/* Classes CTA */}
+            <Button
+              asChild
+              variant="outline"
+              className={cn(
+                "rounded-full font-semibold transition-all duration-300 px-5 py-2.5 text-sm",
+                isScrolled
+                  ? "border-2 border-primary/40 text-primary hover:bg-primary/5 bg-transparent"
+                  : "border-2 border-white/50 text-white hover:bg-white/10 bg-transparent"
+              )}
+            >
+              <Link href="/schedule">Classes</Link>
+            </Button>
+
+            {/* Appointments CTA */}
             <Button
               asChild
               className={cn(
@@ -372,7 +396,7 @@ export default function Header() {
                 "px-6 py-2.5 text-sm"
               )}
             >
-              <Link href="/schedule">Book Now</Link>
+              <Link href="/appointments">Appointments</Link>
             </Button>
           </div>
         </div>
@@ -401,6 +425,7 @@ export default function Header() {
           <div className="flex items-center gap-2">
             <Link
               href="/account"
+              aria-label="Login to account"
               className={cn(
                 "p-2 transition-colors",
                 isScrolled ? "text-foreground/70 hover:text-accent" : "text-white/90 hover:text-accent"
@@ -411,10 +436,12 @@ export default function Header() {
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <button className={cn(
-                  "p-2 transition-colors",
-                  isScrolled ? "text-foreground/70 hover:text-accent" : "text-white/90 hover:text-accent"
-                )}>
+                <button
+                  aria-label="Open navigation menu"
+                  className={cn(
+                    "p-2 transition-colors",
+                    isScrolled ? "text-foreground/70 hover:text-accent" : "text-white/90 hover:text-accent"
+                  )}>
                   <MenuIcon className="w-6 h-6" />
                 </button>
               </SheetTrigger>
@@ -475,10 +502,19 @@ export default function Header() {
                     </Link>
                     <Button
                       asChild
-                      className="w-full rounded-full py-6 text-base bg-accent text-accent-foreground shadow-lg"
+                      variant="outline"
+                      className="w-full rounded-full py-6 text-base border-2 border-primary/40 text-primary"
                     >
                       <Link href="/schedule" onClick={() => setMobileMenuOpen(false)}>
-                        Book Now
+                        Classes
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      className="w-full rounded-full py-6 text-base bg-accent text-accent-foreground shadow-lg"
+                    >
+                      <Link href="/appointments" onClick={() => setMobileMenuOpen(false)}>
+                        Appointments
                       </Link>
                     </Button>
                   </div>

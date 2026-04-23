@@ -6,9 +6,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 
 const images = [
-  { src: "/tavu-sign.png", alt: "TAVÚ lightbox sign on a wall" },
-  { src: "/about-studio.png", alt: "Woman sitting in studio" },
-  { src: "/about-reach.png", alt: "Artistic arm reaching out" },
+  { src: "/tavu-sign.webp", alt: "TAVÚ lightbox sign on a wall" },
+  { src: "/about-studio.webp", alt: "Woman sitting in studio" },
+  { src: "/about-reach.webp", alt: "Artistic arm reaching out" },
 ];
 
 export default function About() {
@@ -36,7 +36,7 @@ export default function About() {
               <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-6 block">
                 The Philosophy
               </span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-headline font-medium leading-[1.1] text-primary mb-8">
+              <h2 className="text-4xl sm:text-4xl sm:text-5xl md:text-6xl font-headline font-medium leading-[1.1] text-primary mb-8">
                 In a world that rushes, <br />
                 take a <em className="italic font-light text-primary/70">pause</em>.
               </h2>

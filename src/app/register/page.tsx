@@ -73,7 +73,7 @@ export default function RegisterPage() {
                             <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                                 Start Your Journey
                             </span>
-                            <h1 className="text-5xl md:text-6xl lg:text-7xl font-headline mb-6 text-primary">
+                            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline mb-6 text-primary">
                                 Join the TAVU Community
                             </h1>
                             <p className="text-xl text-muted-foreground leading-relaxed">
@@ -154,7 +154,7 @@ export default function RegisterPage() {
 
                                         {/* Mindbody Widget */}
                                         <div className="p-4 md:p-6 bg-white min-h-[600px]">
-                                            <MindbodyWidget widgetType="registrations" widgetId="dc166478beda" />
+                                            <MindbodyWidget key="register-widget" widgetType="registrations" widgetId="dc166478beda" />
                                         </div>
 
                                         {/* Form Footer */}

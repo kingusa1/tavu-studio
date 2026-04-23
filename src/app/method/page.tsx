@@ -10,7 +10,7 @@ export default function MethodPage() {
             <Header />
             <main className="flex-grow pt-32 pb-16 px-4 container mx-auto relative z-10">
                 <div className="max-w-4xl mx-auto">
-                    <h1 className="text-5xl md:text-6xl font-headline mb-8 text-primary">The Method</h1>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-headline mb-8 text-primary">The Method</h1>
                     <div className="prose prose-xl prose-stone dark:prose-invert">
                         <p className="font-serif text-xl leading-relaxed mb-12 text-muted-foreground">
                             Rooted in TA (grounding) and VÚ (flow), our practice is a single, curated method designed to soothe the nervous system, restore clarity, and invite you to return to yourself.

@@ -9,7 +9,7 @@ const services = [
     {
         name: 'Reformer Pilates',
         description: 'Small-group reformer classes, limited to 8 participants. A 50-minute, low-impact practice designed to build strength, control, mobility, and alignment.',
-        image: '/service-pilates-stretch.png',
+        image: '/service-pilates-stretch.webp',
         link: '/services/reformer-pilates',
         features: ['8 max participants', '50 minutes', 'All levels welcome'],
         accent: 'from-blue-500/20'
@@ -17,7 +17,7 @@ const services = [
     {
         name: 'Breathing Room',
         description: 'Breath-led practices including yoga, mat pilates, and mobility sessions. Designed to restore balance, release tension, and reconnect you to your body.',
-        image: '/service-yoga-mat.png',
+        image: '/service-yoga-mat.webp',
         link: '/services/breathing-room',
         features: ['45-60 minutes', 'All levels', 'Mat-based practices'],
         accent: 'from-emerald-500/20'
@@ -25,7 +25,7 @@ const services = [
     {
         name: 'Compression Therapy',
         description: 'Contrast therapy combining Himalayan Salt Sauna or Infrared Sauna with Ice Bath. Activate your body\'s natural healing response and accelerate recovery.',
-        image: '/service-ice-bath.png',
+        image: '/service-ice-bath.webp',
         link: '/services/compression-therapy',
         features: ['60 minutes', 'Hot & cold therapy', 'Private suites available'],
         accent: 'from-amber-500/20'
@@ -33,7 +33,7 @@ const services = [
     {
         name: 'IV Therapy',
         description: 'Intravenous vitamin and hydration therapy for optimal wellness. Boost energy, enhance recovery, and support your immune system.',
-        image: '/service-ice-hands.png',
+        image: '/service-ice-hands.webp',
         link: '/services/iv-therapy',
         features: ['30-45 minutes', 'Custom formulations', 'Medical supervision'],
         accent: 'from-purple-500/20'
@@ -41,7 +41,7 @@ const services = [
     {
         name: 'Massage',
         description: 'Therapeutic and relaxation massage by certified therapists. From stress relief to deep tissue work, find the perfect treatment for your needs.',
-        image: '/post-4.jpg',
+        image: '/post-4.webp',
         link: '/services/massage',
         features: ['45-60 minutes', 'Multiple styles', 'Ladies only'],
         accent: 'from-rose-500/20'
@@ -61,7 +61,7 @@ export default function ServicesPage() {
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                             What We Offer
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-primary">Our Services</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">Our Services</h1>
                         <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
                             Discover the complete TAVÚ experience — from reformer classes to recovery therapies,
                             everything you need for your wellness journey.
@@ -99,7 +99,7 @@ export default function ServicesPage() {
                                                     <span className="text-accent text-sm font-semibold uppercase tracking-wider mb-2">
                                                         {index === 0 ? 'Movement' : index === 1 ? 'Breath' : 'Recovery'}
                                                     </span>
-                                                    <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4 group-hover:text-accent transition-colors">
+                                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4 group-hover:text-accent transition-colors">
                                                         {service.name}
                                                     </h2>
                                                     <p className="text-foreground/70 text-lg leading-relaxed mb-6">
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="max-w-4xl mx-auto text-center glass p-10 md:p-16 rounded-3xl">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Ready to Begin?</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Ready to Begin?</h2>
                                 <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
                                     Start your wellness journey with our pre-opening packages. Limited spots available.
                                 </p>

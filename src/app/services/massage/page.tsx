@@ -55,7 +55,7 @@ export default function MassagePage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/post-4.jpg"
+                        src="/post-4.webp"
                         alt="Massage Services"
                         fill
                         className="object-cover"
@@ -68,7 +68,7 @@ export default function MassagePage() {
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                             Recovery
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Massage</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Massage</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto">
                             Therapeutic and relaxation massage by certified therapists. Find the perfect treatment for your body and mind.
                         </p>
@@ -83,7 +83,7 @@ export default function MassagePage() {
                         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                             <MotionWrapper delay={0.1} direction="left">
                                 <div>
-                                    <h2 className="text-3xl md:text-4xl font-headline text-primary mb-6">Healing Touch</h2>
+                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">Healing Touch</h2>
                                     <p className="text-lg text-foreground/70 mb-6 leading-relaxed">
                                         Our massage therapy services combine ancient healing traditions with modern therapeutic techniques.
                                         Each session is tailored to your specific needs, whether you're seeking relaxation, pain relief, or athletic recovery.
@@ -111,7 +111,7 @@ export default function MassagePage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/about-studio.png"
+                                        src="/about-studio.webp"
                                         alt="Massage Room"
                                         fill
                                         className="object-cover"
@@ -147,7 +147,7 @@ export default function MassagePage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Our Treatments</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Our Treatments</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
                                     From gentle relaxation to deep therapeutic work, find your perfect massage.
                                 </p>
@@ -190,7 +190,7 @@ export default function MassagePage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-3xl md:text-4xl font-headline mb-4">Treat Yourself</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">Treat Yourself</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Book your massage session and experience complete relaxation.
                             </p>

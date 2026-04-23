@@ -66,7 +66,7 @@ export default function ContactPage() {
                                 {/* Image Card */}
                                 <div className="relative aspect-video rounded-2xl overflow-hidden">
                                     <Image
-                                        src="/tavu-sign.png"
+                                        src="/tavu-sign.webp"
                                         alt="TAVU Wellness Studio"
                                         fill
                                         className="object-cover"

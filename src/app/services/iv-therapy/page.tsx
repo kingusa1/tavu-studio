@@ -7,49 +7,86 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const treatments = [
+interface DripItem {
+    name: string;
+    subItems?: string[];
+}
+
+interface DripCategory {
+    name: string;
+    description: string;
+    items: DripItem[];
+}
+
+const dripMenu: DripCategory[] = [
     {
-        name: 'Hydration Boost',
-        description: 'Essential hydration therapy to replenish fluids and electrolytes. Perfect for recovery from dehydration, jet lag, or intense workouts.',
-        duration: '30 min',
-        price: 'From 350 AED',
-        benefits: ['Rapid rehydration', 'Electrolyte balance', 'Energy boost']
+        name: 'Hydration',
+        description: 'Deep cellular hydration to restore balance and vitality.',
+        items: [
+            { name: 'Hydration 500 mL' },
+            { name: 'Hydration 1,000 mL' },
+        ],
     },
     {
-        name: 'Immunity Shield',
-        description: 'High-dose Vitamin C and immune-boosting nutrients to strengthen your body\'s natural defenses.',
-        duration: '45 min',
-        price: 'From 450 AED',
-        benefits: ['Immune support', 'Antioxidant protection', 'Faster recovery']
+        name: 'Energy & Performance',
+        description: 'Designed to enhance physical performance, focus and endurance.',
+        items: [
+            { name: 'Energy Booster' },
+            { name: 'Fitness Booster' },
+            { name: 'IV – Men’s Performance' },
+            { name: 'Weight Loss' },
+        ],
     },
     {
-        name: 'Energy Revival',
-        description: 'B-vitamins and essential nutrients to combat fatigue and restore your natural energy levels.',
-        duration: '45 min',
-        price: 'From 450 AED',
-        benefits: ['Increased energy', 'Mental clarity', 'Reduced fatigue']
+        name: 'Glow & Beauty',
+        description: 'Support skin radiance, hair health and antioxidant protection.',
+        items: [
+            { name: 'Skin Glow' },
+            { name: 'Hair Growth' },
+            { name: 'Vitamin C (2500 mg)' },
+            { name: 'Vitamin C IV Drip (5000 mg)' },
+            { name: 'Vitamin C + Glutathione (Summer Glow IV)' },
+        ],
     },
     {
-        name: 'Beauty Glow',
-        description: 'Collagen-boosting vitamins and antioxidants for radiant skin, healthy hair, and strong nails.',
-        duration: '45 min',
-        price: 'From 500 AED',
-        benefits: ['Skin radiance', 'Hair & nail health', 'Anti-aging support']
+        name: 'Stress & Recovery',
+        description: 'Calm the nervous system and accelerate recovery.',
+        items: [
+            { name: 'Stress Relief' },
+            { name: 'After Party (IV Fatigue)' },
+            { name: 'IV Magnesium – 1000 mg (Mini)' },
+            { name: 'IV Magnesium – 2000 mg' },
+        ],
     },
     {
-        name: 'Athletic Performance',
-        description: 'Comprehensive blend of amino acids, vitamins, and minerals for peak athletic performance and recovery.',
-        duration: '60 min',
-        price: 'From 550 AED',
-        benefits: ['Enhanced performance', 'Faster muscle recovery', 'Reduced inflammation']
+        name: 'Gut & Detox',
+        description: 'Support digestion, liver function and internal balance.',
+        items: [
+            { name: 'Liver Detox' },
+            { name: 'IV Gut Drip' },
+            { name: 'Hydration for Vomiting & Diarrhea' },
+        ],
     },
     {
-        name: 'Custom Blend',
-        description: 'Personalized IV therapy tailored to your specific health goals and needs. Consultation included.',
-        duration: '45-60 min',
-        price: 'From 600 AED',
-        benefits: ['Personalized formula', 'Medical consultation', 'Targeted results']
-    }
+        name: 'NAD+ Longevity',
+        description: 'Advanced cellular support for energy, focus and longevity.',
+        items: [
+            { name: 'NAD+ 250 mg' },
+            { name: 'NAD+ 500 mg' },
+            {
+                name: 'NAD+ Programs',
+                subItems: ['NAD+ 250 mg × 3', 'NAD+ 250 mg × 5', 'NAD+ 500 mg × 3', 'NAD+ 500 mg × 5'],
+            },
+        ],
+    },
+    {
+        name: 'Mini Drips — 250 mL',
+        description: 'Short, effective and perfect as an add-on.',
+        items: [
+            { name: 'NAD+ 100 mg' },
+            { name: 'NAC 500' },
+        ],
+    },
 ];
 
 export default function IVTherapyPage() {
@@ -62,7 +99,7 @@ export default function IVTherapyPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-ice-hands.png"
+                        src="/service-ice-hands.webp"
                         alt="IV Therapy"
                         fill
                         className="object-cover"
@@ -75,7 +112,7 @@ export default function IVTherapyPage() {
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                             Recovery
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">IV Therapy</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">IV Therapy</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto">
                             Intravenous vitamin and hydration therapy for optimal wellness, delivered directly to your bloodstream.
                         </p>
@@ -90,7 +127,7 @@ export default function IVTherapyPage() {
                         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                             <MotionWrapper delay={0.1} direction="left">
                                 <div>
-                                    <h2 className="text-3xl md:text-4xl font-headline text-primary mb-6">Why IV Therapy?</h2>
+                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">Why IV Therapy?</h2>
                                     <p className="text-lg text-foreground/70 mb-6 leading-relaxed">
                                         IV therapy delivers essential vitamins, minerals, and hydration directly into your bloodstream,
                                         bypassing the digestive system for 100% absorption. This means faster, more effective results than oral supplements.
@@ -125,7 +162,7 @@ export default function IVTherapyPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/about-reach.png"
+                                        src="/about-reach.webp"
                                         alt="IV Therapy Suite"
                                         fill
                                         className="object-cover"
@@ -156,47 +193,63 @@ export default function IVTherapyPage() {
                     </div>
                 </section>
 
-                {/* Treatments Section */}
+                {/* IV Drip Menu */}
                 <section className="py-20 bg-muted/30">
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Our Treatments</h2>
+                                <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">Menu</span>
+                                <h2 className="text-3xl md:text-5xl font-headline text-primary mb-4">IV Drip Menu</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Choose from our range of IV therapy treatments, each designed for specific health goals.
+                                    A curated menu of IV drips and mini drips for hydration, performance, beauty, recovery, detox and longevity.
                                 </p>
                             </div>
                         </MotionWrapper>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                            {treatments.map((treatment, index) => (
-                                <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-xl transition-all h-full flex flex-col">
-                                        <h3 className="font-headline text-xl text-primary mb-2">{treatment.name}</h3>
-                                        <p className="text-sm text-foreground/70 mb-4">{treatment.description}</p>
-                                        <ul className="space-y-2 mb-6 flex-grow">
-                                            {treatment.benefits.map((benefit, i) => (
-                                                <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
-                                                    <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                    {benefit}
+                        <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                            {dripMenu.map((category, index) => (
+                                <MotionWrapper key={index} delay={0.05 * (index + 1)} direction="up">
+                                    <div className="bg-card border border-border p-8 rounded-2xl hover:shadow-xl transition-all h-full">
+                                        <h3 className="font-headline text-2xl italic text-primary mb-1">{category.name}</h3>
+                                        <p className="text-sm text-foreground/60 mb-5">{category.description}</p>
+                                        <ul className="space-y-2.5">
+                                            {category.items.map((item, i) => (
+                                                <li key={i} className="border-b border-border/40 pb-2.5 last:border-b-0 last:pb-0">
+                                                    <p className="text-sm text-foreground/80">{item.name}</p>
+                                                    {item.subItems && (
+                                                        <ul className="mt-2 ml-4 space-y-1">
+                                                            {item.subItems.map((sub, j) => (
+                                                                <li key={j} className="text-xs text-foreground/60">{sub}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
                                                 </li>
                                             ))}
                                         </ul>
-                                        <div className="flex items-center justify-between pt-4 border-t border-border">
-                                            <div>
-                                                <p className="text-sm text-foreground/60">{treatment.duration}</p>
-                                                <p className="font-semibold text-accent">{treatment.price}</p>
-                                            </div>
-                                            <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
-                                                Book →
-                                            </Link>
-                                        </div>
                                     </div>
                                 </MotionWrapper>
                             ))}
+
+                            <MotionWrapper delay={0.4} direction="up">
+                                <div className="bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/30 p-8 rounded-2xl h-full flex flex-col justify-center">
+                                    <h3 className="font-headline text-2xl italic text-primary mb-3">TAVÚ Signature Booster</h3>
+                                    <p className="text-sm text-foreground/70">
+                                        Our exclusive formulation, designed to complement movement, recovery and presence.
+                                    </p>
+                                </div>
+                            </MotionWrapper>
                         </div>
+
+                        <MotionWrapper delay={0.5} direction="up">
+                            <div className="text-center mt-12">
+                                <Link
+                                    href="/appointments"
+                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
+                                >
+                                    Book IV Therapy
+                                </Link>
+                            </div>
+                        </MotionWrapper>
                     </div>
                 </section>
 
@@ -216,7 +269,7 @@ export default function IVTherapyPage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-3xl md:text-4xl font-headline mb-4">Feel the Difference</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">Feel the Difference</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Book your IV therapy session and experience optimal wellness.
                             </p>

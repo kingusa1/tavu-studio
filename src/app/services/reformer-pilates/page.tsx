@@ -65,7 +65,7 @@ export default function ReformerPilatesPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-pilates-stretch.png"
+                        src="/service-pilates-stretch.webp"
                         alt="Reformer Pilates"
                         fill
                         className="object-cover"
@@ -78,7 +78,7 @@ export default function ReformerPilatesPage() {
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                             Movement
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Reformer Pilates</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Reformer Pilates</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto">
                             Small-group reformer classes designed to build strength, control, mobility, and alignment.
                         </p>
@@ -93,7 +93,7 @@ export default function ReformerPilatesPage() {
                         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                             <MotionWrapper delay={0.1} direction="left">
                                 <div>
-                                    <h2 className="text-3xl md:text-4xl font-headline text-primary mb-6">The Reformer Room</h2>
+                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">The Reformer Room</h2>
                                     <p className="text-lg text-foreground/70 mb-6 leading-relaxed">
                                         Our reformer room features state-of-the-art equipment in an intimate setting limited to 8 participants per class.
                                         Each 50-minute session is meticulously designed to challenge your body while maintaining alignment and connection to your breath.
@@ -119,7 +119,7 @@ export default function ReformerPilatesPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-mat-stretch.png"
+                                        src="/service-mat-stretch.webp"
                                         alt="Reformer Studio"
                                         fill
                                         className="object-cover"
@@ -151,7 +151,7 @@ export default function ReformerPilatesPage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Our Classes</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Our Classes</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
                                     From foundation to advanced, find the class that matches your level.
                                 </p>
@@ -188,7 +188,7 @@ export default function ReformerPilatesPage() {
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary mb-4">Reformer Packages</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Reformer Packages</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
                                     All prices include VAT.
                                 </p>
@@ -259,7 +259,7 @@ export default function ReformerPilatesPage() {
                 <section className="py-20 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-3xl md:text-4xl font-headline mb-4">Ready to Begin?</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">Ready to Begin?</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Book your first reformer class and experience the TAVÚ difference.
                             </p>

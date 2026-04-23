@@ -1,0 +1,316 @@
+"use client";
+
+import Header from '@/components/landing/Header';
+import Footer from '@/components/landing/Footer';
+import BackgroundImage from '@/components/common/BackgroundImage';
+import MotionWrapper from '@/components/common/MotionWrapper';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const sharedPackages = [
+    {
+        name: 'Drop-In',
+        price: '220',
+        description: '60-minute session (Sauna + Ice Bath). Includes full access to sauna + Ice bath. Towels & amenities.',
+        note: 'Add-on: Compression Flush (20 min) — 50 AED',
+    },
+    {
+        name: '5-Pack',
+        price: '990',
+        description: 'Valid 30 days from first use.',
+    },
+    {
+        name: '10-Pack',
+        price: '1,850',
+        description: 'Valid 45 days from first use.',
+    },
+];
+
+const privatePackages = [
+    {
+        name: 'Private Contrast Drop-In',
+        price: '275',
+        description: 'Infrared Sauna + Ice Bath, private suite.',
+    },
+    {
+        name: 'Private 5-Pack',
+        price: '1,250',
+        description: 'Valid 30 days.',
+    },
+    {
+        name: 'Private 10-Pack',
+        price: '2,300',
+        description: 'Valid 45 days.',
+    },
+];
+
+const benefits = [
+    {
+        title: 'Accelerated Recovery',
+        description: 'Reduce muscle soreness and speed up recovery after intense workouts.',
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        ),
+    },
+    {
+        title: 'Reduced Inflammation',
+        description: 'Cold therapy helps reduce inflammation and joint pain naturally.',
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        ),
+    },
+    {
+        title: 'Improved Circulation',
+        description: 'Hot-cold contrast boosts blood flow and cardiovascular health.',
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+        ),
+    },
+    {
+        title: 'Mental Clarity',
+        description: 'Cold exposure releases endorphins and improves mental focus.',
+        icon: (
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+        ),
+    },
+];
+
+export default function ContrastTherapyPage() {
+    return (
+        <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
+            <BackgroundImage />
+            <Header />
+
+            {/* Hero Section */}
+            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/service-ice-bath.webp"
+                        alt="Contrast Therapy"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+                </div>
+                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                    <MotionWrapper delay={0} direction="up">
+                        <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
+                            Recovery
+                        </span>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Contrast Therapy</h1>
+                        <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto">
+                            Alternating sauna and ice bath sessions to activate your body&apos;s natural healing response.
+                        </p>
+                    </MotionWrapper>
+                </div>
+            </section>
+
+            <main className="flex-grow">
+                {/* Overview */}
+                <section className="py-20 bg-background">
+                    <div className="container mx-auto px-4">
+                        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                            <MotionWrapper delay={0.1} direction="left">
+                                <div>
+                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">The Power of Contrast</h2>
+                                    <p className="text-lg text-foreground/70 mb-6 leading-relaxed">
+                                        Our contrast therapy sessions combine the ancient wisdom of hot and cold therapy with modern recovery science.
+                                        Experience the healing power of our Himalayan Salt Sauna, Infrared Sauna, and Ice Bath facilities.
+                                    </p>
+                                    <p className="text-lg text-foreground/70 mb-8 leading-relaxed">
+                                        Whether you&apos;re an athlete seeking faster recovery or simply looking to boost your wellness routine,
+                                        our contrast therapy will leave you feeling refreshed, rejuvenated, and ready to take on anything.
+                                    </p>
+                                    <Link
+                                        href="/appointments"
+                                        className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
+                                    >
+                                        Book a Session
+                                    </Link>
+                                </div>
+                            </MotionWrapper>
+                            <MotionWrapper delay={0.2} direction="right">
+                                <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
+                                    <Image
+                                        src="/service-ice-hands.webp"
+                                        alt="Contrast Therapy Suite"
+                                        fill
+                                        className="object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+                                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                                        <p className="text-sm uppercase tracking-[0.2em] text-accent font-medium mb-2">TAVÚ</p>
+                                        <h3 className="text-2xl md:text-3xl font-headline text-white mb-1">Sauna</h3>
+                                        <h3 className="text-2xl md:text-3xl font-headline italic font-light text-white/90 mb-4">+ Ice Bath</h3>
+                                        <ul className="space-y-1.5">
+                                            <li className="text-white/80 text-sm flex items-center gap-2">
+                                                <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
+                                                Himalayan Salt & Infrared Sauna
+                                            </li>
+                                            <li className="text-white/80 text-sm flex items-center gap-2">
+                                                <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
+                                                Shared and private suite options
+                                            </li>
+                                            <li className="text-white/80 text-sm flex items-center gap-2">
+                                                <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
+                                                Optional add-on: Compression Flush
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </MotionWrapper>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Benefits */}
+                <section className="py-24 bg-gradient-to-b from-muted/20 to-background">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-16">
+                                <span className="text-accent uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">Why Choose Us</span>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Benefits</h2>
+                                <p className="text-lg text-foreground/60 max-w-xl mx-auto leading-relaxed">
+                                    Experience the transformative power of contrast therapy.
+                                </p>
+                            </div>
+                        </MotionWrapper>
+
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                            {benefits.map((benefit, index) => (
+                                <MotionWrapper key={index} delay={0.08 * (index + 1)} direction="up">
+                                    <div className="group bg-white border border-border/50 p-8 rounded-3xl text-center hover:shadow-2xl hover:shadow-accent/10 hover:border-accent/30 transition-all duration-300 h-full">
+                                        <div className="w-14 h-14 bg-gradient-to-br from-accent/20 to-accent/5 rounded-2xl flex items-center justify-center mx-auto mb-5 text-accent group-hover:scale-110 transition-transform duration-300">
+                                            {benefit.icon}
+                                        </div>
+                                        <h3 className="font-semibold text-primary text-lg mb-3">{benefit.title}</h3>
+                                        <p className="text-sm text-foreground/60 leading-relaxed">{benefit.description}</p>
+                                    </div>
+                                </MotionWrapper>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Pricing - Shared */}
+                <section className="py-20 bg-background">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-12">
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Contrast Therapy</h2>
+                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+                                    Shared sauna + ice bath. All prices include VAT.
+                                </p>
+                            </div>
+                        </MotionWrapper>
+
+                        <div className="max-w-2xl mx-auto">
+                            <MotionWrapper delay={0.2} direction="up">
+                                <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                                    <div className="flex flex-col gap-4 p-6">
+                                        {sharedPackages.map((pkg, i) => (
+                                            <div key={i} className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                                                <div className="flex-grow">
+                                                    <p className="font-semibold text-primary">{pkg.name}</p>
+                                                    <p className="text-sm text-foreground/60 mt-1">{pkg.description}</p>
+                                                    {pkg.note && (
+                                                        <p className="text-xs text-accent font-medium mt-1.5">{pkg.note}</p>
+                                                    )}
+                                                </div>
+                                                <div className="text-right flex-shrink-0">
+                                                    <p className="font-headline text-xl text-accent">{pkg.price}</p>
+                                                    <p className="text-xs text-foreground/50">AED</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="px-6 pb-6">
+                                        <Link
+                                            href="/appointments"
+                                            className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                        >
+                                            Book Contrast Therapy
+                                        </Link>
+                                    </div>
+                                </div>
+                            </MotionWrapper>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Pricing - Private */}
+                <section className="py-20 bg-muted/30">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-12">
+                                <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">Premium</span>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Private Suite</h2>
+                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+                                    Infrared Sauna + Ice Bath in a private suite for a premium recovery experience.
+                                </p>
+                            </div>
+                        </MotionWrapper>
+
+                        <div className="max-w-2xl mx-auto">
+                            <MotionWrapper delay={0.2} direction="up">
+                                <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                                    <div className="flex flex-col gap-4 p-6">
+                                        {privatePackages.map((pkg, i) => (
+                                            <div key={i} className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+                                                <div className="flex-grow">
+                                                    <p className="font-semibold text-primary">{pkg.name}</p>
+                                                    <p className="text-sm text-foreground/60 mt-1">{pkg.description}</p>
+                                                </div>
+                                                <div className="text-right flex-shrink-0">
+                                                    <p className="font-headline text-xl text-accent">{pkg.price}</p>
+                                                    <p className="text-xs text-foreground/50">AED</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="px-6 pb-6">
+                                        <Link
+                                            href="/appointments"
+                                            className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                        >
+                                            Book Private Suite
+                                        </Link>
+                                    </div>
+                                </div>
+                            </MotionWrapper>
+                        </div>
+                    </div>
+                </section>
+
+                {/* CTA */}
+                <section className="py-20 bg-primary text-primary-foreground">
+                    <div className="container mx-auto px-4 text-center">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">Ready to Recover?</h2>
+                            <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
+                                Book your contrast therapy session and feel the difference.
+                            </p>
+                            <Link
+                                href="/appointments"
+                                className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
+                            >
+                                Book a Session
+                            </Link>
+                        </MotionWrapper>
+                    </div>
+                </section>
+            </main>
+
+            <Footer />
+        </div>
+    );
+}

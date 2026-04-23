@@ -6,7 +6,7 @@ export default function BackgroundImage() {
   return (
     <div className="fixed inset-0 -z-10">
       <Image
-        src="/background.jpg"
+        src="/background.webp"
         alt="TAVÚ Studio background"
         fill
         className="object-cover opacity-40"

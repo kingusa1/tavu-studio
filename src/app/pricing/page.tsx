@@ -116,7 +116,7 @@ export default function PricingPage() {
                     {/* Header */}
                     <MotionWrapper delay={0} direction="up">
                         <div className="text-center mb-14">
-                            <h1 className="text-5xl md:text-7xl font-headline mb-6 text-primary">Choose Your Rhythm</h1>
+                            <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">Choose Your Rhythm</h1>
                             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                                 All prices include VAT.
                             </p>
@@ -144,14 +144,14 @@ export default function PricingPage() {
                     {/* Contrast Therapy & Compression */}
                     <div className="grid lg:grid-cols-2 gap-8 mb-12">
                         <MotionWrapper delay={0.1} direction="up">
-                            <PricingCard title="Contrast Therapy" subtitle="Sauna + Ice Bath" bookLabel="Book Contrast Therapy" bookHref="/schedule">
+                            <PricingCard title="Contrast Therapy" subtitle="Sauna + Ice Bath" bookLabel="Book Contrast Therapy" bookHref="/appointments">
                                 {contrastPackages.map((pkg, i) => (
                                     <PriceRow key={i} {...pkg} />
                                 ))}
                             </PricingCard>
                         </MotionWrapper>
                         <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Compression Therapy" subtitle="Normatec" bookLabel="Book Compression" bookHref="/schedule">
+                            <PricingCard title="Compression Therapy" subtitle="Normatec" bookLabel="Book Compression" bookHref="/appointments">
                                 <PriceRow name="Normatec" price="160" description="A recovery-focused treatment using pulsing compression to stimulate circulation and support faster muscle recovery." duration="45 min" />
                                 <div className="p-4 rounded-xl bg-muted/20">
                                     <p className="text-sm font-medium text-primary mb-2">Benefits:</p>
@@ -178,7 +178,7 @@ export default function PricingPage() {
                     {/* Massage & Bundles */}
                     <div className="grid lg:grid-cols-2 gap-8 mb-12">
                         <MotionWrapper delay={0.1} direction="up">
-                            <PricingCard title="Massage" subtitle="Ladies Only" bookLabel="Book Massage" bookHref="/schedule">
+                            <PricingCard title="Massage" subtitle="Ladies Only" bookLabel="Book Massage" bookHref="/appointments">
                                 {massageServices.map((pkg, i) => (
                                     <PriceRow key={i} {...pkg} />
                                 ))}

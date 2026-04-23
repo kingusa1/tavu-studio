@@ -81,7 +81,7 @@ export default function ClassesPage() {
                 <div className="absolute inset-0 bg-primary/20 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/hero-yoga-pose.png"
+                        src="/hero-yoga-pose.webp"
                         alt="TAVU Movement Classes"
                         fill
                         className="object-cover opacity-60"
@@ -90,7 +90,7 @@ export default function ClassesPage() {
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
-                        <h1 className="text-5xl md:text-7xl font-headline mb-6 text-white">Our Classes</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Our Classes</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-light">
                             Experience the TAVÚ method through intentionally designed classes that blend movement and breath.
                         </p>
@@ -107,7 +107,7 @@ export default function ClassesPage() {
                                 <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">
                                     Pricing
                                 </span>
-                                <h2 className="text-3xl md:text-4xl font-headline text-primary">Class Packages</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary">Class Packages</h2>
                                 <p className="text-foreground/60 mt-2">All prices include VAT</p>
                             </div>
 
@@ -211,7 +211,7 @@ export default function ClassesPage() {
                             <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-pilates-stretch.png"
+                                        src="/service-pilates-stretch.webp"
                                         alt="Reformer Pilates Studio"
                                         fill
                                         className="object-cover"
@@ -220,7 +220,7 @@ export default function ClassesPage() {
                                 </div>
                                 <div>
                                     <span className="text-accent font-medium text-sm tracking-wider uppercase">Movement</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Reformer Room</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Reformer Room</h2>
                                     <p className="text-lg text-foreground/80 mb-2 font-medium">
                                         Small-group reformer classes, limited to 8 participants.
                                     </p>
@@ -270,7 +270,7 @@ export default function ClassesPage() {
                             <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
                                 <div className="order-2 lg:order-1">
                                     <span className="text-accent font-medium text-sm tracking-wider uppercase">Breath</span>
-                                    <h2 className="text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Breathing Room</h2>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2 mb-4">Breathing Room</h2>
                                     <p className="text-lg text-foreground/80 mb-2 font-medium">
                                         A space dedicated to slowing down.
                                     </p>
@@ -286,7 +286,7 @@ export default function ClassesPage() {
                                 </div>
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
                                     <Image
-                                        src="/service-yoga-mat.png"
+                                        src="/service-yoga-mat.webp"
                                         alt="Yoga and Breathing Studio"
                                         fill
                                         className="object-cover"
@@ -326,7 +326,7 @@ export default function ClassesPage() {
                 <section className="py-16 bg-primary text-primary-foreground">
                     <div className="container mx-auto px-4 text-center">
                         <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-3xl md:text-4xl font-headline mb-4">Begin When Ready</h2>
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">Begin When Ready</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
                                 Explore the schedule and book your class.
                             </p>

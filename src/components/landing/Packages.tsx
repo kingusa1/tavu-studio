@@ -74,7 +74,7 @@ export default function Packages() {
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">
                             Pricing
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-headline text-primary mb-4">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mb-4">
                             Choose Your Practice
                         </h2>
                         <p className="text-lg text-foreground/70 max-w-2xl mx-auto">

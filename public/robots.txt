@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /register/
+
+Sitemap: https://tavustudio.com/sitemap.xml

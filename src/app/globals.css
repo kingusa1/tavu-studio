@@ -5,6 +5,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  /* Prevent elements from causing horizontal overflow on mobile */
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
   }
   :root {
     /* Enhanced Warm Sand / Silk Light Mode - Made transparent */
