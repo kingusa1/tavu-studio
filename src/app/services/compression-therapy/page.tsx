@@ -79,8 +79,8 @@ export default function CompressionTherapyPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-recovery-equipment.webp"
-                                        alt="NormaTec Compression"
+                                        src="/about-lounge.webp"
+                                        alt="Recovery lounge at TAVÚ"
                                         fill
                                         className="object-cover"
                                     />

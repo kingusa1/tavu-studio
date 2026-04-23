@@ -23,17 +23,25 @@ const services = [
         accent: 'from-emerald-500/20'
     },
     {
-        name: 'Compression Therapy',
-        description: 'Contrast therapy combining Himalayan Salt Sauna or Infrared Sauna with Ice Bath. Activate your body\'s natural healing response and accelerate recovery.',
+        name: 'Contrast Therapy',
+        description: 'Himalayan Salt Sauna or Infrared Sauna with Ice Bath. Activate your body\'s natural healing response and accelerate recovery.',
         image: '/service-sauna.webp',
-        link: '/services/compression-therapy',
+        link: '/services/contrast-therapy',
         features: ['60 minutes', 'Hot & cold therapy', 'Private suites available'],
         accent: 'from-amber-500/20'
     },
     {
+        name: 'Compression Therapy',
+        description: 'NormaTec pulsing compression for faster muscle recovery. Boosts circulation, flushes lactic acid and reduces swelling.',
+        image: '/service-recovery-equipment.webp',
+        link: '/services/compression-therapy',
+        features: ['45 minutes', 'NormaTec system', 'Add-on to contrast'],
+        accent: 'from-cyan-500/20'
+    },
+    {
         name: 'IV Therapy',
         description: 'Intravenous vitamin and hydration therapy for optimal wellness. Boost energy, enhance recovery, and support your immune system.',
-        image: '/service-ice-baths.webp',
+        image: '/about-lounge.webp',
         link: '/services/iv-therapy',
         features: ['30-45 minutes', 'Custom formulations', 'Medical supervision'],
         accent: 'from-purple-500/20'

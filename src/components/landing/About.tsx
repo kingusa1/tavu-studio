@@ -5,10 +5,11 @@ import NextImage from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 
+// Three pillars visual: Reform (reformer studio), Breath (breathing room props), Contrast (sauna)
 const images = [
-  { src: "/about-exterior.webp", alt: "TAVÚ lightbox sign on a wall" },
-  { src: "/about-reception.webp", alt: "Woman sitting in studio" },
-  { src: "/about-lounge.webp", alt: "Artistic arm reaching out" },
+  { src: "/service-reformer-mirror.webp", alt: "TAVÚ Reformer Pilates studio with circular backlit mirror" },
+  { src: "/service-breathing-props.webp", alt: "Breathing Room props — TAVÚ cork block and foam rollers" },
+  { src: "/service-sauna.webp", alt: "Himalayan salt sauna at TAVÚ Studio" },
 ];
 
 export default function About() {
