@@ -138,17 +138,17 @@ export default function IVTherapyPage() {
                                         we have a treatment for you.
                                     </p>
                                     <div className="flex flex-wrap gap-4 mb-8">
-                                        <div className="bg-muted/50 rounded-xl px-6 py-3 text-center">
-                                            <p className="text-sm font-medium text-accent">100%</p>
-                                            <p className="text-xs text-foreground/60">Absorption</p>
+                                        <div className="bg-card border border-border rounded-xl px-6 py-3 text-center shadow-sm">
+                                            <p className="text-base font-semibold text-accent">100%</p>
+                                            <p className="text-xs font-medium text-foreground/70">Absorption</p>
                                         </div>
-                                        <div className="bg-muted/50 rounded-xl px-6 py-3 text-center">
-                                            <p className="text-sm font-medium text-accent">Medical</p>
-                                            <p className="text-xs text-foreground/60">Supervision</p>
+                                        <div className="bg-card border border-border rounded-xl px-6 py-3 text-center shadow-sm">
+                                            <p className="text-base font-semibold text-accent">Medical</p>
+                                            <p className="text-xs font-medium text-foreground/70">Supervision</p>
                                         </div>
-                                        <div className="bg-muted/50 rounded-xl px-6 py-3 text-center">
-                                            <p className="text-sm font-medium text-accent">Custom</p>
-                                            <p className="text-xs text-foreground/60">Formulations</p>
+                                        <div className="bg-card border border-border rounded-xl px-6 py-3 text-center shadow-sm">
+                                            <p className="text-base font-semibold text-accent">Custom</p>
+                                            <p className="text-xs font-medium text-foreground/70">Formulations</p>
                                         </div>
                                     </div>
                                     <Link

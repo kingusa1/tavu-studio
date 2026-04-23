@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface MindbodyWidgetProps {
   widgetType?: string;
@@ -11,17 +12,15 @@ const HEALCODE_SRC = "https://widgets.mindbodyonline.com/javascripts/healcode.js
 const BRANDED_WEB_SRC = "https://brandedweb.mindbodyonline.com/embed/widget.js";
 
 const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const pathname = usePathname();
   const isHealCode = widgetType.toLowerCase() === "registrations";
+  const scriptSrc = isHealCode ? HEALCODE_SRC : BRANDED_WEB_SRC;
 
   useEffect(() => {
-    if (!containerRef.current || !widgetId) return;
+    if (!widgetId) return;
 
-    const baseSrc = isHealCode ? HEALCODE_SRC : BRANDED_WEB_SRC;
-
-    // Swallow common Mindbody widget errors (widget logs JSON parse errors on
-    // unrelated payloads — they aren't fatal, but they break our boundary).
+    // Swallow non-fatal Mindbody JSON parse errors
     const handleGlobalError = (event: ErrorEvent) => {
       const msg = event.message || "";
       const file = event.filename || "";
@@ -37,41 +36,36 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
     };
     window.addEventListener("error", handleGlobalError);
 
-    // 1) Render the target element INTO the container
-    if (isHealCode) {
-      containerRef.current.innerHTML = `<healcode-widget data-type="registrations" data-widget-partner="object" data-widget-id="${widgetId}" data-widget-version="0"></healcode-widget>`;
-    } else {
-      containerRef.current.innerHTML = `<div class="mindbody-widget" data-widget-type="${widgetType}" data-widget-id="${widgetId}"></div>`;
-    }
+    // Give the browser one paint cycle so the widget <div> / <healcode-widget>
+    // rendered by React is actually committed before Mindbody's script scans.
+    let script: HTMLScriptElement | null = null;
+    const rafId = requestAnimationFrame(() => {
+      // Remove any cached Mindbody script — cache-buster alone isn't enough
+      // because the prior script's init state lingers on window.
+      document
+        .querySelectorAll(`script[src^="${scriptSrc}"]`)
+        .forEach((el) => el.remove());
 
-    // 2) Remove any previously loaded Mindbody script so a fresh one re-scans the DOM
-    document
-      .querySelectorAll(`script[src^="${baseSrc}"]`)
-      .forEach((el) => el.remove());
+      script = document.createElement("script");
+      script.src = `${scriptSrc}?v=${Date.now()}`;
+      script.async = true;
+      script.type = "text/javascript";
+      script.onload = () => setStatus("ready");
+      script.onerror = () => setStatus("error");
+      document.body.appendChild(script);
+    });
 
-    // 3) Inject a fresh script tag. Cache-buster forces browser to re-evaluate
-    //    so its DOM scan picks up the freshly-rendered widget container.
-    const script = document.createElement("script");
-    script.src = `${baseSrc}?v=${Date.now()}`;
-    script.async = true;
-    script.type = "text/javascript";
-
-    script.onload = () => setStatus("ready");
-    script.onerror = () => setStatus("error");
-
-    document.body.appendChild(script);
-
-    // Safety fallback: if onload never fires (network hiccup), still show widget area
-    const readyFallback = setTimeout(() => setStatus("ready"), 3500);
+    // Safety fallback: hide the spinner even if onload never fires
+    const readyFallback = setTimeout(() => setStatus("ready"), 4000);
 
     return () => {
+      cancelAnimationFrame(rafId);
       clearTimeout(readyFallback);
       window.removeEventListener("error", handleGlobalError);
-      // Clean up our script and widget div so next mount gets a fresh one
-      script.remove();
-      if (containerRef.current) containerRef.current.innerHTML = "";
+      if (script) script.remove();
     };
-  }, [widgetId, widgetType, isHealCode]);
+    // pathname in deps forces a fresh script load on client-side navigation
+  }, [widgetId, scriptSrc, pathname]);
 
   if (!widgetId) {
     return (
@@ -112,6 +106,10 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
   }
 
   const widgetTitle = `Mindbody ${widgetType} booking widget`;
+  // Keyed on pathname + widgetId so React fully unmounts and remounts the
+  // widget container whenever the user navigates between pages, preventing
+  // stale widget state from carrying over.
+  const reactKey = `${pathname}-${widgetId}`;
 
   return (
     <div
@@ -119,7 +117,22 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
       aria-label={widgetTitle}
       className={`relative w-full min-h-[600px] flex justify-center bg-transparent overflow-hidden ${isHealCode ? "healcode-container" : ""}`}
     >
-      <div ref={containerRef} className="w-full" />
+      {isHealCode ? (
+        <div
+          key={reactKey}
+          className="w-full"
+          dangerouslySetInnerHTML={{
+            __html: `<healcode-widget data-type="registrations" data-widget-partner="object" data-widget-id="${widgetId}" data-widget-version="0"></healcode-widget>`,
+          }}
+        />
+      ) : (
+        <div
+          key={reactKey}
+          className="mindbody-widget w-full"
+          data-widget-type={widgetType}
+          data-widget-id={widgetId}
+        />
+      )}
 
       {status === "loading" && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

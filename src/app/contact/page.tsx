@@ -99,7 +99,7 @@ export default function ContactPage() {
                                         <Clock className="w-5 h-5 text-accent mb-3" />
                                         <p className="text-xs uppercase tracking-wider text-foreground/40 mb-1">Hours</p>
                                         <p className="text-sm text-foreground/70 leading-relaxed">
-                                            Weekdays 8am-9pm<br />Weekends 9am-6pm
+                                            9am – 9pm daily<br />Closed Saturdays
                                         </p>
                                     </div>
 
@@ -141,7 +141,7 @@ export default function ContactPage() {
                                             <InstagramIcon className="w-5 h-5" />
                                         </motion.a>
                                         <motion.a
-                                            href="https://www.tiktok.com/@tavustudio"
+                                            href="https://www.tiktok.com/@tavuwellness.studio"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="w-10 h-10 rounded-full bg-background/50 flex items-center justify-center text-foreground/50 hover:text-accent hover:bg-accent/10 transition-all"

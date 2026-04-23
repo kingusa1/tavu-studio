@@ -309,7 +309,7 @@ export default function TermsOfService() {
                     </a>
                   </p>
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Operating Hours: Daily 7:00 AM - 9:00 PM
+                    Operating Hours: 9:00 AM – 9:00 PM (Closed Saturdays)
                   </p>
                 </div>
               </section>

@@ -118,17 +118,34 @@ export default function SocialFeed() {
                 </p>
               )}
             </div>
-            <motion.a
-              href={`https://instagram.com/${instagramHandle}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 md:mt-0 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-medium hover:opacity-90 transition-opacity shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Instagram className="w-5 h-5" />
-              Follow on Instagram
-            </motion.a>
+            <div className="mt-6 md:mt-0 flex flex-wrap gap-3">
+              <motion.a
+                href={`https://instagram.com/${instagramHandle}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow TAVÚ on Instagram"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-medium hover:opacity-90 transition-opacity shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Instagram className="w-5 h-5" />
+                Instagram
+              </motion.a>
+              <motion.a
+                href="https://www.tiktok.com/@tavuwellness.studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow TAVÚ on TikTok"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-black text-white font-medium hover:opacity-90 transition-opacity shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.77a8.16 8.16 0 0 0 4.77 1.52V6.85a4.85 4.85 0 0 1-1.84-.16z" />
+                </svg>
+                TikTok
+              </motion.a>
+            </div>
           </div>
         </MotionWrapper>
       </div>

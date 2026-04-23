@@ -99,13 +99,13 @@ export default function ReformerPilatesPage() {
                                         Each 50-minute session is meticulously designed to challenge your body while maintaining alignment and connection to your breath.
                                     </p>
                                     <div className="grid grid-cols-2 gap-4 mb-8">
-                                        <div className="bg-muted/50 rounded-xl p-4 text-center">
-                                            <p className="text-3xl font-headline text-accent">8</p>
-                                            <p className="text-sm text-foreground/60">Max Participants</p>
+                                        <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
+                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">8</p>
+                                            <p className="text-sm font-medium text-foreground/70">Max Participants</p>
                                         </div>
-                                        <div className="bg-muted/50 rounded-xl p-4 text-center">
-                                            <p className="text-3xl font-headline text-accent">50</p>
-                                            <p className="text-sm text-foreground/60">Minutes</p>
+                                        <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
+                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">50</p>
+                                            <p className="text-sm font-medium text-foreground/70">Minutes</p>
                                         </div>
                                     </div>
                                     <Link

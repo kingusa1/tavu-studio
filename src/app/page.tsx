@@ -1,20 +1,36 @@
 'use client';
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
-import Packages from '@/components/landing/Packages';
-import ServicesExplorer from '@/components/landing/ServicesExplorer';
-import About from '@/components/landing/About';
-import Method from '@/components/landing/Method';
-import SocialFeed from '@/components/landing/SocialFeed';
-import Contact from '@/components/landing/Contact';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 
+// Below-the-fold sections are dynamically imported to cut initial JS
+// bundle size (framer-motion, heavy section components). They still
+// render client-side; just deferred until the main bundle is parsed.
+const Packages = dynamic(() => import('@/components/landing/Packages'), {
+  loading: () => <div className="py-20" />,
+});
+const ServicesExplorer = dynamic(() => import('@/components/landing/ServicesExplorer'), {
+  loading: () => <div className="py-20" />,
+});
+const About = dynamic(() => import('@/components/landing/About'), {
+  loading: () => <div className="py-20" />,
+});
+const Method = dynamic(() => import('@/components/landing/Method'), {
+  loading: () => <div className="py-20" />,
+});
+const SocialFeed = dynamic(() => import('@/components/landing/SocialFeed'), {
+  loading: () => <div className="py-20" />,
+});
+const Contact = dynamic(() => import('@/components/landing/Contact'), {
+  loading: () => <div className="py-20" />,
+});
+
 export default function Home() {
   useEffect(() => {
-    // Ensure page starts at top - fallback for client-side hash clearing
     if (window.location.hash) {
       window.history.replaceState(null, '', window.location.pathname);
       window.scrollTo(0, 0);

@@ -146,8 +146,17 @@ export default function RootLayout({
               },
               sameAs: [
                 'https://www.instagram.com/tavuwellness.studio',
+                'https://www.tiktok.com/@tavuwellness.studio',
               ],
               priceRange: '120 AED - 2,300 AED',
+              openingHoursSpecification: [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                  opens: '09:00',
+                  closes: '21:00',
+                },
+              ],
               hasOfferCatalog: {
                 '@type': 'OfferCatalog',
                 name: 'TAVÚ Services',

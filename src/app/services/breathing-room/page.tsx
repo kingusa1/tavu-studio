@@ -90,13 +90,13 @@ export default function BreathingRoomPage() {
                                         each session is designed to help you release tension, build strength, and find inner calm.
                                     </p>
                                     <div className="grid grid-cols-2 gap-4 mb-8">
-                                        <div className="bg-muted/50 rounded-xl p-4 text-center">
-                                            <p className="text-3xl font-headline text-accent">45-60</p>
-                                            <p className="text-sm text-foreground/60">Minutes</p>
+                                        <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
+                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">45-60</p>
+                                            <p className="text-sm font-medium text-foreground/70">Minutes</p>
                                         </div>
-                                        <div className="bg-muted/50 rounded-xl p-4 text-center">
-                                            <p className="text-3xl font-headline text-accent">All</p>
-                                            <p className="text-sm text-foreground/60">Levels Welcome</p>
+                                        <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
+                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">All</p>
+                                            <p className="text-sm font-medium text-foreground/70">Levels Welcome</p>
                                         </div>
                                     </div>
                                     <Link

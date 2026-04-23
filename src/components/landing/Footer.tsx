@@ -118,7 +118,7 @@ export default function Footer() {
               <a href="https://instagram.com/tavuwellness.studio" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Instagram" className="opacity-60 hover:opacity-100 transition-opacity">
                 <InstagramIcon className="h-5 w-5" />
               </a>
-              <a href="https://www.tiktok.com/@tavustudio" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on TikTok" className="opacity-60 hover:opacity-100 transition-opacity">
+              <a href="https://www.tiktok.com/@tavuwellness.studio" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on TikTok" className="opacity-60 hover:opacity-100 transition-opacity">
                 <TikTokIcon className="h-5 w-5" />
               </a>
               <a href="https://www.facebook.com/people/TAV%C3%9A-Wellness/61580985467215/" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Facebook" className="opacity-60 hover:opacity-100 transition-opacity">
@@ -181,8 +181,8 @@ export default function Footer() {
               connect@tavustudio.com
             </p>
             <p className="text-sm opacity-70">
-              Weekdays: 8am - 9pm<br />
-              Weekends: 9am - 6pm
+              9am – 9pm daily<br />
+              Closed Saturdays
             </p>
           </div>
         </div>
