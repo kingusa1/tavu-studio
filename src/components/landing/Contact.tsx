@@ -57,7 +57,7 @@ export default function Contact() {
                                         <Clock className="w-5 h-5 text-accent mt-1 shrink-0" />
                                         <p className="text-lg font-light leading-relaxed text-foreground/80">
                                             9am – 9pm daily<br />
-                                            Closed Saturdays
+                                            Open 7 days a week
                                         </p>
                                     </div>
                                 </div>

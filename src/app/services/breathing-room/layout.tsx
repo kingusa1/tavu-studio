@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Breathing Room — Mat Pilates, Yoga, Mobility, Breathwork & Yin',
   description:
-    'Mat Pilates, Yoga, Mobility, Breathwork and Yin classes at TAVÚ in Al Raha, Abu Dhabi. Drop-in 120 AED, 5-class 550 AED, 10-class 1,020 AED, Unlimited Monthly 800 AED.',
+    'Mat Pilates, Yoga, Mobility, Breathwork and Yin classes at TAVÚ, Al Raha, Abu Dhabi. Drop-in 120 AED, 5-class 550 AED, 10-class 1,020 AED, Unlimited 3-Month 2,400 AED.',
   keywords: [
     'Mat Pilates Abu Dhabi',
     'Breathwork Abu Dhabi',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Breathing Room at TAVÚ | Mat Pilates, Yoga, Breathwork & Mobility',
     description:
-      'Mat-based and breath-focused classes. Drop-in 120 AED or Unlimited Monthly 800 AED.',
+      'Mat-based and breath-focused classes. Drop-in 120 AED or Unlimited 3-Month Membership 2,400 AED.',
     url: '/services/breathing-room',
   },
 };

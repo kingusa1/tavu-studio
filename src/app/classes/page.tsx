@@ -186,17 +186,69 @@ export default function ClassesPage() {
                                         </div>
                                         <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
                                             <div>
-                                                <p className="font-semibold text-primary text-sm">Unlimited Monthly</p>
-                                                <p className="text-xs text-foreground/60 mt-0.5">30 days unlimited access</p>
-                                                <p className="text-xs text-foreground/40 mt-0.5">No rollovers · Auto-renew optional</p>
+                                                <p className="font-semibold text-primary text-sm">Unlimited 3-Month Membership</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment</p>
+                                                <p className="text-xs text-foreground/40 mt-0.5">Valid for 3 consecutive months · Non-transferable · Non-refundable · No rollovers</p>
                                             </div>
-                                            <p className="font-headline text-lg text-accent">800 <span className="text-xs text-foreground/50">AED</span></p>
+                                            <p className="font-headline text-lg text-accent whitespace-nowrap">800 <span className="text-xs text-foreground/50">AED / month</span></p>
                                         </div>
                                     </div>
                                     <div className="px-5 pb-5">
                                         <Link href="/schedule" className="flex items-center justify-center w-full h-11 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-sm">
                                             Book Breathing Room
                                         </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </MotionWrapper>
+
+                        {/* Unlimited 3-Month Membership — full terms */}
+                        <MotionWrapper delay={0.15} direction="up">
+                            <div className="max-w-5xl mx-auto mt-8 bg-card border border-border rounded-2xl overflow-hidden">
+                                <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
+                                    <h3 className="font-headline text-xl">Unlimited 3-Month Membership</h3>
+                                    <p className="text-sm text-primary-foreground/70">AED 800/month · AED 2,400 paid upfront</p>
+                                </div>
+                                <div className="p-6">
+                                    <p className="text-sm text-foreground/80 leading-relaxed mb-3">
+                                        Enjoy unlimited access to all Breathing Room classes with a membership designed
+                                        for consistency and long-term progress.
+                                    </p>
+                                    <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+                                        Your membership is based on AED 800 per month for a 3-month commitment, with a
+                                        single upfront payment of AED 2,400 at the time of purchase. There are no
+                                        monthly recurring payments during the membership period.
+                                    </p>
+
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Membership Includes</p>
+                                            <ul className="space-y-2">
+                                                {[
+                                                    'Unlimited access to all Breathing Room classes',
+                                                    'AED 800/month value',
+                                                    '3-month commitment',
+                                                    'AED 2,400 paid upfront',
+                                                    'Valid for 3 consecutive months',
+                                                    'Non-transferable',
+                                                    'Non-refundable',
+                                                    'No rollovers',
+                                                ].map((item, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                        <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="p-5 rounded-xl bg-muted/30">
+                                            <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Booking Policy</p>
+                                            <p className="text-sm text-foreground/70 leading-relaxed">
+                                                To ensure fair access for all members, more than 3 late cancellations
+                                                during the membership period will result in a 1-week booking suspension,
+                                                during which new class bookings will not be permitted.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

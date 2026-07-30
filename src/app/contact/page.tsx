@@ -99,7 +99,7 @@ export default function ContactPage() {
                                         <Clock className="w-5 h-5 text-accent mb-3" />
                                         <p className="text-xs uppercase tracking-wider text-foreground/40 mb-1">Hours</p>
                                         <p className="text-sm text-foreground/70 leading-relaxed">
-                                            9am – 9pm daily<br />Closed Saturdays
+                                            9am – 9pm daily<br />Open 7 days a week
                                         </p>
                                     </div>
 

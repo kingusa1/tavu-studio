@@ -38,6 +38,7 @@ const breathingPackages = [
     {
         name: 'Drop-In',
         price: '120',
+        period: '',
         description: 'Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).',
         validity: '',
         note: 'Non-transferable & non-refundable',
@@ -45,6 +46,7 @@ const breathingPackages = [
     {
         name: '5-Class Pack',
         price: '550',
+        period: '',
         description: 'Perfect for weekly consistency.',
         validity: '30 days from first use',
         note: '',
@@ -52,16 +54,18 @@ const breathingPackages = [
     {
         name: '10-Class Pack',
         price: '1,020',
+        period: '',
         description: 'Ideal for deeper practice.',
         validity: '45 days from first use',
         note: '',
     },
     {
-        name: 'Unlimited Monthly',
+        name: 'Unlimited 3-Month Membership',
         price: '800',
-        description: 'Unlimited access for 30 days.',
-        validity: '30 days',
-        note: 'No rollovers \u00b7 Auto-renew optional \u00b7 Non-transferable & non-refundable',
+        period: 'month',
+        description: 'Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment.',
+        validity: '3 consecutive months',
+        note: 'Non-transferable \u00b7 Non-refundable \u00b7 No rollovers',
     },
 ];
 
@@ -147,7 +151,9 @@ export default function Packages() {
                                         </div>
                                         <div className="text-right flex-shrink-0">
                                             <p className="font-headline text-xl text-accent">{pkg.price}</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
+                                            <p className="text-xs text-foreground/50 whitespace-nowrap">
+                                                {pkg.period ? `AED / ${pkg.period}` : 'AED'}
+                                            </p>
                                         </div>
                                     </div>
                                 ))}

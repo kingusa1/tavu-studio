@@ -28,6 +28,60 @@ export default function AppointmentsPage() {
                         </div>
                     </MotionWrapper>
 
+                    <MotionWrapper delay={0.15} direction="up">
+                        <div className="mt-12">
+                            <h2 className="text-2xl font-headline text-primary mb-6 text-center">Appointment Packages</h2>
+                            <div className="bg-card border border-accent/30 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
+                                <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
+                                    <div>
+                                        <h3 className="font-headline text-2xl text-primary">Nomadic Recovery Pack (5+1)</h3>
+                                        <p className="text-sm text-foreground/60 mt-1">Compression Therapy</p>
+                                    </div>
+                                    <div className="text-right flex-shrink-0">
+                                        <p className="font-headline text-3xl text-accent">660</p>
+                                        <p className="text-xs text-foreground/50">AED</p>
+                                    </div>
+                                </div>
+
+                                <p className="text-sm text-foreground/70 mb-6">
+                                    Recover, recharge, and keep your body performing at its best with our Nomadic
+                                    Recovery Pack. Each 45-minute Compression Therapy session helps improve circulation,
+                                    reduce muscle soreness and swelling, and support faster recovery.
+                                </p>
+
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Package Includes</p>
+                                        <ul className="space-y-2">
+                                            {[
+                                                '5 × 45-minute Nomadic Compression Therapy Sessions',
+                                                '1 Complimentary 45-minute Compression Therapy Session',
+                                                'Total: 6 Sessions',
+                                                'Valid for 45 days',
+                                            ].map((item, i) => (
+                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                    <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="p-5 rounded-xl bg-muted/30">
+                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Please Note</p>
+                                        <ul className="space-y-2">
+                                            {['Non-transferable', 'Non-refundable'].map((item, i) => (
+                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                    <span className="w-1 h-1 bg-foreground/60 rounded-full flex-shrink-0 mt-2" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </MotionWrapper>
+
                     <MotionWrapper delay={0.2} direction="up">
                         <div className="mt-12 bg-card border border-border p-6 rounded-2xl">
                             <h3 className="text-lg font-semibold text-primary mb-4">Appointment Information</h3>

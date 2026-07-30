@@ -1,21 +1,33 @@
 {
-  "name": "TAVÚ Studio",
+  "name": "TAVÚ Wellness Studio",
   "short_name": "TAVÚ",
-  "description": "Enter the Stillness | Waitlist (Abu Dhabi)",
+  "description": "Abu Dhabi's first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat classes, breathwork, sauna + ice bath, NormaTec compression, massage and IV therapy in Al Raha.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4A5568",
+  "background_color": "#313D47",
+  "theme_color": "#313D47",
+  "lang": "en-AE",
+  "dir": "ltr",
+  "categories": ["health", "fitness", "lifestyle"],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

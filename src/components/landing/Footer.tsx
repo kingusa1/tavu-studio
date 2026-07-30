@@ -182,7 +182,7 @@ export default function Footer() {
             </p>
             <p className="text-sm opacity-70">
               9am – 9pm daily<br />
-              Closed Saturdays
+              Open 7 days a week
             </p>
           </div>
         </div>

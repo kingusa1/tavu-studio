@@ -127,7 +127,7 @@ export default function BreathingRoomPage() {
                                             </li>
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                Drop-in sessions, class packs, and unlimited monthly membership
+                                                Drop-in sessions, class packs, and an unlimited 3-month membership
                                             </li>
                                         </ul>
                                     </div>
@@ -224,13 +224,13 @@ export default function BreathingRoomPage() {
                                     </div>
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
-                                            <p className="font-semibold text-primary">Unlimited Monthly</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Unlimited access for 30 days.</p>
-                                            <p className="text-xs text-foreground/40 mt-1">No rollovers · Auto-renew optional · Non-transferable & non-refundable</p>
+                                            <p className="font-semibold text-primary">Unlimited 3-Month Membership</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment.</p>
+                                            <p className="text-xs text-foreground/40 mt-1">Valid for 3 consecutive months · Non-transferable · Non-refundable · No rollovers</p>
                                         </div>
                                         <div className="text-right flex-shrink-0">
                                             <p className="font-headline text-xl text-accent">800</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
+                                            <p className="text-xs text-foreground/50 whitespace-nowrap">AED / month</p>
                                         </div>
                                     </div>
                                 </div>
@@ -241,6 +241,55 @@ export default function BreathingRoomPage() {
                                     >
                                         Book Breathing Room
                                     </Link>
+                                </div>
+                            </div>
+                        </MotionWrapper>
+
+                        {/* Unlimited 3-Month Membership — full terms */}
+                        <MotionWrapper delay={0.25} direction="up">
+                            <div className="max-w-lg mx-auto mt-8 bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
+                                <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
+                                    <h3 className="font-headline text-xl">Unlimited 3-Month Membership</h3>
+                                    <p className="text-sm text-primary-foreground/70">AED 800/month · AED 2,400 paid upfront</p>
+                                </div>
+                                <div className="p-6">
+                                    <p className="text-sm text-foreground/80 leading-relaxed mb-3">
+                                        Enjoy unlimited access to all Breathing Room classes with a membership designed
+                                        for consistency and long-term progress.
+                                    </p>
+                                    <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+                                        Your membership is based on AED 800 per month for a 3-month commitment, with a
+                                        single upfront payment of AED 2,400 at the time of purchase. There are no
+                                        monthly recurring payments during the membership period.
+                                    </p>
+
+                                    <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Membership Includes</p>
+                                    <ul className="space-y-2 mb-6">
+                                        {[
+                                            'Unlimited access to all Breathing Room classes',
+                                            'AED 800/month value',
+                                            '3-month commitment',
+                                            'AED 2,400 paid upfront',
+                                            'Valid for 3 consecutive months',
+                                            'Non-transferable',
+                                            'Non-refundable',
+                                            'No rollovers',
+                                        ].map((item, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <div className="p-5 rounded-xl bg-muted/30">
+                                        <p className="text-sm font-semibold text-primary mb-2 underline underline-offset-4">Booking Policy</p>
+                                        <p className="text-sm text-foreground/70 leading-relaxed">
+                                            To ensure fair access for all members, more than 3 late cancellations during
+                                            the membership period will result in a 1-week booking suspension, during
+                                            which new class bookings will not be permitted.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </MotionWrapper>

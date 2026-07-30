@@ -1,12 +1,8 @@
 import Footer from "@/components/landing/Footer";
 import Header from "@/components/landing/Header";
 import BackgroundImage from '@/components/common/BackgroundImage';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | TAVU Wellness Studio',
-  description: 'Privacy Policy for TAVU Wellness Studio - Learn how we collect, use, and protect your personal information.',
-};
+// Metadata lives in ./layout.tsx so the root title template applies exactly once.
 
 export default function PrivacyPolicy() {
   return (

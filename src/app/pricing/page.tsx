@@ -17,7 +17,18 @@ const breathingPackages = [
     { name: 'Drop-In', price: '120', description: 'Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).', note: 'Non-transferable & non-refundable' },
     { name: '5-Class Pack', price: '550', description: 'Valid 30 days from first use. Perfect for weekly consistency.' },
     { name: '10-Class Pack', price: '1,020', description: 'Valid 45 days from first use. Ideal for deeper practice.' },
-    { name: 'Unlimited Monthly', price: '800', description: 'Unlimited access for 30 days.', note: 'No rollovers \u00b7 Auto-renew optional \u00b7 Non-transferable & non-refundable' },
+    { name: 'Unlimited 3-Month Membership', price: '800', period: 'month', description: 'Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment.', note: 'Valid for 3 consecutive months \u00b7 Non-transferable \u00b7 Non-refundable \u00b7 No rollovers' },
+];
+
+const unlimitedMembershipIncludes = [
+    'Unlimited access to all Breathing Room classes',
+    'AED 800/month value',
+    '3-month commitment',
+    'AED 2,400 paid upfront',
+    'Valid for 3 consecutive months',
+    'Non-transferable',
+    'Non-refundable',
+    'No rollovers',
 ];
 
 const contrastPackages = [
@@ -60,8 +71,8 @@ const membershipIncludes = [
     '1 VIP upgrade quarterly',
 ];
 
-function PriceRow({ name, price, description, note, bonus, duration }: {
-    name: string; price: string; description: string; note?: string; bonus?: string; duration?: string;
+function PriceRow({ name, price, description, note, bonus, duration, period }: {
+    name: string; price: string; description: string; note?: string; bonus?: string; duration?: string; period?: string;
 }) {
     return (
         <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
@@ -76,7 +87,7 @@ function PriceRow({ name, price, description, note, bonus, duration }: {
             </div>
             <div className="text-right flex-shrink-0">
                 <p className="font-headline text-xl text-accent">{price}</p>
-                <p className="text-xs text-foreground/50">AED</p>
+                <p className="text-xs text-foreground/50 whitespace-nowrap">{period ? `AED / ${period}` : 'AED'}</p>
             </div>
         </div>
     );
@@ -141,6 +152,60 @@ export default function PricingPage() {
                         </MotionWrapper>
                     </div>
 
+                    {/* Unlimited 3-Month Membership — full terms */}
+                    <MotionWrapper delay={0.1} direction="up">
+                        <div className="bg-card border border-border rounded-2xl overflow-hidden mb-12">
+                            <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
+                                <h2 className="font-headline text-2xl mb-0.5">Unlimited 3-Month Membership</h2>
+                                <p className="text-sm text-primary-foreground/70">AED 800/month · 3-month commitment · AED 2,400 paid upfront</p>
+                            </div>
+                            <div className="p-6 md:p-8">
+                                <p className="text-base text-foreground/80 leading-relaxed mb-4">
+                                    Enjoy unlimited access to all Breathing Room classes with a membership designed
+                                    for consistency and long-term progress.
+                                </p>
+                                <p className="text-base text-foreground/80 leading-relaxed mb-8">
+                                    Your membership is based on AED 800 per month for a 3-month commitment, with a
+                                    single upfront payment of AED 2,400 at the time of purchase. There are no monthly
+                                    recurring payments during the membership period.
+                                </p>
+
+                                <div className="grid md:grid-cols-2 gap-8">
+                                    <div>
+                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Membership Includes</p>
+                                        <ul className="space-y-2">
+                                            {unlimitedMembershipIncludes.map((item, i) => (
+                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                    <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="p-5 rounded-xl bg-muted/30">
+                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Booking Policy</p>
+                                        <p className="text-sm text-foreground/70 leading-relaxed">
+                                            To ensure fair access for all members, more than 3 late cancellations during
+                                            the membership period will result in a 1-week booking suspension, during
+                                            which new class bookings will not be permitted.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="mt-8 text-center">
+                                    <Link
+                                        href="/schedule"
+                                        className="inline-flex items-center justify-center h-12 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                    >
+                                        Book Breathing Room
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </MotionWrapper>
+
                     {/* Contrast Therapy & Compression */}
                     <div className="grid lg:grid-cols-2 gap-8 mb-12">
                         <MotionWrapper delay={0.1} direction="up">
@@ -153,6 +218,13 @@ export default function PricingPage() {
                         <MotionWrapper delay={0.15} direction="up">
                             <PricingCard title="Compression Therapy" subtitle="Normatec" bookLabel="Book Compression" bookHref="/appointments">
                                 <PriceRow name="Normatec" price="160" description="A recovery-focused treatment using pulsing compression to stimulate circulation and support faster muscle recovery." duration="45 min" />
+                                <PriceRow
+                                    name="Nomadic Recovery Pack (5+1)"
+                                    price="660"
+                                    description="Recover, recharge, and keep your body performing at its best. Each 45-minute Compression Therapy session helps improve circulation, reduce muscle soreness and swelling, and support faster recovery."
+                                    bonus="5 × 45-min sessions + 1 complimentary Compression Therapy session — 6 sessions total · Valid 45 days"
+                                    note="Non-transferable · Non-refundable"
+                                />
                                 <div className="p-4 rounded-xl bg-muted/20">
                                     <p className="text-sm font-medium text-primary mb-2">Benefits:</p>
                                     <ul className="space-y-1 text-sm text-foreground/60">

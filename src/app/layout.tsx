@@ -85,10 +85,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
       { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
       { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
+    shortcut: ['/favicon.ico'],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
@@ -148,11 +150,18 @@ export default function RootLayout({
                 'https://www.instagram.com/tavuwellness.studio',
                 'https://www.tiktok.com/@tavuwellness.studio',
               ],
-              priceRange: '120 AED - 2,300 AED',
+              email: 'connect@tavustudio.com',
+              priceRange: '120 AED - 2,400 AED',
+              currenciesAccepted: 'AED',
+              paymentAccepted: 'Credit Card, Debit Card',
+              areaServed: {
+                '@type': 'City',
+                name: 'Abu Dhabi',
+              },
               openingHoursSpecification: [
                 {
                   '@type': 'OpeningHoursSpecification',
-                  dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                  dayOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                   opens: '09:00',
                   closes: '21:00',
                 },
@@ -161,12 +170,108 @@ export default function RootLayout({
                 '@type': 'OfferCatalog',
                 name: 'TAVÚ Services',
                 itemListElement: [
-                  { '@type': 'OfferCatalog', name: 'Reformer Pilates' },
-                  { '@type': 'OfferCatalog', name: 'Breathing Room (Mat Pilates, Yoga, Breathwork, Mobility, Yin)' },
-                  { '@type': 'OfferCatalog', name: 'Contrast Therapy (Sauna + Ice Bath)' },
-                  { '@type': 'OfferCatalog', name: 'Compression Therapy (NormaTec)' },
-                  { '@type': 'OfferCatalog', name: 'Massage (Ladies Only)' },
-                  { '@type': 'OfferCatalog', name: 'IV Therapy' },
+                  {
+                    '@type': 'Offer',
+                    price: '160',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Reformer Pilates — Drop-In',
+                      description: 'Small-group reformer class, limited to 8 participants. 50 minutes.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '120',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Breathing Room — Drop-In',
+                      description: 'Mat Pilates, Yoga, Mobility, Breathwork or Yin class.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '2400',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Unlimited 3-Month Membership',
+                      description: 'Unlimited access to all Breathing Room classes. AED 800/month value, paid upfront for a 3-month commitment.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '220',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Contrast Therapy — Drop-In',
+                      description: '60-minute infrared sauna and ice bath session.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '275',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Private Contrast Therapy — Drop-In',
+                      description: 'Infrared sauna and ice bath in a private suite.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '160',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Compression Therapy (NormaTec)',
+                      description: '45-minute pulsing compression session to stimulate circulation and support muscle recovery.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '660',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Nomadic Recovery Pack (5+1)',
+                      description: 'Five 45-minute Compression Therapy sessions plus one complimentary session. Six sessions total, valid 45 days.',
+                    },
+                  },
+                  {
+                    '@type': 'AggregateOffer',
+                    lowPrice: '180',
+                    highPrice: '300',
+                    priceCurrency: 'AED',
+                    offerCount: '5',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Massage (Ladies Only)',
+                      description: 'Destress, Relaxing, Deep Tissue, Express Head/Neck/Shoulder and Foot Ritual massage.',
+                    },
+                  },
+                  {
+                    '@type': 'AggregateOffer',
+                    lowPrice: '1650',
+                    highPrice: '1850',
+                    priceCurrency: 'AED',
+                    offerCount: '3',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Wellness Memberships (3, 6 & 12 Months)',
+                      description: 'Reformer up to 4x/week, unlimited mat classes, Contrast Therapy up to 3x/week, 20% off add-ons.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'IV Therapy',
+                      description: 'Intravenous vitamin and hydration therapy.',
+                    },
+                  },
                 ],
               },
             }),

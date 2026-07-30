@@ -21,6 +21,18 @@ const recommendedFor = [
     'Swelling or fluid retention',
 ];
 
+const recoveryPackIncludes = [
+    '5 × 45-minute Nomadic Compression Therapy Sessions',
+    '1 Complimentary 45-minute Compression Therapy Session',
+    'Total: 6 Sessions',
+    'Valid for 45 days',
+];
+
+const recoveryPackNotes = [
+    'Non-transferable',
+    'Non-refundable',
+];
+
 export default function CompressionTherapyPage() {
     return (
         <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
@@ -117,13 +129,14 @@ export default function CompressionTherapyPage() {
                             <div className="text-center mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">NormaTec</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    One session, all the recovery benefits.
+                                    Single sessions and multi-session recovery packs.
                                 </p>
                             </div>
                         </MotionWrapper>
 
+                        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-start">
                         <MotionWrapper delay={0.2} direction="up">
-                            <div className="max-w-lg mx-auto bg-card border border-border rounded-2xl p-8 shadow-xl">
+                            <div className="bg-card border border-border rounded-2xl p-8 shadow-xl h-full">
                                 <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                                     <div>
                                         <h3 className="font-headline text-2xl text-primary">NormaTec</h3>
@@ -172,6 +185,60 @@ export default function CompressionTherapyPage() {
                                 </Link>
                             </div>
                         </MotionWrapper>
+
+                        {/* Nomadic Recovery Pack */}
+                        <MotionWrapper delay={0.3} direction="up">
+                            <div className="bg-card border border-accent/30 rounded-2xl p-8 shadow-xl h-full">
+                                <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
+                                    <div>
+                                        <h3 className="font-headline text-2xl text-primary">Nomadic Recovery Pack</h3>
+                                        <p className="text-sm text-foreground/60 mt-1">5 + 1 complimentary session</p>
+                                    </div>
+                                    <div className="text-right flex-shrink-0">
+                                        <p className="font-headline text-3xl text-accent">660</p>
+                                        <p className="text-xs text-foreground/50">AED</p>
+                                    </div>
+                                </div>
+
+                                <p className="text-sm text-foreground/70 mb-6">
+                                    Recover, recharge, and keep your body performing at its best with our Nomadic
+                                    Recovery Pack. Each 45-minute Compression Therapy session helps improve circulation,
+                                    reduce muscle soreness and swelling, and support faster recovery.
+                                </p>
+
+                                <div className="mb-5">
+                                    <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Package Includes</p>
+                                    <ul className="space-y-2">
+                                        {recoveryPackIncludes.map((item, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div className="mb-6">
+                                    <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Please Note</p>
+                                    <ul className="space-y-2">
+                                        {recoveryPackNotes.map((item, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                <span className="w-1 h-1 bg-foreground/60 rounded-full flex-shrink-0 mt-2" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <Link
+                                    href="/appointments"
+                                    className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                >
+                                    Book Recovery Pack
+                                </Link>
+                            </div>
+                        </MotionWrapper>
+                        </div>
                     </div>
                 </section>
 

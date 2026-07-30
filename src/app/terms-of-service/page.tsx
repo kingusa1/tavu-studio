@@ -1,12 +1,8 @@
 import Footer from "@/components/landing/Footer";
 import Header from "@/components/landing/Header";
 import BackgroundImage from '@/components/common/BackgroundImage';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Terms of Service | TAVU Wellness Studio',
-  description: 'Terms of Service for TAVU Wellness Studio - Read our terms and conditions for using our wellness services.',
-};
+// Metadata lives in ./layout.tsx so the root title template applies exactly once.
 
 export default function TermsOfService() {
   return (
@@ -102,6 +98,11 @@ export default function TermsOfService() {
                 <p className="leading-relaxed">
                   We reserve the right to cancel or reschedule classes due to instructor illness, low enrollment, or unforeseen circumstances. In such cases, you will be notified as soon as possible and your class credit will be restored or rescheduled.
                 </p>
+
+                <h3 className="text-lg font-semibold mt-4 mb-2">5.5 Membership Booking Suspension</h3>
+                <p className="leading-relaxed">
+                  To ensure fair access for all members, more than 3 late cancellations during the Unlimited 3-Month Membership period will result in a 1-week booking suspension, during which new class bookings will not be permitted.
+                </p>
               </section>
 
               {/* Pricing and Payment */}
@@ -132,6 +133,17 @@ export default function TermsOfService() {
                 <p className="leading-relaxed">
                   Class packages have an expiration period as specified at the time of purchase. Unused classes will expire at the end of the validity period and cannot be refunded, extended, or transferred unless otherwise stated.
                 </p>
+
+                <h3 className="text-lg font-semibold mt-4 mb-2">6.5 Unlimited 3-Month Membership</h3>
+                <p className="leading-relaxed mb-4">
+                  The Unlimited 3-Month Membership is based on AED 800 per month for a 3-month commitment, paid as a single upfront payment of AED 2,400 at the time of purchase. There are no monthly recurring payments during the membership period.
+                </p>
+                <ul className="list-disc list-inside space-y-2 pl-4">
+                  <li>The membership is valid for 3 consecutive months from the start date</li>
+                  <li>The full amount of AED 2,400 is payable upfront at the time of purchase</li>
+                  <li>Memberships are non-transferable and non-refundable</li>
+                  <li>Unused classes do not roll over between months or beyond the membership period</li>
+                </ul>
               </section>
 
               {/* Health and Safety */}
@@ -309,7 +321,7 @@ export default function TermsOfService() {
                     </a>
                   </p>
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Operating Hours: 9:00 AM – 9:00 PM (Closed Saturdays)
+                    Operating Hours: 9:00 AM – 9:00 PM, 7 days a week
                   </p>
                 </div>
               </section>
