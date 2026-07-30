@@ -250,7 +250,7 @@ export default function BreathingRoomPage() {
                             <div className="max-w-lg mx-auto mt-8 bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
                                 <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
                                     <h3 className="font-headline text-xl">Unlimited 3-Month Membership</h3>
-                                    <p className="text-sm text-primary-foreground/70">AED 800/month · AED 2,400 paid upfront</p>
+                                    <p className="text-sm text-primary-foreground/70">AED 800/month · 3-month commitment · AED 2,400 paid upfront</p>
                                 </div>
                                 <div className="p-6">
                                     <p className="text-sm text-foreground/80 leading-relaxed mb-3">

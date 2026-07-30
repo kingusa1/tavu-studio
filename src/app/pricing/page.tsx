@@ -31,6 +31,13 @@ const unlimitedMembershipIncludes = [
     'No rollovers',
 ];
 
+const recoveryPackIncludes = [
+    '5 × 45-minute Nomadic Compression Therapy Sessions',
+    '1 Complimentary 45-minute Compression Therapy Session',
+    'Total: 6 Sessions',
+    'Valid for 45 days',
+];
+
 const contrastPackages = [
     { name: 'Drop-In', price: '220', description: '60-minute session (Sauna + Ice Bath). Towels & amenities.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
     { name: '5-Pack', price: '990', description: 'Valid 30 days from first use.' },
@@ -221,8 +228,8 @@ export default function PricingPage() {
                                 <PriceRow
                                     name="Nomadic Recovery Pack (5+1)"
                                     price="660"
-                                    description="Recover, recharge, and keep your body performing at its best. Each 45-minute Compression Therapy session helps improve circulation, reduce muscle soreness and swelling, and support faster recovery."
-                                    bonus="5 × 45-min sessions + 1 complimentary Compression Therapy session — 6 sessions total · Valid 45 days"
+                                    description="5 × 45-minute Nomadic Compression Therapy Sessions plus 1 complimentary 45-minute session."
+                                    bonus="Total: 6 Sessions · Valid for 45 days"
                                     note="Non-transferable · Non-refundable"
                                 />
                                 <div className="p-4 rounded-xl bg-muted/20">
@@ -246,6 +253,57 @@ export default function PricingPage() {
                             </PricingCard>
                         </MotionWrapper>
                     </div>
+
+                    {/* Nomadic Recovery Pack — full terms */}
+                    <MotionWrapper delay={0.1} direction="up">
+                        <div className="bg-card border border-accent/30 rounded-2xl overflow-hidden mb-12">
+                            <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
+                                <h2 className="font-headline text-2xl mb-0.5">Nomadic Recovery Pack (5+1)</h2>
+                                <p className="text-sm text-primary-foreground/70">AED 660 · Compression Therapy</p>
+                            </div>
+                            <div className="p-6 md:p-8">
+                                <p className="text-base text-foreground/80 leading-relaxed mb-8">
+                                    Recover, recharge, and keep your body performing at its best with our Nomadic
+                                    Recovery Pack. Each 45-minute Compression Therapy session helps improve
+                                    circulation, reduce muscle soreness and swelling, and support faster recovery.
+                                </p>
+
+                                <div className="grid md:grid-cols-2 gap-8">
+                                    <div>
+                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Package Includes</p>
+                                        <ul className="space-y-2">
+                                            {recoveryPackIncludes.map((item, i) => (
+                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                    <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    <div className="p-5 rounded-xl bg-muted/30">
+                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Please Note</p>
+                                        <ul className="space-y-2">
+                                            {['Non-transferable', 'Non-refundable'].map((item, i) => (
+                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                    <span className="w-1 h-1 bg-foreground/60 rounded-full flex-shrink-0 mt-2" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div className="mt-8 text-center">
+                                    <Link
+                                        href="/appointments"
+                                        className="inline-flex items-center justify-center h-12 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                                    >
+                                        Book Recovery Pack
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </MotionWrapper>
 
                     {/* Massage & Bundles */}
                     <div className="grid lg:grid-cols-2 gap-8 mb-12">

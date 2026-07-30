@@ -191,8 +191,8 @@ export default function CompressionTherapyPage() {
                             <div className="bg-card border border-accent/30 rounded-2xl p-8 shadow-xl h-full">
                                 <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                                     <div>
-                                        <h3 className="font-headline text-2xl text-primary">Nomadic Recovery Pack</h3>
-                                        <p className="text-sm text-foreground/60 mt-1">5 + 1 complimentary session</p>
+                                        <h3 className="font-headline text-2xl text-primary">Nomadic Recovery Pack (5+1)</h3>
+                                        <p className="text-sm text-foreground/60 mt-1">Compression Therapy</p>
                                     </div>
                                     <div className="text-right flex-shrink-0">
                                         <p className="font-headline text-3xl text-accent">660</p>
