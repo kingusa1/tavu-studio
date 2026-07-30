@@ -221,17 +221,6 @@ export default function ReformerPilatesPage() {
                                     </div>
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
-                                            <p className="font-semibold text-primary">10-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Valid 60 days.</p>
-                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 2 complimentary Contrast Therapy sessions</p>
-                                        </div>
-                                        <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">1,420</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
-                                        <div>
                                             <p className="font-semibold text-primary">16-Class Pack</p>
                                             <p className="text-sm text-foreground/60 mt-1">Valid 75 days.</p>
                                             <p className="text-xs text-accent font-medium mt-1.5">Includes 2 complimentary Contrast Therapy sessions</p>

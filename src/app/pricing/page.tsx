@@ -9,15 +9,13 @@ import Link from 'next/link';
 const reformerPackages = [
     { name: 'Reformer Drop-In', price: '160', description: 'Single reformer session. VAT included.' },
     { name: '8-Class Pack', price: '1,260', description: 'Valid 45 days.', bonus: 'Includes 1 complimentary Contrast Therapy session' },
-    { name: '10-Class Pack', price: '1,420', description: 'Valid 60 days.', bonus: 'Includes 2 complimentary Contrast Therapy sessions' },
     { name: '16-Class Pack', price: '2,020', description: 'Valid 75 days.', bonus: 'Includes 2 complimentary Contrast Therapy sessions' },
 ];
 
 const breathingPackages = [
     { name: 'Drop-In', price: '120', description: 'Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).', note: 'Non-transferable & non-refundable' },
     { name: '5-Class Pack', price: '550', description: 'Valid 30 days from first use. Perfect for weekly consistency.' },
-    { name: '10-Class Pack', price: '1,020', description: 'Valid 45 days from first use. Ideal for deeper practice.' },
-    { name: 'Unlimited 3-Month Membership', price: '800', period: 'month', description: 'Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment.', note: 'Valid for 3 consecutive months \u00b7 Non-transferable \u00b7 Non-refundable \u00b7 No rollovers' },
+    { name: 'Unlimited 3-Month Membership', price: '2,400', description: 'Unlimited access to all Breathing Room classes. Paid upfront for a 3-month commitment (AED 800/month value).', note: 'Valid for 3 consecutive months \u00b7 Non-transferable \u00b7 Non-refundable \u00b7 No rollovers' },
 ];
 
 const unlimitedMembershipIncludes = [
@@ -164,7 +162,7 @@ export default function PricingPage() {
                         <div className="bg-card border border-border rounded-2xl overflow-hidden mb-12">
                             <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
                                 <h2 className="font-headline text-2xl mb-0.5">Unlimited 3-Month Membership</h2>
-                                <p className="text-sm text-primary-foreground/70">AED 800/month · 3-month commitment · AED 2,400 paid upfront</p>
+                                <p className="text-sm text-primary-foreground/70">AED 2,400 paid upfront · 3-month commitment · AED 800/month value</p>
                             </div>
                             <div className="p-6 md:p-8">
                                 <p className="text-base text-foreground/80 leading-relaxed mb-4">

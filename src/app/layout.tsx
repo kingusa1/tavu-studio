@@ -197,7 +197,7 @@ export default function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'Unlimited 3-Month Membership',
-                      description: 'Unlimited access to all Breathing Room classes. AED 800/month value, paid upfront for a 3-month commitment.',
+                      description: 'Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment (AED 800/month value). Valid for 3 consecutive months, non-transferable, non-refundable, no rollovers.',
                     },
                   },
                   {

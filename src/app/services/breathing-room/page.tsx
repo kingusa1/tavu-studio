@@ -213,24 +213,13 @@ export default function BreathingRoomPage() {
                                     </div>
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
-                                            <p className="font-semibold text-primary">10-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Ideal for deeper practice.</p>
-                                            <p className="text-xs text-foreground/50 mt-1">Valid 45 days from first use</p>
-                                        </div>
-                                        <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">1,020</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
-                                        <div>
                                             <p className="font-semibold text-primary">Unlimited 3-Month Membership</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment.</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Unlimited access to all Breathing Room classes. Paid upfront for a 3-month commitment (AED 800/month value).</p>
                                             <p className="text-xs text-foreground/40 mt-1">Valid for 3 consecutive months · Non-transferable · Non-refundable · No rollovers</p>
                                         </div>
                                         <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">800</p>
-                                            <p className="text-xs text-foreground/50 whitespace-nowrap">AED / month</p>
+                                            <p className="font-headline text-xl text-accent">2,400</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +239,7 @@ export default function BreathingRoomPage() {
                             <div className="max-w-lg mx-auto mt-8 bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
                                 <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
                                     <h3 className="font-headline text-xl">Unlimited 3-Month Membership</h3>
-                                    <p className="text-sm text-primary-foreground/70">AED 800/month · 3-month commitment · AED 2,400 paid upfront</p>
+                                    <p className="text-sm text-primary-foreground/70">AED 2,400 paid upfront · 3-month commitment · AED 800/month value</p>
                                 </div>
                                 <div className="p-6">
                                     <p className="text-sm text-foreground/80 leading-relaxed mb-3">

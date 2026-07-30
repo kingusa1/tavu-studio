@@ -135,14 +135,6 @@ export default function ClassesPage() {
                                         </div>
                                         <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
                                             <div>
-                                                <p className="font-semibold text-primary text-sm">10-Class Pack</p>
-                                                <p className="text-xs text-foreground/60 mt-0.5">Valid 60 days</p>
-                                                <p className="text-xs text-accent mt-0.5">+ 2 Contrast Therapy sessions</p>
-                                            </div>
-                                            <p className="font-headline text-lg text-accent">1,420 <span className="text-xs text-foreground/50">AED</span></p>
-                                        </div>
-                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
-                                            <div>
                                                 <p className="font-semibold text-primary text-sm">16-Class Pack</p>
                                                 <p className="text-xs text-foreground/60 mt-0.5">Valid 75 days</p>
                                                 <p className="text-xs text-accent mt-0.5">+ 2 Contrast Therapy sessions</p>
@@ -179,18 +171,11 @@ export default function ClassesPage() {
                                         </div>
                                         <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
                                             <div>
-                                                <p className="font-semibold text-primary text-sm">10-Class Pack</p>
-                                                <p className="text-xs text-foreground/60 mt-0.5">Valid 45 days from first use</p>
-                                            </div>
-                                            <p className="font-headline text-lg text-accent">1,020 <span className="text-xs text-foreground/50">AED</span></p>
-                                        </div>
-                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
-                                            <div>
                                                 <p className="font-semibold text-primary text-sm">Unlimited 3-Month Membership</p>
-                                                <p className="text-xs text-foreground/60 mt-0.5">Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Unlimited access to all Breathing Room classes. Paid upfront for a 3-month commitment (AED 800/month value)</p>
                                                 <p className="text-xs text-foreground/40 mt-0.5">Valid for 3 consecutive months · Non-transferable · Non-refundable · No rollovers</p>
                                             </div>
-                                            <p className="font-headline text-lg text-accent whitespace-nowrap">800 <span className="text-xs text-foreground/50">AED / month</span></p>
+                                            <p className="font-headline text-lg text-accent whitespace-nowrap">2,400 <span className="text-xs text-foreground/50">AED</span></p>
                                         </div>
                                     </div>
                                     <div className="px-5 pb-5">
@@ -207,7 +192,7 @@ export default function ClassesPage() {
                             <div className="max-w-5xl mx-auto mt-8 bg-card border border-border rounded-2xl overflow-hidden">
                                 <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
                                     <h3 className="font-headline text-xl">Unlimited 3-Month Membership</h3>
-                                    <p className="text-sm text-primary-foreground/70">AED 800/month · 3-month commitment · AED 2,400 paid upfront</p>
+                                    <p className="text-sm text-primary-foreground/70">AED 2,400 paid upfront · 3-month commitment · AED 800/month value</p>
                                 </div>
                                 <div className="p-6">
                                     <p className="text-sm text-foreground/80 leading-relaxed mb-3">
