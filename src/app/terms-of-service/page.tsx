@@ -13,7 +13,7 @@ export default function TermsOfService() {
         <div className="container mx-auto px-4 py-16 sm:py-24">
           <div className="bg-card/80 backdrop-blur-sm p-8 md:p-16 rounded-2xl shadow-2xl border border-white/10 max-w-4xl mx-auto">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold text-primary mb-4">Terms of Service</h1>
-            <p className="text-sm text-muted-foreground mb-8">Last Updated: January 2025</p>
+            <p className="text-sm text-muted-foreground mb-8">Last Updated: July 2026</p>
 
             <div className="space-y-8 text-primary/90">
 
@@ -143,6 +143,16 @@ export default function TermsOfService() {
                   <li>The full amount of AED 2,400 is payable upfront at the time of purchase</li>
                   <li>Memberships are non-transferable and non-refundable</li>
                   <li>Unused classes do not roll over between months or beyond the membership period</li>
+                </ul>
+
+                <h3 className="text-lg font-semibold mt-4 mb-2">6.6 Appointment and Service Packages</h3>
+                <p className="leading-relaxed mb-4">
+                  Appointment and service packages, such as the Nomadic Recovery Pack (5+1), are valid for the period specified at the time of purchase.
+                </p>
+                <ul className="list-disc list-inside space-y-2 pl-4">
+                  <li>The Nomadic Recovery Pack (5+1) provides 6 sessions in total (5 paid plus 1 complimentary) and is valid for 45 days from the date of purchase</li>
+                  <li>Unused sessions expire at the end of the validity period and cannot be refunded, extended, or transferred</li>
+                  <li>Appointment and service packages are non-transferable and non-refundable</li>
                 </ul>
               </section>
 

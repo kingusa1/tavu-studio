@@ -237,7 +237,7 @@ export default function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'Nomadic Recovery Pack (5+1)',
-                      description: 'Five 45-minute Compression Therapy sessions plus one complimentary session. Six sessions total, valid 45 days.',
+                      description: 'Five 45-minute Nomadic Compression Therapy sessions plus one complimentary 45-minute Compression Therapy session. Six sessions total, valid for 45 days. Non-transferable and non-refundable.',
                     },
                   },
                   {

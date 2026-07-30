@@ -35,7 +35,7 @@ export default function RecoveryPage() {
                                 <Link href="/services/compression-therapy" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
                                     <h2 className="font-headline text-2xl text-primary mb-3">Compression Therapy</h2>
                                     <p className="text-foreground/70 text-sm mb-4">NormaTec pulsing compression for faster muscle recovery.</p>
-                                    <span className="text-accent font-medium text-sm">160 AED →</span>
+                                    <span className="text-accent font-medium text-sm">From 160 AED →</span>
                                 </Link>
                             </MotionWrapper>
                             <MotionWrapper delay={0.2} direction="up">
