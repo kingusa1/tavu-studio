@@ -238,6 +238,23 @@ export default function ClassesPage() {
                                 </div>
                             </div>
                         </MotionWrapper>
+
+                        {/* Class Policies */}
+                        <MotionWrapper delay={0.2} direction="up">
+                            <div className="max-w-5xl mx-auto mt-8 bg-card border border-border rounded-2xl p-6">
+                                <h3 className="text-lg font-semibold text-primary mb-4">Class Policies</h3>
+                                <div className="grid md:grid-cols-2 gap-4 text-sm text-foreground/70">
+                                    <div className="flex items-start gap-2">
+                                        <span className="text-accent font-bold">•</span>
+                                        <span><strong>Class minimum:</strong> A minimum of 4 participants is required for each class to proceed. Classes that do not meet the minimum attendance requirement may be cancelled.</span>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <span className="text-accent font-bold">•</span>
+                                        <span><strong>Late arrival:</strong> Arriving 10 minutes or more after the start time means entry to the class will not be permitted.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </MotionWrapper>
                     </div>
                 </section>
 

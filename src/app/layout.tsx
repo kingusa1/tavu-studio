@@ -202,7 +202,7 @@ export default function RootLayout({
                   },
                   {
                     '@type': 'Offer',
-                    price: '220',
+                    price: '275',
                     priceCurrency: 'AED',
                     itemOffered: {
                       '@type': 'Service',
@@ -242,14 +242,14 @@ export default function RootLayout({
                   },
                   {
                     '@type': 'AggregateOffer',
-                    lowPrice: '180',
-                    highPrice: '300',
+                    lowPrice: '300',
+                    highPrice: '800',
                     priceCurrency: 'AED',
-                    offerCount: '5',
+                    offerCount: '11',
                     itemOffered: {
                       '@type': 'Service',
                       name: 'Massage (Ladies Only)',
-                      description: 'Destress, Relaxing, Deep Tissue, Express Head/Neck/Shoulder and Foot Ritual massage.',
+                      description: 'FLOW Relaxation, RELEASE Deep Tissue, RECOVER Sports and DRAIN Lymphatic full-body rituals, targeted recovery rituals, ROOTED foot reflexology and the 3-hour Recovery Escape. Ritual Packs 5 + 1 included.',
                     },
                   },
                   {

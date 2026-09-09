@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Recovery — Contrast Therapy, Compression & Massage',
   description:
-    'Recovery at TAVÚ in Al Raha, Abu Dhabi: Contrast Therapy (infrared sauna + ice bath) from 220 AED, NormaTec Compression from 160 AED, and ladies-only massage from 180 AED.',
+    'Recovery at TAVÚ in Al Raha, Abu Dhabi: Contrast Therapy (infrared sauna + ice bath) from 275 AED, NormaTec Compression from 160 AED, and ladies-only massage from 300 AED.',
   keywords: [
     'recovery studio Abu Dhabi',
     'ice bath Abu Dhabi',

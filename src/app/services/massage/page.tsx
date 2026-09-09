@@ -7,42 +7,101 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const massageServices = [
+const fullBodyRituals = [
     {
-        name: 'Destress Massage',
-        description: 'Perfect for reducing stress, improving sleep quality, and easing tension in the upper body.',
-        duration: '60 min',
-        price: '300 AED',
-        benefits: ['Stress relief', 'Improved sleep', 'Upper body tension relief']
+        name: 'FLOW | Relaxation Massage',
+        description: 'A slow, full-body ritual designed to soften muscular tension, calm the nervous system and return the body to balance.',
+        duration: '60 Minutes',
+        price: '350 AED',
+        pack: 'Ritual Pack | 5 + 1 Included — 1,890 AED',
+        packNote: 'Six-session value 2,100 AED · Valid for 45 days',
+        benefits: ['Softens muscular tension', 'Calms the nervous system', 'Returns the body to balance'],
     },
     {
-        name: 'Relaxing Massage',
-        description: 'Deep relaxation, helping to calm the nervous system and bring the body into a state of complete tranquility.',
-        duration: '60 min',
-        price: '300 AED',
-        benefits: ['Deep relaxation', 'Calms nervous system', 'Complete tranquility']
+        name: 'RELEASE | Deep Tissue Massage',
+        description: 'A focused, full-body treatment using deeper pressure to release muscular tightness, improve mobility and support recovery.',
+        duration: '60 Minutes',
+        price: '350 AED',
+        pack: 'Ritual Pack | 5 + 1 Included — 1,890 AED',
+        packNote: 'Six-session value 2,100 AED · Valid for 45 days',
+        benefits: ['Releases muscular tightness', 'Improves mobility', 'Supports recovery'],
     },
     {
-        name: 'Express Head, Neck & Shoulder',
-        description: 'Focuses on relieving headaches and reducing stiffness in the neck and shoulders.',
-        duration: '45 min',
-        price: '220 AED',
-        benefits: ['Headache relief', 'Neck stiffness relief', 'Shoulder tension release']
+        name: 'RECOVER | Sports Massage',
+        description: 'A therapeutic full-body massage created for active bodies, targeting muscular fatigue, restricted movement and areas requiring deeper recovery.',
+        duration: '60 Minutes',
+        price: '350 AED',
+        pack: 'Ritual Pack | 5 + 1 Included — 1,890 AED',
+        packNote: 'Six-session value 2,100 AED · Valid for 45 days',
+        benefits: ['Targets muscular fatigue', 'Restores restricted movement', 'Created for active bodies'],
     },
     {
-        name: 'Foot Ritual Massage',
-        description: 'Designed to reduce swelling and boost circulation, leaving your feet feeling light and refreshed.',
-        duration: '30 min',
-        price: '180 AED',
-        benefits: ['Reduces swelling', 'Boosts circulation', 'Light & refreshed feet']
+        name: 'DRAIN | Lymphatic Massage',
+        description: 'A specialized, gentle treatment designed to support lymphatic drainage, reduce fluid retention and leave the body feeling lighter.',
+        duration: '60 Minutes',
+        price: '450 AED',
+        pack: 'Ritual Pack | 5 + 1 Included — 2,430 AED',
+        packNote: 'Six-session value 2,700 AED · Valid for 45 days',
+        benefits: ['Supports lymphatic drainage', 'Reduces fluid retention', 'Leaves the body feeling lighter'],
+    },
+];
+
+const targetedRituals = [
+    {
+        name: 'RESET | Head, Neck & Shoulders',
+        description: 'A focused massage to release tension through the scalp, neck, shoulders and upper back.',
+        addOn: '150', ritual: '300', pack: '1,620',
     },
     {
-        name: 'Deep Tissue Massage',
-        description: 'Targets deep muscles to release knots, improve mobility, and ease tension.',
-        duration: '60 min',
-        price: '300 AED',
-        benefits: ['Deep muscle release', 'Improved mobility', 'Tension relief']
+        name: 'RECOVER | Deep Foot Recovery',
+        description: 'An intensive treatment combining therapeutic massage, percussion therapy and targeted pressure-point techniques.',
+        addOn: '150', ritual: '320', pack: '1,728',
     },
+    {
+        name: 'RELEASE | Arm & Hand Recovery',
+        description: 'Designed to relieve tightness through the hands, wrists, forearms and arms. Ideal for desk-related tension, regular training and daily muscle fatigue.',
+        addOn: '150', ritual: '300', pack: '1,620',
+    },
+    {
+        name: 'GROUND | Scalp Therapy',
+        description: 'A calming scalp ritual that encourages deep relaxation and releases mental and physical tension.',
+        addOn: '150', ritual: '300', pack: '1,620',
+    },
+    {
+        name: 'LIFT | Facial Recovery',
+        description: 'A sculpting facial massage that supports lymphatic drainage, releases facial tension and restores a natural glow.',
+        addOn: '150', ritual: '350', pack: '1,890',
+    },
+];
+
+const rootedIncludes = [
+    '20-minute therapeutic foot soak',
+    'Choice of signature salt blend',
+    'Hot towel ritual',
+    '30-minute foot reflexology massage',
+    'TAVÚ signature herbal tea',
+];
+
+const saltBlends = [
+    { name: 'RECOVER', description: 'Peppermint and eucalyptus for tired muscles and active bodies.' },
+    { name: 'CALM', description: 'Lavender and chamomile for softness, relaxation and stillness.' },
+    { name: 'REVIVE', description: 'Ginger and lemon for a warming and refreshing reset.' },
+];
+
+const recoveryEscapeIncludes = [
+    'Exclusive access to the Main Contrast Suite',
+    'Traditional sauna with Himalayan salt',
+    'Ice bath experience',
+    'Private shower facilities',
+    '60-minute full-body therapeutic massage',
+    'TAVÚ signature herbal tea',
+];
+
+const packageSummary = [
+    { ritual: '300', value: '1,800', pack: '1,620', saving: '180' },
+    { ritual: '320', value: '1,920', pack: '1,728', saving: '192' },
+    { ritual: '350', value: '2,100', pack: '1,890', saving: '210' },
+    { ritual: '450', value: '2,700', pack: '2,430', saving: '270' },
 ];
 
 export default function MassagePage() {
@@ -124,15 +183,15 @@ export default function MassagePage() {
                                         <ul className="space-y-1.5">
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                Destress, Relaxing, Express Head/Neck/Shoulder
+                                                FLOW, RELEASE, RECOVER & DRAIN full-body rituals
                                             </li>
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                Foot Ritual, Deep Tissue
+                                                RESET, GROUND, LIFT & ROOTED targeted rituals
                                             </li>
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                30 to 60 minute sessions available
+                                                Ritual Packs | 5 + 1 Included · Valid 45 days
                                             </li>
                                         </ul>
                                     </div>
@@ -142,20 +201,21 @@ export default function MassagePage() {
                     </div>
                 </section>
 
-                {/* Services Section */}
+                {/* Full-Body Massage Rituals */}
                 <section className="py-20 bg-muted/30">
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Our Treatments</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">TAVÚ Full-Body Massage Rituals</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    From gentle relaxation to deep therapeutic work, find your perfect massage.
+                                    Sixty minutes of focused, full-body therapeutic work. Every ritual is available as a
+                                    Ritual Pack with a sixth session included.
                                 </p>
                             </div>
                         </MotionWrapper>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                            {massageServices.map((service, index) => (
+                        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                            {fullBodyRituals.map((service, index) => (
                                 <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
                                     <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-xl transition-all h-full flex flex-col">
                                         <h3 className="font-headline text-xl text-primary mb-2">{service.name}</h3>
@@ -170,19 +230,218 @@ export default function MassagePage() {
                                                 </li>
                                             ))}
                                         </ul>
-                                        <div className="flex items-center justify-between pt-4 border-t border-border">
-                                            <div>
-                                                <p className="text-sm text-foreground/60">{service.duration}</p>
-                                                <p className="font-semibold text-accent">{service.price}</p>
+                                        <div className="pt-4 border-t border-border">
+                                            <div className="flex items-center justify-between mb-3">
+                                                <div>
+                                                    <p className="text-sm text-foreground/60">{service.duration}</p>
+                                                    <p className="font-semibold text-accent text-lg">{service.price}</p>
+                                                </div>
+                                                <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
+                                                    Book →
+                                                </Link>
                                             </div>
-                                            <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
-                                                Book →
-                                            </Link>
+                                            <div className="p-3 rounded-xl bg-muted/40">
+                                                <p className="text-sm font-medium text-primary">{service.pack}</p>
+                                                <p className="text-xs text-foreground/50 mt-0.5">{service.packNote}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </MotionWrapper>
                             ))}
                         </div>
+                    </div>
+                </section>
+
+                {/* Targeted Recovery Rituals */}
+                <section className="py-20 bg-background">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-12">
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">TAVÚ Targeted Recovery Rituals</h2>
+                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+                                    Thirty-minute treatments are offered individually as add-ons. Packages are available
+                                    exclusively for 60-minute rituals.
+                                </p>
+                            </div>
+                        </MotionWrapper>
+
+                        <div className="max-w-5xl mx-auto space-y-4">
+                            {targetedRituals.map((service, index) => (
+                                <MotionWrapper key={index} delay={0.05 * (index + 1)} direction="up">
+                                    <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-all">
+                                        <h3 className="font-headline text-xl text-primary mb-1">{service.name}</h3>
+                                        <p className="text-sm text-foreground/70 mb-4">{service.description}</p>
+                                        <div className="grid sm:grid-cols-3 gap-3">
+                                            <div className="p-3 rounded-xl bg-muted/30">
+                                                <p className="text-xs text-foreground/50 uppercase tracking-wide">30-Minute Add-On</p>
+                                                <p className="font-headline text-lg text-accent">{service.addOn} <span className="text-xs text-foreground/50">AED</span></p>
+                                            </div>
+                                            <div className="p-3 rounded-xl bg-muted/30">
+                                                <p className="text-xs text-foreground/50 uppercase tracking-wide">60-Minute Ritual</p>
+                                                <p className="font-headline text-lg text-accent">{service.ritual} <span className="text-xs text-foreground/50">AED</span></p>
+                                            </div>
+                                            <div className="p-3 rounded-xl bg-muted/30">
+                                                <p className="text-xs text-foreground/50 uppercase tracking-wide">Ritual Pack | 5 + 1</p>
+                                                <p className="font-headline text-lg text-accent">{service.pack} <span className="text-xs text-foreground/50">AED</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </MotionWrapper>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ROOTED Exclusive Foot Ritual */}
+                <section className="py-20 bg-muted/30">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-12">
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">TAVÚ Exclusive Foot Ritual</h2>
+                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+                                    ROOTED | Foot Soaking and Reflexology — a grounding ritual beginning with warmth and
+                                    ending in deep release.
+                                </p>
+                            </div>
+                        </MotionWrapper>
+
+                        <MotionWrapper delay={0.15} direction="up">
+                            <div className="max-w-5xl mx-auto bg-card border border-accent/30 rounded-2xl overflow-hidden">
+                                <div className="bg-primary text-primary-foreground px-6 py-5 text-center">
+                                    <h3 className="font-headline text-2xl">ROOTED | Foot Soaking and Reflexology</h3>
+                                    <p className="text-sm text-primary-foreground/70 mt-1">60 Minutes · 320 AED</p>
+                                </div>
+                                <div className="p-6 md:p-8">
+                                    <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+                                        Choose your preferred signature salt blend and settle into a 20-minute therapeutic
+                                        foot soak, followed by a 30-minute reflexology foot massage targeting pressure
+                                        points, fatigue and tension.
+                                    </p>
+
+                                    <div className="grid md:grid-cols-2 gap-6 mb-6">
+                                        <div>
+                                            <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">The Ritual Includes</p>
+                                            <ul className="space-y-2">
+                                                {rootedIncludes.map((item, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                        <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="p-5 rounded-xl bg-muted/30">
+                                            <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Ritual Pack</p>
+                                            <p className="font-headline text-2xl text-accent mb-1">1,728 <span className="text-xs text-foreground/50">AED</span></p>
+                                            <p className="text-sm text-foreground/70">Ritual Pack | 5 + 1 Included</p>
+                                            <p className="text-xs text-foreground/50 mt-1">Six-session value 1,920 AED · Valid for 45 days</p>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Choose Your Salt Blend</p>
+                                    <div className="grid sm:grid-cols-3 gap-3 mb-6">
+                                        {saltBlends.map((blend, i) => (
+                                            <div key={i} className="p-4 rounded-xl bg-muted/30">
+                                                <p className="font-semibold text-primary text-sm mb-1">{blend.name}</p>
+                                                <p className="text-xs text-foreground/60">{blend.description}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <p className="text-xs text-foreground/50">
+                                        Each blend is created using our signature foundation of Epsom salt, Dead Sea salt
+                                        and Himalayan pink salt.
+                                    </p>
+
+                                    <div className="mt-6">
+                                        <Link href="/schedule" className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all">
+                                            Book ROOTED
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </MotionWrapper>
+                    </div>
+                </section>
+
+                {/* Recovery Escape */}
+                <section className="py-20 bg-background">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-12">
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">TAVÚ Recovery Escape</h2>
+                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+                                    Three hours. Entirely yours.
+                                </p>
+                            </div>
+                        </MotionWrapper>
+
+                        <MotionWrapper delay={0.15} direction="up">
+                            <div className="max-w-5xl mx-auto bg-card border border-accent/30 rounded-2xl overflow-hidden">
+                                <div className="bg-primary text-primary-foreground px-6 py-5 flex flex-wrap items-center justify-between gap-3">
+                                    <div>
+                                        <h3 className="font-headline text-2xl">Recovery Escape</h3>
+                                        <p className="text-sm text-primary-foreground/70">Duration: 3 Hours</p>
+                                    </div>
+                                    <p className="font-headline text-3xl text-accent">800 <span className="text-sm text-primary-foreground/60">AED</span></p>
+                                </div>
+                                <div className="p-6 md:p-8">
+                                    <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+                                        Begin with exclusive access to the Main Contrast Suite, moving between warmth and
+                                        cold at your own pace. Then surrender to a 60-minute full-body therapeutic massage
+                                        tailored to what your body needs most.
+                                    </p>
+                                    <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Your Recovery Escape Includes</p>
+                                    <ul className="grid md:grid-cols-2 gap-2 mb-6">
+                                        {recoveryEscapeIncludes.map((item, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p className="text-xs text-foreground/50 italic mb-6">Limited appointments available.</p>
+                                    <Link href="/schedule" className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all">
+                                        Book Recovery Escape
+                                    </Link>
+                                </div>
+                            </div>
+                        </MotionWrapper>
+                    </div>
+                </section>
+
+                {/* Package Pricing Summary */}
+                <section className="py-20 bg-muted/30">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="max-w-3xl mx-auto">
+                                <h2 className="text-2xl sm:text-3xl font-headline text-primary mb-6 text-center">Package Pricing Summary</h2>
+                                <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                                    <table className="w-full text-sm">
+                                        <thead className="bg-primary text-primary-foreground">
+                                            <tr>
+                                                <th className="text-left font-semibold px-4 py-3">Ritual Price</th>
+                                                <th className="text-left font-semibold px-4 py-3">Six-Session Value</th>
+                                                <th className="text-left font-semibold px-4 py-3">Package Price</th>
+                                                <th className="text-left font-semibold px-4 py-3">Saving</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {packageSummary.map((row, i) => (
+                                                <tr key={i} className="border-t border-border">
+                                                    <td className="px-4 py-3 text-foreground/70">AED {row.ritual}</td>
+                                                    <td className="px-4 py-3 text-foreground/70">AED {row.value}</td>
+                                                    <td className="px-4 py-3 font-semibold text-accent">AED {row.pack}</td>
+                                                    <td className="px-4 py-3 text-foreground/70">AED {row.saving}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p className="text-xs text-foreground/50 mt-3 text-center">
+                                    Every Ritual Pack includes a sixth session at no charge. All prices include VAT.
+                                </p>
+                            </div>
+                        </MotionWrapper>
                     </div>
                 </section>
 

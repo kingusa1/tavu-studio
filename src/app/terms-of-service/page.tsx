@@ -79,7 +79,8 @@ export default function TermsOfService() {
                   <li>All bookings are subject to availability</li>
                   <li>Bookings can be made through our website, Mindbody app, or by contacting us directly</li>
                   <li>Please arrive at least 10 minutes before your scheduled class</li>
-                  <li>Late arrivals may not be permitted to join the class for safety reasons, and this will be treated as a no-show</li>
+                  <li>Arriving 10 minutes or more after the start time means entry to the class will not be permitted, for safety reasons, and this will be treated as a no-show</li>
+                  <li>A minimum of 4 participants is required for each class to proceed. Classes that do not meet the minimum attendance requirement may be cancelled</li>
                 </ul>
 
                 <h3 className="text-lg font-semibold mt-4 mb-2">5.2 Cancellation Policy</h3>
@@ -96,7 +97,7 @@ export default function TermsOfService() {
 
                 <h3 className="text-lg font-semibold mt-4 mb-2">5.4 Studio Cancellations</h3>
                 <p className="leading-relaxed">
-                  We reserve the right to cancel or reschedule classes due to instructor illness, low enrollment, or unforeseen circumstances. In such cases, you will be notified as soon as possible and your class credit will be restored or rescheduled.
+                  A minimum of 4 participants is required for each class to proceed. Classes that do not meet the minimum attendance requirement may be cancelled. We also reserve the right to cancel or reschedule classes due to instructor illness or unforeseen circumstances. In such cases, you will be notified as soon as possible and your class credit will be restored or rescheduled.
                 </p>
 
                 <h3 className="text-lg font-semibold mt-4 mb-2">5.5 Membership Booking Suspension</h3>

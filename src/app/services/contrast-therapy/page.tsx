@@ -10,7 +10,7 @@ import Link from 'next/link';
 const sharedPackages = [
     {
         name: 'Drop-In',
-        price: '220',
+        price: '275',
         description: '60-minute session (Sauna + Ice Bath). Includes full access to sauna + Ice bath. Towels & amenities.',
         note: 'Add-on: Compression Flush (20 min) — 50 AED',
     },

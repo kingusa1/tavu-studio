@@ -28,7 +28,7 @@ export default function RecoveryPage() {
                                 <Link href="/services/contrast-therapy" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
                                     <h2 className="font-headline text-2xl text-primary mb-3">Contrast Therapy</h2>
                                     <p className="text-foreground/70 text-sm mb-4">Sauna + Ice Bath sessions. Shared and private suites available.</p>
-                                    <span className="text-accent font-medium text-sm">From 220 AED →</span>
+                                    <span className="text-accent font-medium text-sm">From 275 AED →</span>
                                 </Link>
                             </MotionWrapper>
                             <MotionWrapper delay={0.15} direction="up">
@@ -41,8 +41,8 @@ export default function RecoveryPage() {
                             <MotionWrapper delay={0.2} direction="up">
                                 <Link href="/services/massage" className="block bg-card border border-border rounded-2xl p-8 text-center hover:shadow-xl hover:border-accent/30 transition-all h-full">
                                     <h2 className="font-headline text-2xl text-primary mb-3">Massage</h2>
-                                    <p className="text-foreground/70 text-sm mb-4">Ladies only. Destress, Relaxing, Deep Tissue, and more.</p>
-                                    <span className="text-accent font-medium text-sm">From 180 AED →</span>
+                                    <p className="text-foreground/70 text-sm mb-4">Ladies only. FLOW, RELEASE, RECOVER, DRAIN full-body rituals, targeted recovery rituals and more.</p>
+                                    <span className="text-accent font-medium text-sm">From 300 AED →</span>
                                 </Link>
                             </MotionWrapper>
                         </div>

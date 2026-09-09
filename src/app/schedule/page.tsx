@@ -48,6 +48,14 @@ export default function SchedulePage() {
                                     <span className="text-accent font-bold">•</span>
                                     <span><strong>What to bring:</strong> Comfortable workout attire and water</span>
                                 </div>
+                                <div className="flex items-start gap-2">
+                                    <span className="text-accent font-bold">•</span>
+                                    <span><strong>Class minimum:</strong> A minimum of 4 participants is required for each class to proceed. Classes that do not meet the minimum attendance requirement may be cancelled.</span>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <span className="text-accent font-bold">•</span>
+                                    <span><strong>Late arrival:</strong> Arriving 10 minutes or more after the start time means entry to the class will not be permitted.</span>
+                                </div>
                             </div>
                         </div>
                     </MotionWrapper>

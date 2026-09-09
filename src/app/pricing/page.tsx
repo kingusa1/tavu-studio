@@ -37,7 +37,7 @@ const recoveryPackIncludes = [
 ];
 
 const contrastPackages = [
-    { name: 'Drop-In', price: '220', description: '60-minute session (Sauna + Ice Bath). Towels & amenities.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
+    { name: 'Drop-In', price: '275', description: '60-minute session (Sauna + Ice Bath). Towels & amenities.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
     { name: '5-Pack', price: '990', description: 'Valid 30 days from first use.' },
     { name: '10-Pack', price: '1,850', description: 'Valid 45 days from first use.' },
     { name: 'Private Contrast Drop-In', price: '275', description: 'Infrared Sauna + Ice Bath, private suite.' },
@@ -46,20 +46,26 @@ const contrastPackages = [
 ];
 
 const massageServices = [
-    { name: 'Destress Massage', price: '300', description: 'Perfect for reducing stress, improving sleep quality, and easing tension in the upper body.', duration: '60 min' },
-    { name: 'Relaxing Massage', price: '300', description: 'Deep relaxation, helping to calm the nervous system and bring the body into a state of complete tranquility.', duration: '60 min' },
-    { name: 'Express Head, Neck & Shoulder', price: '220', description: 'Focuses on relieving headaches and reducing stiffness in the neck and shoulders.', duration: '45 min' },
-    { name: 'Foot Ritual Massage', price: '180', description: 'Designed to reduce swelling and boost circulation, leaving your feet feeling light and refreshed.', duration: '30 min' },
-    { name: 'Deep Tissue Massage', price: '300', description: 'Targets deep muscles to release knots, improve mobility, and ease tension.', duration: '60 min' },
+    { name: 'FLOW | Relaxation Massage', price: '350', description: 'Slow full-body ritual to soften tension, calm the nervous system and restore balance.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
+    { name: 'RELEASE | Deep Tissue Massage', price: '350', description: 'Deeper pressure to release muscular tightness, improve mobility and support recovery.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
+    { name: 'RECOVER | Sports Massage', price: '350', description: 'Therapeutic full-body massage for active bodies, targeting fatigue and restricted movement.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
+    { name: 'DRAIN | Lymphatic Massage', price: '450', description: 'Gentle treatment to support lymphatic drainage, reduce fluid retention and feel lighter.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 2,430 AED · Valid 45 days' },
+    { name: 'RESET | Head, Neck & Shoulders', price: '300', description: 'Releases tension through the scalp, neck, shoulders and upper back.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
+    { name: 'RECOVER | Deep Foot Recovery', price: '320', description: 'Therapeutic massage, percussion therapy and targeted pressure-point techniques.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,728 AED' },
+    { name: 'RELEASE | Arm & Hand Recovery', price: '300', description: 'Relieves tightness through the hands, wrists, forearms and arms.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
+    { name: 'GROUND | Scalp Therapy', price: '300', description: 'Calming scalp ritual for deep relaxation and release of mental and physical tension.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
+    { name: 'LIFT | Facial Recovery', price: '350', description: 'Sculpting facial massage that supports lymphatic drainage and restores a natural glow.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,890 AED' },
+    { name: 'ROOTED | Foot Soaking & Reflexology', price: '320', description: '20-min therapeutic foot soak with your choice of salt blend, hot towel ritual, 30-min reflexology and herbal tea.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,728 AED · Valid 45 days' },
+    { name: 'TAVÚ Recovery Escape', price: '800', description: 'Exclusive Main Contrast Suite access (sauna + ice bath) followed by a 60-min full-body therapeutic massage.', duration: '3 hours', note: 'Limited appointments available' },
 ];
 
 const bundles = [
-    { name: 'TA Reset', price: '480', description: 'Contrast + Head/Neck/Shoulder Massage' },
-    { name: 'TA Deep Calm', price: '520', description: 'Contrast + Relaxing Massage' },
-    { name: 'VU Athlete', price: '560', description: 'Contrast + Deep Tissue' },
-    { name: 'VU Mobility Flow', price: '580', description: 'Contrast + Mobility Massage' },
+    { name: 'TA Reset', price: '480', description: 'Contrast + RESET Head, Neck & Shoulders' },
+    { name: 'TA Deep Calm', price: '520', description: 'Contrast + FLOW Relaxation Massage' },
+    { name: 'VU Athlete', price: '560', description: 'Contrast + RELEASE Deep Tissue Massage' },
+    { name: 'VU Mobility Flow', price: '580', description: 'Contrast + RECOVER Sports Massage' },
     { name: 'VIP Flow', price: '660', description: 'Private Contrast + Any Massage' },
-    { name: 'Express Recovery', price: '420', description: 'Contrast + 30-min Massage' },
+    { name: 'Express Recovery', price: '420', description: 'Contrast + 30-min Targeted Recovery Add-On' },
 ];
 
 const memberships = [
