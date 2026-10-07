@@ -292,7 +292,7 @@ export default function Hero() {
             <div className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 text-white/85 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md space-y-1 px-2">
               <p>Where movement is practiced</p>
               <p>and recovery is part of the method</p>
-              <p className="text-sm sm:text-base md:text-lg text-white/70 italic pt-1">Reformer, mat, yoga, mobility, and stretch</p>
+              <p className="text-sm sm:text-base md:text-lg text-white/70 italic pt-1">Reformer, mat, release, and stretch</p>
               <p className="pt-4">Supported by contrast and compression</p>
               <p className="pt-3"><span className="text-accent font-medium">TA</span> — stillness</p>
               <p><span className="text-accent font-medium">VÚ</span> — flow</p>

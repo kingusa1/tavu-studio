@@ -44,7 +44,7 @@ const navigation = {
       },
       {
         title: 'Breathing Room',
-        description: 'Yoga, mat pilates & mobility',
+        description: 'Mat, release & stretch classes',
         href: '/services/breathing-room',
         icon: (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

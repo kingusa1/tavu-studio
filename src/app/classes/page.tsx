@@ -208,7 +208,7 @@ export default function ClassesPage() {
                                         <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
                                             <div>
                                                 <p className="font-semibold text-primary text-sm">Drop-In</p>
-                                                <p className="text-xs text-foreground/60 mt-0.5">Any class: Mat Pilates, Mobility, Yoga, Breathwork, Yin</p>
+                                                <p className="text-xs text-foreground/60 mt-0.5">Any class: TAVÚ MAT, RELEASE and STRETCH</p>
                                             </div>
                                             <p className="font-headline text-lg text-accent">120 <span className="text-xs text-foreground/50">AED</span></p>
                                         </div>
@@ -372,7 +372,7 @@ export default function ClassesPage() {
                                         A space dedicated to slowing down.
                                     </p>
                                     <p className="text-lg text-foreground/70 mb-6 font-light leading-relaxed">
-                                        Breath-led practices designed to restore balance, release tension, and reconnect you to your body. Sessions range from 45–60 minutes, inviting softness, presence, and quiet strength.
+                                        Signature mat, release and stretch classes designed to restore balance, release tension, and reconnect you to your body — inviting softness, presence, and quiet strength.
                                     </p>
                                     <Link
                                         href="/schedule"
@@ -384,7 +384,7 @@ export default function ClassesPage() {
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
                                     <Image
                                         src="/service-breathing-props.webp"
-                                        alt="Yoga and Breathing Studio"
+                                        alt="TAVÚ Breathing Room"
                                         fill
                                         className="object-cover"
                                     />

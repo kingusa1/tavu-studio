@@ -8,20 +8,20 @@ import Image from 'next/image';
 
 const upcomingEvents = [
     {
-        title: 'Breathwork Workshop',
-        date: 'Coming Soon',
-        time: 'TBA',
-        description: 'A deep dive into breathwork techniques for stress relief, improved focus, and enhanced athletic performance.',
-        category: 'Workshop',
-        image: '/gallery-breathing-room.webp'
+        title: 'Full Moon Sound Healing',
+        date: 'Full Moon',
+        time: 'Dates announced on our schedule',
+        description: 'A sound healing session held around the full moon. Some events are also specially focused around Yin + Yang.',
+        category: 'Sound Healing',
+        image: '/event-sound-healing-1.webp'
     },
     {
-        title: 'Recovery Science Seminar',
-        date: 'Coming Soon',
-        time: 'TBA',
-        description: 'Learn the science behind contrast therapy, cold exposure, and optimal recovery protocols from wellness experts.',
-        category: 'Seminar',
-        image: '/service-sauna.webp'
+        title: 'New Moon Sound Healing',
+        date: 'New Moon',
+        time: 'Dates announced on our schedule',
+        description: 'A sound healing session held around the new moon. Some events are also specially focused around Yin + Yang.',
+        category: 'Sound Healing',
+        image: '/event-sound-healing-2.webp'
     }
 ];
 
@@ -103,15 +103,6 @@ const highlights: Highlight[] = [
         images: [
             { src: '/event-beyondlefifth-1.webp', alt: 'BeyondLeFifth running club gathering outside TAVÚ' },
             { src: '/event-beyondlefifth-2.webp', alt: 'BeyondLeFifth runners meeting in front of the TAVÚ studio' },
-        ],
-    },
-    {
-        title: 'Sound Healing',
-        category: 'Full Moon · New Moon',
-        description: 'Full Moon Sound Healing and New Moon Sound Healing. Some events are also specially focused around Yin + Yang.',
-        images: [
-            { src: '/event-sound-healing-1.webp', alt: 'Sound healing set-up with gongs and singing bowls at TAVÚ' },
-            { src: '/event-sound-healing-2.webp', alt: 'Candle-lit sound healing mats in the TAVÚ Breathing Room' },
         ],
     },
 ];
@@ -279,7 +270,7 @@ export default function EventsPage() {
                         <MotionWrapper delay={0.1} direction="up">
                             <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline mb-6">Stay Updated</h2>
                             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                                Register to receive notifications about upcoming events, workshops, and exclusive member gatherings.
+                                Register to receive notifications about upcoming events, collaborations, and exclusive member gatherings.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Link

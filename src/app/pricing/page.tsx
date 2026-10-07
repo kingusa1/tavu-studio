@@ -13,7 +13,7 @@ const reformerPackages = [
 ];
 
 const breathingPackages = [
-    { name: 'Drop-In', price: '120', description: 'Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).', note: 'Non-transferable & non-refundable' },
+    { name: 'Drop-In', price: '120', description: 'Single session valid for any Breathing Room class (TAVÚ MAT, RELEASE and STRETCH).', note: 'Non-transferable & non-refundable' },
     { name: '5-Class Pack', price: '550', description: 'Valid 30 days from first use. Perfect for weekly consistency.' },
 ];
 
@@ -29,14 +29,10 @@ const unlimitedMembershipIncludes = [
 ];
 
 const contrastPackages = [
-    { name: 'Individual Drop-In', price: '275', duration: '60 min', description: 'A Contrast Therapy session for one, with the choice of a private or shared experience, combining sauna heat and a 5–8°C cold plunge to support recovery, circulation, and overall wellbeing.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
+    { name: 'Individual Drop-In', price: '275', duration: '60 min', description: 'A private Contrast Therapy session for one, combining sauna heat and a 5–8°C cold plunge to support recovery, circulation, and overall wellbeing.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
     { name: 'Couple', price: '456', duration: '60 min', description: 'A 60-minute Contrast Therapy session for two, with the choice of a private or shared experience. Move together between sauna heat and cold immersion for a restorative recovery experience.' },
     { name: 'Trio', price: '600', duration: '60 min', description: 'A 60-minute Contrast Therapy session for three, with the choice of a private or shared experience. Enjoy the heat-and-cold recovery ritual together, designed for a longer shared reset.' },
     { name: 'Group', price: '1,050', duration: '60 min · Up to 6 guests', description: 'A 60-minute Contrast Therapy experience for groups of up to six, with the choice of a private or shared experience. A shared recovery ritual combining sauna heat and cold immersion.' },
-    { name: '5-Pack', price: '990', description: 'Valid 30 days from first use.' },
-    { name: '10-Pack', price: '1,850', description: 'Valid 45 days from first use.' },
-    { name: 'Private 5-Pack', price: '1,250', description: 'Valid 30 days.' },
-    { name: 'Private 10-Pack', price: '2,300', description: 'Valid 45 days.' },
 ];
 
 const massageServices = [
@@ -83,7 +79,7 @@ const memberships = [
         validity: 'Valid for 45 days',
         description: 'Our most complete recovery membership, designed for those who want to make Contrast Therapy a consistent part of their routine.',
         includes: [
-            '2 × 45 minute Compression Therapy sessions',
+            '2 × 30 minute Compression Therapy sessions',
             'Choice of Main or Private Contrast',
             '10% off Massage services',
             '2 complimentary Head, Neck + Shoulder Chair Massage (30 minutes)',
@@ -165,7 +161,7 @@ export default function PricingPage() {
                             </PricingCard>
                         </MotionWrapper>
                         <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Breathing Room" subtitle="Mat Pilates, Mobility, Yoga, Breathwork, Yin" bookLabel="Book Your Mat" bookHref="/schedule">
+                            <PricingCard title="Breathing Room" subtitle="TAVÚ MAT, RELEASE and STRETCH" bookLabel="Book Your Mat" bookHref="/schedule">
                                 {breathingPackages.map((pkg, i) => (
                                     <PriceRow key={i} {...pkg} />
                                 ))}
@@ -237,16 +233,16 @@ export default function PricingPage() {
                             </PricingCard>
                         </MotionWrapper>
                         <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Compression Therapy" subtitle="NormaTec" bookLabel="Book Compression" bookHref="/appointments">
+                            <PricingCard title="Compression Therapy" subtitle="NormaTec" bookLabel="Book Compression Therapy" bookHref="/appointments">
                                 <PriceRow
-                                    name="NormaTec Individual Session"
+                                    name="NormaTec Compression Therapy | Individual Session"
                                     price="160"
                                     description="A 45-minute Compression Therapy session designed to support circulation, reduce muscle fatigue, and promote recovery through targeted compression."
                                     duration="45 min"
                                     note="Validity: 7 days"
                                 />
                                 <PriceRow
-                                    name="NormaTec Recovery Pack — 5 + 1"
+                                    name="NormaTec Compression Therapy | Recovery Pack — 5 + 1"
                                     price="660"
                                     description="A recovery pack for consistent care, including five Compression Therapy sessions plus one complimentary session."
                                     duration="6 × 45 min"

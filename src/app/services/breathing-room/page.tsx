@@ -117,7 +117,7 @@ export default function BreathingRoomPage() {
                                 <div>
                                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">The Breathing Room</h2>
                                     <p className="text-lg text-foreground/70 mb-6 leading-relaxed">
-                                        Our breathing room is a sanctuary for presence and breath. From yoga flows to mat pilates,
+                                        Our breathing room is a sanctuary for presence and breath. From mat pilates to release and stretch,
                                         each session is designed to help you release tension, build strength, and find inner calm.
                                     </p>
                                     <div className="grid grid-cols-2 gap-4 mb-8">
@@ -154,7 +154,7 @@ export default function BreathingRoomPage() {
                                         <ul className="space-y-1.5">
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                Mat Pilates, Mobility, Yoga, Breathwork and Yin
+                                                TAVÚ MAT, RELEASE and STRETCH classes
                                             </li>
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
@@ -175,7 +175,7 @@ export default function BreathingRoomPage() {
                             <div className="text-center mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Our Classes</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Yoga, pilates, and mobility practices for every body.
+                                    Signature mat, release and stretch classes for every body.
                                 </p>
                             </div>
                         </MotionWrapper>
@@ -224,7 +224,7 @@ export default function BreathingRoomPage() {
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
                                             <p className="font-semibold text-primary">Drop-In</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Single session valid for any Breathing Room class (TAVÚ MAT, RELEASE and STRETCH).</p>
                                             <p className="text-xs text-foreground/40 mt-1">Non-transferable & non-refundable</p>
                                         </div>
                                         <div className="text-right flex-shrink-0">

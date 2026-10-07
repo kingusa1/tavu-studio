@@ -27,7 +27,7 @@ const membershipTiers = [
         validity: 'Valid for 45 days',
         description: 'Our most complete recovery membership, designed for those who want to make Contrast Therapy a consistent part of their routine.',
         includes: [
-            '2 × 45 minute Compression Therapy sessions',
+            '2 × 30 minute Compression Therapy sessions',
             'Choice of Main or Private Contrast',
             '10% off Massage services',
             '2 complimentary Head, Neck + Shoulder Chair Massage (30 minutes)',

@@ -32,7 +32,7 @@ const breathingPackages = [
         name: 'Drop-In',
         price: '120',
         period: '',
-        description: 'Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).',
+        description: 'Single session valid for any Breathing Room class (TAVÚ MAT, RELEASE and STRETCH).',
         validity: '',
         note: 'Non-transferable & non-refundable',
     },
@@ -116,7 +116,7 @@ export default function Packages() {
                         <div className="bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col">
                             <div className="bg-primary text-primary-foreground px-8 py-6 text-center">
                                 <h3 className="font-headline text-2xl mb-1">Breathing Room</h3>
-                                <p className="text-sm text-primary-foreground/70">Mat Pilates, Mobility, Yoga, Breathwork, Yin</p>
+                                <p className="text-sm text-primary-foreground/70">TAVÚ MAT, RELEASE and STRETCH</p>
                             </div>
                             <div className="p-6 flex flex-col gap-4 flex-grow">
                                 {breathingPackages.map((pkg, i) => (

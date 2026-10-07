@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     default: 'TAVÚ | Abu Dhabi\'s First Private Reformer Pilates & Contrast Therapy Studio',
     template: '%s | TAVÚ Studio',
   },
-  description: 'TAVÚ — Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat classes, breathwork, sauna + ice bath, NormaTec compression & massage in Al Raha.',
+  description: 'TAVÚ — Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat, release & stretch classes, sauna + ice bath, NormaTec compression & massage in Al Raha.',
   keywords: [
     'Reformer Pilates Abu Dhabi',
     'Contrast Therapy Abu Dhabi',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     'Wellness Studio Abu Dhabi',
     'NormaTec Abu Dhabi',
     'Massage Abu Dhabi',
-    'Breathwork Abu Dhabi',
+    'Mat Pilates Abu Dhabi',
     'TAVU Studio',
   ],
   authors: [{ name: 'TAVÚ Studio' }],
@@ -134,7 +134,7 @@ export default function RootLayout({
               '@type': 'HealthClub',
               name: 'TAVÚ Studio',
               alternateName: 'TAVU Studio',
-              description: 'Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, breathwork, sauna + ice bath, NormaTec compression and massage.',
+              description: 'Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat, release and stretch classes, sauna + ice bath, NormaTec compression and massage.',
               url: 'https://tavustudio.com',
               logo: 'https://tavustudio.com/logo.png',
               image: 'https://tavustudio.com/opengraph-image.png',
@@ -186,7 +186,7 @@ export default function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'Breathing Room — Drop-In',
-                      description: 'Mat Pilates, Yoga, Mobility, Breathwork or Yin class.',
+                      description: 'One TAVÚ MAT, RELEASE or STRETCH class.',
                     },
                   },
                   {
@@ -206,7 +206,7 @@ export default function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'Contrast Therapy — Individual Drop-In',
-                      description: 'A 60-minute Contrast Therapy session for one, private or shared, combining sauna heat and a 5–8°C cold plunge.',
+                      description: 'A 60-minute private Contrast Therapy session for one, combining sauna heat and a 5–8°C cold plunge.',
                     },
                   },
                   {
@@ -280,7 +280,7 @@ export default function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'Recovery Memberships (Reset & Ritual Unlimited)',
-                      description: 'Reset Membership AED 820 (valid 30 days): 4 Contrast Therapy sessions, 1 Compression Therapy session, a complimentary chair massage. Ritual Unlimited Membership AED 1,390 (valid 45 days): Contrast Therapy with 2 Compression Therapy sessions and 2 complimentary chair massages. Choice of Main or Private Contrast.',
+                      description: 'Reset Membership AED 820 (valid 30 days): 4 Contrast Therapy sessions, 1 Compression Therapy session, a complimentary chair massage. Ritual Unlimited Membership AED 1,390 (valid 45 days): Contrast Therapy with 2 × 30-minute Compression Therapy sessions and 2 complimentary 30-minute chair massages. Choice of Main or Private Contrast.',
                     },
                   },
                 ],

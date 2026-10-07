@@ -89,9 +89,8 @@ export default function AboutPage() {
                                         <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">TA</span>
                                         <h3 className="text-2xl md:text-3xl font-headline mb-3">Grounds the body.</h3>
                                         <p className="text-white/80 text-base leading-relaxed max-w-md">
-                                            Strength, stability, presence. Built through Reformer Pilates,
-                                            mat work, mobility and the rituals of recovery. Slow, intentional,
-                                            repeated until it becomes part of you.
+                                            Strength, stability, presence. Built on the Reformer and the Mat —
+                                            slow, intentional, repeated until it becomes part of you.
                                         </p>
                                     </div>
                                 </div>
@@ -112,8 +111,8 @@ export default function AboutPage() {
                                         <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">VU</span>
                                         <h3 className="text-2xl md:text-3xl font-headline mb-3">Lifts the spirit.</h3>
                                         <p className="text-white/80 text-base leading-relaxed max-w-md">
-                                            Breath, heat, cold, stillness. The practices that open space — breathwork,
-                                            yoga, sauna, ice bath. What you carry out, lighter than what you brought in.
+                                            Heat, cold, touch, stillness. Contrast therapy and massage restore, release,
+                                            and renew. What you carry out, lighter than what you brought in.
                                         </p>
                                     </div>
                                 </div>
