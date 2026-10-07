@@ -216,7 +216,7 @@ export default function MassagePage() {
                             <div className="text-center mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">TAVÚ Full-Body Massage Rituals</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Sixty minutes of focused, full-body therapeutic work. Every ritual is available as a
+                                    Sixty or ninety minutes of focused, full-body therapeutic work. Every ritual is available as a
                                     Ritual Pack with a sixth session included.
                                 </p>
                             </div>

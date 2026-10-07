@@ -156,7 +156,7 @@ export default function ReformerPilatesPage() {
                             <div className="text-center mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Our Classes</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    From foundation to advanced, find the class that matches your level.
+                                    From TA: Gentle Flow to advanced, find the class that matches your level.
                                 </p>
                             </div>
                         </MotionWrapper>

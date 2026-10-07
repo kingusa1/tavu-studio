@@ -10,7 +10,7 @@ const upcomingEvents = [
     {
         title: 'Full Moon Sound Healing',
         date: 'Full Moon',
-        time: 'Dates announced on our schedule',
+        time: 'Dates to be announced',
         description: 'A sound healing session held around the full moon. Some events are also specially focused around Yin + Yang.',
         category: 'Sound Healing',
         image: '/event-sound-healing-1.webp'
@@ -18,7 +18,7 @@ const upcomingEvents = [
     {
         title: 'New Moon Sound Healing',
         date: 'New Moon',
-        time: 'Dates announced on our schedule',
+        time: 'Dates to be announced',
         description: 'A sound healing session held around the new moon. Some events are also specially focused around Yin + Yang.',
         category: 'Sound Healing',
         image: '/event-sound-healing-2.webp'

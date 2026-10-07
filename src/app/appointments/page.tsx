@@ -34,7 +34,7 @@ export default function AppointmentsPage() {
                             <div className="bg-card border border-accent/30 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
                                 <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                                     <div>
-                                        <h3 className="font-headline text-2xl text-primary">NormaTec Recovery Pack (5+1)</h3>
+                                        <h3 className="font-headline text-2xl text-primary">NormaTec Compression Therapy | Recovery Pack — 5 + 1</h3>
                                         <p className="text-sm text-foreground/60 mt-1">Compression Therapy</p>
                                     </div>
                                     <div className="text-right flex-shrink-0">

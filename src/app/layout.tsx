@@ -255,7 +255,7 @@ export default function RootLayout({
                     priceCurrency: 'AED',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'NormaTec Recovery Pack (5+1)',
+                      name: 'NormaTec Compression Therapy — Recovery Pack (5+1)',
                       description: 'A recovery pack for consistent care, including five 45-minute Compression Therapy sessions plus one complimentary session. Six sessions total, valid for 45 days. Non-transferable and non-refundable.',
                     },
                   },

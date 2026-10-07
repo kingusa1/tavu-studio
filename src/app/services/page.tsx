@@ -16,10 +16,10 @@ const services = [
     },
     {
         name: 'Breathing Room',
-        description: 'Breath-led practices including yoga, mat pilates, and mobility sessions. Designed to restore balance, release tension, and reconnect you to your body.',
+        description: 'Signature TAVÚ MAT, RELEASE and STRETCH classes. Designed to restore balance, release tension, and reconnect you to your body.',
         image: '/service-breathing-props.webp',
         link: '/services/breathing-room',
-        features: ['45-60 minutes', 'All levels', 'Mat-based practices'],
+        features: ['Mat, Release & Stretch', 'Signature classes', 'Mat-based practices'],
         accent: 'from-emerald-500/20'
     },
     {

@@ -122,12 +122,12 @@ export default function BreathingRoomPage() {
                                     </p>
                                     <div className="grid grid-cols-2 gap-4 mb-8">
                                         <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
-                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">45-60</p>
-                                            <p className="text-sm font-medium text-foreground/70">Minutes</p>
+                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">11</p>
+                                            <p className="text-sm font-medium text-foreground/70">Signature Classes</p>
                                         </div>
                                         <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
-                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">All</p>
-                                            <p className="text-sm font-medium text-foreground/70">Levels Welcome</p>
+                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">3</p>
+                                            <p className="text-sm font-medium text-foreground/70">MAT · RELEASE · STRETCH</p>
                                         </div>
                                     </div>
                                     <Link

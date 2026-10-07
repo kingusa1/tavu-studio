@@ -20,9 +20,9 @@ const services = [
         id: 'breathing-room',
         name: 'Breathing Room',
         tagline: 'Stillness. Depth. Release.',
-        description: 'Yoga, mat pilates, and mobility sessions in a dedicated space for grounding breathwork and mindful movement.',
+        description: 'Signature TAVÚ MAT, RELEASE and STRETCH classes in a dedicated space for mindful, grounded movement.',
         image: '/service-breathing-props.webp',
-        highlights: ['Yoga & mat pilates', 'Guided breathwork', 'Mobility sessions', 'Mindful movement'],
+        highlights: ['TAVÚ MAT', 'TAVÚ RELEASE', 'TAVÚ STRETCH', 'Mindful movement'],
         href: '/services/breathing-room',
     },
     {

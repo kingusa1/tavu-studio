@@ -56,8 +56,8 @@ export default function Contact() {
                                     <div className="flex items-start gap-4">
                                         <Clock className="w-5 h-5 text-accent mt-1 shrink-0" />
                                         <p className="text-lg font-light leading-relaxed text-foreground/80">
-                                            9am – 9pm daily<br />
-                                            Open 7 days a week
+                                            Monday – Sunday<br />
+                                            9:00 AM – 9:00 PM
                                         </p>
                                     </div>
                                 </div>

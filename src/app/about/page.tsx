@@ -138,22 +138,22 @@ export default function AboutPage() {
                             </MotionWrapper>
                             <MotionWrapper delay={0.2} direction="right">
                                 <div>
-                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">Our Story</span>
+                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">The Journey</span>
                                     <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2 mb-6">The TAVÚ Journey</h2>
                                     <div className="space-y-4 text-lg text-foreground/70">
                                         <p>
                                             TAVÚ was created from a simple belief: balance is not found in extremes, but in integration.
                                         </p>
                                         <p className="font-medium text-foreground/80">
-                                            <span className="text-accent">TA</span> — grounding, strength, presence.<br />
-                                            <span className="text-accent">VU</span> — elevation, flow, expansion.
+                                            <span className="text-accent">TA</span> — grounding on the Reformer and the Mat.<br />
+                                            <span className="text-accent">VU</span> — the rise, through contrast and massage.
                                         </p>
                                         <p>
                                             Together, they form TAVÚ: a space where the body is supported, the breath is honored,
                                             and practice becomes ritual.
                                         </p>
                                         <p>
-                                            Rooted in Abu Dhabi, we bring Reformer Pilates, breath-led practices, and recovery
+                                            Rooted in Abu Dhabi, we bring Reformer Pilates, mat classes, contrast therapy and massage
                                             into one considered experience. Every class is designed with intention —
                                             to build strength without force, to restore without escape, and to reconnect you to
                                             yourself through consistency, not urgency.

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Services | Pilates, Yoga, Contrast Therapy, Recovery & Massage',
+  title: 'Services | Pilates, Contrast Therapy, Recovery & Massage',
   description:
     'Explore all TAVÚ services — Reformer Pilates, Breathing Room, Contrast Therapy, NormaTec Compression Therapy and Massage in Al Raha, Abu Dhabi.',
   alternates: { canonical: '/services' },
