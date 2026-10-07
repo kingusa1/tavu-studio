@@ -122,7 +122,7 @@ export default function MassagePage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-massage-towels.webp"
+                        src="/gallery-sauna-salt.webp"
                         alt="TAVÚ spa facilities"
                         fill
                         className="object-cover"
