@@ -43,7 +43,7 @@ const services = [
         description: 'Therapeutic and relaxation massage by certified therapists. From stress relief to deep tissue work, find the perfect treatment for your needs.',
         image: '/service-massage-towels.webp',
         link: '/services/massage',
-        features: ['45-60 minutes', 'Multiple styles', 'Ladies only'],
+        features: ['60 or 90 minutes', 'Multiple styles', 'Ladies only'],
         accent: 'from-rose-500/20'
     }
 ];
