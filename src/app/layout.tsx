@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     default: 'TAVÚ | Abu Dhabi\'s First Private Reformer Pilates & Contrast Therapy Studio',
     template: '%s | TAVÚ Studio',
   },
-  description: 'TAVÚ — Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat classes, breathwork, sauna + ice bath, NormaTec compression, massage & IV therapy in Al Raha.',
+  description: 'TAVÚ — Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat classes, breathwork, sauna + ice bath, NormaTec compression & massage in Al Raha.',
   keywords: [
     'Reformer Pilates Abu Dhabi',
     'Contrast Therapy Abu Dhabi',
@@ -36,7 +36,6 @@ export const metadata: Metadata = {
     'Pilates Al Raha',
     'Wellness Studio Abu Dhabi',
     'NormaTec Abu Dhabi',
-    'IV Therapy Abu Dhabi',
     'Massage Abu Dhabi',
     'Breathwork Abu Dhabi',
     'TAVU Studio',
@@ -135,7 +134,7 @@ export default function RootLayout({
               '@type': 'HealthClub',
               name: 'TAVÚ Studio',
               alternateName: 'TAVU Studio',
-              description: 'Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, breathwork, sauna + ice bath, NormaTec compression, massage and IV therapy.',
+              description: 'Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, breathwork, sauna + ice bath, NormaTec compression and massage.',
               url: 'https://tavustudio.com',
               logo: 'https://tavustudio.com/logo.png',
               image: 'https://tavustudio.com/opengraph-image.png',
@@ -206,18 +205,38 @@ export default function RootLayout({
                     priceCurrency: 'AED',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Contrast Therapy — Drop-In',
-                      description: '60-minute infrared sauna and ice bath session.',
+                      name: 'Contrast Therapy — Individual Drop-In',
+                      description: 'A 60-minute Contrast Therapy session for one, private or shared, combining sauna heat and a 5–8°C cold plunge.',
                     },
                   },
                   {
                     '@type': 'Offer',
-                    price: '275',
+                    price: '456',
                     priceCurrency: 'AED',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Private Contrast Therapy — Drop-In',
-                      description: 'Infrared sauna and ice bath in a private suite.',
+                      name: 'Contrast Therapy — Couple',
+                      description: 'A 60-minute Contrast Therapy session for two, private or shared.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '600',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Contrast Therapy — Trio',
+                      description: 'A 60-minute Contrast Therapy session for three, private or shared.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    price: '1050',
+                    priceCurrency: 'AED',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Contrast Therapy — Group (up to 6 guests)',
+                      description: 'A 60-minute Contrast Therapy experience for groups of up to six, private or shared.',
                     },
                   },
                   {
@@ -226,8 +245,8 @@ export default function RootLayout({
                     priceCurrency: 'AED',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Compression Therapy (NormaTec)',
-                      description: '45-minute pulsing compression session to stimulate circulation and support muscle recovery.',
+                      name: 'NormaTec Compression Therapy — Individual Session',
+                      description: 'A 45-minute Compression Therapy session designed to support circulation, reduce muscle fatigue, and promote recovery through targeted compression. Valid for 7 days.',
                     },
                   },
                   {
@@ -236,8 +255,8 @@ export default function RootLayout({
                     priceCurrency: 'AED',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Nomadic Recovery Pack (5+1)',
-                      description: 'Five 45-minute Nomadic Compression Therapy sessions plus one complimentary 45-minute Compression Therapy session. Six sessions total, valid for 45 days. Non-transferable and non-refundable.',
+                      name: 'NormaTec Recovery Pack (5+1)',
+                      description: 'A recovery pack for consistent care, including five 45-minute Compression Therapy sessions plus one complimentary session. Six sessions total, valid for 45 days. Non-transferable and non-refundable.',
                     },
                   },
                   {
@@ -249,27 +268,19 @@ export default function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'Massage (Ladies Only)',
-                      description: 'FLOW Relaxation, RELEASE Deep Tissue, RECOVER Sports and DRAIN Lymphatic full-body rituals, targeted recovery rituals, ROOTED foot reflexology and the 3-hour Recovery Escape. Ritual Packs 5 + 1 included.',
+                      description: 'FLOW Relaxation, RELEASE Deep Tissue, RECOVER Sports and DRAIN Lymphatic full-body rituals (60 or 90 minutes), targeted recovery rituals, ROOTED foot reflexology and the 3-hour Recovery Escape. Ritual Packs 5 + 1 included.',
                     },
                   },
                   {
                     '@type': 'AggregateOffer',
-                    lowPrice: '1650',
-                    highPrice: '1850',
+                    lowPrice: '820',
+                    highPrice: '1390',
                     priceCurrency: 'AED',
-                    offerCount: '3',
+                    offerCount: '2',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Wellness Memberships (3, 6 & 12 Months)',
-                      description: 'Reformer up to 4x/week, unlimited mat classes, Contrast Therapy up to 3x/week, 20% off add-ons.',
-                    },
-                  },
-                  {
-                    '@type': 'Offer',
-                    itemOffered: {
-                      '@type': 'Service',
-                      name: 'IV Therapy',
-                      description: 'Intravenous vitamin and hydration therapy.',
+                      name: 'Recovery Memberships (Reset & Ritual Unlimited)',
+                      description: 'Reset Membership AED 820 (valid 30 days): 4 Contrast Therapy sessions, 1 Compression Therapy session, a complimentary chair massage. Ritual Unlimited Membership AED 1,390 (valid 45 days): Contrast Therapy with 2 Compression Therapy sessions and 2 complimentary chair massages. Choice of Main or Private Contrast.',
                     },
                   },
                 ],

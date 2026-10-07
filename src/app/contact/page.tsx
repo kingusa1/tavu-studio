@@ -82,7 +82,7 @@ export default function ContactPage() {
                                 {/* Info Grid */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <motion.a
-                                        href="https://share.google/H65MSpZCTdk6RSqrH"
+                                        href="https://maps.app.goo.gl/Xg1JCDsDxwxMkjad9?g_st=ic"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="bg-card/60 backdrop-blur-sm border border-border/30 rounded-2xl p-5 hover:border-accent/30 transition-all group"

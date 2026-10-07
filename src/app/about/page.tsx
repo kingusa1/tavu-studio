@@ -13,10 +13,9 @@ const gallery = [
     { src: '/service-sauna.webp', alt: 'Himalayan salt sauna interior' },
     { src: '/hero-ice-baths.webp', alt: 'Contrast Therapy ice baths at TAVÚ' },
     { src: '/about-lounge.webp', alt: 'TAVÚ arched stone lounge' },
-    { src: '/service-breathing-shelf.webp', alt: 'Breathing Room equipment shelf' },
-    { src: '/amenity-bathroom.webp', alt: 'TAVÚ facilities — organic stone basins' },
-    { src: '/about-brand.webp', alt: 'TAVÚ branded amenities tray' },
-    { src: '/amenity-cafe.webp', alt: 'TAVÚ café bar' },
+    { src: '/gallery-breathing-room.webp', alt: 'The TAVÚ Breathing Room with mats, arched mirror and warm light' },
+    { src: '/gallery-sauna-infrared.webp', alt: 'Guest relaxing in the TAVÚ infrared sauna' },
+    { src: '/gallery-sauna-salt.webp', alt: 'Guest resting in the TAVÚ Himalayan salt sauna' },
 ];
 
 export default function AboutPage() {
@@ -43,8 +42,11 @@ export default function AboutPage() {
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                             Our Story
                         </span>
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">About TAVÚ</h1>
-                        <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">A room built for return</h1>
+                        <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-4">
+                            Reformer Pilates and contrast therapy, held as one ritual. The first of its kind in Abu Dhabi.
+                        </p>
+                        <p className="text-lg md:text-xl text-white/80 leading-relaxed">
                             TA grounds the body. VU lifts the spirit.
                         </p>
                     </MotionWrapper>
@@ -61,11 +63,13 @@ export default function AboutPage() {
                                     The Philosophy
                                 </span>
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mb-4">
-                                    Two halves, one whole
+                                    From stillness into motion
                                 </h2>
-                                <p className="text-lg text-foreground/70">
-                                    TAVÚ is built on a simple duality — a grounded body and an elevated spirit.
-                                </p>
+                                <div className="space-y-3 text-lg text-foreground/70">
+                                    <p>TA is the grounding. Reformer and Mat bring the body back to itself.</p>
+                                    <p>VÚ is the rise. Contrast and massage restore, release, and renew.</p>
+                                    <p>The ritual is the passage between them — and what the body learns there, it keeps.</p>
+                                </div>
                             </div>
                         </MotionWrapper>
 
@@ -74,8 +78,8 @@ export default function AboutPage() {
                             <MotionWrapper delay={0.1} direction="left">
                                 <div className="group relative rounded-3xl overflow-hidden h-[520px] shadow-2xl">
                                     <Image
-                                        src="/service-reformer-mirror.webp"
-                                        alt="TA — Reformer Pilates grounding the body"
+                                        src="/ta-grounds-reformer.webp"
+                                        alt="TA — the TAVÚ Reformer studio, grounding the body"
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         sizes="(max-width: 768px) 100vw, 50vw"
@@ -183,7 +187,7 @@ export default function AboutPage() {
                             </div>
                         </MotionWrapper>
 
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
                             {gallery.map((img, i) => (
                                 <MotionWrapper key={i} delay={0.05 * i} direction="up">
                                     <div className="relative aspect-square overflow-hidden rounded-2xl group">
@@ -192,7 +196,7 @@ export default function AboutPage() {
                                             alt={img.alt}
                                             fill
                                             className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                            sizes="(max-width: 768px) 50vw, 25vw"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </div>

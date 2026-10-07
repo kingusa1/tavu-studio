@@ -15,7 +15,6 @@ const reformerPackages = [
 const breathingPackages = [
     { name: 'Drop-In', price: '120', description: 'Single session valid for any class (Mat Pilates, Mobility, Yoga, Breathwork, Yin).', note: 'Non-transferable & non-refundable' },
     { name: '5-Class Pack', price: '550', description: 'Valid 30 days from first use. Perfect for weekly consistency.' },
-    { name: 'Unlimited 3-Month Membership', price: '2,400', description: 'Unlimited access to all Breathing Room classes. Paid upfront for a 3-month commitment (AED 800/month value).', note: 'Valid for 3 consecutive months \u00b7 Non-transferable \u00b7 Non-refundable \u00b7 No rollovers' },
 ];
 
 const unlimitedMembershipIncludes = [
@@ -29,27 +28,22 @@ const unlimitedMembershipIncludes = [
     'No rollovers',
 ];
 
-const recoveryPackIncludes = [
-    '5 × 45-minute Nomadic Compression Therapy Sessions',
-    '1 Complimentary 45-minute Compression Therapy Session',
-    'Total: 6 Sessions',
-    'Valid for 45 days',
-];
-
 const contrastPackages = [
-    { name: 'Drop-In', price: '275', description: '60-minute session (Sauna + Ice Bath). Towels & amenities.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
+    { name: 'Individual Drop-In', price: '275', duration: '60 min', description: 'A Contrast Therapy session for one, with the choice of a private or shared experience, combining sauna heat and a 5–8°C cold plunge to support recovery, circulation, and overall wellbeing.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
+    { name: 'Couple', price: '456', duration: '60 min', description: 'A 60-minute Contrast Therapy session for two, with the choice of a private or shared experience. Move together between sauna heat and cold immersion for a restorative recovery experience.' },
+    { name: 'Trio', price: '600', duration: '60 min', description: 'A 60-minute Contrast Therapy session for three, with the choice of a private or shared experience. Enjoy the heat-and-cold recovery ritual together, designed for a longer shared reset.' },
+    { name: 'Group', price: '1,050', duration: '60 min · Up to 6 guests', description: 'A 60-minute Contrast Therapy experience for groups of up to six, with the choice of a private or shared experience. A shared recovery ritual combining sauna heat and cold immersion.' },
     { name: '5-Pack', price: '990', description: 'Valid 30 days from first use.' },
     { name: '10-Pack', price: '1,850', description: 'Valid 45 days from first use.' },
-    { name: 'Private Contrast Drop-In', price: '275', description: 'Infrared Sauna + Ice Bath, private suite.' },
     { name: 'Private 5-Pack', price: '1,250', description: 'Valid 30 days.' },
     { name: 'Private 10-Pack', price: '2,300', description: 'Valid 45 days.' },
 ];
 
 const massageServices = [
-    { name: 'FLOW | Relaxation Massage', price: '350', description: 'Slow full-body ritual to soften tension, calm the nervous system and restore balance.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
-    { name: 'RELEASE | Deep Tissue Massage', price: '350', description: 'Deeper pressure to release muscular tightness, improve mobility and support recovery.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
-    { name: 'RECOVER | Sports Massage', price: '350', description: 'Therapeutic full-body massage for active bodies, targeting fatigue and restricted movement.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
-    { name: 'DRAIN | Lymphatic Massage', price: '450', description: 'Gentle treatment to support lymphatic drainage, reduce fluid retention and feel lighter.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 2,430 AED · Valid 45 days' },
+    { name: 'FLOW | Relaxation Massage', price: '350', description: 'Slow full-body ritual to soften tension, calm the nervous system and restore balance.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
+    { name: 'RELEASE | Deep Tissue Massage', price: '350', description: 'Deeper pressure to release muscular tightness, improve mobility and support recovery.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
+    { name: 'RECOVER | Sports Massage', price: '350', description: 'Therapeutic full-body massage for active bodies, targeting fatigue and restricted movement.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
+    { name: 'DRAIN | Lymphatic Massage', price: '450', description: 'Gentle treatment to support lymphatic drainage, reduce fluid retention and feel lighter.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 2,430 AED · Valid 45 days' },
     { name: 'RESET | Head, Neck & Shoulders', price: '300', description: 'Releases tension through the scalp, neck, shoulders and upper back.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
     { name: 'RECOVER | Deep Foot Recovery', price: '320', description: 'Therapeutic massage, percussion therapy and targeted pressure-point techniques.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,728 AED' },
     { name: 'RELEASE | Arm & Hand Recovery', price: '300', description: 'Relieves tightness through the hands, wrists, forearms and arms.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
@@ -69,17 +63,33 @@ const bundles = [
 ];
 
 const memberships = [
-    { name: '3 Months', price: '1,850', period: 'AED/month' },
-    { name: '6 Months', price: '1,750', period: 'AED/month' },
-    { name: '12 Months', price: '1,650', period: 'AED/month' },
-];
-
-const membershipIncludes = [
-    'Reformer (up to 4x/week)',
-    'Unlimited mat classes',
-    'Contrast (up to 3x/week)',
-    '20% off add-ons',
-    '1 VIP upgrade quarterly',
+    {
+        name: 'Reset Membership',
+        price: '820',
+        validity: 'Valid for 30 days',
+        description: 'Four Contrast Therapy sessions to use throughout the month whenever you need a reset.',
+        includes: [
+            '4 × Contrast Therapy sessions',
+            'Choice of Main or Private Contrast',
+            '1 × 30 minute Compression Therapy session',
+            '1 × complimentary 15-minute Head, Neck & Shoulder Chair Massage (subject to therapist availability)',
+            '10% off one Massage service',
+            'Bring one friend for AED 95 once during the membership',
+        ],
+    },
+    {
+        name: 'Ritual Unlimited Membership',
+        price: '1,390',
+        validity: 'Valid for 45 days',
+        description: 'Our most complete recovery membership, designed for those who want to make Contrast Therapy a consistent part of their routine.',
+        includes: [
+            '2 × 45 minute Compression Therapy sessions',
+            'Choice of Main or Private Contrast',
+            '10% off Massage services',
+            '2 complimentary Head, Neck + Shoulder Chair Massage (30 minutes)',
+            'Bring one friend for AED 95 once during the membership',
+        ],
+    },
 ];
 
 function PriceRow({ name, price, description, note, bonus, duration, period }: {
@@ -155,7 +165,7 @@ export default function PricingPage() {
                             </PricingCard>
                         </MotionWrapper>
                         <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Breathing Room" subtitle="Mat Pilates, Mobility, Yoga, Breathwork, Yin" bookLabel="Book Breathing Room" bookHref="/schedule">
+                            <PricingCard title="Breathing Room" subtitle="Mat Pilates, Mobility, Yoga, Breathwork, Yin" bookLabel="Book Your Mat" bookHref="/schedule">
                                 {breathingPackages.map((pkg, i) => (
                                     <PriceRow key={i} {...pkg} />
                                 ))}
@@ -198,9 +208,9 @@ export default function PricingPage() {
                                     <div className="p-5 rounded-xl bg-muted/30">
                                         <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Booking Policy</p>
                                         <p className="text-sm text-foreground/70 leading-relaxed">
-                                            To ensure fair access for all members, more than 3 late cancellations during
-                                            the membership period will result in a 1-week booking suspension, during
-                                            which new class bookings will not be permitted.
+                                            To ensure fair access for all members, 3 late cancellations within the same
+                                            week will result in a 1-week booking suspension, during which new class
+                                            bookings will not be permitted.
                                         </p>
                                     </div>
                                 </div>
@@ -210,7 +220,7 @@ export default function PricingPage() {
                                         href="/schedule"
                                         className="inline-flex items-center justify-center h-12 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
                                     >
-                                        Book Breathing Room
+                                        Book Your Mat
                                     </Link>
                                 </div>
                             </div>
@@ -227,13 +237,20 @@ export default function PricingPage() {
                             </PricingCard>
                         </MotionWrapper>
                         <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Compression Therapy" subtitle="Normatec" bookLabel="Book Compression" bookHref="/appointments">
-                                <PriceRow name="Normatec" price="160" description="A recovery-focused treatment using pulsing compression to stimulate circulation and support faster muscle recovery." duration="45 min" />
+                            <PricingCard title="Compression Therapy" subtitle="NormaTec" bookLabel="Book Compression" bookHref="/appointments">
                                 <PriceRow
-                                    name="Nomadic Recovery Pack (5+1)"
+                                    name="NormaTec Individual Session"
+                                    price="160"
+                                    description="A 45-minute Compression Therapy session designed to support circulation, reduce muscle fatigue, and promote recovery through targeted compression."
+                                    duration="45 min"
+                                    note="Validity: 7 days"
+                                />
+                                <PriceRow
+                                    name="NormaTec Recovery Pack — 5 + 1"
                                     price="660"
-                                    description="5 × 45-minute Nomadic Compression Therapy Sessions plus 1 complimentary 45-minute session."
-                                    bonus="Total: 6 Sessions · Valid for 45 days"
+                                    description="A recovery pack for consistent care, including five Compression Therapy sessions plus one complimentary session."
+                                    duration="6 × 45 min"
+                                    bonus="Total: 6 Sessions · Validity: 45 days"
                                     note="Non-transferable · Non-refundable"
                                 />
                                 <div className="p-4 rounded-xl bg-muted/20">
@@ -257,57 +274,6 @@ export default function PricingPage() {
                             </PricingCard>
                         </MotionWrapper>
                     </div>
-
-                    {/* Nomadic Recovery Pack — full terms */}
-                    <MotionWrapper delay={0.1} direction="up">
-                        <div className="bg-card border border-accent/30 rounded-2xl overflow-hidden mb-12">
-                            <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
-                                <h2 className="font-headline text-2xl mb-0.5">Nomadic Recovery Pack (5+1)</h2>
-                                <p className="text-sm text-primary-foreground/70">AED 660 · Compression Therapy</p>
-                            </div>
-                            <div className="p-6 md:p-8">
-                                <p className="text-base text-foreground/80 leading-relaxed mb-8">
-                                    Recover, recharge, and keep your body performing at its best with our Nomadic
-                                    Recovery Pack. Each 45-minute Compression Therapy session helps improve
-                                    circulation, reduce muscle soreness and swelling, and support faster recovery.
-                                </p>
-
-                                <div className="grid md:grid-cols-2 gap-8">
-                                    <div>
-                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Package Includes</p>
-                                        <ul className="space-y-2">
-                                            {recoveryPackIncludes.map((item, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
-                                                    <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="p-5 rounded-xl bg-muted/30">
-                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Please Note</p>
-                                        <ul className="space-y-2">
-                                            {['Non-transferable', 'Non-refundable'].map((item, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
-                                                    <span className="w-1 h-1 bg-foreground/60 rounded-full flex-shrink-0 mt-2" />
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div className="mt-8 text-center">
-                                    <Link
-                                        href="/appointments"
-                                        className="inline-flex items-center justify-center h-12 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
-                                    >
-                                        Book Recovery Pack
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </MotionWrapper>
 
                     {/* Massage & Bundles */}
                     <div className="grid lg:grid-cols-2 gap-8 mb-12">
@@ -334,27 +300,28 @@ export default function PricingPage() {
                                 <h2 className="font-headline text-2xl mb-0.5">Memberships</h2>
                             </div>
                             <div className="p-6">
-                                <div className="grid md:grid-cols-3 gap-4 mb-8">
-                                    {memberships.map((tier, i) => (
-                                        <div key={i} className="p-5 rounded-xl bg-muted/30 text-center">
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    {memberships.map((tier) => (
+                                        <div key={tier.name} className="p-5 rounded-xl bg-muted/30 flex flex-col">
                                             <p className="font-semibold text-primary text-lg mb-1">{tier.name}</p>
-                                            <p className="font-headline text-3xl text-accent">{tier.price}</p>
-                                            <p className="text-xs text-foreground/50">{tier.period}</p>
+                                            <p className="mb-3">
+                                                <span className="text-xs text-foreground/50 mr-1">AED</span>
+                                                <span className="font-headline text-3xl text-accent">{tier.price}</span>
+                                                <span className="text-xs text-foreground/50 ml-2">| {tier.validity}</span>
+                                            </p>
+                                            <p className="text-sm text-foreground/70 mb-4">{tier.description}</p>
+                                            <ul className="space-y-2">
+                                                {tier.includes.map((item) => (
+                                                    <li key={item} className="flex items-start gap-2 text-sm text-foreground/70">
+                                                        <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
                                         </div>
                                     ))}
-                                </div>
-                                <div className="max-w-md mx-auto">
-                                    <p className="text-sm font-medium text-primary mb-3 text-center">All Memberships Include:</p>
-                                    <ul className="space-y-2">
-                                        {membershipIncludes.map((item, i) => (
-                                            <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
-                                                <svg className="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
                                 </div>
                                 <div className="mt-6 text-center">
                                     <Link

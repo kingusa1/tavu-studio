@@ -36,7 +36,7 @@ export default function Contact() {
                                 <div>
                                     <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">Address</h3>
                                     <a
-                                        href="https://share.google/H65MSpZCTdk6RSqrH"
+                                        href="https://maps.app.goo.gl/Xg1JCDsDxwxMkjad9?g_st=ic"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-start gap-4 group"

@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   poweredByHeader: false,
+  // IV Therapy was removed from the service menu (client feedback, Oct 2026) — keep old links working.
+  async redirects() {
+    return [
+      { source: '/services/iv-therapy', destination: '/services', permanent: true },
+    ];
+  },
   compress: true,
   images: {
     formats: ['image/avif', 'image/webp'],

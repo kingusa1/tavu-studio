@@ -8,32 +8,33 @@ import Image from 'next/image';
 
 const membershipTiers = [
     {
-        name: '3 Months',
-        price: '1,850',
-        period: 'AED/month',
-        description: 'Quarterly commitment for consistent wellness',
+        name: 'Reset Membership',
+        price: '820',
+        validity: 'Valid for 30 days',
+        description: 'Four Contrast Therapy sessions to use throughout the month whenever you need a reset.',
+        includes: [
+            '4 × Contrast Therapy sessions',
+            'Choice of Main or Private Contrast',
+            '1 × 30 minute Compression Therapy session',
+            '1 × complimentary 15-minute Head, Neck & Shoulder Chair Massage (subject to therapist availability)',
+            '10% off one Massage service',
+            'Bring one friend for AED 95 once during the membership',
+        ],
     },
     {
-        name: '6 Months',
-        price: '1,750',
-        period: 'AED/month',
-        description: 'Half-year commitment with better value',
+        name: 'Ritual Unlimited Membership',
+        price: '1,390',
+        validity: 'Valid for 45 days',
+        description: 'Our most complete recovery membership, designed for those who want to make Contrast Therapy a consistent part of their routine.',
+        includes: [
+            '2 × 45 minute Compression Therapy sessions',
+            'Choice of Main or Private Contrast',
+            '10% off Massage services',
+            '2 complimentary Head, Neck + Shoulder Chair Massage (30 minutes)',
+            'Bring one friend for AED 95 once during the membership',
+        ],
         popular: true,
     },
-    {
-        name: '12 Months',
-        price: '1,650',
-        period: 'AED/month',
-        description: 'Best value for dedicated practitioners',
-    },
-];
-
-const membershipIncludes = [
-    'Reformer (up to 4x/week)',
-    'Unlimited mat classes',
-    'Contrast (up to 3x/week)',
-    '20% off add-ons',
-    '1 VIP upgrade quarterly',
 ];
 
 export default function MembershipsPage() {
@@ -47,7 +48,7 @@ export default function MembershipsPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/about-brand.webp"
+                        src="/gallery-sauna-salt.webp"
                         alt="TAVÚ Memberships"
                         fill
                         className="object-cover"
@@ -76,41 +77,36 @@ export default function MembershipsPage() {
                             </div>
                         </MotionWrapper>
 
-                        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                             {membershipTiers.map((tier, index) => (
                                 <MotionWrapper key={tier.name} delay={0.1 + index * 0.1} direction="up">
                                     <div className={`bg-card border ${tier.popular ? 'border-accent ring-2 ring-accent' : 'border-border'} p-8 rounded-2xl h-full flex flex-col`}>
                                         {tier.popular && (
                                             <span className="inline-block bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-semibold mb-4 self-start">
-                                                Best Value
+                                                Most Complete
                                             </span>
                                         )}
                                         <h3 className="text-2xl font-headline text-primary mb-2">{tier.name}</h3>
                                         <div className="mb-4">
+                                            <span className="text-sm text-foreground/60 mr-1">AED</span>
                                             <span className="text-4xl font-headline text-accent">{tier.price}</span>
-                                            <span className="text-sm text-foreground/60 ml-1">{tier.period}</span>
+                                            <span className="text-sm text-foreground/60 ml-2">| {tier.validity}</span>
                                         </div>
-                                        <p className="text-foreground/70">{tier.description}</p>
+                                        <p className="text-foreground/70 mb-6">{tier.description}</p>
+                                        <ul className="space-y-3 mt-auto">
+                                            {tier.includes.map((item) => (
+                                                <li key={item} className="flex items-start gap-3">
+                                                    <svg className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span className="text-foreground/70">{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </MotionWrapper>
                             ))}
                         </div>
-
-                        <MotionWrapper delay={0.4} direction="up">
-                            <div className="max-w-lg mx-auto mt-12 bg-card border border-border p-8 rounded-2xl">
-                                <h3 className="font-headline text-xl text-primary mb-4 text-center">All Memberships Include</h3>
-                                <ul className="space-y-3">
-                                    {membershipIncludes.map((item, i) => (
-                                        <li key={i} className="flex items-center gap-3">
-                                            <svg className="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                            </svg>
-                                            <span className="text-foreground/70">{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </MotionWrapper>
                     </div>
                 </section>
 

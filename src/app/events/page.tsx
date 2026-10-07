@@ -8,20 +8,12 @@ import Image from 'next/image';
 
 const upcomingEvents = [
     {
-        title: 'Soft Opening Celebration',
-        date: 'Coming Soon',
-        time: 'TBA',
-        description: 'Join us for the grand opening of TAVU Wellness Studio. Experience our facilities, meet our team, and enjoy exclusive founding member offers.',
-        category: 'Launch Event',
-        image: '/about-exterior.webp'
-    },
-    {
         title: 'Breathwork Workshop',
         date: 'Coming Soon',
         time: 'TBA',
         description: 'A deep dive into breathwork techniques for stress relief, improved focus, and enhanced athletic performance.',
         category: 'Workshop',
-        image: '/service-breathing-shelf.webp'
+        image: '/gallery-breathing-room.webp'
     },
     {
         title: 'Recovery Science Seminar',
@@ -35,20 +27,20 @@ const upcomingEvents = [
 
 const eventTypes = [
     {
-        title: 'Workshops',
-        description: 'Hands-on learning experiences focused on specific wellness techniques and practices',
+        title: 'Special Events & Collaborations',
+        description: 'Curated experiences created together with brands and partners who share our approach to wellbeing',
         icon: (
             <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
             </svg>
         )
     },
     {
-        title: 'Retreats',
-        description: 'Immersive multi-day experiences combining movement, recovery, and mindfulness',
+        title: 'Private Events',
+        description: 'Exclusive sessions for teams and groups, hosted privately at TAVÚ',
         icon: (
             <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
         )
     },
@@ -62,14 +54,66 @@ const eventTypes = [
         )
     },
     {
-        title: 'Guest Speakers',
-        description: 'Learn from wellness experts, athletes, and thought leaders in health and fitness',
+        title: 'Sound Healing',
+        description: 'Full Moon and New Moon sound healing sessions, with some events focused around Yin + Yang',
         icon: (
             <svg className="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
         )
     }
+];
+
+interface EventImage {
+    src: string;
+    alt: string;
+}
+
+interface Highlight {
+    title: string;
+    category: string;
+    description: string;
+    images: EventImage[];
+    logo?: EventImage;
+}
+
+// Real events, partnerships and community moments supplied by the TAVÚ team (Oct 2026 website feedback).
+const highlights: Highlight[] = [
+    {
+        title: 'ALO + TAVÚ',
+        category: 'Special Event · Collaboration',
+        description: 'A special collaboration between ALO and TAVÚ.',
+        images: [
+            { src: '/event-alo-1.webp', alt: 'ALO + TAVÚ collaboration — ALO gift bag and drink at TAVÚ' },
+            { src: '/event-alo-2.webp', alt: 'ALO + TAVÚ collaboration — ALO gifts laid out on a TAVÚ mat' },
+        ],
+        logo: { src: '/partner-alo-logo.webp', alt: 'ALO logo' },
+    },
+    {
+        title: 'Jiu-Jitsu Women’s Team',
+        category: 'Private Event',
+        description: 'The Jiu-Jitsu Women’s Team came to TAVÚ for a private event.',
+        images: [],
+        logo: { src: '/partner-uae-jiujitsu.webp', alt: 'UAE Jiu-Jitsu Federation logo' },
+    },
+    {
+        title: 'BeyondLeFifth Running Club',
+        category: 'Community Gathering',
+        description: 'Our running club collaboration with BeyondLeFifth.',
+        images: [
+            { src: '/event-beyondlefifth-1.webp', alt: 'BeyondLeFifth running club gathering outside TAVÚ' },
+            { src: '/event-beyondlefifth-2.webp', alt: 'BeyondLeFifth runners meeting in front of the TAVÚ studio' },
+        ],
+    },
+    {
+        title: 'Sound Healing',
+        category: 'Full Moon · New Moon',
+        description: 'Full Moon Sound Healing and New Moon Sound Healing. Some events are also specially focused around Yin + Yang.',
+        images: [
+            { src: '/event-sound-healing-1.webp', alt: 'Sound healing set-up with gongs and singing bowls at TAVÚ' },
+            { src: '/event-sound-healing-2.webp', alt: 'Candle-lit sound healing mats in the TAVÚ Breathing Room' },
+        ],
+    },
 ];
 
 export default function EventsPage() {
@@ -95,7 +139,7 @@ export default function EventsPage() {
                     <MotionWrapper delay={0} direction="up">
                         <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Events</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-                            Workshops, seminars, and community gatherings to deepen your practice
+                            Special events, collaborations, and community gatherings to deepen your practice
                         </p>
                     </MotionWrapper>
                 </div>
@@ -164,6 +208,64 @@ export default function EventsPage() {
                                         </div>
                                         <h3 className="text-xl font-headline text-primary mb-2">{type.title}</h3>
                                         <p className="text-sm text-foreground/70">{type.description}</p>
+                                    </div>
+                                </MotionWrapper>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Events, Partnerships & Community */}
+                <section className="py-20 lg:py-28 bg-background">
+                    <div className="container mx-auto px-4">
+                        <MotionWrapper delay={0.1} direction="up">
+                            <div className="text-center mb-16">
+                                <span className="text-accent font-medium text-sm tracking-wider uppercase">Collaborations</span>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2">Events, Partnerships &amp; Community</h2>
+                            </div>
+                        </MotionWrapper>
+
+                        <div className="space-y-10 max-w-6xl mx-auto">
+                            {highlights.map((item, index) => (
+                                <MotionWrapper key={item.title} delay={0.1 + index * 0.05} direction="up">
+                                    <div className="bg-card border border-border rounded-2xl overflow-hidden">
+                                        <div className={`grid gap-0 ${item.images.length > 0 ? 'md:grid-cols-5' : 'md:grid-cols-3'}`}>
+                                            <div className={`${item.images.length > 0 ? 'md:col-span-3' : 'md:col-span-1'} ${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                                                {item.images.length > 0 ? (
+                                                    <div className="grid grid-cols-2 gap-1 h-full">
+                                                        {item.images.map((img) => (
+                                                            <div key={img.src} className="relative aspect-[4/5] md:aspect-auto md:min-h-[360px]">
+                                                                <Image
+                                                                    src={img.src}
+                                                                    alt={img.alt}
+                                                                    fill
+                                                                    className="object-cover"
+                                                                    sizes="(max-width: 768px) 50vw, 30vw"
+                                                                />
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                ) : item.logo ? (
+                                                    <div className="relative h-full min-h-[220px] bg-white flex items-center justify-center p-8">
+                                                        <div className="relative w-48 h-40">
+                                                            <Image src={item.logo.src} alt={item.logo.alt} fill className="object-contain" sizes="192px" />
+                                                        </div>
+                                                    </div>
+                                                ) : null}
+                                            </div>
+                                            <div className="md:col-span-2 p-6 md:p-10 flex flex-col justify-center">
+                                                {item.images.length > 0 && item.logo && (
+                                                    <div className="relative w-14 h-14 mb-4">
+                                                        <Image src={item.logo.src} alt={item.logo.alt} fill className="object-contain" sizes="56px" />
+                                                    </div>
+                                                )}
+                                                <span className="inline-block self-start bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium mb-3">
+                                                    {item.category}
+                                                </span>
+                                                <h3 className="text-2xl md:text-3xl font-headline text-primary mb-3">{item.title}</h3>
+                                                <p className="text-foreground/70 leading-relaxed">{item.description}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </MotionWrapper>
                             ))}
