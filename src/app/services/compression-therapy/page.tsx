@@ -22,7 +22,7 @@ const recommendedFor = [
 ];
 
 const recoveryPackIncludes = [
-    '5 × 45-minute Nomadic Compression Therapy Sessions',
+    '5 × 45-minute NormaTec Compression Therapy Sessions',
     '1 Complimentary 45-minute Compression Therapy Session',
     'Total: 6 Sessions',
     'Valid for 45 days',
@@ -100,7 +100,7 @@ export default function CompressionTherapyPage() {
                                     <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                                         <p className="text-sm uppercase tracking-[0.2em] text-accent font-medium mb-2">TAVÚ</p>
                                         <h3 className="text-2xl md:text-3xl font-headline text-white mb-1">NormaTec</h3>
-                                        <h3 className="text-2xl md:text-3xl font-headline italic font-light text-white/90 mb-4">Compression</h3>
+                                        <h3 className="text-2xl md:text-3xl font-headline italic font-light text-white/90 mb-4">Compression Therapy</h3>
                                         <ul className="space-y-1.5">
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
@@ -139,8 +139,8 @@ export default function CompressionTherapyPage() {
                             <div className="bg-card border border-border rounded-2xl p-8 shadow-xl h-full">
                                 <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                                     <div>
-                                        <h3 className="font-headline text-2xl text-primary">NormaTec</h3>
-                                        <p className="text-sm text-foreground/60 mt-1">45 minutes</p>
+                                        <h3 className="font-headline text-2xl text-primary">Individual Session</h3>
+                                        <p className="text-sm text-foreground/60 mt-1">45 Minutes · Valid 7 Days</p>
                                     </div>
                                     <div className="text-right flex-shrink-0">
                                         <p className="font-headline text-3xl text-accent">160</p>
@@ -149,8 +149,8 @@ export default function CompressionTherapyPage() {
                                 </div>
 
                                 <p className="text-sm text-foreground/70 mb-6">
-                                    A recovery-focused treatment using pulsing compression to stimulate circulation
-                                    and support faster muscle recovery.
+                                    A 45-minute Compression Therapy session designed to support circulation,
+                                    reduce muscle fatigue, and promote recovery through targeted compression.
                                 </p>
 
                                 <div className="mb-5">
@@ -186,12 +186,12 @@ export default function CompressionTherapyPage() {
                             </div>
                         </MotionWrapper>
 
-                        {/* Nomadic Recovery Pack */}
+                        {/* NormaTec Recovery Pack */}
                         <MotionWrapper delay={0.3} direction="up">
                             <div className="bg-card border border-accent/30 rounded-2xl p-8 shadow-xl h-full">
                                 <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                                     <div>
-                                        <h3 className="font-headline text-2xl text-primary">Nomadic Recovery Pack (5+1)</h3>
+                                        <h3 className="font-headline text-2xl text-primary">Recovery Pack — 5 + 1</h3>
                                         <p className="text-sm text-foreground/60 mt-1">Compression Therapy</p>
                                     </div>
                                     <div className="text-right flex-shrink-0">
@@ -201,9 +201,8 @@ export default function CompressionTherapyPage() {
                                 </div>
 
                                 <p className="text-sm text-foreground/70 mb-6">
-                                    Recover, recharge, and keep your body performing at its best with our Nomadic
-                                    Recovery Pack. Each 45-minute Compression Therapy session helps improve circulation,
-                                    reduce muscle soreness and swelling, and support faster recovery.
+                                    A recovery pack for consistent care, including five Compression Therapy sessions
+                                    plus one complimentary session.
                                 </p>
 
                                 <div className="mb-5">

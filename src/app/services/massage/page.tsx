@@ -13,6 +13,8 @@ const fullBodyRituals = [
         description: 'A slow, full-body ritual designed to soften muscular tension, calm the nervous system and return the body to balance.',
         duration: '60 Minutes',
         price: '350 AED',
+        duration90: '90 Minutes',
+        price90: '500 AED',
         pack: 'Ritual Pack | 5 + 1 Included — 1,890 AED',
         packNote: 'Six-session value 2,100 AED · Valid for 45 days',
         benefits: ['Softens muscular tension', 'Calms the nervous system', 'Returns the body to balance'],
@@ -22,6 +24,8 @@ const fullBodyRituals = [
         description: 'A focused, full-body treatment using deeper pressure to release muscular tightness, improve mobility and support recovery.',
         duration: '60 Minutes',
         price: '350 AED',
+        duration90: '90 Minutes',
+        price90: '500 AED',
         pack: 'Ritual Pack | 5 + 1 Included — 1,890 AED',
         packNote: 'Six-session value 2,100 AED · Valid for 45 days',
         benefits: ['Releases muscular tightness', 'Improves mobility', 'Supports recovery'],
@@ -31,6 +35,8 @@ const fullBodyRituals = [
         description: 'A therapeutic full-body massage created for active bodies, targeting muscular fatigue, restricted movement and areas requiring deeper recovery.',
         duration: '60 Minutes',
         price: '350 AED',
+        duration90: '90 Minutes',
+        price90: '500 AED',
         pack: 'Ritual Pack | 5 + 1 Included — 1,890 AED',
         packNote: 'Six-session value 2,100 AED · Valid for 45 days',
         benefits: ['Targets muscular fatigue', 'Restores restricted movement', 'Created for active bodies'],
@@ -40,6 +46,8 @@ const fullBodyRituals = [
         description: 'A specialized, gentle treatment designed to support lymphatic drainage, reduce fluid retention and leave the body feeling lighter.',
         duration: '60 Minutes',
         price: '450 AED',
+        duration90: '90 Minutes',
+        price90: '500 AED',
         pack: 'Ritual Pack | 5 + 1 Included — 2,430 AED',
         packNote: 'Six-session value 2,700 AED · Valid for 45 days',
         benefits: ['Supports lymphatic drainage', 'Reduces fluid retention', 'Leaves the body feeling lighter'],
@@ -114,7 +122,7 @@ export default function MassagePage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/amenity-bathroom.webp"
+                        src="/service-massage-towels.webp"
                         alt="TAVÚ spa facilities"
                         fill
                         className="object-cover"
@@ -232,9 +240,15 @@ export default function MassagePage() {
                                         </ul>
                                         <div className="pt-4 border-t border-border">
                                             <div className="flex items-center justify-between mb-3">
-                                                <div>
-                                                    <p className="text-sm text-foreground/60">{service.duration}</p>
-                                                    <p className="font-semibold text-accent text-lg">{service.price}</p>
+                                                <div className="space-y-2">
+                                                    <div>
+                                                        <p className="text-sm text-foreground/60">{service.duration}</p>
+                                                        <p className="font-semibold text-accent text-lg">{service.price}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm text-foreground/60">{service.duration90}</p>
+                                                        <p className="font-semibold text-accent text-lg">{service.price90}</p>
+                                                    </div>
                                                 </div>
                                                 <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
                                                     Book →

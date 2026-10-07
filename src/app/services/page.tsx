@@ -39,14 +39,6 @@ const services = [
         accent: 'from-cyan-500/20'
     },
     {
-        name: 'IV Therapy',
-        description: 'Intravenous vitamin and hydration therapy for optimal wellness. Boost energy, enhance recovery, and support your immune system.',
-        image: '/about-lounge.webp',
-        link: '/services/iv-therapy',
-        features: ['30-45 minutes', 'Custom formulations', 'Medical supervision'],
-        accent: 'from-purple-500/20'
-    },
-    {
         name: 'Massage',
         description: 'Therapeutic and relaxation massage by certified therapists. From stress relief to deep tissue work, find the perfect treatment for your needs.',
         image: '/service-massage-towels.webp',

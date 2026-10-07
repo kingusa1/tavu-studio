@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Memberships | 3, 6 & 12-Month Wellness Plans',
+  title: 'Memberships | Reset & Ritual Unlimited',
   description:
-    'TAVÚ memberships: 3 months 1,850 AED/month, 6 months 1,750 AED/month, 12 months 1,650 AED/month. Reformer up to 4x/week, unlimited mat, Contrast up to 3x/week.',
+    'TAVÚ memberships: Reset 820 AED/30 days (4 Contrast, Compression Therapy, massage); Ritual Unlimited 1,390/45 days (Contrast, 2 Compression Therapy, massages).',
   keywords: [
-    'Pilates membership Abu Dhabi',
-    'Wellness membership Al Raha',
-    'Unlimited Pilates Abu Dhabi',
-    'Monthly Reformer',
+    'Reset membership Abu Dhabi',
+    'Ritual Unlimited membership',
+    'Contrast Therapy membership Al Raha',
+    'Wellness membership Abu Dhabi',
   ],
   alternates: { canonical: '/memberships' },
   openGraph: {
-    title: 'TAVÚ Memberships | Full-Access Wellness',
-    description: 'From 1,650 AED/month. Reformer, mat classes, Contrast Therapy and 20% off add-ons.',
+    title: 'TAVÚ Memberships | Reset & Ritual Unlimited',
+    description: 'Reset 820 AED and Ritual Unlimited 1,390 AED — Contrast Therapy, Compression Therapy and massage benefits.',
     url: '/memberships',
   },
 };

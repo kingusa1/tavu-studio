@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Compression Therapy (NormaTec) in Abu Dhabi',
   description:
-    'NormaTec compression therapy for faster recovery at TAVÚ in Al Raha, Abu Dhabi. 45-minute session, 160 AED. Boosts circulation, reduces swelling, flushes lactic acid.',
+    'NormaTec compression therapy for faster recovery at TAVÚ in Al Raha, Abu Dhabi. 45-minute session 160 AED, Recovery Pack (5+1) 660 AED. Boosts circulation, reduces swelling, flushes lactic acid.',
   keywords: [
     'NormaTec Abu Dhabi',
     'Compression Therapy Abu Dhabi',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Compression Therapy at TAVÚ | NormaTec Recovery',
     description:
-      'NormaTec pulsing compression for faster muscle recovery. 45 min — 160 AED.',
+      'NormaTec pulsing compression for faster muscle recovery. 45 min — 160 AED, Recovery Pack (5+1) 660 AED.',
     url: '/services/compression-therapy',
   },
 };

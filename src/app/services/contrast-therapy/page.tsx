@@ -7,40 +7,32 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const sharedPackages = [
+const sessions = [
     {
-        name: 'Drop-In',
+        name: 'Individual Drop-In',
         price: '275',
-        description: '60-minute session (Sauna + Ice Bath). Includes full access to sauna + Ice bath. Towels & amenities.',
+        duration: '60 Minutes',
+        description: 'A private Contrast Therapy session for one, combining sauna heat and a 5–8°C cold plunge to support recovery, circulation, and overall wellbeing.',
         note: 'Add-on: Compression Flush (20 min) — 50 AED',
     },
     {
-        name: '5-Pack',
-        price: '990',
-        description: 'Valid 30 days from first use.',
+        name: 'Couple',
+        price: '456',
+        duration: '60 Minutes',
+        description: 'A 60-minute Contrast Therapy session for two, with the choice of a private or shared experience. Move together between sauna heat and cold immersion for a restorative recovery experience.',
     },
     {
-        name: '10-Pack',
-        price: '1,850',
-        description: 'Valid 45 days from first use.',
-    },
-];
-
-const privatePackages = [
-    {
-        name: 'Private Contrast Drop-In',
-        price: '275',
-        description: 'Infrared Sauna + Ice Bath, private suite.',
+        name: 'Trio',
+        price: '600',
+        duration: '60 Minutes',
+        description: 'A 60-minute Contrast Therapy session for three, with the choice of a private or shared experience. Enjoy the heat-and-cold recovery ritual together, designed for a longer shared reset.',
     },
     {
-        name: 'Private 5-Pack',
-        price: '1,250',
-        description: 'Valid 30 days.',
-    },
-    {
-        name: 'Private 10-Pack',
-        price: '2,300',
-        description: 'Valid 45 days.',
+        name: 'Group',
+        price: '1,050',
+        duration: '60 Minutes',
+        guests: 'Up to 6 Guests',
+        description: 'A 60-minute Contrast Therapy experience for groups of up to six, with the choice of a private or shared experience. A shared recovery ritual combining sauna heat and cold immersion.',
     },
 ];
 
@@ -201,14 +193,14 @@ export default function ContrastTherapyPage() {
                     </div>
                 </section>
 
-                {/* Pricing - Shared */}
+                {/* Pricing - Sessions */}
                 <section className="py-20 bg-background">
                     <div className="container mx-auto px-4">
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Contrast Therapy</h2>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Sessions</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Shared sauna + ice bath. All prices include VAT.
+                                    Every session comes with the choice of a private or shared experience. All prices include VAT.
                                 </p>
                             </div>
                         </MotionWrapper>
@@ -217,10 +209,16 @@ export default function ContrastTherapyPage() {
                             <MotionWrapper delay={0.2} direction="up">
                                 <div className="bg-card border border-border rounded-2xl overflow-hidden">
                                     <div className="flex flex-col gap-4 p-6">
-                                        {sharedPackages.map((pkg, i) => (
+                                        {sessions.map((pkg, i) => (
                                             <div key={i} className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
                                                 <div className="flex-grow">
-                                                    <p className="font-semibold text-primary">{pkg.name}</p>
+                                                    <div className="flex items-center gap-2 flex-wrap">
+                                                        <p className="font-semibold text-primary">{pkg.name}</p>
+                                                        <span className="text-xs text-foreground/50">{pkg.duration}</span>
+                                                        {pkg.guests && (
+                                                            <span className="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded-full">{pkg.guests}</span>
+                                                        )}
+                                                    </div>
                                                     <p className="text-sm text-foreground/60 mt-1">{pkg.description}</p>
                                                     {pkg.note && (
                                                         <p className="text-xs text-accent font-medium mt-1.5">{pkg.note}</p>
@@ -243,49 +241,14 @@ export default function ContrastTherapyPage() {
                                     </div>
                                 </div>
                             </MotionWrapper>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Pricing - Private */}
-                <section className="py-20 bg-muted/30">
-                    <div className="container mx-auto px-4">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <div className="text-center mb-12">
-                                <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">Premium</span>
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Private Suite</h2>
-                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Infrared Sauna + Ice Bath in a private suite for a premium recovery experience.
+                            <MotionWrapper delay={0.25} direction="up">
+                                <p className="text-center text-sm text-foreground/60 mt-6">
+                                    Looking for regular sessions? See our{' '}
+                                    <Link href="/memberships" className="text-accent font-medium hover:underline">
+                                        Reset and Ritual Unlimited memberships
+                                    </Link>
+                                    .
                                 </p>
-                            </div>
-                        </MotionWrapper>
-
-                        <div className="max-w-2xl mx-auto">
-                            <MotionWrapper delay={0.2} direction="up">
-                                <div className="bg-card border border-border rounded-2xl overflow-hidden">
-                                    <div className="flex flex-col gap-4 p-6">
-                                        {privatePackages.map((pkg, i) => (
-                                            <div key={i} className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
-                                                <div className="flex-grow">
-                                                    <p className="font-semibold text-primary">{pkg.name}</p>
-                                                    <p className="text-sm text-foreground/60 mt-1">{pkg.description}</p>
-                                                </div>
-                                                <div className="text-right flex-shrink-0">
-                                                    <p className="font-headline text-xl text-accent">{pkg.price}</p>
-                                                    <p className="text-xs text-foreground/50">AED</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="px-6 pb-6">
-                                        <Link
-                                            href="/appointments"
-                                            className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
-                                        >
-                                            Book Private Suite
-                                        </Link>
-                                    </div>
-                                </div>
                             </MotionWrapper>
                         </div>
                     </div>

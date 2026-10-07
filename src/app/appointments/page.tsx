@@ -17,7 +17,7 @@ export default function AppointmentsPage() {
                         <div className="text-center mb-12">
                             <h1 className="text-4xl sm:text-5xl md:text-6xl font-headline mb-6 text-primary">Appointments</h1>
                             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                                Book one-on-one sessions — Contrast Therapy, Compression, Massage, IV Therapy and private appointments.
+                                Book one-on-one sessions — Contrast Therapy, Compression Therapy, Massage and private appointments.
                             </p>
                         </div>
                     </MotionWrapper>
@@ -34,7 +34,7 @@ export default function AppointmentsPage() {
                             <div className="bg-card border border-accent/30 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
                                 <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                                     <div>
-                                        <h3 className="font-headline text-2xl text-primary">Nomadic Recovery Pack (5+1)</h3>
+                                        <h3 className="font-headline text-2xl text-primary">NormaTec Recovery Pack (5+1)</h3>
                                         <p className="text-sm text-foreground/60 mt-1">Compression Therapy</p>
                                     </div>
                                     <div className="text-right flex-shrink-0">
@@ -44,9 +44,8 @@ export default function AppointmentsPage() {
                                 </div>
 
                                 <p className="text-sm text-foreground/70 mb-6">
-                                    Recover, recharge, and keep your body performing at its best with our Nomadic
-                                    Recovery Pack. Each 45-minute Compression Therapy session helps improve circulation,
-                                    reduce muscle soreness and swelling, and support faster recovery.
+                                    A recovery pack for consistent care, including five Compression Therapy sessions
+                                    plus one complimentary session.
                                 </p>
 
                                 <div className="grid md:grid-cols-2 gap-6">
@@ -54,7 +53,7 @@ export default function AppointmentsPage() {
                                         <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Package Includes</p>
                                         <ul className="space-y-2">
                                             {[
-                                                '5 × 45-minute Nomadic Compression Therapy Sessions',
+                                                '5 × 45-minute NormaTec Compression Therapy Sessions',
                                                 '1 Complimentary 45-minute Compression Therapy Session',
                                                 'Total: 6 Sessions',
                                                 'Valid for 45 days',

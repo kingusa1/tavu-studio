@@ -44,15 +44,6 @@ const services = [
         href: '/services/compression-therapy',
     },
     {
-        id: 'iv-therapy',
-        name: 'IV Therapy',
-        tagline: 'Replenish. Recharge. Glow.',
-        description: 'Vitamin and hydration infusions administered by licensed professionals to boost energy, immunity, and overall wellness.',
-        image: '/about-lounge.webp',
-        highlights: ['Vitamin infusions', 'Hydration therapy', 'Licensed professionals', 'Custom blends'],
-        href: '/services/iv-therapy',
-    },
-    {
         id: 'massage',
         name: 'Massage',
         tagline: 'Unwind. Heal. Breathe.',
