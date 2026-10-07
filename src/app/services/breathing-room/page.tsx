@@ -10,39 +10,70 @@ import Link from 'next/link';
 
 const classes = [
     {
-        name: 'TAVÚ FLOW',
-        tagline: 'Yin-to-Yang Yoga Ritual',
-        description: 'Blending deep grounding with gentle, breath-led flow. Find balance between stillness and movement.',
-        level: 'All Levels',
-        duration: '60 min'
+        family: 'TAVÚ MAT',
+        name: 'TAVÚ MAT: Core',
+        level: '',
+        description: 'A focused Mat Pilates class designed to strengthen the deep core, improve stability, and support better posture through controlled, intentional movement.'
     },
     {
-        name: 'TAVÚ RELEASE',
-        tagline: 'Myofascial & Yin Mobility',
-        description: 'Myofascial softening combined with Yin mobility to unwind tension and reset the body completely.',
-        level: 'All Levels',
-        duration: '60 min'
+        family: 'TAVÚ MAT',
+        name: 'TAVÚ MAT: Power Pulse',
+        level: 'Advanced',
+        description: 'A high-energy advanced Mat workout combining powerful movements, controlled pulses, and challenging sequences to build strength, endurance, and full-body control.'
     },
     {
-        name: 'TAVÚ CORE',
-        tagline: 'Mat Pilates Ritual',
-        description: 'Mat Pilates ritual mixing grounding alignment with dynamic core strength. Build your center.',
-        level: 'All Levels',
-        duration: '45 min'
+        family: 'TAVÚ MAT',
+        name: 'TAVÚ MAT: Sculpt',
+        level: 'Advanced',
+        description: 'An advanced Mat workout built around challenging sculpting sequences designed to strengthen, define, and fatigue the muscles while testing control, stability, and endurance.'
     },
     {
-        name: 'TAVÚ MOBILITY',
-        tagline: 'Mobility-Flow Ritual',
-        description: 'Open joints, expand range, and connect breath to movement. Unlock your body\'s full potential.',
-        level: 'All Levels',
-        duration: '45 min'
+        family: 'TAVÚ RELEASE',
+        name: 'TAVÚ RELEASE: Hip Reset',
+        level: '',
+        description: 'A targeted release class designed to open the hips, ease built-up tension, and restore mobility through a combination of gentle movement, stretching, and controlled mobility work.'
     },
     {
-        name: 'TAVÚ POWER',
-        tagline: 'Sculpting & Barre-Inspired',
-        description: 'Sculpting and barre-inspired ritual focused on heat, rhythm, and rising strength. Feel the burn.',
-        level: 'All Levels',
-        duration: '45 min'
+        family: 'TAVÚ RELEASE',
+        name: 'TAVÚ RELEASE: Lower Back Release',
+        level: '',
+        description: 'A gentle class focused on releasing tension through the lower back, hips, and surrounding muscles while improving mobility and encouraging comfortable, supported movement.'
+    },
+    {
+        family: 'TAVÚ RELEASE',
+        name: 'TAVÚ RELEASE: Stretch & Release',
+        level: '',
+        description: 'A calming full-body session combining gentle stretching and release work to reduce tension, improve mobility, and leave the body feeling lighter and more relaxed.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Backbends & Posture',
+        level: '',
+        description: 'A focused stretching class designed to open the chest, shoulders, spine, and hip flexors while building the mobility and control needed for backbends and improved posture.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Balance + Sculpt',
+        level: '',
+        description: 'A combination of balance work, controlled sculpting movements, and stretching designed to improve stability, coordination, strength, and flexibility.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Deep Core + Stretch',
+        level: '',
+        description: 'A balanced session combining deep core activation with full-body stretching to improve stability, posture, mobility, and overall body control.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Dynamic Stretching',
+        level: '',
+        description: 'An active stretching class using continuous, controlled movement to increase mobility, warm the body, and improve functional range of motion.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Split & Glutes',
+        level: '',
+        description: 'A targeted stretching session focused on the hips, glutes, and surrounding muscles to release tightness, improve mobility, and support better lower-body movement.'
     }
 ];
 
@@ -110,8 +141,8 @@ export default function BreathingRoomPage() {
                             <MotionWrapper delay={0.2} direction="right">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-breathing-shelf.webp"
-                                        alt="Breathing Room Studio"
+                                        src="/gallery-breathing-room.webp"
+                                        alt="The TAVÚ Breathing Room"
                                         fill
                                         className="object-cover"
                                     />
@@ -155,14 +186,15 @@ export default function BreathingRoomPage() {
                                     <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-all h-full flex flex-col">
                                         <div className="flex items-center justify-between mb-3">
                                             <h3 className="font-headline text-xl text-primary">{cls.name}</h3>
-                                            <span className="text-xs px-3 py-1 rounded-full font-medium border bg-sky-50 text-sky-700 border-sky-200">
-                                                {cls.level}
-                                            </span>
+                                            {cls.level && (
+                                                <span className="text-xs px-3 py-1 rounded-full font-medium border bg-rose-50 text-rose-700 border-rose-200">
+                                                    {cls.level}
+                                                </span>
+                                            )}
                                         </div>
-                                        <p className="text-sm font-medium text-accent mb-2">{cls.tagline}</p>
+                                        <p className="text-sm font-medium text-accent mb-2 uppercase tracking-wide text-xs">{cls.family}</p>
                                         <p className="text-sm text-foreground/70 flex-grow">{cls.description}</p>
-                                        <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
-                                            <span className="text-sm text-foreground/60">{cls.duration}</span>
+                                        <div className="flex items-center justify-end mt-4 pt-4 border-t border-border">
                                             <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
                                                 Book Now →
                                             </Link>
@@ -211,24 +243,13 @@ export default function BreathingRoomPage() {
                                             <p className="text-xs text-foreground/50">AED</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
-                                        <div>
-                                            <p className="font-semibold text-primary">Unlimited 3-Month Membership</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Unlimited access to all Breathing Room classes. Paid upfront for a 3-month commitment (AED 800/month value).</p>
-                                            <p className="text-xs text-foreground/40 mt-1">Valid for 3 consecutive months · Non-transferable · Non-refundable · No rollovers</p>
-                                        </div>
-                                        <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">2,400</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div className="px-6 pb-6">
                                     <Link
                                         href="/schedule"
                                         className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
                                     >
-                                        Book Breathing Room
+                                        Book Your Mat
                                     </Link>
                                 </div>
                             </div>
@@ -274,9 +295,9 @@ export default function BreathingRoomPage() {
                                     <div className="p-5 rounded-xl bg-muted/30">
                                         <p className="text-sm font-semibold text-primary mb-2 underline underline-offset-4">Booking Policy</p>
                                         <p className="text-sm text-foreground/70 leading-relaxed">
-                                            To ensure fair access for all members, more than 3 late cancellations during
-                                            the membership period will result in a 1-week booking suspension, during
-                                            which new class bookings will not be permitted.
+                                            To ensure fair access for all members, 3 late cancellations within the
+                                            same week will result in a 1-week booking suspension, during which new
+                                            class bookings will not be permitted.
                                         </p>
                                     </div>
                                 </div>

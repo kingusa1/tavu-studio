@@ -148,7 +148,7 @@ export default function Packages() {
                                     href="/schedule"
                                     className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
                                 >
-                                    Book Breathing Room
+                                    Book Your Mat
                                 </Link>
                             </div>
                         </div>

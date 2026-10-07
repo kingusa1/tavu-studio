@@ -9,61 +9,111 @@ import Image from 'next/image';
 
 const reformerClasses = [
     {
-        name: 'TA FORM',
-        tagline: 'Foundational Reformer Class',
-        description: 'Focused on alignment, breath, and grounding control. The perfect starting point for your reformer journey.',
-        level: 'Foundation'
+        name: 'TA: Gentle Flow',
+        level: 'All Levels',
+        description: 'A slower, controlled Reformer class focused on mindful movement, mobility, alignment, and full-body strength. Ideal for anyone looking for a gentler approach while still getting an effective workout.'
     },
     {
-        name: 'TA FLOW',
-        tagline: 'Breath-Led Reformer Flow',
-        description: 'Gentle, breath-led reformer flow rising from foundational movement. Smooth transitions meet mindful breathing.',
-        level: 'Foundation'
+        name: 'VÚ: Steady Strength',
+        level: 'Intermediate',
+        description: 'An intermediate Reformer class built around steady, controlled strength work. Expect purposeful resistance sequences that challenge the entire body while developing muscular endurance, stability, and control.'
     },
     {
-        name: 'VU ALIGN',
-        tagline: 'Precision & Alignment',
-        description: 'Stronger reformer sequencing focused on precision, alignment, and fluid strength. Build power with intention.',
-        level: 'Intermediate'
+        name: 'VÚ: Tone & Tighten',
+        level: 'Intermediate',
+        description: 'An intermediate full-body Reformer workout combining controlled resistance and targeted sculpting sequences to strengthen, tone, and challenge muscular endurance from head to toe.'
     },
     {
-        name: 'VU ELEVATE',
-        tagline: 'Dynamic Flow',
-        description: 'Dynamic reformer flow with expressive transitions and elevated strength. Push your limits with grace.',
-        level: 'Intermediate'
+        name: 'TAVÚ: Power Pulse',
+        level: 'Advanced',
+        description: 'A high-intensity advanced Reformer workout combining powerful resistance work, controlled pulses, and challenging transitions to test strength, endurance, stability, and control.'
     },
     {
-        name: 'PEAK VU',
-        tagline: 'Advanced Reformer Ritual',
-        description: 'Advanced reformer ritual with seamless transitions and refined control. The ultimate expression of mastery.',
-        level: 'Advanced'
+        name: 'Lower Body × Core',
+        level: '',
+        description: 'A targeted Reformer workout combining lower-body strength with focused core work. Expect controlled sequences for the glutes and legs alongside deep abdominal activation and stability training.'
+    },
+    {
+        name: 'Upper Body × Core',
+        level: '',
+        description: 'A focused Reformer workout targeting the arms, shoulders, back, and core through controlled resistance work designed to build upper-body strength, stability, and definition.'
     }
 ];
 
 const breathingClasses = [
     {
-        name: 'TAVÚ FLOW',
-        tagline: 'Yin-to-Yang Yoga Ritual',
-        description: 'Blending deep grounding with gentle, breath-led flow. Find balance between stillness and movement.',
-        level: 'All Levels'
+        family: 'TAVÚ MAT',
+        name: 'TAVÚ MAT: Core',
+        level: '',
+        description: 'A focused Mat Pilates class designed to strengthen the deep core, improve stability, and support better posture through controlled, intentional movement.'
     },
     {
-        name: 'TAVÚ RELEASE',
-        tagline: 'Myofascial & Yin Mobility',
-        description: 'Myofascial softening combined with Yin mobility to unwind tension and reset the body completely.',
-        level: 'All Levels'
+        family: 'TAVÚ MAT',
+        name: 'TAVÚ MAT: Power Pulse',
+        level: 'Advanced',
+        description: 'A high-energy advanced Mat workout combining powerful movements, controlled pulses, and challenging sequences to build strength, endurance, and full-body control.'
     },
     {
-        name: 'TAVÚ CORE',
-        tagline: 'Mat Pilates Ritual',
-        description: 'Mat Pilates ritual mixing grounding alignment with dynamic core strength. Build your center.',
-        level: 'All Levels'
+        family: 'TAVÚ MAT',
+        name: 'TAVÚ MAT: Sculpt',
+        level: 'Advanced',
+        description: 'An advanced Mat workout built around challenging sculpting sequences designed to strengthen, define, and fatigue the muscles while testing control, stability, and endurance.'
+    },
+    {
+        family: 'TAVÚ RELEASE',
+        name: 'TAVÚ RELEASE: Hip Reset',
+        level: '',
+        description: 'A targeted release class designed to open the hips, ease built-up tension, and restore mobility through a combination of gentle movement, stretching, and controlled mobility work.'
+    },
+    {
+        family: 'TAVÚ RELEASE',
+        name: 'TAVÚ RELEASE: Lower Back Release',
+        level: '',
+        description: 'A gentle class focused on releasing tension through the lower back, hips, and surrounding muscles while improving mobility and encouraging comfortable, supported movement.'
+    },
+    {
+        family: 'TAVÚ RELEASE',
+        name: 'TAVÚ RELEASE: Stretch & Release',
+        level: '',
+        description: 'A calming full-body session combining gentle stretching and release work to reduce tension, improve mobility, and leave the body feeling lighter and more relaxed.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Backbends & Posture',
+        level: '',
+        description: 'A focused stretching class designed to open the chest, shoulders, spine, and hip flexors while building the mobility and control needed for backbends and improved posture.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Balance + Sculpt',
+        level: '',
+        description: 'A combination of balance work, controlled sculpting movements, and stretching designed to improve stability, coordination, strength, and flexibility.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Deep Core + Stretch',
+        level: '',
+        description: 'A balanced session combining deep core activation with full-body stretching to improve stability, posture, mobility, and overall body control.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Dynamic Stretching',
+        level: '',
+        description: 'An active stretching class using continuous, controlled movement to increase mobility, warm the body, and improve functional range of motion.'
+    },
+    {
+        family: 'TAVÚ STRETCH',
+        name: 'TAVÚ STRETCH: Split & Glutes',
+        level: '',
+        description: 'A targeted stretching session focused on the hips, glutes, and surrounding muscles to release tightness, improve mobility, and support better lower-body movement.'
     }
 ];
 
 function getLevelColor(level: string) {
     switch (level) {
-        case 'Foundation': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        case 'Foundation':
+        case 'All Levels':
+            return 'bg-emerald-50 text-emerald-700 border-emerald-200';
         case 'Intermediate': return 'bg-amber-50 text-amber-700 border-amber-200';
         case 'Advanced': return 'bg-rose-50 text-rose-700 border-rose-200';
         default: return 'bg-sky-50 text-sky-700 border-sky-200';
@@ -169,18 +219,10 @@ export default function ClassesPage() {
                                             </div>
                                             <p className="font-headline text-lg text-accent">550 <span className="text-xs text-foreground/50">AED</span></p>
                                         </div>
-                                        <div className="flex justify-between items-start p-3 rounded-lg bg-muted/30">
-                                            <div>
-                                                <p className="font-semibold text-primary text-sm">Unlimited 3-Month Membership</p>
-                                                <p className="text-xs text-foreground/60 mt-0.5">Unlimited access to all Breathing Room classes. Paid upfront for a 3-month commitment (AED 800/month value)</p>
-                                                <p className="text-xs text-foreground/40 mt-0.5">Valid for 3 consecutive months · Non-transferable · Non-refundable · No rollovers</p>
-                                            </div>
-                                            <p className="font-headline text-lg text-accent whitespace-nowrap">2,400 <span className="text-xs text-foreground/50">AED</span></p>
-                                        </div>
                                     </div>
                                     <div className="px-5 pb-5">
                                         <Link href="/schedule" className="flex items-center justify-center w-full h-11 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-sm">
-                                            Book Breathing Room
+                                            Book Your Mat
                                         </Link>
                                     </div>
                                 </div>
@@ -229,9 +271,9 @@ export default function ClassesPage() {
                                         <div className="p-5 rounded-xl bg-muted/30">
                                             <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Booking Policy</p>
                                             <p className="text-sm text-foreground/70 leading-relaxed">
-                                                To ensure fair access for all members, more than 3 late cancellations
-                                                during the membership period will result in a 1-week booking suspension,
-                                                during which new class bookings will not be permitted.
+                                                To ensure fair access for all members, 3 late cancellations within the
+                                                same week will result in a 1-week booking suspension, during which new
+                                                class bookings will not be permitted.
                                             </p>
                                         </div>
                                     </div>
@@ -265,8 +307,8 @@ export default function ClassesPage() {
                             <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
                                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                                     <Image
-                                        src="/service-reformer-mirror.webp"
-                                        alt="Reformer Pilates Studio"
+                                        src="/reformer-room-new.webp"
+                                        alt="TAVÚ Reformer Room — client on the reformer"
                                         fill
                                         className="object-cover"
                                     />
@@ -298,11 +340,12 @@ export default function ClassesPage() {
                                     <div className="bg-card border border-border p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
                                         <div className="flex items-center justify-between mb-3">
                                             <h3 className="font-headline text-xl text-primary group-hover:text-accent transition-colors">{cls.name}</h3>
-                                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
-                                                {cls.level}
-                                            </span>
+                                            {cls.level && (
+                                                <span className={`text-xs px-2 py-0.5 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
+                                                    {cls.level}
+                                                </span>
+                                            )}
                                         </div>
-                                        <p className="text-sm font-medium text-accent mb-3 uppercase tracking-wide text-xs">{cls.tagline}</p>
                                         <p className="text-sm text-foreground/70 leading-relaxed flex-grow">{cls.description}</p>
                                         <Link
                                             href="/schedule"
@@ -357,11 +400,13 @@ export default function ClassesPage() {
                                     <div className="bg-card border border-border p-6 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
                                         <div className="flex items-center justify-between mb-2">
                                             <h3 className="font-semibold text-lg text-primary group-hover:text-accent transition-colors">{cls.name}</h3>
-                                            <span className={`text-xs px-2 py-1 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
-                                                {cls.level}
-                                            </span>
+                                            {cls.level && (
+                                                <span className={`text-xs px-2 py-1 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
+                                                    {cls.level}
+                                                </span>
+                                            )}
                                         </div>
-                                        <p className="text-sm font-medium text-accent mb-2">{cls.tagline}</p>
+                                        <p className="text-sm font-medium text-accent mb-2 uppercase tracking-wide text-xs">{cls.family}</p>
                                         <p className="text-sm text-foreground/70 flex-grow">{cls.description}</p>
                                         <Link
                                             href="/schedule"

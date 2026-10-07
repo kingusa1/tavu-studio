@@ -10,45 +10,48 @@ import Link from 'next/link';
 
 const classes = [
     {
-        name: 'TA FORM',
-        tagline: 'Foundational Reformer Class',
-        description: 'Focused on alignment, breath, and grounding control. The perfect starting point for your reformer journey.',
-        level: 'Foundation',
+        name: 'TA: Gentle Flow',
+        level: 'All Levels',
+        description: 'A slower, controlled Reformer class focused on mindful movement, mobility, alignment, and full-body strength. Ideal for anyone looking for a gentler approach while still getting an effective workout.',
         duration: '50 min'
     },
     {
-        name: 'TA FLOW',
-        tagline: 'Breath-Led Reformer Flow',
-        description: 'Gentle, breath-led reformer flow rising from foundational movement. Smooth transitions meet mindful breathing.',
-        level: 'Foundation',
-        duration: '50 min'
-    },
-    {
-        name: 'VU ALIGN',
-        tagline: 'Precision & Alignment',
-        description: 'Stronger reformer sequencing focused on precision, alignment, and fluid strength. Build power with intention.',
+        name: 'VÚ: Steady Strength',
         level: 'Intermediate',
+        description: 'An intermediate Reformer class built around steady, controlled strength work. Expect purposeful resistance sequences that challenge the entire body while developing muscular endurance, stability, and control.',
         duration: '50 min'
     },
     {
-        name: 'VU ELEVATE',
-        tagline: 'Dynamic Flow',
-        description: 'Dynamic reformer flow with expressive transitions and elevated strength. Push your limits with grace.',
+        name: 'VÚ: Tone & Tighten',
         level: 'Intermediate',
+        description: 'An intermediate full-body Reformer workout combining controlled resistance and targeted sculpting sequences to strengthen, tone, and challenge muscular endurance from head to toe.',
         duration: '50 min'
     },
     {
-        name: 'PEAK VU',
-        tagline: 'Advanced Reformer Ritual',
-        description: 'Advanced reformer ritual with seamless transitions and refined control. The ultimate expression of mastery.',
+        name: 'TAVÚ: Power Pulse',
         level: 'Advanced',
+        description: 'A high-intensity advanced Reformer workout combining powerful resistance work, controlled pulses, and challenging transitions to test strength, endurance, stability, and control.',
+        duration: '50 min'
+    },
+    {
+        name: 'Lower Body × Core',
+        level: '',
+        description: 'A targeted Reformer workout combining lower-body strength with focused core work. Expect controlled sequences for the glutes and legs alongside deep abdominal activation and stability training.',
+        duration: '50 min'
+    },
+    {
+        name: 'Upper Body × Core',
+        level: '',
+        description: 'A focused Reformer workout targeting the arms, shoulders, back, and core through controlled resistance work designed to build upper-body strength, stability, and definition.',
         duration: '50 min'
     }
 ];
 
 function getLevelColor(level: string) {
     switch (level) {
-        case 'Foundation': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        case 'Foundation':
+        case 'All Levels':
+            return 'bg-emerald-50 text-emerald-700 border-emerald-200';
         case 'Intermediate': return 'bg-amber-50 text-amber-700 border-amber-200';
         case 'Advanced': return 'bg-rose-50 text-rose-700 border-rose-200';
         default: return 'bg-sky-50 text-sky-700 border-sky-200';
@@ -164,11 +167,12 @@ export default function ReformerPilatesPage() {
                                     <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-all h-full flex flex-col">
                                         <div className="flex items-center justify-between mb-3">
                                             <h3 className="font-headline text-xl text-primary">{cls.name}</h3>
-                                            <span className={`text-xs px-3 py-1 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
-                                                {cls.level}
-                                            </span>
+                                            {cls.level && (
+                                                <span className={`text-xs px-3 py-1 rounded-full font-medium border ${getLevelColor(cls.level)}`}>
+                                                    {cls.level}
+                                                </span>
+                                            )}
                                         </div>
-                                        <p className="text-sm font-medium text-accent mb-2">{cls.tagline}</p>
                                         <p className="text-sm text-foreground/70 flex-grow">{cls.description}</p>
                                         <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
                                             <span className="text-sm text-foreground/60">{cls.duration}</span>
