@@ -8,7 +8,7 @@ import type { ComponentProps, ReactNode } from 'react';
 
 type LexicalRichTextProps = ComponentProps<typeof LexicalRichText>;
 
-export type RichTextPreset = 'inline' | 'legal';
+export type RichTextPreset = 'inline' | 'legal' | 'post';
 
 export type RichTextProps = {
   data: LexicalRichTextProps['data'];
