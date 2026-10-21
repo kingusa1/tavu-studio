@@ -282,8 +282,63 @@ export interface Policy {
  */
 export interface Event {
   id: number;
+  /**
+   * Event name, e.g. "Sound Healing".
+   */
   title: string;
   slug: string;
+  /**
+   * Upcoming shows in the "Upcoming Events" card. Highlight shows in "Events, Partnerships & Community".
+   */
+  kind: 'upcoming' | 'highlight';
+  /**
+   * Small pill text, e.g. "Sound Healing" or "Special Event · Collaboration".
+   */
+  categoryLabel?: string | null;
+  /**
+   * e.g. "Full Moon & New Moon".
+   */
+  dateLabel?: string | null;
+  /**
+   * e.g. "Dates to be announced". Upcoming events only.
+   */
+  timeLabel?: string | null;
+  /**
+   * Optional — used for sorting. Leave empty when the date is not yet fixed.
+   */
+  startDate?: string | null;
+  /**
+   * Optional. An Upcoming event whose end date has passed is hidden from the site automatically.
+   */
+  endDate?: string | null;
+  description?: string | null;
+  /**
+   * Up to 2 photos, shown side by side.
+   */
+  images?:
+    | {
+        image?: {
+          media?: (number | null) | Media;
+          /**
+           * Overrides the image's default alt text for this spot only
+           */
+          alt?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional partner/brand logo, e.g. ALO or UAE Jiu-Jitsu.
+   */
+  logo?: {
+    media?: (number | null) | Media;
+    /**
+     * Overrides the image's default alt text for this spot only
+     */
+    alt?: string | null;
+  };
+  active?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -304,8 +359,70 @@ export interface Testimonial {
  */
 export interface LegalPage {
   id: number;
+  /**
+   * Page heading, e.g. "Terms of Service".
+   */
   title: string;
-  slug: string;
+  slug: 'terms-of-service' | 'privacy-policy';
+  /**
+   * Shown as "Last Updated: {Month Year}".
+   */
+  lastUpdated?: string | null;
+  /**
+   * Numbered sections. Use Heading 2 for each numbered section, Heading 3 for sub-sections.
+   */
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * The contact box shown at the end of the last section.
+   */
+  contactCard?: {
+    enabled?: boolean | null;
+    organisationName?: string | null;
+    addressLines?:
+      | {
+          line?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Uses the email from Site Settings.
+     */
+    showEmail?: boolean | null;
+    /**
+     * Uses the WhatsApp number from Site Settings.
+     */
+    showWhatsapp?: boolean | null;
+    /**
+     * Optional, e.g. "Operating Hours: 9:00 AM – 9:00 PM, 7 days a week".
+     */
+    hoursNote?: string | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -521,6 +638,32 @@ export interface PoliciesSelect<T extends boolean = true> {
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  kind?: T;
+  categoryLabel?: T;
+  dateLabel?: T;
+  timeLabel?: T;
+  startDate?: T;
+  endDate?: T;
+  description?: T;
+  images?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        id?: T;
+      };
+  logo?:
+    | T
+    | {
+        media?: T;
+        alt?: T;
+      };
+  active?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -541,6 +684,34 @@ export interface TestimonialsSelect<T extends boolean = true> {
 export interface LegalPagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  lastUpdated?: T;
+  body?: T;
+  contactCard?:
+    | T
+    | {
+        enabled?: T;
+        organisationName?: T;
+        addressLines?:
+          | T
+          | {
+              line?: T;
+              id?: T;
+            };
+        showEmail?: T;
+        showWhatsapp?: T;
+        hoursNote?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1059,7 +1230,75 @@ export interface MassagePage {
  */
 export interface EventsPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    title?: string | null;
+    intro?: string | null;
+  };
+  upcoming?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    /**
+     * Shown only when there are zero upcoming events. Leave empty to hide the section in that case.
+     */
+    emptyText?: string | null;
+  };
+  eventTypes?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    items?:
+      | {
+          icon?: ('star' | 'lock' | 'users' | 'moon') | null;
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  highlights?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+  };
+  /**
+   * "Stay Updated" closing section.
+   */
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1069,7 +1308,90 @@ export interface EventsPage {
  */
 export interface PartnershipsPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    title?: string | null;
+    intro?: string | null;
+  };
+  types?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    items?:
+      | {
+          icon?: ('corporate' | 'sports' | 'hotels' | 'brand') | null;
+          title?: string | null;
+          description?: string | null;
+          features?:
+            | {
+                text?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whyPartner?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    eyebrow?: string | null;
+    heading?: string | null;
+    /**
+     * Numbered 1-4 automatically on the page (no icon).
+     */
+    items?:
+      | {
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * "Let's Work Together" closing section.
+   */
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1079,7 +1401,82 @@ export interface PartnershipsPage {
  */
 export interface ContactPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    eyebrow?: string | null;
+    /**
+     * e.g. "Let's" (plain weight).
+     */
+    headingLead?: string | null;
+    /**
+     * e.g. "Connect" (italic, light weight).
+     */
+    headingEmphasis?: string | null;
+    intro?: string | null;
+  };
+  imageCard?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    caption?: string | null;
+  };
+  /**
+   * Labels only — the address, hours, phone, email and WhatsApp values come from Site Settings.
+   */
+  tiles?: {
+    locationLabel?: string | null;
+    hoursLabel?: string | null;
+    phoneLabel?: string | null;
+    emailLabel?: string | null;
+    /**
+     * Chat button text, e.g. "Chat Now".
+     */
+    whatsappLabel?: string | null;
+  };
+  form?: {
+    nameLabel?: string | null;
+    namePlaceholder?: string | null;
+    emailLabel?: string | null;
+    emailPlaceholder?: string | null;
+    messageLabel?: string | null;
+    messagePlaceholder?: string | null;
+    submitLabel?: string | null;
+    submittingLabel?: string | null;
+    footnote?: string | null;
+    /**
+     * The WhatsApp message built on submit. Placeholders: {name} {email} {message}.
+     */
+    whatsappTemplate?: string | null;
+    /**
+     * Validation error messages.
+     */
+    errors?: {
+      name?: string | null;
+      email?: string | null;
+      message?: string | null;
+    };
+  };
+  /**
+   * The embed URL comes from Site Settings.
+   */
+  map?: {
+    title?: string | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1089,7 +1486,95 @@ export interface ContactPage {
  */
 export interface RegisterPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    eyebrow?: string | null;
+    title?: string | null;
+    intro?: string | null;
+  };
+  benefits?: {
+    heading?: string | null;
+    items?:
+      | {
+          icon?: ('instant-booking' | 'track-journey' | 'manage-packages' | 'exclusive-access') | null;
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  perks?: {
+    heading?: string | null;
+    items?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  formCard?: {
+    heading?: string | null;
+    text?: string | null;
+    signInPrompt?: string | null;
+    signInLink?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+  };
+  trustBadges?: {
+    items?:
+      | {
+          icon?: ('shield' | 'lock' | 'bolt') | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * "Ready to Transform Your Wellness?" closing section.
+   */
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  quickLinks?: {
+    items?:
+      | {
+          icon?: ('faq' | 'schedule' | 'about') | null;
+          title?: string | null;
+          text?: string | null;
+          href?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1099,7 +1584,100 @@ export interface RegisterPage {
  */
 export interface AccountPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    eyebrow?: string | null;
+    /**
+     * e.g. "Your" (plain weight).
+     */
+    headingLead?: string | null;
+    /**
+     * e.g. "Account" (italic, light weight).
+     */
+    headingEmphasis?: string | null;
+    intro?: string | null;
+  };
+  loginCard?: {
+    heading?: string | null;
+    subheading?: string | null;
+    /**
+     * Visible button text, e.g. "Sign In to Your Account".
+     */
+    signInLabel?: string | null;
+    /**
+     * Mindbody widget link text, e.g. "Sign In".
+     */
+    widgetInnerText?: string | null;
+    /**
+     * e.g. "or".
+     */
+    dividerLabel?: string | null;
+    createAccount?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    /**
+     * e.g. "Need help?".
+     */
+    helpPrefix?: string | null;
+    helpLink?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+  };
+  features?: {
+    heading?: string | null;
+    intro?: string | null;
+    items?:
+      | {
+          icon?: ('book-classes' | 'view-history' | 'manage-packages' | 'book-recovery') | null;
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Shaped like a CTA section, but each button also carries an icon (calendar/currency) — built manually rather than with the shared CTA helper.
+   */
+  quickActions?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          icon?: ('calendar' | 'currency') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  trustBadges?: {
+    items?:
+      | {
+          icon?: ('shield' | 'lock' | 'bolt') | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1580,7 +2158,76 @@ export interface MassagePageSelect<T extends boolean = true> {
  * via the `definition` "events-page_select".
  */
 export interface EventsPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        title?: T;
+        intro?: T;
+      };
+  upcoming?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        emptyText?: T;
+      };
+  eventTypes?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  highlights?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1590,7 +2237,88 @@ export interface EventsPageSelect<T extends boolean = true> {
  * via the `definition` "partnerships-page_select".
  */
 export interface PartnershipsPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        title?: T;
+        intro?: T;
+      };
+  types?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              features?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  whyPartner?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        eyebrow?: T;
+        heading?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1600,7 +2328,71 @@ export interface PartnershipsPageSelect<T extends boolean = true> {
  * via the `definition` "contact-page_select".
  */
 export interface ContactPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        headingLead?: T;
+        headingEmphasis?: T;
+        intro?: T;
+      };
+  imageCard?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        caption?: T;
+      };
+  tiles?:
+    | T
+    | {
+        locationLabel?: T;
+        hoursLabel?: T;
+        phoneLabel?: T;
+        emailLabel?: T;
+        whatsappLabel?: T;
+      };
+  form?:
+    | T
+    | {
+        nameLabel?: T;
+        namePlaceholder?: T;
+        emailLabel?: T;
+        emailPlaceholder?: T;
+        messageLabel?: T;
+        messagePlaceholder?: T;
+        submitLabel?: T;
+        submittingLabel?: T;
+        footnote?: T;
+        whatsappTemplate?: T;
+        errors?:
+          | T
+          | {
+              name?: T;
+              email?: T;
+              message?: T;
+            };
+      };
+  map?:
+    | T
+    | {
+        title?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1610,7 +2402,106 @@ export interface ContactPageSelect<T extends boolean = true> {
  * via the `definition` "register-page_select".
  */
 export interface RegisterPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+      };
+  benefits?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  perks?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  formCard?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        signInPrompt?: T;
+        signInLink?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+      };
+  trustBadges?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              icon?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  quickLinks?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              text?: T;
+              href?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1620,7 +2511,94 @@ export interface RegisterPageSelect<T extends boolean = true> {
  * via the `definition` "account-page_select".
  */
 export interface AccountPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        headingLead?: T;
+        headingEmphasis?: T;
+        intro?: T;
+      };
+  loginCard?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        signInLabel?: T;
+        widgetInnerText?: T;
+        dividerLabel?: T;
+        createAccount?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        helpPrefix?: T;
+        helpLink?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+      };
+  features?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  quickActions?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              icon?: T;
+              id?: T;
+            };
+      };
+  trustBadges?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              icon?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
