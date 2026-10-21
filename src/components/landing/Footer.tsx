@@ -1,29 +1,11 @@
 
+'use client';
+
+import { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const footerLinks = {
-  explore: [
-    { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
-    { href: '/classes', label: 'Classes' },
-  ],
-  connect: [
-    { href: '/memberships', label: 'Memberships' },
-    { href: '/events', label: 'Events' },
-    { href: '/partnerships', label: 'Partnerships' },
-    { href: '/contact', label: 'Contact' },
-  ],
-  book: [
-    { href: '/schedule', label: 'Book a Class' },
-    { href: '/pricing', label: 'Pricing' },
-    { href: '/register', label: 'Register' },
-  ],
-  legal: [
-    { href: '/privacy-policy', label: 'Privacy Policy' },
-    { href: '/terms-of-service', label: 'Terms of Service' },
-  ]
-};
+import { useSiteData } from '@/components/providers/SiteDataProvider';
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg
@@ -92,6 +74,9 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 );
 
 export default function Footer() {
+  const { footer, settings } = useSiteData();
+  const { social, location, contact, hours } = settings;
+
   return (
     <footer className="bg-primary text-primary-foreground pt-24 pb-12">
       <div className="container mx-auto px-6">
@@ -108,71 +93,69 @@ export default function Footer() {
                 className="h-10 w-auto brightness-0 invert"
               />
             </Link>
-            <p className="text-sm opacity-70 mb-2 max-w-xs leading-relaxed">
-              TA grounds the body. VU lifts the spirit.
-            </p>
-            <p className="text-sm opacity-70 mb-6 max-w-xs leading-relaxed">
-              TAVÚ is the space where both are practiced as one.
-            </p>
+            {(footer.taglineLines ?? []).map((line, index) => (
+              <p key={index} className="text-sm opacity-70 mb-2 max-w-xs leading-relaxed last:mb-6">
+                {line.line}
+              </p>
+            ))}
             <div className="flex gap-5">
-              <a href="https://instagram.com/tavuwellness.studio" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Instagram" className="opacity-60 hover:opacity-100 transition-opacity">
-                <InstagramIcon className="h-5 w-5" />
-              </a>
-              <a href="https://www.tiktok.com/@tavuwellness.studio" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on TikTok" className="opacity-60 hover:opacity-100 transition-opacity">
-                <TikTokIcon className="h-5 w-5" />
-              </a>
-              <a href="https://www.facebook.com/people/TAV%C3%9A-Wellness/61580985467215/" target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Facebook" className="opacity-60 hover:opacity-100 transition-opacity">
-                <FacebookIcon className="h-5 w-5" />
-              </a>
-              <a href="https://wa.me/971522755551" target="_blank" rel="noopener noreferrer" aria-label="Contact TAVÚ on WhatsApp" className="opacity-60 hover:opacity-100 transition-opacity">
-                <WhatsAppIcon className="h-5 w-5" />
-              </a>
+              {social.instagramUrl && (
+                <a href={social.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Instagram" className="opacity-60 hover:opacity-100 transition-opacity">
+                  <InstagramIcon className="h-5 w-5" />
+                </a>
+              )}
+              {social.tiktokUrl && (
+                <a href={social.tiktokUrl} target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on TikTok" className="opacity-60 hover:opacity-100 transition-opacity">
+                  <TikTokIcon className="h-5 w-5" />
+                </a>
+              )}
+              {social.facebookUrl && (
+                <a href={social.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Follow TAVÚ on Facebook" className="opacity-60 hover:opacity-100 transition-opacity">
+                  <FacebookIcon className="h-5 w-5" />
+                </a>
+              )}
+              {contact.whatsappNumber && (
+                <a href={`https://wa.me/${contact.whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="Contact TAVÚ on WhatsApp" className="opacity-60 hover:opacity-100 transition-opacity">
+                  <WhatsAppIcon className="h-5 w-5" />
+                </a>
+              )}
             </div>
           </div>
 
-          {/* Explore Column */}
-          <div>
-            <h4 className="font-headline text-sm font-semibold uppercase tracking-[0.2em] mb-6 opacity-50">Explore</h4>
-            <ul className="space-y-3">
-              {footerLinks.explore.map(link => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm opacity-70 hover:opacity-100 transition-opacity">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Connect Column */}
-          <div>
-            <h4 className="font-headline text-sm font-semibold uppercase tracking-[0.2em] mb-6 opacity-50">Connect</h4>
-            <ul className="space-y-3">
-              {footerLinks.connect.map(link => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-sm opacity-70 hover:opacity-100 transition-opacity">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Columns (Explore / Connect) */}
+          {(footer.columns ?? []).map((column, columnIndex) => (
+            <div key={columnIndex}>
+              <h4 className="font-headline text-sm font-semibold uppercase tracking-[0.2em] mb-6 opacity-50">{column.heading}</h4>
+              <ul className="space-y-3">
+                {(column.links ?? []).map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <Link href={link.href ?? '#'} className="text-sm opacity-70 hover:opacity-100 transition-opacity">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           {/* Visit Us Column */}
           <div>
-            <h4 className="font-headline text-sm font-semibold uppercase tracking-[0.2em] mb-6 opacity-50">Visit Us</h4>
+            <h4 className="font-headline text-sm font-semibold uppercase tracking-[0.2em] mb-6 opacity-50">{footer.visitUs?.heading}</h4>
             <a
-              href="https://maps.app.goo.gl/Xg1JCDsDxwxMkjad9?g_st=ic"
+              href={location.mapsUrl ?? undefined}
               target="_blank"
               rel="noopener noreferrer"
               className="not-italic text-sm opacity-70 leading-relaxed mb-2 block hover:opacity-100 transition-opacity"
             >
-              Shop 1, Crescent Residence<br />
-              Plot 12, Sector RBW4, Shatie Al Raha<br />
-              Abu Dhabi, UAE
+              {(location.addressLines ?? []).map((line, index) => (
+                <Fragment key={index}>
+                  {line.line}
+                  <br />
+                </Fragment>
+              ))}
             </a>
             <a
-              href="https://maps.app.goo.gl/Xg1JCDsDxwxMkjad9?g_st=ic"
+              href={location.mapsUrl ?? undefined}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm text-accent underline underline-offset-4 mb-4 hover:opacity-80 transition-opacity"
@@ -181,21 +164,25 @@ export default function Footer() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              View on Google Maps
+              {footer.visitUs?.mapsLinkLabel}
             </a>
             <a
-              href="tel:+971522755551"
+              href={contact.phoneE164 ? `tel:${contact.phoneE164}` : undefined}
               className="text-sm opacity-70 mb-2 block hover:opacity-100 transition-opacity"
             >
-              +971 52 275 5551
+              {contact.phoneDisplay}
             </a>
             <p className="text-sm opacity-70 mb-2">
-              connect@tavustudio.com
+              {contact.email}
             </p>
-            <p className="text-sm font-semibold opacity-90 mt-4 mb-1">Opening Hours</p>
+            <p className="text-sm font-semibold opacity-90 mt-4 mb-1">{footer.visitUs?.hoursHeading}</p>
             <p className="text-sm opacity-70">
-              Monday – Sunday<br />
-              9:00 AM – 9:00 PM
+              {(hours.displayLines ?? []).map((line, index) => (
+                <Fragment key={index}>
+                  {line.line}
+                  {index < (hours.displayLines?.length ?? 0) - 1 && <br />}
+                </Fragment>
+              ))}
             </p>
           </div>
         </div>
@@ -203,11 +190,12 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-xs opacity-40">
-            {new Date().getFullYear()} TAVÚ Wellness Studio. All rights reserved.
+            {/* {year} is already resolved by getGlobal()'s token pass (§4.5) before this prop arrives */}
+            {footer.copyright}
           </p>
           <div className="flex gap-8">
-            {footerLinks.legal.map(link => (
-              <Link key={link.href} href={link.href} className="text-xs opacity-40 hover:opacity-80 transition-opacity">
+            {(footer.legalLinks ?? []).map((link, index) => (
+              <Link key={index} href={link.href ?? '#'} className="text-xs opacity-40 hover:opacity-80 transition-opacity">
                 {link.label}
               </Link>
             ))}

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import { useSiteData } from "@/components/providers/SiteDataProvider";
+
 interface MindbodyWidgetProps {
   widgetType?: string;
   widgetId: string;
@@ -14,6 +16,8 @@ const BRANDED_WEB_SRC = "https://brandedweb.mindbodyonline.com/embed/widget.js";
 const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetProps) => {
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const pathname = usePathname();
+  const { settings } = useSiteData();
+  const whatsappNumber = settings.contact.whatsappNumber;
   const isHealCode = widgetType.toLowerCase() === "registrations";
   const scriptSrc = isHealCode ? HEALCODE_SRC : BRANDED_WEB_SRC;
 
@@ -92,7 +96,7 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
             Try Again
           </button>
           <a
-            href="https://wa.me/971522755551"
+            href={`https://wa.me/${whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contact TAVÚ on WhatsApp"

@@ -2,13 +2,19 @@
 
 import Image from 'next/image';
 
+import { useSiteData } from '@/components/providers/SiteDataProvider';
+
 export default function BackgroundImage() {
+  const { settings } = useSiteData();
+  const backgroundImage = settings.brand.backgroundImage;
+  const src = backgroundImage && typeof backgroundImage === 'object' && backgroundImage.url ? backgroundImage.url : '/background.webp';
+
   return (
     <div className="fixed inset-0 -z-10">
       {/* Background decorative image — deliberately NOT priority, so it
           doesn't compete with the hero's LCP image for initial bandwidth. */}
       <Image
-        src="/background.webp"
+        src={src}
         alt=""
         fill
         className="object-cover opacity-40"
@@ -21,4 +27,3 @@ export default function BackgroundImage() {
     </div>
   );
 }
-

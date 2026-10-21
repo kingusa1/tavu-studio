@@ -5,6 +5,7 @@ Allow: /
 Disallow: /api/
 Disallow: /account/
 Disallow: /register/
+Disallow: /admin/
 
 # --- AI assistants & answer engines (explicitly welcomed) ---
 # Named agents do not inherit rules from "*", so the same rules are repeated here.
@@ -29,5 +30,6 @@ Allow: /
 Disallow: /api/
 Disallow: /account/
 Disallow: /register/
+Disallow: /admin/
 
 Sitemap: https://tavustudio.com/sitemap.xml
