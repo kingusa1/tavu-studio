@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres';
+import { resendAdapter } from '@payloadcms/email-resend';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import path from 'path';
 import { buildConfig } from 'payload';
@@ -44,6 +45,17 @@ export default buildConfig({
   collections,
   globals,
   editor: lexicalEditor(),
+  // Admin emails (password reset, user invitations) and every website email go through Resend
+  // from the verified tavustudio.com domain. Without a key (local dev) Payload logs emails instead.
+  ...(process.env.RESEND_API_KEY
+    ? {
+        email: resendAdapter({
+          apiKey: process.env.RESEND_API_KEY,
+          defaultFromAddress: process.env.EMAIL_FROM_ADDRESS || 'connect@tavustudio.com',
+          defaultFromName: process.env.EMAIL_FROM_NAME || 'TAVÚ Wellness Studio',
+        }),
+      }
+    : {}),
   secret: payloadSecret,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

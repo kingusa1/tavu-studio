@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { EmailSettings } from './EmailSettings';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { SiteSettings } from './SiteSettings';
@@ -55,4 +56,5 @@ export const globals: GlobalConfig[] = [
   ContactPage,
   RegisterPage,
   AccountPage,
+  EmailSettings,
 ];

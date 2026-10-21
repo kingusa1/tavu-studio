@@ -77,6 +77,8 @@ export interface Config {
     testimonials: Testimonial;
     'legal-pages': LegalPage;
     'contact-submissions': ContactSubmission;
+    'newsletter-subscribers': NewsletterSubscriber;
+    'newsletter-issues': NewsletterIssue;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +96,8 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
+    'newsletter-issues': NewsletterIssuesSelect<false> | NewsletterIssuesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -128,6 +132,7 @@ export interface Config {
     'contact-page': ContactPage;
     'register-page': RegisterPage;
     'account-page': AccountPage;
+    'email-settings': EmailSetting;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
@@ -154,6 +159,7 @@ export interface Config {
     'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
     'register-page': RegisterPageSelect<false> | RegisterPageSelect<true>;
     'account-page': AccountPageSelect<false> | AccountPageSelect<true>;
+    'email-settings': EmailSettingsSelect<false> | EmailSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -719,6 +725,8 @@ export interface LegalPage {
   createdAt: string;
 }
 /**
+ * Messages from the website contact form. The team and the visitor are emailed automatically (see Site → Emails & Newsletter).
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-submissions".
  */
@@ -729,6 +737,85 @@ export interface ContactSubmission {
   message: string;
   page?: string | null;
   status?: ('new' | 'read' | 'replied') | null;
+  /**
+   * Filled in automatically after the message arrives.
+   */
+  emailStatus?: ('sent' | 'partial' | 'failed' | 'skipped') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * People who signed up for the newsletter on the website. Only “Subscribed” people receive issues.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers".
+ */
+export interface NewsletterSubscriber {
+  id: number;
+  email: string;
+  firstName?: string | null;
+  status: 'pending' | 'subscribed' | 'unsubscribed';
+  /**
+   * Where they signed up, e.g. “blog”.
+   */
+  source?: string | null;
+  consent?: {
+    text?: string | null;
+    givenAt?: string | null;
+  };
+  confirmedAt?: string | null;
+  unsubscribedAt?: string | null;
+  resendContactId?: string | null;
+  confirmTokenHash?: string | null;
+  confirmTokenExpiresAt?: string | null;
+  confirmEmailSentAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Write an issue, send a test to yourself, then send it to all subscribers. An issue can only be sent once.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-issues".
+ */
+export interface NewsletterIssue {
+  id: number;
+  /**
+   * The email subject line. Aim for under 50 characters.
+   */
+  subject: string;
+  /**
+   * Shown next to the subject in most inboxes.
+   */
+  preheader?: string | null;
+  heading: string;
+  coverImage?: (number | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  ctaLabel?: string | null;
+  ctaUrl?: string | null;
+  /**
+   * “Send to ALL subscribers” cannot be undone. Send yourself a test first.
+   */
+  action?: ('none' | 'test' | 'send') | null;
+  testEmail?: string | null;
+  status?: ('draft' | 'sent') | null;
+  lastTestSentAt?: string | null;
+  sentAt?: string | null;
+  broadcastId?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -795,6 +882,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-submissions';
         value: number | ContactSubmission;
+      } | null)
+    | ({
+        relationTo: 'newsletter-subscribers';
+        value: number | NewsletterSubscriber;
+      } | null)
+    | ({
+        relationTo: 'newsletter-issues';
+        value: number | NewsletterIssue;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1171,6 +1266,52 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   message?: T;
   page?: T;
   status?: T;
+  emailStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers_select".
+ */
+export interface NewsletterSubscribersSelect<T extends boolean = true> {
+  email?: T;
+  firstName?: T;
+  status?: T;
+  source?: T;
+  consent?:
+    | T
+    | {
+        text?: T;
+        givenAt?: T;
+      };
+  confirmedAt?: T;
+  unsubscribedAt?: T;
+  resendContactId?: T;
+  confirmTokenHash?: T;
+  confirmTokenExpiresAt?: T;
+  confirmEmailSentAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-issues_select".
+ */
+export interface NewsletterIssuesSelect<T extends boolean = true> {
+  subject?: T;
+  preheader?: T;
+  heading?: T;
+  coverImage?: T;
+  content?: T;
+  ctaLabel?: T;
+  ctaUrl?: T;
+  action?: T;
+  testEmail?: T;
+  status?: T;
+  lastTestSentAt?: T;
+  sentAt?: T;
+  broadcastId?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3490,6 +3631,92 @@ export interface AccountPage {
   createdAt?: string | null;
 }
 /**
+ * Who website emails come from, who receives contact-form messages, and the wording of every automatic email.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-settings".
+ */
+export interface EmailSetting {
+  id: number;
+  sender?: {
+    fromName?: string | null;
+    /**
+     * Must be an @tavustudio.com address (the domain verified in Resend). Replies go here too.
+     */
+    fromAddress?: string | null;
+  };
+  contactForm?: {
+    notifyTeam?: boolean | null;
+    /**
+     * Every address here receives the message. Pressing “Reply” answers the visitor directly.
+     */
+    teamRecipients?:
+      | {
+          email: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * {name} becomes the visitor’s name.
+     */
+    teamSubject?: string | null;
+    sendThankYou?: boolean | null;
+    thankYouSubject?: string | null;
+    /**
+     * You can use {name} (their first name), {phone} and {email} (the studio’s WhatsApp number and email).
+     */
+    thankYouHeading?: string | null;
+    /**
+     * Leave an empty line between paragraphs. You can use {name} (their first name), {phone} and {email} (the studio’s WhatsApp number and email).
+     */
+    thankYouBody?: string | null;
+    thankYouCtaLabel?: string | null;
+    thankYouCtaUrl?: string | null;
+  };
+  newsletter?: {
+    /**
+     * Filled in automatically when the first subscriber confirms. Newsletter issues are sent to this segment.
+     */
+    segmentId?: string | null;
+    segmentName?: string | null;
+    signupEyebrow?: string | null;
+    signupHeading?: string | null;
+    signupText?: string | null;
+    consentText?: string | null;
+    successText?: string | null;
+    confirmSubject?: string | null;
+    /**
+     * You can use {name} (their first name), {phone} and {email} (the studio’s WhatsApp number and email).
+     */
+    confirmHeading?: string | null;
+    /**
+     * You can use {name} (their first name), {phone} and {email} (the studio’s WhatsApp number and email).
+     */
+    confirmBody?: string | null;
+    confirmCtaLabel?: string | null;
+    welcomeSubject?: string | null;
+    /**
+     * You can use {name} (their first name), {phone} and {email} (the studio’s WhatsApp number and email).
+     */
+    welcomeHeading?: string | null;
+    /**
+     * You can use {name} (their first name), {phone} and {email} (the studio’s WhatsApp number and email).
+     */
+    welcomeBody?: string | null;
+    welcomeCtaLabel?: string | null;
+    welcomeCtaUrl?: string | null;
+    confirmedPageHeading?: string | null;
+    confirmedPageText?: string | null;
+    unsubscribedPageHeading?: string | null;
+    unsubscribedPageText?: string | null;
+    invalidPageHeading?: string | null;
+    invalidPageText?: string | null;
+  };
+  signOff?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
@@ -5646,6 +5873,66 @@ export interface AccountPageSelect<T extends boolean = true> {
         ogImage?: T;
         robots?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-settings_select".
+ */
+export interface EmailSettingsSelect<T extends boolean = true> {
+  sender?:
+    | T
+    | {
+        fromName?: T;
+        fromAddress?: T;
+      };
+  contactForm?:
+    | T
+    | {
+        notifyTeam?: T;
+        teamRecipients?:
+          | T
+          | {
+              email?: T;
+              id?: T;
+            };
+        teamSubject?: T;
+        sendThankYou?: T;
+        thankYouSubject?: T;
+        thankYouHeading?: T;
+        thankYouBody?: T;
+        thankYouCtaLabel?: T;
+        thankYouCtaUrl?: T;
+      };
+  newsletter?:
+    | T
+    | {
+        segmentId?: T;
+        segmentName?: T;
+        signupEyebrow?: T;
+        signupHeading?: T;
+        signupText?: T;
+        consentText?: T;
+        successText?: T;
+        confirmSubject?: T;
+        confirmHeading?: T;
+        confirmBody?: T;
+        confirmCtaLabel?: T;
+        welcomeSubject?: T;
+        welcomeHeading?: T;
+        welcomeBody?: T;
+        welcomeCtaLabel?: T;
+        welcomeCtaUrl?: T;
+        confirmedPageHeading?: T;
+        confirmedPageText?: T;
+        unsubscribedPageHeading?: T;
+        unsubscribedPageText?: T;
+        invalidPageHeading?: T;
+        invalidPageText?: T;
+      };
+  signOff?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

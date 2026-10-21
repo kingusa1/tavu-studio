@@ -6,6 +6,8 @@ import { Events } from './Events';
 import { LegalPages } from './LegalPages';
 import { MassageRituals } from './MassageRituals';
 import { Media } from './Media';
+import { NewsletterIssues } from './NewsletterIssues';
+import { NewsletterSubscribers } from './NewsletterSubscribers';
 import { Offers } from './Offers';
 import { Policies } from './Policies';
 import { Testimonials } from './Testimonials';
@@ -27,4 +29,6 @@ export const collections: CollectionConfig[] = [
   Testimonials,
   LegalPages,
   ContactSubmissions,
+  NewsletterSubscribers,
+  NewsletterIssues,
 ];
