@@ -33,6 +33,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# scratch work (TLS proofs, audit baselines, etc.) — never committed
+/tmp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

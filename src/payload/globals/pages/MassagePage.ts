@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload';
 
 import { ctaSection, link, overlayCard, seo, serviceHero } from '../../fields';
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { revalidateGlobalAfterChange } from '../../hooks/revalidateSite';
 import { validateTokensGlobal } from '../../hooks/validateTokens';
@@ -10,7 +11,7 @@ export const MassagePage: GlobalConfig = {
   slug: 'massage-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

@@ -52,7 +52,8 @@ export async function uploadObject({
       apikey: serviceRoleKey,
       Authorization: `Bearer ${serviceRoleKey}`,
       'Content-Type': mimeType || 'application/octet-stream',
-      'x-upsert': 'true',
+      'cache-control': 'max-age=31536000',
+      'x-upsert': 'false',
     },
     // Buffer is a Uint8Array at runtime (valid BodyInit for Node's fetch); the mismatch is
     // TS's DOM lib typing of Buffer's generic form, not a real incompatibility.
@@ -103,7 +104,8 @@ export async function createSignedUploadURL({
       apikey: serviceRoleKey,
       Authorization: `Bearer ${serviceRoleKey}`,
       'Content-Type': 'application/json',
-      'x-upsert': 'true',
+      'cache-control': 'max-age=31536000',
+      'x-upsert': 'false',
     },
     body: '{}',
   });

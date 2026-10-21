@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload';
 
-import { anyone } from '../access/anyone';
+import { authenticated } from '../access/authenticated';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { richTextField } from '../fields/richText';
 import { seo } from '../fields/seo';
@@ -19,7 +19,7 @@ export const LegalPages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'lastUpdated'],
   },
   access: {
-    read: anyone,
+    read: authenticated,
     create: isAdminOrEditor,
     update: isAdminOrEditor,
     delete: isAdminOrEditor,

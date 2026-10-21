@@ -1,5 +1,6 @@
 import type { Field, GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { ctaSection } from '../../fields/ctaSection';
 import { image } from '../../fields/image';
@@ -25,7 +26,7 @@ export const HomePage: GlobalConfig = {
     description: 'The home page (/). Sections appear in this fixed order; turn a section off with its "Show this section" toggle instead of deleting its content.',
   },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

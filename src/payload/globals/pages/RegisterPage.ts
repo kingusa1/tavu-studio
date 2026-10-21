@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { ctaSection } from '../../fields/ctaSection';
 import { link } from '../../fields/link';
@@ -34,7 +35,7 @@ export const RegisterPage: GlobalConfig = {
   slug: 'register-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

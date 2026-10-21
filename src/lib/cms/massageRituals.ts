@@ -4,11 +4,10 @@ import { cache } from 'react';
 
 import type { MassageRitual } from '@/payload-types';
 
+import { getCatalog } from './catalog';
 import { buildPackageSummary } from './offerText';
 import type { PackageSummaryRow, RitualLike } from './offerText';
-import { getPayloadClient } from './payload';
-import { buildTokenIndex, resolveTokensDeep } from './tokens';
-import type { TokenFact, TokenOffer, TokenRitual } from './tokens';
+import { resolveTokensDeep } from './tokens';
 
 export type GetRitualsArgs = {
   group?: 'full-body' | 'targeted' | 'signature-foot' | 'escape';
@@ -20,21 +19,9 @@ export type GetRitualsArgs = {
  * ritual, not just the ones this call returns.
  */
 export const getRituals = cache(async ({ group }: GetRitualsArgs = {}): Promise<MassageRitual[]> => {
-  const payload = await getPayloadClient();
+  const { rituals: allRituals, index } = await getCatalog();
 
-  const [allOffers, allRituals, settings] = await Promise.all([
-    payload.find({ collection: 'offers', sort: ['sortOrder', 'createdAt'], limit: 0, depth: 1, overrideAccess: true }),
-    payload.find({ collection: 'massage-rituals', sort: ['sortOrder', 'createdAt'], limit: 0, depth: 1, overrideAccess: true }),
-    payload.findGlobal({ slug: 'site-settings', depth: 0 }).catch(() => null),
-  ]);
-
-  const index = buildTokenIndex({
-    offers: allOffers.docs as unknown as TokenOffer[],
-    rituals: allRituals.docs as unknown as TokenRitual[],
-    settings: settings as unknown as { facts?: TokenFact[] | null } | null,
-  });
-
-  const filtered = allRituals.docs.filter((ritual) => {
+  const filtered = allRituals.filter((ritual) => {
     if (ritual.active === false) return false;
     if (group && ritual.group !== group) return false;
     return true;

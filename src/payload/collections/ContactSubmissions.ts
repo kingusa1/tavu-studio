@@ -1,12 +1,14 @@
 import type { CollectionConfig } from 'payload';
 
 import { sendContactEmails } from '../hooks/sendContactEmails';
+import { isAdmin } from '../access/isAdmin';
 
 /**
  * Public visitors never write here directly through Payload's REST/access-control path —
  * src/app/(frontend)/api/contact/route.ts creates documents via the Local API with
- * overrideAccess: true after its own zod validation + honeypot check. This collection's own
- * access control is authenticated-only in every direction, matching an internal CRM inbox.
+ * overrideAccess: true after its own zod validation + honeypot check. This collection holds
+ * visitor PII, so read/update/delete are admin-only; create stays authenticated-only (in
+ * practice the contact route bypasses it entirely via overrideAccess).
  */
 export const ContactSubmissions: CollectionConfig = {
   slug: 'contact-submissions',
@@ -20,9 +22,9 @@ export const ContactSubmissions: CollectionConfig = {
   },
   access: {
     create: ({ req }) => Boolean(req.user),
-    read: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
   fields: [
     {
@@ -48,6 +50,7 @@ export const ContactSubmissions: CollectionConfig = {
       name: 'status',
       type: 'select',
       defaultValue: 'new',
+      index: true,
       options: [
         { label: 'New', value: 'new' },
         { label: 'Read', value: 'read' },

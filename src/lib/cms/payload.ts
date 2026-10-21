@@ -3,6 +3,7 @@
 // in this project; this comment is the documented fallback per the build brief.)
 import { cache } from 'react';
 import { getPayload, type CollectionSlug, type GlobalSlug, type Payload, type Where } from 'payload';
+import { attachDatabasePool } from '@vercel/functions';
 
 import config from '@payload-config';
 
@@ -11,7 +12,15 @@ let payloadPromise: Promise<Payload> | null = null;
 /** Memoised Payload client — Payload itself pools the underlying DB connection. */
 export function getPayloadClient(): Promise<Payload> {
   if (!payloadPromise) {
-    payloadPromise = getPayload({ config });
+    payloadPromise = getPayload({ config }).then((payload) => {
+      // DB-03: let Vercel's Fluid Compute drain in-flight queries on this pool before a
+      // function instance is frozen/retired, instead of cutting a connection mid-query.
+      const pool = (payload.db as { pool?: unknown }).pool;
+      if (pool) {
+        attachDatabasePool(pool as Parameters<typeof attachDatabasePool>[0]);
+      }
+      return payload;
+    });
   }
   return payloadPromise;
 }

@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../access/authenticated';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { link } from '../fields/link';
 import { revalidateGlobalAfterChange } from '../hooks/revalidateSite';
@@ -15,7 +16,7 @@ export const SystemPages: GlobalConfig = {
     group: 'Site',
   },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

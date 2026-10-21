@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { seo } from '../../fields/seo';
 import { revalidateGlobalAfterChange } from '../../hooks/revalidateSite';
@@ -15,7 +16,7 @@ export const AppointmentsPage: GlobalConfig = {
   slug: 'appointments-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

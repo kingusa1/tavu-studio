@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { revalidateGlobalAfterChange } from '../../hooks/revalidateSite';
 
@@ -16,7 +17,7 @@ export function pageGlobalStub(slug: string): GlobalConfig {
       group: 'Pages',
     },
     access: {
-      read: () => true,
+      read: authenticated,
       update: isAdminOrEditor,
     },
     versions: { max: 25 },
