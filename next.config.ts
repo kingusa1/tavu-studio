@@ -8,7 +8,7 @@ const dirname = path.dirname(__filename);
 
 const nextConfig: NextConfig = {
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   poweredByHeader: false,
   experimental: {
