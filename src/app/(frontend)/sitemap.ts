@@ -1,6 +1,6 @@
 // Dynamic sitemap (brief §D3) — replaces the static `public/sitemap.xml` (deleted in this
-// commit), whose every `lastmod` was frozen at 2026-07-30. `revalidateSite` revalidates
-// `/sitemap.xml` on every content save (§5.4, extended by package E), so this stays current.
+// commit), whose every `lastmod` was frozen at 2026-07-30. It is rendered on every request,
+// so it is always current (see the note on `dynamic` below).
 
 import type { MetadataRoute } from 'next';
 
@@ -10,7 +10,11 @@ import { getAuthorIdsWithPublishedPosts, getPublishedPostsForSitemap } from '@/l
 import { getSiteData } from '@/lib/cms/site';
 import type { GlobalSlug } from 'payload';
 
-export const dynamic = 'force-static';
+// Rendered per request: on Vercel with Next 16.2+ a prerendered `/sitemap.xml` is deployed as a
+// static file that neither `revalidatePath` nor `revalidate` ever rebuilds (vercel/next.js#99055;
+// observed live 2026-10-21: 5 newly published posts missing while /blog/feed.xml had them).
+// Crawlers fetch it rarely, so the few CMS reads per request are cheap.
+export const dynamic = 'force-dynamic';
 
 /** Static route -> the page global whose `updatedAt` should be used as `lastModified`. */
 const STATIC_ROUTES: Array<{ path: string; global: GlobalSlug; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']; priority: number }> = [
