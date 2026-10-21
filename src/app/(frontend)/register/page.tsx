@@ -161,7 +161,7 @@ export default async function RegisterPage() {
                 <MotionWrapper delay={0.15} direction="up">
                   <div className="bg-card border border-border rounded-3xl overflow-hidden shadow-xl">
                     {/* Form Header */}
-                    <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-8 text-primary-foreground">
+                    <div className="tone-dark bg-gradient-to-r from-primary to-primary/80 px-6 py-8 text-primary-foreground">
                       <h2 className="text-2xl font-headline mb-2">{data.formCard.heading}</h2>
                       <p className="text-primary-foreground/80 text-sm">{data.formCard.text}</p>
                     </div>

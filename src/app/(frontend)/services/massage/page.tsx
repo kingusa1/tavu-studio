@@ -41,7 +41,7 @@ export default async function MassagePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+      <section className="tone-dark relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image src={heroImage?.src ?? '/gallery-sauna-salt.webp'} alt={heroImage?.alt ?? 'TAVÚ spa facilities'} fill className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
@@ -93,7 +93,7 @@ export default async function MassagePage() {
                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
                   <Image src={cardImage?.src ?? '/service-massage-towels.webp'} alt={cardImage?.alt ?? 'Massage Room'} fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                  <div className="tone-dark absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                     <p className="text-sm uppercase tracking-[0.2em] text-accent font-medium mb-2">{data.overview?.card?.eyebrow}</p>
                     <h3 className="text-2xl md:text-3xl font-headline text-white mb-1">{data.overview?.card?.titleLine1}</h3>
                     <h3 className="text-2xl md:text-3xl font-headline italic font-light text-white/90 mb-4">{data.overview?.card?.titleLine2}</h3>

@@ -28,7 +28,7 @@ export default async function MembershipsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="tone-dark relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
         <div className="absolute inset-0">
           <Image src={image?.src ?? '/gallery-sauna-salt.webp'} alt={image?.alt ?? 'TAVÚ Memberships'} fill className="object-cover" priority sizes="100vw" />
@@ -66,7 +66,7 @@ export default async function MembershipsPage() {
                       )}
                       <h3 className="text-2xl font-headline text-primary mb-2">{row.name}</h3>
                       <div className="mb-4">
-                        <span className="text-sm text-foreground/60 mr-1">AED</span>
+                        <span className="text-sm text-foreground/60">AED </span>
                         <span className="text-4xl font-headline text-accent">{row.price}</span>
                         <span className="text-sm text-foreground/60 ml-2">| {row.validityLine}</span>
                       </div>

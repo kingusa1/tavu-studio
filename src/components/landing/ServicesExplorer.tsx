@@ -89,6 +89,17 @@ export default function ServicesExplorer({ data }: ServicesExplorerProps) {
                     </div>
                 </MotionWrapper>
 
+                {/* Warm the cache with every service photo so switching tabs never shows an empty box */}
+                <div className="hidden relative" aria-hidden="true">
+                    {services.map((service) => {
+                        const preloadImage = resolveImage(service.image);
+                        if (!preloadImage) return null;
+                        return (
+                            <Image key={service.id} src={preloadImage.src} alt="" fill loading="eager" sizes="(max-width: 768px) 100vw, 50vw" />
+                        );
+                    })}
+                </div>
+
                 {/* Service Detail */}
                 <div className="max-w-5xl mx-auto">
                     <AnimatePresence mode="wait">
@@ -101,7 +112,7 @@ export default function ServicesExplorer({ data }: ServicesExplorerProps) {
                             className="grid md:grid-cols-2 gap-10 items-center"
                         >
                             {/* Image */}
-                            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden">
+                            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-primary/10">
                                 {resolvedImage && (
                                     <Image
                                         src={resolvedImage.src}

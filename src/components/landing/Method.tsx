@@ -91,7 +91,7 @@ export default function Method({ data }: MethodProps) {
     <section
       id="method"
       ref={sectionRef}
-      className="py-20 lg:py-28 relative overflow-hidden bg-gradient-to-b from-primary via-primary to-primary/95"
+      className="tone-dark py-20 lg:py-28 relative overflow-hidden bg-gradient-to-b from-primary via-primary to-primary/95"
     >
       {/* Animated particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -253,7 +253,6 @@ export default function Method({ data }: MethodProps) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 60vw"
-                      priority
                     />
                   )}
 

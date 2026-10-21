@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import { getIcon } from '@/components/icons/cmsIcons';
@@ -316,6 +316,7 @@ export default function Header() {
                 </button>
               </SheetTrigger>
               <SheetContent side="right" className="bg-white border-l border-gray-100 w-[320px] sm:w-[380px] p-0">
+                <SheetTitle className="sr-only">Menu</SheetTitle>
                 <div className="flex flex-col h-full">
                   {/* Mobile Header */}
                   <div className="px-6 py-5 border-b border-gray-100">

@@ -105,7 +105,7 @@ export default async function AccountPage() {
           <MotionWrapper delay={0.1} direction="up">
             <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-lg mx-auto mb-16">
               {/* Card Header */}
-              <div className="bg-gradient-to-r from-primary to-primary/80 px-8 py-10 text-center">
+              <div className="tone-dark bg-gradient-to-r from-primary to-primary/80 px-8 py-10 text-center">
                 <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

@@ -122,7 +122,7 @@ export default function Hero({ data }: HeroProps) {
   const gradientClass = (slide?.accent && accents.hero[slide.accent]) || accents.hero.blue;
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+    <section className="tone-dark relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Carousel Background */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="sync" custom={direction}>
@@ -258,7 +258,7 @@ export default function Hero({ data }: HeroProps) {
           {/* Animated Headline */}
           <MotionWrapper delay={0.2} direction="up">
             <h1 className="text-4xl sm:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-headline font-semibold tracking-tight mb-6 leading-[1.05] drop-shadow-lg">
-              <span className="text-white">{data.headlineLead}</span>
+              <span className="text-white">{data.headlineLead}</span>{" "}
               <br />
               <AnimatePresence mode="wait">
                 <motion.em

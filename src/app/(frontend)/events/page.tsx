@@ -47,7 +47,7 @@ export default async function EventsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="tone-dark relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/60 z-10" />
         <div className="absolute inset-0">
           {heroImage && (

@@ -383,7 +383,7 @@ export async function seedClasses(payload: Payload): Promise<void> {
       cta: {
         enabled: true,
         heading: 'Ready to Begin?',
-        text: 'Start your wellness journey with our pre-opening packages. Limited spots available.',
+        text: 'Start your wellness journey with one of our packages. Limited spots available.',
         buttons: [
           { link: { label: 'View Packages', href: '/pricing' }, style: 'primary' },
           { link: { label: 'Book a Class', href: '/schedule' }, style: 'outline' },
