@@ -150,7 +150,7 @@ export default function RootLayout({
                 'https://www.tiktok.com/@tavuwellness.studio',
               ],
               email: 'connect@tavustudio.com',
-              priceRange: '120 AED - 2,400 AED',
+              priceRange: '120 AED - 7,100 AED',
               currenciesAccepted: 'AED',
               paymentAccepted: 'Credit Card, Debit Card',
               areaServed: {
@@ -187,16 +187,6 @@ export default function RootLayout({
                       '@type': 'Service',
                       name: 'Breathing Room — Drop-In',
                       description: 'One TAVÚ MAT, RELEASE or STRETCH class.',
-                    },
-                  },
-                  {
-                    '@type': 'Offer',
-                    price: '2400',
-                    priceCurrency: 'AED',
-                    itemOffered: {
-                      '@type': 'Service',
-                      name: 'Unlimited 3-Month Membership',
-                      description: 'Unlimited access to all Breathing Room classes. AED 2,400 paid upfront for a 3-month commitment (AED 800/month value). Valid for 3 consecutive months, non-transferable, non-refundable, no rollovers.',
                     },
                   },
                   {

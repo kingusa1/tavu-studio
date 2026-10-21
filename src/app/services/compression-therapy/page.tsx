@@ -6,6 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+import VatNote from '@/components/common/VatNote';
 
 const benefits = [
     'Boosts circulation',
@@ -238,6 +239,7 @@ export default function CompressionTherapyPage() {
                             </div>
                         </MotionWrapper>
                         </div>
+                        <VatNote className="text-sm text-foreground/60 text-center mt-8" />
                     </div>
                 </section>
 

@@ -12,8 +12,9 @@ const services = [
         name: 'Reformer Pilates',
         tagline: 'Precision. Strength. Control.',
         description: 'Small-group reformer classes designed to sculpt, strengthen, and align your body with spring-loaded resistance and expert guidance.',
-        image: '/service-reformer-mirror.webp',
-        highlights: ['Max 12 per class', 'Spring-loaded resistance', 'Full-body sculpting', 'Expert instructors'],
+        image: '/reformer-room-new.webp',
+        alt: 'Client on the reformer in the TAVÚ Reformer Room',
+        highlights: ['Max 8 per class', 'Spring-loaded resistance', 'Full-body sculpting', 'Expert instructors'],
         href: '/services/reformer-pilates',
     },
     {
@@ -22,6 +23,7 @@ const services = [
         tagline: 'Stillness. Depth. Release.',
         description: 'Signature TAVÚ MAT, RELEASE and STRETCH classes in a dedicated space for mindful, grounded movement.',
         image: '/service-breathing-props.webp',
+        alt: 'Breathing Room',
         highlights: ['TAVÚ MAT', 'TAVÚ RELEASE', 'TAVÚ STRETCH', 'Mindful movement'],
         href: '/services/breathing-room',
     },
@@ -31,6 +33,7 @@ const services = [
         tagline: 'Heat. Cold. Renew.',
         description: 'Alternating sauna and ice bath sessions to activate your body’s natural healing response. Shared and private suites available.',
         image: '/service-sauna.webp',
+        alt: 'Contrast Therapy',
         highlights: ['Sauna + Ice Bath', 'Shared & private suites', 'Boosts circulation', 'Accelerates recovery'],
         href: '/services/contrast-therapy',
     },
@@ -40,6 +43,7 @@ const services = [
         tagline: 'Recover. Restore. Repeat.',
         description: 'NormaTec pulsing compression to stimulate circulation, flush lactic acid, and support faster muscle recovery.',
         image: '/service-recovery-equipment.webp',
+        alt: 'Compression Therapy',
         highlights: ['NormaTec compression', 'Post-training recovery', 'Reduces swelling', 'Speeds up recovery'],
         href: '/services/compression-therapy',
     },
@@ -49,6 +53,7 @@ const services = [
         tagline: 'Unwind. Heal. Breathe.',
         description: 'Therapeutic and relaxation massage treatments tailored to release tension, improve circulation, and restore balance.',
         image: '/service-massage-towels.webp',
+        alt: 'Massage',
         highlights: ['Deep tissue', 'Sports recovery', 'Relaxation', 'Custom treatments'],
         href: '/services/massage',
     },
@@ -128,9 +133,9 @@ export default function ServicesExplorer() {
                             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden">
                                 <Image
                                     src={active.image}
-                                    alt={active.name}
+                                    alt={active.alt ?? active.name}
                                     fill
-                                    className="object-cover"
+                                    className={active.id === 'reformer-pilates' ? 'object-cover object-[center_40%]' : 'object-cover'}
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

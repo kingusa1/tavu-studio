@@ -9,7 +9,7 @@ const services = [
     {
         name: 'Reformer Pilates',
         description: 'Small-group reformer classes, limited to 8 participants. A 50-minute, low-impact practice designed to build strength, control, mobility, and alignment.',
-        image: '/service-reformer-mirror.webp',
+        image: '/reformer-room-new.webp',
         link: '/services/reformer-pilates',
         features: ['8 max participants', '50 minutes', 'All levels welcome'],
         accent: 'from-blue-500/20'
@@ -88,7 +88,7 @@ export default function ServicesPage() {
                                                         src={service.image}
                                                         alt={service.name}
                                                         fill
-                                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                        className={`object-cover group-hover:scale-105 transition-transform duration-700 ${service.image === '/reformer-room-new.webp' ? 'object-[center_40%]' : ''}`}
                                                     />
                                                     <div className={`absolute inset-0 bg-gradient-to-t ${service.accent} to-transparent opacity-60`} />
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

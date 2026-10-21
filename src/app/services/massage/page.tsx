@@ -6,6 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+import VatNote from '@/components/common/VatNote';
 
 const fullBodyRituals = [
     {
@@ -167,7 +168,7 @@ export default function MassagePage() {
                                     </div>
                                     <div className="block">
                                         <Link
-                                            href="/schedule"
+                                            href="/appointments"
                                             className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
                                         >
                                             Book a Massage
@@ -250,7 +251,7 @@ export default function MassagePage() {
                                                         <p className="font-semibold text-accent text-lg">{service.price90}</p>
                                                     </div>
                                                 </div>
-                                                <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
+                                                <Link href="/appointments" className="text-accent font-medium text-sm hover:underline">
                                                     Book →
                                                 </Link>
                                             </div>
@@ -367,7 +368,7 @@ export default function MassagePage() {
                                     </p>
 
                                     <div className="mt-6">
-                                        <Link href="/schedule" className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all">
+                                        <Link href="/appointments" className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all">
                                             Book ROOTED
                                         </Link>
                                     </div>
@@ -414,7 +415,7 @@ export default function MassagePage() {
                                         ))}
                                     </ul>
                                     <p className="text-xs text-foreground/50 italic mb-6">Limited appointments available.</p>
-                                    <Link href="/schedule" className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all">
+                                    <Link href="/appointments" className="inline-flex items-center justify-center h-12 px-8 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all">
                                         Book Recovery Escape
                                     </Link>
                                 </div>
@@ -452,8 +453,9 @@ export default function MassagePage() {
                                     </table>
                                 </div>
                                 <p className="text-xs text-foreground/50 mt-3 text-center">
-                                    Every Ritual Pack includes a sixth session at no charge. All prices include VAT.
+                                    Every Ritual Pack includes a sixth session at no charge.
                                 </p>
+                                <VatNote className="text-xs text-foreground/50 mt-1 text-center" />
                             </div>
                         </MotionWrapper>
                     </div>
@@ -468,7 +470,7 @@ export default function MassagePage() {
                                 Book your massage session and experience complete relaxation.
                             </p>
                             <Link
-                                href="/schedule"
+                                href="/appointments"
                                 className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
                             >
                                 Book a Massage

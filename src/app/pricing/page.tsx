@@ -5,27 +5,20 @@ import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
+import VatNote from '@/components/common/VatNote';
 
 const reformerPackages = [
-    { name: 'Reformer Drop-In', price: '160', description: 'Single reformer session. VAT included.' },
-    { name: '8-Class Pack', price: '1,260', description: 'Valid 45 days.', bonus: 'Includes 1 complimentary Contrast Therapy session' },
-    { name: '16-Class Pack', price: '2,020', description: 'Valid 75 days.', bonus: 'Includes 2 complimentary Contrast Therapy sessions' },
+    { name: 'Reformer Drop-In', price: '160', description: 'Single reformer session. VAT excluded.' },
+    { name: '10-Class Pack', price: '1,550', description: 'Valid 2 months.', bonus: 'Includes 2 complimentary Contrast Therapy sessions' },
+    { name: '20-Class Pack', price: '3,000', description: 'Valid 3 months.', bonus: 'Includes 4 complimentary Contrast Therapy sessions' },
+    { name: '50-Class Pack', price: '7,100', description: 'Valid 6 months.', bonus: 'Includes 8 complimentary Contrast Therapy sessions' },
 ];
 
 const breathingPackages = [
     { name: 'Drop-In', price: '120', description: 'Single session valid for any Breathing Room class (TAVÚ MAT, RELEASE and STRETCH).', note: 'Non-transferable & non-refundable' },
-    { name: '5-Class Pack', price: '550', description: 'Valid 30 days from first use. Perfect for weekly consistency.' },
-];
-
-const unlimitedMembershipIncludes = [
-    'Unlimited access to all Breathing Room classes',
-    'AED 800/month value',
-    '3-month commitment',
-    'AED 2,400 paid upfront',
-    'Valid for 3 consecutive months',
-    'Non-transferable',
-    'Non-refundable',
-    'No rollovers',
+    { name: '10-Class Pack', price: '1,100', description: 'Valid 2 months.', bonus: 'Includes 2 complimentary Contrast Therapy sessions' },
+    { name: '20-Class Pack', price: '2,100', description: 'Valid 3 months.', bonus: 'Includes 4 complimentary Contrast Therapy sessions' },
+    { name: '50-Class Pack', price: '5,100', description: 'Valid 6 months.', bonus: 'Includes 8 complimentary Contrast Therapy sessions' },
 ];
 
 const contrastPackages = [
@@ -145,9 +138,7 @@ export default function PricingPage() {
                     <MotionWrapper delay={0} direction="up">
                         <div className="text-center mb-14">
                             <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">Choose Your Rhythm</h1>
-                            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                                All prices include VAT.
-                            </p>
+                            <VatNote className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" />
                         </div>
                     </MotionWrapper>
 
@@ -168,60 +159,6 @@ export default function PricingPage() {
                             </PricingCard>
                         </MotionWrapper>
                     </div>
-
-                    {/* Unlimited 3-Month Membership — full terms */}
-                    <MotionWrapper delay={0.1} direction="up">
-                        <div className="bg-card border border-border rounded-2xl overflow-hidden mb-12">
-                            <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
-                                <h2 className="font-headline text-2xl mb-0.5">Unlimited 3-Month Membership</h2>
-                                <p className="text-sm text-primary-foreground/70">AED 2,400 paid upfront · 3-month commitment · AED 800/month value</p>
-                            </div>
-                            <div className="p-6 md:p-8">
-                                <p className="text-base text-foreground/80 leading-relaxed mb-4">
-                                    Enjoy unlimited access to all Breathing Room classes with a membership designed
-                                    for consistency and long-term progress.
-                                </p>
-                                <p className="text-base text-foreground/80 leading-relaxed mb-8">
-                                    Your membership is based on AED 800 per month for a 3-month commitment, with a
-                                    single upfront payment of AED 2,400 at the time of purchase. There are no monthly
-                                    recurring payments during the membership period.
-                                </p>
-
-                                <div className="grid md:grid-cols-2 gap-8">
-                                    <div>
-                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Membership Includes</p>
-                                        <ul className="space-y-2">
-                                            {unlimitedMembershipIncludes.map((item, i) => (
-                                                <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
-                                                    <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                    <div className="p-5 rounded-xl bg-muted/30">
-                                        <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Booking Policy</p>
-                                        <p className="text-sm text-foreground/70 leading-relaxed">
-                                            To ensure fair access for all members, 3 late cancellations within the same
-                                            week will result in a 1-week booking suspension, during which new class
-                                            bookings will not be permitted.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="mt-8 text-center">
-                                    <Link
-                                        href="/schedule"
-                                        className="inline-flex items-center justify-center h-12 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
-                                    >
-                                        Book Your Mat
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </MotionWrapper>
 
                     {/* Contrast Therapy & Compression */}
                     <div className="grid lg:grid-cols-2 gap-8 mb-12">

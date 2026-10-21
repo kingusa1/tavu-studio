@@ -6,6 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+import VatNote from '@/components/common/VatNote';
 
 
 const classes = [
@@ -68,10 +69,10 @@ export default function ReformerPilatesPage() {
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/service-reformer-mirror.webp"
-                        alt="Reformer Pilates"
+                        src="/reformer-room-new.webp"
+                        alt="Client on the reformer in the TAVÚ Reformer Room"
                         fill
-                        className="object-cover"
+                        className="object-cover object-[center_40%]"
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
@@ -193,9 +194,7 @@ export default function ReformerPilatesPage() {
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Reformer Packages</h2>
-                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    All prices include VAT.
-                                </p>
+                                <VatNote className="text-lg text-foreground/70 max-w-2xl mx-auto" />
                             </div>
                         </MotionWrapper>
 
@@ -205,7 +204,7 @@ export default function ReformerPilatesPage() {
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
                                             <p className="font-semibold text-primary">Drop-In</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Single reformer session. VAT included.</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Single reformer session. VAT excluded.</p>
                                         </div>
                                         <div className="text-right flex-shrink-0">
                                             <p className="font-headline text-xl text-accent">160</p>
@@ -214,23 +213,34 @@ export default function ReformerPilatesPage() {
                                     </div>
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
-                                            <p className="font-semibold text-primary">8-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Valid 45 days.</p>
-                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 1 complimentary Contrast Therapy session</p>
+                                            <p className="font-semibold text-primary">10-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 2 months.</p>
+                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 2 complimentary Contrast Therapy sessions</p>
                                         </div>
                                         <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">1,260</p>
+                                            <p className="font-headline text-xl text-accent">1,550</p>
                                             <p className="text-xs text-foreground/50">AED</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
-                                            <p className="font-semibold text-primary">16-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Valid 75 days.</p>
-                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 2 complimentary Contrast Therapy sessions</p>
+                                            <p className="font-semibold text-primary">20-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 3 months.</p>
+                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 4 complimentary Contrast Therapy sessions</p>
                                         </div>
                                         <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">2,020</p>
+                                            <p className="font-headline text-xl text-accent">3,000</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">50-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 6 months.</p>
+                                            <p className="text-xs text-accent font-medium mt-1.5">Includes 8 complimentary Contrast Therapy sessions</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">7,100</p>
                                             <p className="text-xs text-foreground/50">AED</p>
                                         </div>
                                     </div>

@@ -5,6 +5,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
 import Image from 'next/image';
+import VatNote from '@/components/common/VatNote';
 
 const membershipTiers = [
     {
@@ -107,6 +108,7 @@ export default function MembershipsPage() {
                                 </MotionWrapper>
                             ))}
                         </div>
+                        <VatNote className="text-sm text-foreground/60 text-center mt-8" />
                     </div>
                 </section>
 

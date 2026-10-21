@@ -2,28 +2,36 @@
 
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
+import VatNote from '@/components/common/VatNote';
 
 const reformerPackages = [
     {
         name: 'Drop-In',
         price: '160',
-        description: 'Single reformer session. VAT included.',
+        description: 'Single reformer session. VAT excluded.',
         validity: '',
         bonus: '',
     },
     {
-        name: '8-Class Pack',
-        price: '1,260',
-        description: 'Valid 45 days.',
-        validity: '45 days',
-        bonus: 'Includes 1 complimentary Contrast Therapy session',
+        name: '10-Class Pack',
+        price: '1,550',
+        description: 'Valid 2 months.',
+        validity: '2 months',
+        bonus: 'Includes 2 complimentary Contrast Therapy sessions',
     },
     {
-        name: '16-Class Pack',
-        price: '2,020',
-        description: 'Valid 75 days.',
-        validity: '75 days',
-        bonus: 'Includes 2 complimentary Contrast Therapy sessions',
+        name: '20-Class Pack',
+        price: '3,000',
+        description: 'Valid 3 months.',
+        validity: '3 months',
+        bonus: 'Includes 4 complimentary Contrast Therapy sessions',
+    },
+    {
+        name: '50-Class Pack',
+        price: '7,100',
+        description: 'Valid 6 months.',
+        validity: '6 months',
+        bonus: 'Includes 8 complimentary Contrast Therapy sessions',
     },
 ];
 
@@ -37,20 +45,28 @@ const breathingPackages = [
         note: 'Non-transferable & non-refundable',
     },
     {
-        name: '5-Class Pack',
-        price: '550',
+        name: '10-Class Pack',
+        price: '1,100',
         period: '',
-        description: 'Perfect for weekly consistency.',
-        validity: '30 days from first use',
+        description: 'Includes 2 complimentary Contrast Therapy sessions.',
+        validity: '2 months',
         note: '',
     },
     {
-        name: 'Unlimited 3-Month Membership',
-        price: '2,400',
+        name: '20-Class Pack',
+        price: '2,100',
         period: '',
-        description: 'Unlimited access to all Breathing Room classes. Paid upfront for a 3-month commitment (AED 800/month value).',
-        validity: '3 consecutive months',
-        note: 'Non-transferable \u00b7 Non-refundable \u00b7 No rollovers',
+        description: 'Includes 4 complimentary Contrast Therapy sessions.',
+        validity: '3 months',
+        note: '',
+    },
+    {
+        name: '50-Class Pack',
+        price: '5,100',
+        period: '',
+        description: 'Includes 8 complimentary Contrast Therapy sessions.',
+        validity: '6 months',
+        note: '',
     },
 ];
 
@@ -67,8 +83,9 @@ export default function Packages() {
                             Choose Your Practice
                         </h2>
                         <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                            All prices include VAT. More services coming soon.
+                            More services coming soon.
                         </p>
+                        <VatNote className="text-sm text-foreground/60 max-w-2xl mx-auto mt-2" />
                     </div>
                 </MotionWrapper>
 

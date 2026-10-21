@@ -183,19 +183,13 @@ export default function PartnershipsPage() {
                                 We're always looking for like-minded partners who share our passion for wellness.
                                 Get in touch to discuss collaboration opportunities.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <div className="flex justify-center">
                                 <Link
                                     href="/contact"
                                     className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
                                 >
                                     Contact Us
                                 </Link>
-                                <a
-                                    href="mailto:partnerships@tavu.ae"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-transparent border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/10 transition-all text-lg"
-                                >
-                                    partnerships@tavu.ae
-                                </a>
                             </div>
                         </MotionWrapper>
                     </div>

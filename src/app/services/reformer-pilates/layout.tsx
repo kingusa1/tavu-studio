@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Reformer Pilates in Abu Dhabi | Small-Group Classes',
   description:
-    'Small-group Reformer Pilates classes at TAVÚ in Al Raha, Abu Dhabi. Drop-in 160 AED and class packs from 1,260 AED. Build strength, mobility and control.',
+    'Small-group Reformer Pilates classes at TAVÚ in Al Raha, Abu Dhabi. Drop-in 160 AED and class packs from 1,550 AED. Build strength, mobility and control.',
   keywords: [
     'Reformer Pilates Abu Dhabi',
     'Reformer Pilates Al Raha',

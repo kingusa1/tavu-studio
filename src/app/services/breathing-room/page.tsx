@@ -6,6 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+import VatNote from '@/components/common/VatNote';
 
 
 const classes = [
@@ -158,7 +159,7 @@ export default function BreathingRoomPage() {
                                             </li>
                                             <li className="text-white/80 text-sm flex items-center gap-2">
                                                 <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                Drop-in sessions, class packs, and an unlimited 3-month membership
+                                                Drop-in sessions and class packs
                                             </li>
                                         </ul>
                                     </div>
@@ -212,9 +213,7 @@ export default function BreathingRoomPage() {
                         <MotionWrapper delay={0.1} direction="up">
                             <div className="text-center mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Breathing Room Packages</h2>
-                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    All prices include VAT.
-                                </p>
+                                <VatNote className="text-lg text-foreground/70 max-w-2xl mx-auto" />
                             </div>
                         </MotionWrapper>
 
@@ -234,12 +233,34 @@ export default function BreathingRoomPage() {
                                     </div>
                                     <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
                                         <div>
-                                            <p className="font-semibold text-primary">5-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Perfect for weekly consistency.</p>
-                                            <p className="text-xs text-foreground/50 mt-1">Valid 30 days from first use</p>
+                                            <p className="font-semibold text-primary">10-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 2 months.</p>
+                                            <p className="text-xs text-foreground/50 mt-1">Includes 2 complimentary Contrast Therapy sessions</p>
                                         </div>
                                         <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">550</p>
+                                            <p className="font-headline text-xl text-accent">1,100</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">20-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 3 months.</p>
+                                            <p className="text-xs text-foreground/50 mt-1">Includes 4 complimentary Contrast Therapy sessions</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">2,100</p>
+                                            <p className="text-xs text-foreground/50">AED</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                                        <div>
+                                            <p className="font-semibold text-primary">50-Class Pack</p>
+                                            <p className="text-sm text-foreground/60 mt-1">Valid 6 months.</p>
+                                            <p className="text-xs text-foreground/50 mt-1">Includes 8 complimentary Contrast Therapy sessions</p>
+                                        </div>
+                                        <div className="text-right flex-shrink-0">
+                                            <p className="font-headline text-xl text-accent">5,100</p>
                                             <p className="text-xs text-foreground/50">AED</p>
                                         </div>
                                     </div>
@@ -251,55 +272,6 @@ export default function BreathingRoomPage() {
                                     >
                                         Book Your Mat
                                     </Link>
-                                </div>
-                            </div>
-                        </MotionWrapper>
-
-                        {/* Unlimited 3-Month Membership — full terms */}
-                        <MotionWrapper delay={0.25} direction="up">
-                            <div className="max-w-lg mx-auto mt-8 bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
-                                <div className="bg-primary text-primary-foreground px-6 py-4 text-center">
-                                    <h3 className="font-headline text-xl">Unlimited 3-Month Membership</h3>
-                                    <p className="text-sm text-primary-foreground/70">AED 2,400 paid upfront · 3-month commitment · AED 800/month value</p>
-                                </div>
-                                <div className="p-6">
-                                    <p className="text-sm text-foreground/80 leading-relaxed mb-3">
-                                        Enjoy unlimited access to all Breathing Room classes with a membership designed
-                                        for consistency and long-term progress.
-                                    </p>
-                                    <p className="text-sm text-foreground/80 leading-relaxed mb-6">
-                                        Your membership is based on AED 800 per month for a 3-month commitment, with a
-                                        single upfront payment of AED 2,400 at the time of purchase. There are no
-                                        monthly recurring payments during the membership period.
-                                    </p>
-
-                                    <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">Membership Includes</p>
-                                    <ul className="space-y-2 mb-6">
-                                        {[
-                                            'Unlimited access to all Breathing Room classes',
-                                            'AED 800/month value',
-                                            '3-month commitment',
-                                            'AED 2,400 paid upfront',
-                                            'Valid for 3 consecutive months',
-                                            'Non-transferable',
-                                            'Non-refundable',
-                                            'No rollovers',
-                                        ].map((item, i) => (
-                                            <li key={i} className="flex items-start gap-2 text-sm text-foreground/70">
-                                                <span className="w-1 h-1 bg-accent rounded-full flex-shrink-0 mt-2" />
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <div className="p-5 rounded-xl bg-muted/30">
-                                        <p className="text-sm font-semibold text-primary mb-2 underline underline-offset-4">Booking Policy</p>
-                                        <p className="text-sm text-foreground/70 leading-relaxed">
-                                            To ensure fair access for all members, 3 late cancellations within the
-                                            same week will result in a 1-week booking suspension, during which new
-                                            class bookings will not be permitted.
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
                         </MotionWrapper>

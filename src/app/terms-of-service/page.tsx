@@ -100,10 +100,6 @@ export default function TermsOfService() {
                   A minimum of 4 participants is required for each class to proceed. Classes that do not meet the minimum attendance requirement may be cancelled. We also reserve the right to cancel or reschedule classes due to instructor illness or unforeseen circumstances. In such cases, you will be notified as soon as possible and your class credit will be restored or rescheduled.
                 </p>
 
-                <h3 className="text-lg font-semibold mt-4 mb-2">5.5 Membership Booking Suspension</h3>
-                <p className="leading-relaxed">
-                  To ensure fair access for all members, 3 late cancellations within the same week by an Unlimited 3-Month Membership holder will result in a 1-week booking suspension, during which new class bookings will not be permitted.
-                </p>
               </section>
 
               {/* Pricing and Payment */}
@@ -112,7 +108,7 @@ export default function TermsOfService() {
 
                 <h3 className="text-lg font-semibold mt-4 mb-2">6.1 Pricing</h3>
                 <ul className="list-disc list-inside space-y-2 pl-4">
-                  <li>All prices are listed in UAE Dirhams (AED) and are inclusive of VAT where applicable</li>
+                  <li>All prices are listed in UAE Dirhams (AED) and exclude VAT; applicable VAT is charged in addition to the listed price</li>
                   <li>We reserve the right to modify prices at any time, but changes will not affect existing confirmed bookings or active memberships</li>
                 </ul>
 
@@ -135,18 +131,7 @@ export default function TermsOfService() {
                   Class packages have an expiration period as specified at the time of purchase. Unused classes will expire at the end of the validity period and cannot be refunded, extended, or transferred unless otherwise stated.
                 </p>
 
-                <h3 className="text-lg font-semibold mt-4 mb-2">6.5 Unlimited 3-Month Membership</h3>
-                <p className="leading-relaxed mb-4">
-                  The Unlimited 3-Month Membership is based on AED 800 per month for a 3-month commitment, paid as a single upfront payment of AED 2,400 at the time of purchase. There are no monthly recurring payments during the membership period.
-                </p>
-                <ul className="list-disc list-inside space-y-2 pl-4">
-                  <li>The membership is valid for 3 consecutive months from the start date</li>
-                  <li>The full amount of AED 2,400 is payable upfront at the time of purchase</li>
-                  <li>Memberships are non-transferable and non-refundable</li>
-                  <li>Unused classes do not roll over between months or beyond the membership period</li>
-                </ul>
-
-                <h3 className="text-lg font-semibold mt-4 mb-2">6.6 Appointment and Service Packages</h3>
+                <h3 className="text-lg font-semibold mt-4 mb-2">6.5 Appointment and Service Packages</h3>
                 <p className="leading-relaxed mb-4">
                   Appointment and service packages, such as the NormaTec Compression Therapy Recovery Pack (5+1), are valid for the period specified at the time of purchase.
                 </p>

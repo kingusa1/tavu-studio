@@ -6,6 +6,7 @@ import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+import VatNote from '@/components/common/VatNote';
 
 const sessions = [
     {
@@ -200,8 +201,9 @@ export default function ContrastTherapyPage() {
                             <div className="text-center mb-12">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Sessions</h2>
                                 <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    The individual drop-in is a private session; couple, trio and group sessions come with the choice of a private or shared experience. All prices include VAT.
+                                    The individual drop-in is a private session; couple, trio and group sessions come with the choice of a private or shared experience.
                                 </p>
+                                <VatNote className="text-sm text-foreground/60 max-w-2xl mx-auto mt-2" />
                             </div>
                         </MotionWrapper>
 

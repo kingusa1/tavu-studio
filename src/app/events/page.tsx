@@ -8,20 +8,12 @@ import Image from 'next/image';
 
 const upcomingEvents = [
     {
-        title: 'Full Moon Sound Healing',
-        date: 'Full Moon',
+        title: 'Sound Healing',
+        date: 'Full Moon & New Moon',
         time: 'Dates to be announced',
-        description: 'A sound healing session held around the full moon. Some events are also specially focused around Yin + Yang.',
+        description: 'A sound healing session held around the full moon and the new moon. Some events are also specially focused around Yin + Yang.',
         category: 'Sound Healing',
-        image: '/event-sound-healing-1.webp'
-    },
-    {
-        title: 'New Moon Sound Healing',
-        date: 'New Moon',
-        time: 'Dates to be announced',
-        description: 'A sound healing session held around the new moon. Some events are also specially focused around Yin + Yang.',
-        category: 'Sound Healing',
-        image: '/event-sound-healing-2.webp'
+        images: ['/event-sound-healing-1.webp', '/event-sound-healing-2.webp']
     }
 ];
 
@@ -152,14 +144,18 @@ export default function EventsPage() {
                                 <MotionWrapper key={event.title} delay={0.1 + index * 0.1} direction="up">
                                     <div className="bg-card border border-border rounded-2xl overflow-hidden">
                                         <div className="grid md:grid-cols-3 gap-0">
-                                            <div className="aspect-video md:aspect-auto relative min-h-[200px]">
-                                                <Image
-                                                    src={event.image}
-                                                    alt={event.title}
-                                                    fill
-                                                    className="object-cover"
-                                                    sizes="(max-width: 768px) 100vw, 33vw"
-                                                />
+                                            <div className="aspect-video md:aspect-auto relative min-h-[200px] grid grid-cols-2 gap-1">
+                                                {event.images.map((src) => (
+                                                    <div key={src} className="relative h-full">
+                                                        <Image
+                                                            src={src}
+                                                            alt={event.title}
+                                                            fill
+                                                            className="object-cover"
+                                                            sizes="(max-width: 768px) 50vw, 17vw"
+                                                        />
+                                                    </div>
+                                                ))}
                                             </div>
                                             <div className="md:col-span-2 p-6 md:p-8">
                                                 <div className="flex items-center gap-3 mb-3">

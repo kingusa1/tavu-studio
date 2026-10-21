@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Contrast Therapy (Sauna + Ice Bath) in Abu Dhabi',
   description:
-    'Sauna plus ice bath contrast therapy at TAVÚ in Al Raha, Abu Dhabi. Private individual drop-in 275 AED, couple 456 AED, trio 600 AED, groups up to six 1,050 AED. VAT included.',
+    'Sauna plus ice bath contrast therapy at TAVÚ in Al Raha, Abu Dhabi. Private individual drop-in 275 AED, couple 456 AED, trio 600 AED, groups up to six 1,050 AED. VAT excluded.',
   keywords: [
     'Contrast Therapy Abu Dhabi',
     'Ice bath Abu Dhabi',
