@@ -3,6 +3,7 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import MindbodyWidget from '@/components/mindbody/MindbodyWidget';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getGlobal } from '@/lib/cms/globals';
 import { getOffers } from '@/lib/cms/offers';
 import { offerRow } from '@/lib/cms/offerText';
@@ -39,6 +40,10 @@ export default async function AppointmentsPage() {
 
       <main className="flex-grow pt-32 pb-16 px-4 container mx-auto">
         <div className="max-w-5xl mx-auto">
+          <Breadcrumbs
+            siteUrl={settings.brand.siteUrl ?? 'https://tavustudio.com'}
+            items={[{ name: 'Home', path: '/' }, { name: 'Appointments', path: '/appointments' }]}
+          />
           <MotionWrapper delay={0} direction="up">
             <div className="text-center mb-12">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-headline mb-6 text-primary">{data.title}</h1>

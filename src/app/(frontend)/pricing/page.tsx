@@ -6,6 +6,7 @@ import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
 
 import { FeaturedOfferCard } from '@/components/pricing/FeaturedOfferCard';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getOffers } from '@/lib/cms/offers';
 import { getRituals } from '@/lib/cms/massageRituals';
 import { offerRow, pricingRitualRow } from '@/lib/cms/offerText';
@@ -115,6 +116,10 @@ export default async function PricingPage() {
       <Header />
       <main className="flex-grow pt-32 pb-16 px-4 container mx-auto relative z-10">
         <div className="max-w-6xl mx-auto">
+          <Breadcrumbs
+            siteUrl={settings.brand.siteUrl ?? 'https://tavustudio.com'}
+            items={[{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing' }]}
+          />
           {/* Header */}
           <MotionWrapper delay={0} direction="up">
             <div className="text-center mb-14">
