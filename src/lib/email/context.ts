@@ -86,8 +86,7 @@ export async function loadEmailContext(payload: Payload): Promise<EmailContext> 
   };
 }
 
-/** First name for greetings ("Sara Ahmed" → "Sara"); falls back to "there". */
+/** First name for greetings ("Sara Ahmed" → "Sara"); empty when unknown (see fillTokens). */
 export function firstNameOf(name: string | null | undefined): string {
-  const first = singleLine(name, 80).split(' ')[0];
-  return first || 'there';
+  return singleLine(name, 80).split(' ')[0] || '';
 }

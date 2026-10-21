@@ -1,5 +1,8 @@
 import type { CollectionConfig } from 'payload';
 
+import { loadEmailContext } from '../../lib/email/context';
+import { passwordResetEmail } from '../../lib/email/templates';
+
 /**
  * The very first user ever created has no admin to grant them the role, so
  * beforeChange forces role: 'admin' when the collection is still empty.
@@ -28,7 +31,21 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
     defaultColumns: ['email', 'name', 'role'],
   },
-  auth: true,
+  auth: {
+    forgotPassword: {
+      expiration: 60 * 60 * 1000,
+      generateEmailSubject: () => 'Reset your TAVÚ CMS password',
+      // Branded email; the link is always built from the configured site URL, never from the
+      // request's Host header (prevents reset-link poisoning).
+      generateEmailHTML: async (args) => {
+        const { req, token, user } = args ?? {};
+        if (!req || !token) return '';
+        const ctx = await loadEmailContext(req.payload);
+        const resetUrl = `${ctx.siteUrl}/admin/reset/${encodeURIComponent(token)}`;
+        return passwordResetEmail({ name: user?.name, email: String(user?.email ?? ''), resetUrl }, ctx).html;
+      },
+    },
+  },
   access: {
     create: ({ req }) => Boolean(req.user?.role === 'admin'),
     delete: ({ req }) => Boolean(req.user?.role === 'admin'),

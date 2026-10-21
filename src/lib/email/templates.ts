@@ -207,3 +207,28 @@ export function newsletterIssueEmail(
     }),
   };
 }
+
+/** CMS "Forgot password?" email (Payload calls this from the Users collection). */
+export function passwordResetEmail(input: { name?: string | null; email: string; resetUrl: string }, ctx: EmailContext): BuiltEmail {
+  const greeting = input.name ? `Hi ${firstNameOf(input.name)},` : 'Hello,';
+  const body =
+    `${greeting}\n\nWe received a request to reset the password for the TAVÚ website editor account ${input.email}. ` +
+    'Press the button below to choose a new password. The link works for one hour and can be used once.\n\n' +
+    'If you did not ask for this, you can ignore this email. Your password stays the same.';
+  const cta = { label: 'Choose a new password', url: input.resetUrl };
+  const small = 'For your security, never forward this email or share the link.';
+  return {
+    subject: 'Reset your TAVÚ CMS password',
+    html: renderEmailHtml({
+      preheader: 'Use this link within one hour to choose a new password for the TAVÚ CMS.',
+      eyebrow: 'TAVÚ CMS',
+      heading: 'Reset your password',
+      bodyHtml: paragraphsToHtml(body),
+      cta,
+      footer: ctx.footer,
+      logoUrl: ctx.logoUrl,
+      smallPrintHtml: escapeHtml(small),
+    }),
+    text: renderEmailText({ heading: 'Reset your password', bodyText: body, cta, footer: ctx.footer, smallPrint: small }),
+  };
+}

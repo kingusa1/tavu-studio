@@ -72,9 +72,15 @@ export function paragraphStyle(): string {
   return `margin:0 0 16px;font-family:${BRAND.sans};font-size:16px;line-height:26px;color:${BRAND.ink};`;
 }
 
-/** Replace {token} placeholders; unknown tokens are left untouched so typos stay visible in tests. */
+/**
+ * Replace {token} placeholders. An empty value removes the placeholder together with a leading
+ * comma/space ("Welcome, {name}" → "Welcome"); unknown tokens stay visible so typos show in tests.
+ */
 export function fillTokens(template: string, tokens: Record<string, string>): string {
-  return template.replace(/\{(\w+)\}/g, (match, key: string) => (key in tokens ? tokens[key] : match));
+  return template.replace(/(,?[ 	]*)\{(\w+)\}/g, (match, lead: string, key: string) => {
+    if (!(key in tokens)) return match;
+    return tokens[key] ? `${lead}${tokens[key]}` : '';
+  });
 }
 
 function button(label: string, url: string): string {
