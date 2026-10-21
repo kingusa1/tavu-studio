@@ -455,6 +455,14 @@ async function seedPageGlobals(payload: Payload): Promise<void> {
 
 async function seedLegalPages(payload: Payload): Promise<void> {
   const editorConfig = await editorConfigFactory.default({ config: payload.config });
+  // convertMarkdownToLexical merges blocks across blank lines (paragraph + paragraph, list + following
+  // paragraph). Converting each blank-line-separated block on its own keeps every block separate.
+  const markdownToLexical = (markdown: string) => {
+    const blocks = markdown.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+    const converted = blocks.map((block) => convertMarkdownToLexical({ editorConfig, markdown: block }));
+    const [first] = converted;
+    return { ...first, root: { ...first.root, children: converted.flatMap((doc) => doc.root.children) } };
+  };
 
   const [termsMarkdown, privacyMarkdown] = await Promise.all([
     readFile(path.resolve(process.cwd(), 'src/payload/seed/legal/terms-of-service.md'), 'utf-8'),
@@ -464,7 +472,7 @@ async function seedLegalPages(payload: Payload): Promise<void> {
   await upsertLegalPage(payload, 'terms-of-service', {
     title: 'Terms of Service',
     lastUpdated: new Date('2026-10-01').toISOString(),
-    body: convertMarkdownToLexical({ editorConfig, markdown: termsMarkdown }),
+    body: markdownToLexical(termsMarkdown),
     contactCard: {
       enabled: true,
       organisationName: 'TAVU Wellness Studio',
@@ -486,7 +494,7 @@ async function seedLegalPages(payload: Payload): Promise<void> {
   await upsertLegalPage(payload, 'privacy-policy', {
     title: 'Privacy Policy',
     lastUpdated: new Date('2025-01-01').toISOString(),
-    body: convertMarkdownToLexical({ editorConfig, markdown: privacyMarkdown }),
+    body: markdownToLexical(privacyMarkdown),
     contactCard: {
       enabled: true,
       organisationName: 'TAVU Wellness Studio',
