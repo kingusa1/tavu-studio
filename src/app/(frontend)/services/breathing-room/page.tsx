@@ -1,303 +1,220 @@
-"use client";
-
-import Header from '@/components/landing/Header';
-import Footer from '@/components/landing/Footer';
-import BackgroundImage from '@/components/common/BackgroundImage';
-import MotionWrapper from '@/components/common/MotionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import BackgroundImage from '@/components/common/BackgroundImage';
+import MotionWrapper from '@/components/common/MotionWrapper';
 import VatNote from '@/components/common/VatNote';
+import Footer from '@/components/landing/Footer';
+import Header from '@/components/landing/Header';
+import { getClasses } from '@/lib/cms/classes';
+import { getGlobal } from '@/lib/cms/globals';
+import { resolveImage } from '@/lib/cms/media';
+import { getOffers } from '@/lib/cms/offers';
+import { offerRow } from '@/lib/cms/offerText';
+import type { OfferLike } from '@/lib/cms/offerText';
+import type { BreathingRoomPage as BreathingRoomPageData, Class } from '@/payload-types';
 
+// `getOffers()` is still a package B stub returning `[]`, typed against the stub Offers
+// collection (§6) — `offerRow()` expects the real Offer shape that B's merge provides. Same
+// bridge as `src/lib/cms/globals.ts` uses for tokens; a no-op once B merges.
+function asOfferLike(offer: unknown): OfferLike {
+  return offer as OfferLike;
+}
 
-const classes = [
-    {
-        family: 'TAVÚ MAT',
-        name: 'TAVÚ MAT: Core',
-        level: '',
-        description: 'A focused Mat Pilates class designed to strengthen the deep core, improve stability, and support better posture through controlled, intentional movement.'
-    },
-    {
-        family: 'TAVÚ MAT',
-        name: 'TAVÚ MAT: Power Pulse',
-        level: 'Advanced',
-        description: 'A high-energy advanced Mat workout combining powerful movements, controlled pulses, and challenging sequences to build strength, endurance, and full-body control.'
-    },
-    {
-        family: 'TAVÚ MAT',
-        name: 'TAVÚ MAT: Sculpt',
-        level: 'Advanced',
-        description: 'An advanced Mat workout built around challenging sculpting sequences designed to strengthen, define, and fatigue the muscles while testing control, stability, and endurance.'
-    },
-    {
-        family: 'TAVÚ RELEASE',
-        name: 'TAVÚ RELEASE: Hip Reset',
-        level: '',
-        description: 'A targeted release class designed to open the hips, ease built-up tension, and restore mobility through a combination of gentle movement, stretching, and controlled mobility work.'
-    },
-    {
-        family: 'TAVÚ RELEASE',
-        name: 'TAVÚ RELEASE: Lower Back Release',
-        level: '',
-        description: 'A gentle class focused on releasing tension through the lower back, hips, and surrounding muscles while improving mobility and encouraging comfortable, supported movement.'
-    },
-    {
-        family: 'TAVÚ RELEASE',
-        name: 'TAVÚ RELEASE: Stretch & Release',
-        level: '',
-        description: 'A calming full-body session combining gentle stretching and release work to reduce tension, improve mobility, and leave the body feeling lighter and more relaxed.'
-    },
-    {
-        family: 'TAVÚ STRETCH',
-        name: 'TAVÚ STRETCH: Backbends & Posture',
-        level: '',
-        description: 'A focused stretching class designed to open the chest, shoulders, spine, and hip flexors while building the mobility and control needed for backbends and improved posture.'
-    },
-    {
-        family: 'TAVÚ STRETCH',
-        name: 'TAVÚ STRETCH: Balance + Sculpt',
-        level: '',
-        description: 'A combination of balance work, controlled sculpting movements, and stretching designed to improve stability, coordination, strength, and flexibility.'
-    },
-    {
-        family: 'TAVÚ STRETCH',
-        name: 'TAVÚ STRETCH: Deep Core + Stretch',
-        level: '',
-        description: 'A balanced session combining deep core activation with full-body stretching to improve stability, posture, mobility, and overall body control.'
-    },
-    {
-        family: 'TAVÚ STRETCH',
-        name: 'TAVÚ STRETCH: Dynamic Stretching',
-        level: '',
-        description: 'An active stretching class using continuous, controlled movement to increase mobility, warm the body, and improve functional range of motion.'
-    },
-    {
-        family: 'TAVÚ STRETCH',
-        name: 'TAVÚ STRETCH: Split & Glutes',
-        level: '',
-        description: 'A targeted stretching session focused on the hips, glutes, and surrounding muscles to release tightness, improve mobility, and support better lower-body movement.'
-    }
-];
+export default async function BreathingRoomPage() {
+  const [data, classes, offers] = await Promise.all([
+    getGlobal<BreathingRoomPageData>('breathing-room-page'),
+    getClasses('breathing-room'),
+    getOffers({ category: 'breathing-room', surface: 'servicePage' }),
+  ]);
 
-export default function BreathingRoomPage() {
-    return (
-        <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
-            <BackgroundImage />
-            <Header />
+  const heroImage = resolveImage(data.hero?.image);
+  const cardImage = resolveImage(data.overview?.card?.image);
 
-            {/* Hero Section */}
-            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/service-breathing-props.webp"
-                        alt="Breathing Room"
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-                </div>
-                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                    <MotionWrapper delay={0} direction="up">
-                        <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
-                            Breath
-                        </span>
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">Breathing Room</h1>
-                        <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto">
-                            A space dedicated to slowing down. Breath-led practices designed to restore balance and reconnect you to your body.
-                        </p>
-                    </MotionWrapper>
-                </div>
-            </section>
+  return (
+    <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
+      <BackgroundImage />
+      <Header />
 
-            <main className="flex-grow">
-                {/* Overview Section */}
-                <section className="py-20 bg-background">
-                    <div className="container mx-auto px-4">
-                        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                            <MotionWrapper delay={0.1} direction="left">
-                                <div>
-                                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">The Breathing Room</h2>
-                                    <p className="text-lg text-foreground/70 mb-6 leading-relaxed">
-                                        Our breathing room is a sanctuary for presence and breath. From mat pilates to release and stretch,
-                                        each session is designed to help you release tension, build strength, and find inner calm.
-                                    </p>
-                                    <div className="grid grid-cols-2 gap-4 mb-8">
-                                        <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
-                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">11</p>
-                                            <p className="text-sm font-medium text-foreground/70">Signature Classes</p>
-                                        </div>
-                                        <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
-                                            <p className="text-4xl font-headline text-accent leading-tight mb-1">3</p>
-                                            <p className="text-sm font-medium text-foreground/70">MAT · RELEASE · STRETCH</p>
-                                        </div>
-                                    </div>
-                                    <Link
-                                        href="/schedule"
-                                        className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
-                                    >
-                                        Book a Class
-                                    </Link>
-                                </div>
-                            </MotionWrapper>
-                            <MotionWrapper delay={0.2} direction="right">
-                                <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
-                                    <Image
-                                        src="/gallery-breathing-room.webp"
-                                        alt="The TAVÚ Breathing Room"
-                                        fill
-                                        className="object-cover"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-                                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                                        <p className="text-sm uppercase tracking-[0.2em] text-accent font-medium mb-2">TAVÚ</p>
-                                        <h3 className="text-2xl md:text-3xl font-headline text-white mb-1">Breathing</h3>
-                                        <h3 className="text-2xl md:text-3xl font-headline italic font-light text-white/90 mb-4">Room Classes</h3>
-                                        <ul className="space-y-1.5">
-                                            <li className="text-white/80 text-sm flex items-center gap-2">
-                                                <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                TAVÚ MAT, RELEASE and STRETCH classes
-                                            </li>
-                                            <li className="text-white/80 text-sm flex items-center gap-2">
-                                                <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
-                                                Drop-in sessions and class packs
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </MotionWrapper>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Classes Section */}
-                <section className="py-20 bg-muted/30">
-                    <div className="container mx-auto px-4">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <div className="text-center mb-12">
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Our Classes</h2>
-                                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                                    Signature mat, release and stretch classes for every body.
-                                </p>
-                            </div>
-                        </MotionWrapper>
-
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                            {classes.map((cls, index) => (
-                                <MotionWrapper key={index} delay={0.1 * (index + 1)} direction="up">
-                                    <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-all h-full flex flex-col">
-                                        <div className="flex items-center justify-between mb-3">
-                                            <h3 className="font-headline text-xl text-primary">{cls.name}</h3>
-                                            {cls.level && (
-                                                <span className="text-xs px-3 py-1 rounded-full font-medium border bg-rose-50 text-rose-700 border-rose-200">
-                                                    {cls.level}
-                                                </span>
-                                            )}
-                                        </div>
-                                        <p className="text-sm font-medium text-accent mb-2 uppercase tracking-wide text-xs">{cls.family}</p>
-                                        <p className="text-sm text-foreground/70 flex-grow">{cls.description}</p>
-                                        <div className="flex items-center justify-end mt-4 pt-4 border-t border-border">
-                                            <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
-                                                Book Now →
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </MotionWrapper>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Package Section */}
-                <section className="py-20 bg-accent/5">
-                    <div className="container mx-auto px-4">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <div className="text-center mb-12">
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Breathing Room Packages</h2>
-                                <VatNote className="text-lg text-foreground/70 max-w-2xl mx-auto" />
-                            </div>
-                        </MotionWrapper>
-
-                        <MotionWrapper delay={0.2} direction="up">
-                            <div className="max-w-lg mx-auto bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
-                                <div className="flex flex-col gap-4 p-6">
-                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
-                                        <div>
-                                            <p className="font-semibold text-primary">Drop-In</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Single session valid for any Breathing Room class (TAVÚ MAT, RELEASE and STRETCH).</p>
-                                            <p className="text-xs text-foreground/40 mt-1">Non-transferable & non-refundable</p>
-                                        </div>
-                                        <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">120</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
-                                        <div>
-                                            <p className="font-semibold text-primary">10-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Valid 2 months.</p>
-                                            <p className="text-xs text-foreground/50 mt-1">Includes 2 complimentary Contrast Therapy sessions</p>
-                                        </div>
-                                        <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">1,100</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
-                                        <div>
-                                            <p className="font-semibold text-primary">20-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Valid 3 months.</p>
-                                            <p className="text-xs text-foreground/50 mt-1">Includes 4 complimentary Contrast Therapy sessions</p>
-                                        </div>
-                                        <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">2,100</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
-                                        <div>
-                                            <p className="font-semibold text-primary">50-Class Pack</p>
-                                            <p className="text-sm text-foreground/60 mt-1">Valid 6 months.</p>
-                                            <p className="text-xs text-foreground/50 mt-1">Includes 8 complimentary Contrast Therapy sessions</p>
-                                        </div>
-                                        <div className="text-right flex-shrink-0">
-                                            <p className="font-headline text-xl text-accent">5,100</p>
-                                            <p className="text-xs text-foreground/50">AED</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="px-6 pb-6">
-                                    <Link
-                                        href="/schedule"
-                                        className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
-                                    >
-                                        Book Your Mat
-                                    </Link>
-                                </div>
-                            </div>
-                        </MotionWrapper>
-                    </div>
-                </section>
-
-                {/* CTA Section */}
-                <section className="py-20 bg-primary text-primary-foreground">
-                    <div className="container mx-auto px-4 text-center">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">Ready to Begin?</h2>
-                            <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                                Book your first breathing room class and find your calm.
-                            </p>
-                            <Link
-                                href="/schedule"
-                                className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
-                            >
-                                View Schedule & Book
-                            </Link>
-                        </MotionWrapper>
-                    </div>
-                </section>
-            </main>
-
-            <Footer />
+      {/* Hero Section */}
+      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          {heroImage && (
+            <Image
+              src={heroImage.src}
+              alt={heroImage.alt}
+              fill
+              className={`object-cover ${data.hero?.imagePosition === 'center-40' ? 'object-[center_40%]' : ''}`}
+              priority
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
-    );
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          <MotionWrapper delay={0} direction="up">
+            <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">{data.hero?.eyebrow}</span>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">{data.hero?.title}</h1>
+            <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-2xl mx-auto">{data.hero?.intro}</p>
+          </MotionWrapper>
+        </div>
+      </section>
+
+      <main className="flex-grow">
+        {/* Overview Section */}
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+              <MotionWrapper delay={0.1} direction="left">
+                <div>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-6">{data.overview?.heading}</h2>
+                  {data.overview?.paragraphs?.map((p, i) => (
+                    <p key={i} className="text-lg text-foreground/70 mb-6 leading-relaxed">
+                      {p.text}
+                    </p>
+                  ))}
+                  <div className="grid grid-cols-2 gap-4 mb-8">
+                    {data.overview?.stats?.map((stat, i) => (
+                      <div key={i} className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
+                        <p className="text-4xl font-headline text-accent leading-tight mb-1">{stat.value}</p>
+                        <p className="text-sm font-medium text-foreground/70">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <Link
+                    href={data.overview?.cta?.href || '/schedule'}
+                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
+                  >
+                    {data.overview?.cta?.label}
+                  </Link>
+                </div>
+              </MotionWrapper>
+              <MotionWrapper delay={0.2} direction="right">
+                <div className="aspect-[4/3] relative rounded-2xl overflow-hidden shadow-2xl">
+                  {cardImage && <Image src={cardImage.src} alt={cardImage.alt} fill className="object-cover" />}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                    <p className="text-sm uppercase tracking-[0.2em] text-accent font-medium mb-2">{data.overview?.card?.eyebrow}</p>
+                    <h3 className="text-2xl md:text-3xl font-headline text-white mb-1">{data.overview?.card?.titleLine1}</h3>
+                    <h3 className="text-2xl md:text-3xl font-headline italic font-light text-white/90 mb-4">{data.overview?.card?.titleLine2}</h3>
+                    <ul className="space-y-1.5">
+                      {data.overview?.card?.bullets?.map((bullet, i) => (
+                        <li key={i} className="text-white/80 text-sm flex items-center gap-2">
+                          <span className="w-1 h-1 bg-white/60 rounded-full flex-shrink-0" />
+                          {bullet.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </MotionWrapper>
+            </div>
+          </div>
+        </section>
+
+        {/* Classes Section */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <MotionWrapper delay={0.1} direction="up">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">{data.classes?.heading}</h2>
+                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">{data.classes?.intro}</p>
+              </div>
+            </MotionWrapper>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {classes.map((cls: Class, index: number) => (
+                <MotionWrapper key={cls.id} delay={0.1 * (index + 1)} direction="up">
+                  <div className="bg-card border border-border p-6 rounded-2xl hover:shadow-lg transition-all h-full flex flex-col">
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-headline text-xl text-primary">{cls.name}</h3>
+                      {cls.level && (
+                        <span className="text-xs px-3 py-1 rounded-full font-medium border bg-rose-50 text-rose-700 border-rose-200">
+                          {cls.level === 'all-levels' ? 'All Levels' : cls.level === 'foundation' ? 'Foundation' : cls.level === 'intermediate' ? 'Intermediate' : 'Advanced'}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm font-medium text-accent mb-2 uppercase tracking-wide text-xs">
+                      {cls.family === 'tavu-mat' ? 'TAVÚ MAT' : cls.family === 'tavu-release' ? 'TAVÚ RELEASE' : cls.family === 'tavu-stretch' ? 'TAVÚ STRETCH' : ''}
+                    </p>
+                    <p className="text-sm text-foreground/70 flex-grow">{cls.description}</p>
+                    <div className="flex items-center justify-end mt-4 pt-4 border-t border-border">
+                      <Link href="/schedule" className="text-accent font-medium text-sm hover:underline">
+                        Book Now →
+                      </Link>
+                    </div>
+                  </div>
+                </MotionWrapper>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Package Section */}
+        <section className="py-20 bg-accent/5">
+          <div className="container mx-auto px-4">
+            <MotionWrapper delay={0.1} direction="up">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">{data.packages?.heading}</h2>
+                {data.packages?.showVatNote && <VatNote className="text-lg text-foreground/70 max-w-2xl mx-auto" />}
+              </div>
+            </MotionWrapper>
+
+            <MotionWrapper delay={0.2} direction="up">
+              <div className="max-w-lg mx-auto bg-card border border-border rounded-2xl overflow-hidden shadow-xl">
+                <div className="flex flex-col gap-4 p-6">
+                  {offers.map((offer) => {
+                    const row = offerRow(asOfferLike(offer), 'servicePage');
+                    return (
+                      <div key={offer.id} className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30">
+                        <div>
+                          <p className="font-semibold text-primary">{row.name}</p>
+                          {row.description && <p className="text-sm text-foreground/60 mt-1">{row.description}</p>}
+                          {row.bonus && <p className="text-xs text-foreground/50 mt-1">{row.bonus}</p>}
+                        </div>
+                        <div className="text-right flex-shrink-0">
+                          <p className="font-headline text-xl text-accent">{row.price}</p>
+                          <p className="text-xs text-foreground/50">AED</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="px-6 pb-6">
+                  <Link
+                    href="/schedule"
+                    className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                  >
+                    Book Your Mat
+                  </Link>
+                </div>
+              </div>
+            </MotionWrapper>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        {data.cta?.enabled && (
+          <section className="py-20 bg-primary text-primary-foreground">
+            <div className="container mx-auto px-4 text-center">
+              <MotionWrapper delay={0.1} direction="up">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline mb-4">{data.cta.heading}</h2>
+                <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">{data.cta.text}</p>
+                {data.cta.buttons?.map((button, index) => (
+                  <Link
+                    key={index}
+                    href={button.link.href}
+                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
+                  >
+                    {button.link.label}
+                  </Link>
+                ))}
+              </MotionWrapper>
+            </div>
+          </section>
+        )}
+      </main>
+
+      <Footer />
+    </div>
+  );
 }

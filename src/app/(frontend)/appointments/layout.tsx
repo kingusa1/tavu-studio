@@ -1,16 +1,14 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Appointments | Book Contrast, NormaTec & Massage',
-  description:
-    'Book private appointments at TAVÚ Studio — Contrast Therapy, NormaTec Compression Therapy and Massage in Al Raha, Abu Dhabi.',
-  alternates: { canonical: '/appointments' },
-  openGraph: {
-    title: 'Book an Appointment at TAVÚ',
-    description: 'Private 1-on-1 appointments — Contrast Therapy, Compression Therapy, Massage.',
-    url: '/appointments',
-  },
-};
+import { getGlobal } from '@/lib/cms/globals';
+import { buildMetadata } from '@/lib/cms/metadata';
+import { getSiteData } from '@/lib/cms/site';
+import type { AppointmentsPage } from '@/payload-types';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, { settings }] = await Promise.all([getGlobal<AppointmentsPage>('appointments-page'), getSiteData()]);
+  return buildMetadata(page.seo, { path: '/appointments', fallback: settings.seo });
+}
 
 export default function AppointmentsLayout({ children }: { children: React.ReactNode }) {
   return children;

@@ -1,16 +1,14 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Services | Pilates, Contrast Therapy, Recovery & Massage',
-  description:
-    'Explore all TAVÚ services — Reformer Pilates, Breathing Room, Contrast Therapy, NormaTec Compression Therapy and Massage in Al Raha, Abu Dhabi.',
-  alternates: { canonical: '/services' },
-  openGraph: {
-    title: 'TAVÚ Services | Movement, Recovery, Breath',
-    description: 'Reformer, mat classes, Contrast Therapy, NormaTec and Massage.',
-    url: '/services',
-  },
-};
+import { getGlobal } from '@/lib/cms/globals';
+import { buildMetadata } from '@/lib/cms/metadata';
+import { getSiteData } from '@/lib/cms/site';
+import type { ServicesPage } from '@/payload-types';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, { settings }] = await Promise.all([getGlobal<ServicesPage>('services-page'), getSiteData()]);
+  return buildMetadata(page.seo, { path: '/services', fallback: settings.seo });
+}
 
 export default function ServicesLayout({ children }: { children: React.ReactNode }) {
   return children;
