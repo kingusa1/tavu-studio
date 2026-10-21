@@ -39,6 +39,23 @@ if (process.env.NODE_ENV !== 'production') {
   csrfOrigins.push('http://localhost:3000');
 }
 
+// SEC-01: the pooler's TLS chain is self-signed at its root (Supabase Root 2021 CA /
+// Supabase Intermediate 2021 CA — observed via `openssl s_client -starttls postgres`), so
+// `rejectUnauthorized: true` requires this exact CA or every connection fails closed. When the
+// integrator hasn't set SUPABASE_DB_CA_CERT yet (e.g. a fresh local checkout), fail open with a
+// loud warning rather than crash the whole app — still opportunistically encrypted, just
+// unverified, matching the task's documented fallback for "verification cannot be made to work."
+const supabaseDbCaCert = process.env.SUPABASE_DB_CA_CERT;
+const poolSsl = supabaseDbCaCert
+  ? { ca: supabaseDbCaCert, rejectUnauthorized: true }
+  : (() => {
+      console.warn(
+        '[payload.config] SUPABASE_DB_CA_CERT is not set — falling back to ssl.rejectUnauthorized: false. ' +
+          'Set SUPABASE_DB_CA_CERT (see tmp/secrets/supabase-ca.pem) to verify the database TLS certificate.',
+      );
+      return { rejectUnauthorized: false };
+    })();
+
 export default buildConfig({
   admin: {
     user: 'users',
@@ -62,7 +79,10 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: databaseUri,
-      max: 5,
+      ssl: poolSsl,
+      max: 3,
+      idleTimeoutMillis: 5_000,
+      connectionTimeoutMillis: 10_000,
     },
     schemaName: process.env.PAYLOAD_DB_SCHEMA || 'payload',
     push: process.env.PAYLOAD_DB_PUSH === 'true',
