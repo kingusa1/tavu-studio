@@ -151,6 +151,8 @@ export const Users: CollectionConfig = {
       virtual: true,
       defaultValue: false,
       admin: {
+        // Payload makes virtual fields read-only in the admin unless told otherwise (fields/config/sanitize.js).
+        readOnly: false,
         description:
           'They receive a TAVÚ email with their sign-in address and a button to choose their own password (the link works for 72 hours; after that they can use “Forgot password?”). Their password is never sent by email.',
       },
