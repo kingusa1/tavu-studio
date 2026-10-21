@@ -12,6 +12,7 @@ import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
+import NewsletterSignup from '@/components/newsletter/NewsletterSignup';
 import { buildBlogPostingJsonLd } from '@/lib/cms/jsonLd';
 import { buildMetadata } from '@/lib/cms/metadata';
 import { resolveImage } from '@/lib/cms/media';
@@ -192,7 +193,9 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
 
-          {/* NEWSLETTER_SLOT */}
+          <div className="mt-16">
+            <NewsletterSignup source={`blog:${post.slug}`} />
+          </div>
         </article>
       </main>
       <Footer />

@@ -7,6 +7,7 @@ import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import JsonLd from '@/components/seo/JsonLd';
+import NewsletterSignup from '@/components/newsletter/NewsletterSignup';
 import { getAllCategories, getCategoryBySlug } from '@/lib/cms/categories';
 import { getGlobal } from '@/lib/cms/globals';
 import { buildBlogJsonLd } from '@/lib/cms/jsonLd';
@@ -155,7 +156,9 @@ export default async function BlogListingView({ categorySlug, page }: BlogListin
               </>
             )}
 
-            {/* NEWSLETTER_SLOT */}
+            <div className="mt-20">
+              <NewsletterSignup source="blog" />
+            </div>
           </div>
         </section>
       </main>
