@@ -160,6 +160,9 @@ export async function seedSite(payload: Payload): Promise<void> {
           { label: 'About', path: 'https://tavustudio.com/about', description: 'The studio, the space and the philosophy.' },
           { label: 'Method', path: 'https://tavustudio.com/method', description: 'The TAVÚ progression system.' },
           { label: 'Contact', path: 'https://tavustudio.com/contact', description: 'Location, hours and enquiries.' },
+          { label: 'Blog', path: 'https://tavustudio.com/blog', description: 'Articles on Reformer Pilates, Breathing Room, Contrast Therapy, Compression Therapy and recovery.' },
+          { label: 'FAQ', path: 'https://tavustudio.com/faq', description: 'Answers about classes, sessions, memberships, pricing and booking.' },
+          { label: 'Editorial Policy', path: 'https://tavustudio.com/editorial-policy', description: 'How TAVÚ writes, reviews and corrects its blog articles.' },
         ],
         sectionHeadings: [
           { key: 'servicesPricing', heading: 'Services & Pricing (AED, VAT excluded)' },
