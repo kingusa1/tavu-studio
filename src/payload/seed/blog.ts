@@ -75,10 +75,10 @@ async function upsertDraftPost(payload: Payload, slug: string, data: Record<stri
 
 async function seedCategories(payload: Payload): Promise<Record<string, number>> {
   const categories: Array<{ slug: string; title: string; description: string }> = [
-    { slug: 'reformer-pilates', title: 'Reformer Pilates', description: 'Small-group reformer classes, limited to 8 participants.' },
-    { slug: 'breathing-room', title: 'Breathing Room', description: 'TAVÚ MAT, RELEASE and STRETCH mat-based classes.' },
-    { slug: 'recovery', title: 'Recovery', description: 'Contrast Therapy, Compression Therapy and recovery memberships.' },
-    { slug: 'massage', title: 'Massage', description: 'Ladies-only massage rituals.' },
+    { slug: 'reformer-pilates', title: 'Reformer Pilates', description: "Guides to Reformer Pilates at TAVÚ in Al Raha, Abu Dhabi: small-group 50-minute reformer classes, limited to 8 participants, from gentle to advanced." },
+    { slug: 'breathing-room', title: 'Breathing Room', description: "Guides to TAVÚ's Breathing Room in Al Raha, Abu Dhabi: mat-based TAVÚ MAT, RELEASE and STRETCH classes for strength, mobility and flexibility." },
+    { slug: 'recovery', title: 'Recovery', description: 'Guides to recovery at TAVÚ in Al Raha, Abu Dhabi: Contrast Therapy with sauna and ice bath, NormaTec Compression Therapy and recovery memberships.' },
+    { slug: 'massage', title: 'Massage', description: "Guides to TAVÚ's ladies-only massage rituals in Al Raha, Abu Dhabi: full-body FLOW, RELEASE, RECOVER and DRAIN, targeted rituals and ROOTED reflexology." },
     { slug: 'studio-news', title: 'Studio News', description: 'Updates from TAVÚ Studio.' },
   ];
 
@@ -96,7 +96,7 @@ async function seedAuthor(payload: Payload): Promise<number> {
     name: 'TAVÚ Studio',
     kind: 'organization',
     role: 'TAVÚ Studio Team',
-    bio: 'Written by the team at TAVÚ Wellness Studio, Al Raha, Abu Dhabi.',
+    bio: 'Written by the team at TAVÚ Wellness Studio, Al Raha, Abu Dhabi: guides to Reformer Pilates, the Breathing Room, Contrast Therapy, compression and massage.',
     photo: { media: mediaId('logo.png'), alt: 'TAVÚ Wellness logo' },
     sameAs: [{ url: 'https://www.instagram.com/tavuwellness.studio' }],
   });
