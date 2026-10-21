@@ -260,8 +260,27 @@ export interface MassageRitual {
  */
 export interface Class {
   id: number;
-  title: string;
+  /**
+   * e.g. "TA: Gentle Flow", "TAVÚ MAT: Core"
+   */
+  name: string;
   slug: string;
+  type: 'reformer' | 'breathing-room';
+  /**
+   * The small accent label shown above the class name (Breathing Room only).
+   */
+  family?: ('tavu-mat' | 'tavu-release' | 'tavu-stretch') | null;
+  /**
+   * Badge colour is fixed per level in code. The Breathing Room page always shows its badge in rose regardless of this value.
+   */
+  level?: ('foundation' | 'all-levels' | 'intermediate' | 'advanced') | null;
+  description: string;
+  /**
+   * Shown on the Reformer Pilates service page.
+   */
+  durationLabel?: string | null;
+  active?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -499,8 +518,15 @@ export interface MassageRitualsSelect<T extends boolean = true> {
  * via the `definition` "classes_select".
  */
 export interface ClassesSelect<T extends boolean = true> {
-  title?: T;
+  name?: T;
   slug?: T;
+  type?: T;
+  family?: T;
+  level?: T;
+  description?: T;
+  durationLabel?: T;
+  active?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -939,7 +965,115 @@ export interface MethodPage {
  */
 export interface ClassesPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    title?: string | null;
+    intro?: string | null;
+  };
+  /**
+   * Card titles and CTAs come from Site Settings → Price cards. Rows are the Reformer and Breathing Room offers flagged "Show on Classes" — edit those in Prices & Packages.
+   */
+  packages?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    showVatNote?: boolean | null;
+  };
+  /**
+   * Items come from Policies whose "Show on" includes Classes.
+   */
+  policies?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+  };
+  /**
+   * Class cards below are the active Reformer classes.
+   */
+  reformerRoom?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    eyebrow?: string | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {fact:reformer-capacity}.
+     */
+    lead?: string | null;
+    /**
+     * Tokens allowed, e.g. {fact:reformer-duration}.
+     */
+    body?: string | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    cardCtaLabel?: string | null;
+    cardCtaHref?: string | null;
+  };
+  /**
+   * Class cards below are the active Breathing Room classes.
+   */
+  breathingRoom?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    lead?: string | null;
+    body?: string | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    cardCtaLabel?: string | null;
+    cardCtaHref?: string | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -950,6 +1084,22 @@ export interface ClassesPage {
 export interface SchedulePage {
   id: number;
   title?: string | null;
+  intro?: string | null;
+  bookingInfo?: {
+    heading?: string | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -960,6 +1110,23 @@ export interface SchedulePage {
 export interface AppointmentsPage {
   id: number;
   title?: string | null;
+  intro?: string | null;
+  packagesHeading?: string | null;
+  info?: {
+    heading?: string | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -999,7 +1166,76 @@ export interface RecoveryPage {
  */
 export interface ServicesPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    eyebrow?: string | null;
+    title?: string | null;
+    intro?: string | null;
+  };
+  items?:
+    | {
+        /**
+         * e.g. "Movement", "Breath", "Recovery"
+         */
+        eyebrow?: string | null;
+        name: string;
+        /**
+         * Tokens allowed.
+         */
+        description?: string | null;
+        image?: {
+          media?: (number | null) | Media;
+          /**
+           * Overrides the image's default alt text for this spot only
+           */
+          alt?: string | null;
+        };
+        imagePosition?: ('center' | 'center-40') | null;
+        accent?: ('blue' | 'emerald' | 'amber' | 'cyan' | 'rose') | null;
+        features?:
+          | {
+              /**
+               * Tokens allowed.
+               */
+              text?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  learnMoreLabel?: string | null;
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1009,7 +1245,117 @@ export interface ServicesPage {
  */
 export interface ReformerPilatesPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    imagePosition?: ('center' | 'center-40') | null;
+    eyebrow?: string | null;
+    title?: string | null;
+    intro?: string | null;
+  };
+  overview?: {
+    heading?: string | null;
+    paragraphs?:
+      | {
+          /**
+           * Tokens allowed, e.g. {fact:reformer-capacity}.
+           */
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    stats?:
+      | {
+          /**
+           * Tokens allowed, e.g. {fact:reformer-capacity}.
+           */
+          value?: string | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    card?: {
+      image?: {
+        media?: (number | null) | Media;
+        /**
+         * Overrides the image's default alt text for this spot only
+         */
+        alt?: string | null;
+      };
+      eyebrow?: string | null;
+      titleLine1?: string | null;
+      /**
+       * Rendered in italic.
+       */
+      titleLine2?: string | null;
+      bullets?:
+        | {
+            /**
+             * Tokens allowed, e.g. {price:slug}.
+             */
+            text?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  /**
+   * Class cards below are the active Reformer classes.
+   */
+  classes?: {
+    heading?: string | null;
+    intro?: string | null;
+    cardCtaLabel?: string | null;
+    cardCtaHref?: string | null;
+  };
+  /**
+   * Rows are the Reformer offers flagged "Show on Service Page". The CTA comes from Site Settings → Price cards.
+   */
+  packages?: {
+    heading?: string | null;
+    showVatNote?: boolean | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1019,7 +1365,114 @@ export interface ReformerPilatesPage {
  */
 export interface BreathingRoomPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    imagePosition?: ('center' | 'center-40') | null;
+    eyebrow?: string | null;
+    title?: string | null;
+    intro?: string | null;
+  };
+  overview?: {
+    heading?: string | null;
+    paragraphs?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * The "11" stat is seeded as text, not auto-counted — the owner may prefer "10+" style copy as classes change.
+     */
+    stats?:
+      | {
+          value?: string | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    card?: {
+      image?: {
+        media?: (number | null) | Media;
+        /**
+         * Overrides the image's default alt text for this spot only
+         */
+        alt?: string | null;
+      };
+      eyebrow?: string | null;
+      titleLine1?: string | null;
+      /**
+       * Rendered in italic.
+       */
+      titleLine2?: string | null;
+      bullets?:
+        | {
+            /**
+             * Tokens allowed, e.g. {price:slug}.
+             */
+            text?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  /**
+   * Class cards below are the active Breathing Room classes.
+   */
+  classes?: {
+    heading?: string | null;
+    intro?: string | null;
+    cardCtaLabel?: string | null;
+    cardCtaHref?: string | null;
+  };
+  /**
+   * Rows are the Breathing Room offers flagged "Show on Service Page". The Unlimited 3-Month Membership feature card (when active) renders after the grid. The CTA comes from Site Settings → Price cards.
+   */
+  packages?: {
+    heading?: string | null;
+    showVatNote?: boolean | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1029,7 +1482,118 @@ export interface BreathingRoomPage {
  */
 export interface ContrastTherapyPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    imagePosition?: ('center' | 'center-40') | null;
+    eyebrow?: string | null;
+    title?: string | null;
+    intro?: string | null;
+  };
+  overview?: {
+    heading?: string | null;
+    paragraphs?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    card?: {
+      image?: {
+        media?: (number | null) | Media;
+        /**
+         * Overrides the image's default alt text for this spot only
+         */
+        alt?: string | null;
+      };
+      eyebrow?: string | null;
+      titleLine1?: string | null;
+      /**
+       * Rendered in italic.
+       */
+      titleLine2?: string | null;
+      bullets?:
+        | {
+            /**
+             * Tokens allowed, e.g. {price:slug}.
+             */
+            text?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  benefits?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    intro?: string | null;
+    items?:
+      | {
+          icon?: ('bolt' | 'heart' | 'circulation' | 'lightbulb') | null;
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Rows are the Contrast offers flagged "Show on Service Page".
+   */
+  sessions?: {
+    heading?: string | null;
+    intro?: string | null;
+    showVatNote?: boolean | null;
+  };
+  membershipsNote?: {
+    prefix?: string | null;
+    link?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    suffix?: string | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1039,7 +1603,113 @@ export interface ContrastTherapyPage {
  */
 export interface CompressionTherapyPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    imagePosition?: ('center' | 'center-40') | null;
+    eyebrow?: string | null;
+    title?: string | null;
+    intro?: string | null;
+  };
+  overview?: {
+    heading?: string | null;
+    paragraphs?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    card?: {
+      image?: {
+        media?: (number | null) | Media;
+        /**
+         * Overrides the image's default alt text for this spot only
+         */
+        alt?: string | null;
+      };
+      eyebrow?: string | null;
+      titleLine1?: string | null;
+      /**
+       * Rendered in italic.
+       */
+      titleLine2?: string | null;
+      bullets?:
+        | {
+            /**
+             * Tokens allowed, e.g. {price:slug}.
+             */
+            text?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  /**
+   * The two big cards are the Compression offers flagged "Show on Service Page".
+   */
+  pricing?: {
+    heading?: string | null;
+    intro?: string | null;
+    benefitsHeading?: string | null;
+    recommendedHeading?: string | null;
+    individualCtaLabel?: string | null;
+    packCtaLabel?: string | null;
+    ctaHref?: string | null;
+    showVatNote?: boolean | null;
+  };
+  pairWith?: {
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:compression-flush}.
+     */
+    text?: string | null;
+    link?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1460,7 +2130,108 @@ export interface MethodPageSelect<T extends boolean = true> {
  * via the `definition` "classes-page_select".
  */
 export interface ClassesPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        title?: T;
+        intro?: T;
+      };
+  packages?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        showVatNote?: T;
+      };
+  policies?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+      };
+  reformerRoom?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        eyebrow?: T;
+        heading?: T;
+        lead?: T;
+        body?: T;
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        cardCtaLabel?: T;
+        cardCtaHref?: T;
+      };
+  breathingRoom?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        lead?: T;
+        body?: T;
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        cardCtaLabel?: T;
+        cardCtaHref?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1471,6 +2242,23 @@ export interface ClassesPageSelect<T extends boolean = true> {
  */
 export interface SchedulePageSelect<T extends boolean = true> {
   title?: T;
+  intro?: T;
+  bookingInfo?:
+    | T
+    | {
+        heading?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1481,6 +2269,24 @@ export interface SchedulePageSelect<T extends boolean = true> {
  */
 export interface AppointmentsPageSelect<T extends boolean = true> {
   title?: T;
+  intro?: T;
+  packagesHeading?: T;
+  info?:
+    | T
+    | {
+        heading?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1520,7 +2326,68 @@ export interface RecoveryPageSelect<T extends boolean = true> {
  * via the `definition` "services-page_select".
  */
 export interface ServicesPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+      };
+  items?:
+    | T
+    | {
+        eyebrow?: T;
+        name?: T;
+        description?: T;
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        imagePosition?: T;
+        accent?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        href?: T;
+        id?: T;
+      };
+  learnMoreLabel?: T;
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1530,7 +2397,109 @@ export interface ServicesPageSelect<T extends boolean = true> {
  * via the `definition` "reformer-pilates-page_select".
  */
 export interface ReformerPilatesPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        imagePosition?: T;
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+      };
+  overview?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        stats?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        card?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              eyebrow?: T;
+              titleLine1?: T;
+              titleLine2?: T;
+              bullets?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+      };
+  classes?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        cardCtaLabel?: T;
+        cardCtaHref?: T;
+      };
+  packages?:
+    | T
+    | {
+        heading?: T;
+        showVatNote?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1540,7 +2509,109 @@ export interface ReformerPilatesPageSelect<T extends boolean = true> {
  * via the `definition` "breathing-room-page_select".
  */
 export interface BreathingRoomPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        imagePosition?: T;
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+      };
+  overview?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        stats?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        card?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              eyebrow?: T;
+              titleLine1?: T;
+              titleLine2?: T;
+              bullets?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+      };
+  classes?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        cardCtaLabel?: T;
+        cardCtaHref?: T;
+      };
+  packages?:
+    | T
+    | {
+        heading?: T;
+        showVatNote?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1550,7 +2621,123 @@ export interface BreathingRoomPageSelect<T extends boolean = true> {
  * via the `definition` "contrast-therapy-page_select".
  */
 export interface ContrastTherapyPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        imagePosition?: T;
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+      };
+  overview?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        card?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              eyebrow?: T;
+              titleLine1?: T;
+              titleLine2?: T;
+              bullets?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+      };
+  benefits?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        intro?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  sessions?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        showVatNote?: T;
+      };
+  membershipsNote?:
+    | T
+    | {
+        prefix?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        suffix?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1560,7 +2747,113 @@ export interface ContrastTherapyPageSelect<T extends boolean = true> {
  * via the `definition` "compression-therapy-page_select".
  */
 export interface CompressionTherapyPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        imagePosition?: T;
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+      };
+  overview?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        card?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              eyebrow?: T;
+              titleLine1?: T;
+              titleLine2?: T;
+              bullets?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+      };
+  pricing?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        benefitsHeading?: T;
+        recommendedHeading?: T;
+        individualCtaLabel?: T;
+        packCtaLabel?: T;
+        ctaHref?: T;
+        showVatNote?: T;
+      };
+  pairWith?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
