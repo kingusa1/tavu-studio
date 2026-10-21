@@ -4,9 +4,8 @@ import { cache } from 'react';
 
 import type { Offer } from '@/payload-types';
 
-import { getPayloadClient } from './payload';
-import { buildTokenIndex, resolveTokensDeep } from './tokens';
-import type { TokenFact, TokenOffer, TokenRitual } from './tokens';
+import { getCatalog } from './catalog';
+import { resolveTokensDeep } from './tokens';
 
 export type OfferSurface = 'home' | 'pricing' | 'classes' | 'servicePage' | 'appointments' | 'llms';
 
@@ -38,22 +37,10 @@ function isWithinAvailabilityWindow(offer: Offer, now: number): boolean {
  * (not just the ones this call will return) plus `site-settings.facts`.
  */
 export const getOffers = cache(async ({ category, surface }: GetOffersArgs = {}): Promise<Offer[]> => {
-  const payload = await getPayloadClient();
-
-  const [allOffers, allRituals, settings] = await Promise.all([
-    payload.find({ collection: 'offers', sort: ['sortOrder', 'createdAt'], limit: 0, depth: 1, overrideAccess: true }),
-    payload.find({ collection: 'massage-rituals', sort: ['sortOrder', 'createdAt'], limit: 0, depth: 1, overrideAccess: true }),
-    payload.findGlobal({ slug: 'site-settings', depth: 0 }).catch(() => null),
-  ]);
-
-  const index = buildTokenIndex({
-    offers: allOffers.docs as unknown as TokenOffer[],
-    rituals: allRituals.docs as unknown as TokenRitual[],
-    settings: settings as unknown as { facts?: TokenFact[] | null } | null,
-  });
+  const { offers: allOffers, index } = await getCatalog();
 
   const now = Date.now();
-  const filtered = allOffers.docs.filter((offer) => {
+  const filtered = allOffers.filter((offer) => {
     if (offer.active === false) return false;
     if (!isWithinAvailabilityWindow(offer, now)) return false;
     if (category && offer.category !== category) return false;
