@@ -1,23 +1,15 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Events & Collaborations',
-  description:
-    'Special events and collaborations at TAVÚ in Al Raha, Abu Dhabi — ALO x TAVÚ collaborations, private events, BeyondLeFifth running club gatherings, and Full Moon & New Moon sound healing.',
-  keywords: [
-    'wellness events Abu Dhabi',
-    'sound healing Abu Dhabi',
-    'running club Al Raha',
-    'private events Abu Dhabi',
-  ],
-  alternates: { canonical: '/events' },
-  openGraph: {
-    title: 'Events & Collaborations at TAVÚ',
-    description:
-      'ALO x TAVÚ collaborations, private events, BeyondLeFifth running club and Full Moon / New Moon sound healing.',
-    url: '/events',
-  },
-};
+import { getGlobal } from '@/lib/cms/globals';
+import { buildMetadata } from '@/lib/cms/metadata';
+import { getSiteData } from '@/lib/cms/site';
+
+import type { EventsPageData } from './page';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, { settings }] = await Promise.all([getGlobal<EventsPageData>('events-page'), getSiteData()]);
+  return buildMetadata(page.seo, { path: '/events', fallback: settings.seo });
+}
 
 export default function EventsLayout({ children }: { children: React.ReactNode }) {
   return children;

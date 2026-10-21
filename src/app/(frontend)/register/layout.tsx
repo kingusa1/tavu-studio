@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Create Your Account',
-  description:
-    'Create your TAVÚ account to book classes, manage packages and track your wellness journey.',
-  alternates: { canonical: '/register' },
-  // Account funnel pages are excluded from search (also disallowed in robots.txt)
-  robots: { index: false, follow: true },
-};
+import { getGlobal } from '@/lib/cms/globals';
+import { buildMetadata } from '@/lib/cms/metadata';
+import { getSiteData } from '@/lib/cms/site';
+
+import type { RegisterPageData } from './page';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, { settings }] = await Promise.all([getGlobal<RegisterPageData>('register-page'), getSiteData()]);
+  return buildMetadata(page.seo, { path: '/register', fallback: settings.seo });
+}
 
 export default function RegisterLayout({ children }: { children: React.ReactNode }) {
   return children;
