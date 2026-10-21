@@ -92,9 +92,10 @@ export default buildConfig({
     pool: {
       connectionString: databaseUri,
       ssl: poolSsl,
-      max: 3,
+      // Serverless defaults (Vercel functions); seed/migrate scripts may raise them via env.
+      max: Number(process.env.PAYLOAD_DB_POOL_MAX) || 3,
       idleTimeoutMillis: 5_000,
-      connectionTimeoutMillis: 10_000,
+      connectionTimeoutMillis: Number(process.env.PAYLOAD_DB_CONNECT_TIMEOUT_MS) || 10_000,
     },
     schemaName: process.env.PAYLOAD_DB_SCHEMA || 'payload',
     push: process.env.PAYLOAD_DB_PUSH === 'true',
