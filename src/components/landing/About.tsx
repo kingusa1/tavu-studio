@@ -5,14 +5,17 @@ import NextImage from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 
-// Three pillars visual: Reform (reformer studio), Breath (breathing room props), Contrast (sauna)
-const images = [
-  { src: "/service-reformer-mirror.webp", alt: "TAVÚ Reformer Pilates studio with circular backlit mirror" },
-  { src: "/service-breathing-props.webp", alt: "Breathing Room props — TAVÚ cork block and foam rollers" },
-  { src: "/service-sauna.webp", alt: "Himalayan salt sauna at TAVÚ Studio" },
-];
+import { RichText } from "@/components/cms/RichText";
+import { resolveImage } from "@/lib/cms/media";
+import type { HomePage } from "@/payload-types";
 
-export default function About() {
+export type AboutData = NonNullable<HomePage["about"]>;
+
+export type AboutProps = {
+  data: AboutData;
+};
+
+export default function About({ data }: AboutProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -22,6 +25,9 @@ export default function About() {
   const y1 = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const y2 = useTransform(scrollYProgress, [0, 1], [30, -30]);
   const y3 = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
+  const images = (data.images ?? []).map((row) => resolveImage(row.image));
+  const [image1, image2, image3] = images;
 
   return (
     <section
@@ -35,31 +41,22 @@ export default function About() {
           <MotionWrapper delay={0.1} direction="up">
             <div className="max-w-xl">
               <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-6 block">
-                The Philosophy
+                {data.eyebrow}
               </span>
               <h2 className="text-4xl sm:text-4xl sm:text-5xl md:text-6xl font-headline font-medium leading-[1.1] text-primary mb-8">
-                In a world that rushes, <br />
-                take a <em className="italic font-light text-primary/70">pause</em>.
+                {data.headingLine1} <br />
+                {data.headingLead} <em className="italic font-light text-primary/70">{data.headingEmphasis}</em>{data.headingTail}
               </h2>
               <div className="space-y-5 text-lg text-foreground/65 leading-relaxed font-light">
-                <p>
-                  TAVÚ is more than a studio—it is a sanctuary. A place where movement meets stillness,
-                  and where the noise of the outside world fades into a rhythm of your own making.
-                </p>
-                <p>
-                  We believe that true power comes not just from exertion, but from recovery.
-                  Our method intertwines the strength of <span className="text-primary font-medium">Reform</span>,
-                  the clarity of <span className="text-primary font-medium">Breath</span>, and the healing of
-                  <span className="text-primary font-medium"> Contrast</span> to build a resilient body and a calm mind.
-                </p>
+                {data.body && <RichText data={data.body} boldClassName="text-primary font-medium" />}
               </div>
               <div className="mt-10">
                 <motion.a
-                  href="/method"
+                  href={data.link?.href || '/method'}
                   className="inline-flex items-center text-primary font-medium hover:text-accent transition-colors group"
                   whileHover={{ x: 5 }}
                 >
-                  <span className="border-b border-primary/30 pb-1 group-hover:border-accent">Discover the Method</span>
+                  <span className="border-b border-primary/30 pb-1 group-hover:border-accent">{data.link?.label}</span>
                   <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
                 </motion.a>
               </div>
@@ -78,13 +75,15 @@ export default function About() {
                 style={{ y: y1 }}
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
-                  <NextImage
-                    src={images[0].src}
-                    alt={images[0].alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 60vw, 30vw"
-                  />
+                  {image1 && (
+                    <NextImage
+                      src={image1.src}
+                      alt={image1.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 60vw, 30vw"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
                 </div>
                 {/* Decorative frame */}
@@ -99,13 +98,15 @@ export default function About() {
                 style={{ y: y2 }}
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
-                  <NextImage
-                    src={images[1].src}
-                    alt={images[1].alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
+                  {image2 && (
+                    <NextImage
+                      src={image2.src}
+                      alt={image2.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent opacity-50 group-hover:opacity-30 transition-opacity duration-500" />
                 </div>
               </motion.div>
@@ -118,13 +119,15 @@ export default function About() {
                 style={{ y: y3 }}
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
-                  <NextImage
-                    src={images[2].src}
-                    alt={images[2].alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 45vw, 22vw"
-                  />
+                  {image3 && (
+                    <NextImage
+                      src={image3.src}
+                      alt={image3.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 45vw, 22vw"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
                 </div>
                 {/* Accent dot */}

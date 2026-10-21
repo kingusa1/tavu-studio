@@ -6,72 +6,38 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import MotionWrapper from '@/components/common/MotionWrapper';
 
-const services = [
-    {
-        id: 'reformer-pilates',
-        name: 'Reformer Pilates',
-        tagline: 'Precision. Strength. Control.',
-        description: 'Small-group reformer classes designed to sculpt, strengthen, and align your body with spring-loaded resistance and expert guidance.',
-        image: '/reformer-room-new.webp',
-        alt: 'Client on the reformer in the TAVÚ Reformer Room',
-        highlights: ['Max 8 per class', 'Spring-loaded resistance', 'Full-body sculpting', 'Expert instructors'],
-        href: '/services/reformer-pilates',
-    },
-    {
-        id: 'breathing-room',
-        name: 'Breathing Room',
-        tagline: 'Stillness. Depth. Release.',
-        description: 'Signature TAVÚ MAT, RELEASE and STRETCH classes in a dedicated space for mindful, grounded movement.',
-        image: '/service-breathing-props.webp',
-        alt: 'Breathing Room',
-        highlights: ['TAVÚ MAT', 'TAVÚ RELEASE', 'TAVÚ STRETCH', 'Mindful movement'],
-        href: '/services/breathing-room',
-    },
-    {
-        id: 'contrast-therapy',
-        name: 'Contrast Therapy',
-        tagline: 'Heat. Cold. Renew.',
-        description: 'Alternating sauna and ice bath sessions to activate your body’s natural healing response. Shared and private suites available.',
-        image: '/service-sauna.webp',
-        alt: 'Contrast Therapy',
-        highlights: ['Sauna + Ice Bath', 'Shared & private suites', 'Boosts circulation', 'Accelerates recovery'],
-        href: '/services/contrast-therapy',
-    },
-    {
-        id: 'compression-therapy',
-        name: 'Compression Therapy',
-        tagline: 'Recover. Restore. Repeat.',
-        description: 'NormaTec pulsing compression to stimulate circulation, flush lactic acid, and support faster muscle recovery.',
-        image: '/service-recovery-equipment.webp',
-        alt: 'Compression Therapy',
-        highlights: ['NormaTec compression', 'Post-training recovery', 'Reduces swelling', 'Speeds up recovery'],
-        href: '/services/compression-therapy',
-    },
-    {
-        id: 'massage',
-        name: 'Massage',
-        tagline: 'Unwind. Heal. Breathe.',
-        description: 'Therapeutic and relaxation massage treatments tailored to release tension, improve circulation, and restore balance.',
-        image: '/service-massage-towels.webp',
-        alt: 'Massage',
-        highlights: ['Deep tissue', 'Sports recovery', 'Relaxation', 'Custom treatments'],
-        href: '/services/massage',
-    },
-];
+import { resolveImage } from '@/lib/cms/media';
+import type { HomePage } from '@/payload-types';
 
-export default function ServicesExplorer() {
+export type ServicesExplorerData = NonNullable<HomePage['servicesExplorer']>;
+
+export type ServicesExplorerProps = {
+    data: ServicesExplorerData;
+};
+
+// `imagePosition` select keys mapped to literal Tailwind classes (R4) — replaces the pre-CMS
+// `active.id === 'reformer-pilates'` hack (ServicesExplorer.tsx:138, §1.4).
+const IMAGE_POSITION_CLASS: Record<string, string> = {
+    center: 'object-cover',
+    'center-40': 'object-cover object-[center_40%]',
+};
+
+export default function ServicesExplorer({ data }: ServicesExplorerProps) {
+    const services = data.items ?? [];
+    const serviceCount = services.length || 1;
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [paused, setPaused] = useState(false);
     const active = services[activeIndex];
 
     // Auto-rotate every 5 seconds
     useEffect(() => {
-        if (paused) return;
+        if (paused || services.length === 0) return;
         const timer = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % services.length);
+            setActiveIndex((prev) => (prev + 1) % serviceCount);
         }, 5000);
         return () => clearInterval(timer);
-    }, [paused]);
+    }, [paused, serviceCount, services.length]);
 
     const handleTabClick = useCallback((index: number) => {
         setActiveIndex(index);
@@ -80,19 +46,24 @@ export default function ServicesExplorer() {
         setTimeout(() => setPaused(false), 10000);
     }, []);
 
+    if (!active) return null;
+
+    const resolvedImage = resolveImage(active.image);
+    const imageClass = IMAGE_POSITION_CLASS[active.imagePosition ?? 'center'] ?? IMAGE_POSITION_CLASS.center;
+
     return (
         <section className="py-24 bg-background">
             <div className="container mx-auto px-4">
                 <MotionWrapper delay={0} direction="up">
                     <div className="text-center mb-14">
                         <span className="text-accent uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">
-                            What We Offer
+                            {data.eyebrow}
                         </span>
                         <h2 className="text-3xl md:text-5xl font-headline text-primary mb-4">
-                            Our Services
+                            {data.heading}
                         </h2>
                         <p className="text-lg text-foreground/60 max-w-xl mx-auto">
-                            Select a service to learn more about what we provide.
+                            {data.intro}
                         </p>
                     </div>
                 </MotionWrapper>
@@ -102,7 +73,7 @@ export default function ServicesExplorer() {
                     <div className="flex flex-wrap justify-center gap-2 mb-12 max-w-4xl mx-auto">
                         {services.map((service, index) => (
                             <button
-                                key={service.id}
+                                key={service.id ?? index}
                                 onClick={() => handleTabClick(index)}
                                 className={`
                                     relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300
@@ -122,7 +93,7 @@ export default function ServicesExplorer() {
                 <div className="max-w-5xl mx-auto">
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={active.id}
+                            key={active.id ?? activeIndex}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
@@ -131,13 +102,15 @@ export default function ServicesExplorer() {
                         >
                             {/* Image */}
                             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden">
-                                <Image
-                                    src={active.image}
-                                    alt={active.alt ?? active.name}
-                                    fill
-                                    className={active.id === 'reformer-pilates' ? 'object-cover object-[center_40%]' : 'object-cover'}
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                />
+                                {resolvedImage && (
+                                    <Image
+                                        src={resolvedImage.src}
+                                        alt={resolvedImage.alt || active.name}
+                                        fill
+                                        className={imageClass}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                    />
+                                )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                             </div>
 
@@ -154,10 +127,10 @@ export default function ServicesExplorer() {
                                 </p>
 
                                 <div className="grid grid-cols-2 gap-3 mb-8">
-                                    {active.highlights.map((item, i) => (
-                                        <div key={i} className="flex items-center gap-2">
+                                    {(active.highlights ?? []).map((item, i) => (
+                                        <div key={item.id ?? i} className="flex items-center gap-2">
                                             <div className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                                            <span className="text-sm text-foreground/70">{item}</span>
+                                            <span className="text-sm text-foreground/70">{item.text}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -166,7 +139,7 @@ export default function ServicesExplorer() {
                                     href={active.href}
                                     className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-accent text-accent-foreground font-medium transition-all hover:bg-accent/90 shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30"
                                 >
-                                    Learn More
+                                    {data.ctaLabel}
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                     </svg>

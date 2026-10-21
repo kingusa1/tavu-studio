@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from 'react';
 import { MapPin, Clock, Mail } from 'lucide-react';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -15,8 +16,20 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 import MotionWrapper from '@/components/common/MotionWrapper';
+import { useSiteData } from '@/components/providers/SiteDataProvider';
+import type { HomePage } from '@/payload-types';
 
-export default function Contact() {
+export type ContactData = NonNullable<HomePage['contact']>;
+
+export type ContactProps = {
+    data: ContactData;
+};
+
+export default function Contact({ data }: ContactProps) {
+    const { settings } = useSiteData();
+    const addressLines = settings.location.addressLines ?? [];
+    const hoursLines = settings.hours.displayLines ?? [];
+
     return (
         <section className="py-24 bg-muted/5 relative overflow-hidden">
             <div className="container mx-auto px-6">
@@ -26,60 +39,67 @@ export default function Contact() {
                     <MotionWrapper delay={0.1} direction="up">
                         <div>
                             <span className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-8 block">
-                                The Location
+                                {data.eyebrow}
                             </span>
                             <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline font-medium mb-12">
-                                Visit the <em className="italic font-light text-primary/80">Sanctuary</em>
+                                {data.headingLead} <em className="italic font-light text-primary/80">{data.headingEmphasis}</em>
                             </h2>
 
                             <div className="space-y-12">
                                 <div>
-                                    <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">Address</h3>
+                                    <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">{data.addressHeading}</h3>
                                     <a
-                                        href="https://maps.app.goo.gl/Xg1JCDsDxwxMkjad9?g_st=ic"
+                                        href={settings.location.mapsUrl || undefined}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-start gap-4 group"
                                     >
                                         <MapPin className="w-5 h-5 text-accent mt-1 shrink-0 group-hover:scale-110 transition-transform" />
                                         <p className="text-lg font-light leading-relaxed text-foreground/80 group-hover:text-accent transition-colors">
-                                            TAVÚ Wellness Studio<br />
-                                            Shop 1, Crescent Residence<br />
-                                            Plot 12, Sector RBW4, Shatie Al Raha<br />
-                                            Abu Dhabi, UAE
+                                            {data.addressTitleLine}<br />
+                                            {addressLines.map((line, i) => (
+                                                <Fragment key={i}>
+                                                    {line.line}
+                                                    {i < addressLines.length - 1 && <br />}
+                                                </Fragment>
+                                            ))}
                                         </p>
                                     </a>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">Hours</h3>
+                                    <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">{data.hoursHeading}</h3>
                                     <div className="flex items-start gap-4">
                                         <Clock className="w-5 h-5 text-accent mt-1 shrink-0" />
                                         <p className="text-lg font-light leading-relaxed text-foreground/80">
-                                            Monday – Sunday<br />
-                                            9:00 AM – 9:00 PM
+                                            {hoursLines.map((line, i) => (
+                                                <Fragment key={i}>
+                                                    {line.line}
+                                                    {i < hoursLines.length - 1 && <br />}
+                                                </Fragment>
+                                            ))}
                                         </p>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">Contact</h3>
+                                    <h3 className="text-sm font-headline uppercase tracking-[0.2em] mb-4 opacity-50">{data.contactHeading}</h3>
                                     <div className="space-y-4">
                                         <div className="flex items-start gap-4">
                                             <Mail className="w-5 h-5 text-accent mt-1 shrink-0" />
-                                            <a href="mailto:connect@tavustudio.com" className="text-lg font-light hover:text-accent transition-colors">
-                                                connect@tavustudio.com
+                                            <a href={`mailto:${settings.contact.email}`} className="text-lg font-light hover:text-accent transition-colors">
+                                                {settings.contact.email}
                                             </a>
                                         </div>
                                         <a
-                                            href="https://wa.me/971522755551"
+                                            href={`https://wa.me/${settings.contact.whatsappNumber}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-4 group"
                                         >
                                             <WhatsAppIcon className="w-5 h-5 text-green-500 shrink-0 group-hover:scale-110 transition-transform" />
                                             <span className="text-lg font-light text-foreground/80 group-hover:text-accent transition-colors">
-                                                +971 52 275 5551
+                                                {settings.contact.phoneDisplay}
                                             </span>
                                         </a>
                                     </div>
@@ -93,7 +113,7 @@ export default function Contact() {
                         <div className="h-full min-h-[400px] w-full rounded-2xl border border-white/10 overflow-hidden relative group">
                             {/* Google Maps Embed - Crescent Residence, Al Raha Beach */}
                             <iframe
-                                src="https://maps.google.com/maps?q=CHXW%2BC3R+Abu+Dhabi&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                                src={settings.location.mapEmbedUrl || undefined}
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0, minHeight: '400px' }}
@@ -101,7 +121,7 @@ export default function Contact() {
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                                 className="absolute inset-0"
-                                title="TAVÚ Wellness Studio - Crescent Residence, Al Raha Beach, Abu Dhabi"
+                                title={data.mapTitle || undefined}
                             />
                         </div>
                     </MotionWrapper>
