@@ -34,6 +34,8 @@ export type EmailLayoutInput = {
   /** Already-escaped HTML for the body. */
   bodyHtml: string;
   cta?: { label: string; url: string };
+  /** Already-escaped HTML shown after the button (e.g. the sign-off). */
+  closingHtml?: string;
   footer: EmailFooter;
   /** Small print under the footer (e.g. why you got this email, unsubscribe). Already-escaped HTML. */
   smallPrintHtml?: string;
@@ -100,9 +102,9 @@ function footerHtml(footer: EmailFooter): string {
   if (footer.addressLines.length) lines.push(footer.addressLines.map(escapeHtml).join('<br>'));
   const contact: string[] = [];
   if (footer.phoneDisplay && footer.whatsappNumber) {
-    contact.push(`WhatsApp <a href="https://wa.me/${escapeHtml(footer.whatsappNumber)}" style="${linkStyle}">${escapeHtml(footer.phoneDisplay)}</a>`);
+    contact.push(`WhatsApp <a href="https://wa.me/${escapeHtml(footer.whatsappNumber)}" style="${linkStyle}white-space:nowrap;">${escapeHtml(footer.phoneDisplay)}</a>`);
   }
-  if (footer.email) contact.push(`<a href="mailto:${escapeHtml(footer.email)}" style="${linkStyle}">${escapeHtml(footer.email)}</a>`);
+  if (footer.email) contact.push(`<a href="mailto:${escapeHtml(footer.email)}" style="${linkStyle}white-space:nowrap;">${escapeHtml(footer.email)}</a>`);
   if (contact.length) lines.push(contact.join('&nbsp;&nbsp;·&nbsp;&nbsp;'));
   const social: string[] = [];
   social.push(`<a href="${escapeHtml(footer.siteUrl)}" style="${linkStyle}">${escapeHtml(footer.siteUrl.replace(/^https?:\/\//, ''))}</a>`);
@@ -116,7 +118,7 @@ function footerHtml(footer: EmailFooter): string {
 
 /** The branded HTML document. */
 export function renderEmailHtml(input: EmailLayoutInput): string {
-  const { preheader, eyebrow, heading, bodyHtml, cta, footer, smallPrintHtml, logoUrl } = input;
+  const { preheader, eyebrow, heading, bodyHtml, cta, closingHtml, footer, smallPrintHtml, logoUrl } = input;
   return `<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -155,6 +157,7 @@ export function renderEmailHtml(input: EmailLayoutInput): string {
             <h1 style="margin:0 0 24px;font-family:${BRAND.serif};font-size:34px;line-height:40px;font-weight:500;color:${BRAND.navy};">${escapeHtml(heading)}</h1>
             ${bodyHtml}
             ${cta ? button(cta.label, cta.url) : ''}
+            ${closingHtml ? `<div style="padding-top:16px;">${closingHtml}</div>` : ''}
           </td>
         </tr>
         <tr>
