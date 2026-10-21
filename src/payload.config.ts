@@ -69,6 +69,8 @@ export default buildConfig({
         Logo: '/payload/admin/Logo',
         Icon: '/payload/admin/Icon',
       },
+      // Show / hide button on every password box (sign in, reset, create user, change password).
+      providers: ['/payload/admin/PasswordReveal'],
     },
     meta: {
       titleSuffix: ' — TAVÚ CMS',

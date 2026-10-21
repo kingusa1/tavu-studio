@@ -23,6 +23,7 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { default as default_8b6b60c766c5071addaf46f9ffe18536 } from '../../../payload/admin/Icon'
 import { default as default_3cd692343be5ea03e13bd9af21cbda1d } from '../../../payload/admin/Logo'
+import { default as default_b514a7fcd49002a40763cf859784996e } from '../../../payload/admin/PasswordReveal'
 import { SupabaseClientUploadHandler as SupabaseClientUploadHandler_41df87c5a16f77b37970f22b865474c9 } from '@/payload/storage/SupabaseClientUploadHandler'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
@@ -53,6 +54,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/payload/admin/Icon#default": default_8b6b60c766c5071addaf46f9ffe18536,
   "/payload/admin/Logo#default": default_3cd692343be5ea03e13bd9af21cbda1d,
+  "/payload/admin/PasswordReveal#default": default_b514a7fcd49002a40763cf859784996e,
   "@/payload/storage/SupabaseClientUploadHandler#SupabaseClientUploadHandler": SupabaseClientUploadHandler_41df87c5a16f77b37970f22b865474c9,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

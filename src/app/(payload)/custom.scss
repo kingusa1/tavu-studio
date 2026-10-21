@@ -49,3 +49,36 @@ html[data-theme='light'] {
   height: 18px;
   object-fit: contain;
 }
+
+/* Show / hide password button (src/payload/admin/PasswordReveal.tsx) */
+.tavu-reveal-wrap {
+  position: relative;
+}
+input.tavu-reveal-input {
+  padding-right: 44px !important;
+}
+.tavu-reveal {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--theme-elevation-600);
+  cursor: pointer;
+}
+.tavu-reveal:hover {
+  color: var(--theme-elevation-900);
+  background: var(--theme-elevation-100);
+}
+.tavu-reveal:focus-visible {
+  outline: 2px solid var(--theme-success-500, #2e3d52);
+  outline-offset: 1px;
+}
