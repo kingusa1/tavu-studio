@@ -1,8 +1,11 @@
-import type { CollectionAfterChangeHook, CollectionConfig } from 'payload';
+import type { CollectionAfterChangeHook, CollectionConfig, FieldAccess } from 'payload';
 
 import { unsubscribeContact } from '../../lib/email/resendApi';
 import { isAdmin } from '../access/isAdmin';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
+
+const deny: FieldAccess = () => false;
+const lockedField = { read: deny, create: deny, update: deny };
 
 /** When someone is marked "Unsubscribed" in the CMS, mirror it in Resend so broadcasts skip them. */
 const syncUnsubscribe: CollectionAfterChangeHook = async ({ doc, previousDoc, operation, req, context }) => {
@@ -67,9 +70,11 @@ export const NewsletterSubscribers: CollectionConfig = {
     { name: 'confirmedAt', type: 'date', index: true, admin: { readOnly: true, position: 'sidebar', date: { pickerAppearance: 'dayAndTime' } } },
     { name: 'unsubscribedAt', type: 'date', admin: { readOnly: true, position: 'sidebar', date: { pickerAppearance: 'dayAndTime' } } },
     { name: 'resendContactId', label: 'Resend contact ID', type: 'text', admin: { readOnly: true, position: 'sidebar' } },
-    // Double opt-in bookkeeping — never shown or returned by the API.
-    { name: 'confirmTokenHash', type: 'text', index: true, hidden: true },
-    { name: 'confirmTokenExpiresAt', type: 'date', hidden: true },
-    { name: 'confirmEmailSentAt', type: 'date', hidden: true },
+    // Double opt-in bookkeeping: hidden in the admin and unreadable/unwritable through the API (field
+    // access); only the newsletter routes touch them via the Local API (overrideAccess). Not `hidden:
+    // true`, which would also strip them from the routes' own reads.
+    { name: 'confirmTokenHash', type: 'text', index: true, admin: { hidden: true }, access: lockedField },
+    { name: 'confirmTokenExpiresAt', type: 'date', admin: { hidden: true }, access: lockedField },
+    { name: 'confirmEmailSentAt', type: 'date', admin: { hidden: true }, access: lockedField },
   ],
 };
