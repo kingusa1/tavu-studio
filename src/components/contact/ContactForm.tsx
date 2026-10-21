@@ -8,21 +8,62 @@ import { motion } from 'framer-motion';
 import { Loader2, Send } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters" }),
-  // Honeypot: real visitors never see or fill this field (visually hidden below).
-  website: z.string().optional(),
-});
+export type ContactFormErrorMessages = {
+  name: string;
+  email: string;
+  message: string;
+};
 
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+export type ContactFormProps = {
+  nameLabel: string;
+  namePlaceholder: string;
+  emailLabel: string;
+  emailPlaceholder: string;
+  messageLabel: string;
+  messagePlaceholder: string;
+  submitLabel: string;
+  submittingLabel: string;
+  footnote: string;
+  errors: ContactFormErrorMessages;
+  /** The WhatsApp message template, with `{name}` `{email}` `{message}` placeholders. */
+  whatsappTemplate: string;
+  /** Digits only, e.g. "971522755551" (contact-page form, §5.7; number from site-settings). */
+  whatsappNumber: string;
+};
 
-const WHATSAPP_NUMBER = "971522755551";
+function buildWhatsappMessage(template: string, values: { name: string; email: string; message: string }): string {
+  return template
+    .replaceAll('{name}', values.name)
+    .replaceAll('{email}', values.email)
+    .replaceAll('{message}', values.message);
+}
 
-export default function ContactForm() {
+export default function ContactForm({
+  nameLabel,
+  namePlaceholder,
+  emailLabel,
+  emailPlaceholder,
+  messageLabel,
+  messagePlaceholder,
+  submitLabel,
+  submittingLabel,
+  footnote,
+  errors,
+  whatsappTemplate,
+  whatsappNumber,
+}: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const pathname = usePathname();
+
+  const contactFormSchema = z.object({
+    name: z.string().min(2, { message: errors.name }),
+    email: z.string().email({ message: errors.email }),
+    message: z.string().min(10, { message: errors.message }),
+    // Honeypot: real visitors never see or fill this field (visually hidden below).
+    website: z.string().optional(),
+  });
+
+  type ContactFormValues = z.infer<typeof contactFormSchema>;
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -37,21 +78,9 @@ export default function ContactForm() {
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
 
-    const whatsappMessage = `Hello TAVU,
-
-I would like to get in touch.
-
-Name: ${data.name}
-Email: ${data.email}
-
-Message:
-${data.message}
-
----
-Sent from tavustudio.com`;
-
+    const whatsappMessage = buildWhatsappMessage(whatsappTemplate, data);
     const encodedMessage = encodeURIComponent(whatsappMessage);
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
     // Open WhatsApp synchronously, in the same tick as the click, so browser popup
     // blockers don't block it — never await anything before this call.
@@ -84,12 +113,12 @@ Sent from tavustudio.com`;
         </div>
         <div className="space-y-2">
           <label htmlFor="name" className="text-xs uppercase tracking-[0.15em] text-foreground/50 font-medium">
-            Name
+            {nameLabel}
           </label>
           <input
             id="name"
             type="text"
-            placeholder="Your name"
+            placeholder={namePlaceholder}
             {...form.register("name")}
             className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
           />
@@ -102,12 +131,12 @@ Sent from tavustudio.com`;
 
         <div className="space-y-2">
           <label htmlFor="email" className="text-xs uppercase tracking-[0.15em] text-foreground/50 font-medium">
-            Email
+            {emailLabel}
           </label>
           <input
             id="email"
             type="email"
-            placeholder="your@email.com"
+            placeholder={emailPlaceholder}
             {...form.register("email")}
             className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all"
           />
@@ -120,11 +149,11 @@ Sent from tavustudio.com`;
 
         <div className="space-y-2">
           <label htmlFor="message" className="text-xs uppercase tracking-[0.15em] text-foreground/50 font-medium">
-            Message
+            {messageLabel}
           </label>
           <textarea
             id="message"
-            placeholder="How can we help you?"
+            placeholder={messagePlaceholder}
             {...form.register("message")}
             className="w-full bg-background/50 border border-border/50 rounded-xl px-5 py-4 text-foreground placeholder:text-foreground/30 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/10 transition-all min-h-[160px] resize-none"
           />
@@ -145,18 +174,18 @@ Sent from tavustudio.com`;
           {isSubmitting ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Opening WhatsApp...
+              {submittingLabel}
             </>
           ) : (
             <>
               <Send className="w-5 h-5" />
-              Send Message
+              {submitLabel}
             </>
           )}
         </motion.button>
 
         <p className="text-center text-xs text-foreground/40">
-          You'll be redirected to WhatsApp to continue the conversation
+          {footnote}
         </p>
       </form>
     </div>
