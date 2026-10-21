@@ -1,3 +1,5 @@
+import { timingSafeEqual } from 'node:crypto';
+
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
@@ -13,18 +15,23 @@ import { getPayloadClient } from '@/lib/cms/payload';
  */
 export async function GET(request: Request): Promise<NextResponse> {
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret) {
-    const authHeader = request.headers.get('authorization') ?? '';
-    if (authHeader !== `Bearer ${cronSecret}`) {
-      return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
-    }
+  const got = request.headers.get('authorization') ?? '';
+  const want = `Bearer ${cronSecret ?? ''}`;
+  const gotBuf = Buffer.from(got);
+  const wantBuf = Buffer.from(want);
+  const authorized =
+    Boolean(cronSecret) && gotBuf.length === wantBuf.length && timingSafeEqual(gotBuf, wantBuf);
+
+  if (!authorized) {
+    return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
   }
 
   const payload = await getPayloadClient();
-  const { totalDocs: count } = await payload.count({ collection: 'users' });
+  // Touch the DB only to prove liveness — never return the count to the caller.
+  await payload.count({ collection: 'users' });
 
   revalidatePath('/', 'layout');
   revalidatePath('/llms.txt');
 
-  return NextResponse.json({ ok: true, count });
+  return NextResponse.json({ ok: true });
 }
