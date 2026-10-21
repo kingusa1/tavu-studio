@@ -1,10 +1,23 @@
+import { withPayload } from '@payloadcms/next/withPayload';
 import type { NextConfig } from 'next';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(__filename);
 
 const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
   poweredByHeader: false,
+  experimental: {
+    // The app now has two parallel root layouts — (frontend) and (payload) —
+    // so there is no single root layout for Next to compose a root
+    // not-found.tsx through. global-not-found.tsx (src/app/global-not-found.tsx)
+    // covers any URL that matches neither route group at all.
+    globalNotFound: true,
+  },
   // IV Therapy was removed from the service menu (client feedback, Oct 2026) — keep old links working.
   async redirects() {
     return [
@@ -23,6 +36,9 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: '**.cdninstagram.com', port: '', pathname: '/**' },
       { protocol: 'https', hostname: '**.fbcdn.net', port: '', pathname: '/**' },
       { protocol: 'https', hostname: 'behold.pictures', port: '', pathname: '/**' },
+      // Supabase Storage public bucket — Payload Media `url` values are
+      // direct Supabase public-object URLs (see src/payload/storage/supabase.ts).
+      { protocol: 'https', hostname: 'armumywprajdpyyfpvoz.supabase.co', port: '', pathname: '/storage/v1/object/public/**' },
     ],
   },
   async headers() {
@@ -52,6 +68,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  webpack: (webpackConfig) => {
+    webpackConfig.resolve.extensionAlias = {
+      '.cjs': ['.cts', '.cjs'],
+      '.js': ['.ts', '.tsx', '.js', '.jsx'],
+      '.mjs': ['.mts', '.mjs'],
+    };
+
+    return webpackConfig;
+  },
+  turbopack: {
+    root: path.resolve(dirname),
+  },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig, { devBundleServerPackages: false });
