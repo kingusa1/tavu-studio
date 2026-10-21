@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-import { getPayloadClient } from '@/lib/payload';
+import { getPayloadClient } from '@/lib/cms/payload';
 
 // Same validation rules as src/components/contact/ContactForm.tsx's client-side zod schema.
 const contactSchema = z.object({
