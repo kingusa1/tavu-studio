@@ -120,7 +120,7 @@ export default async function CompressionTherapyPage() {
                   <div className="bg-card border border-border rounded-2xl p-8 shadow-xl h-full">
                     <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                       <div>
-                        <h3 className="font-headline text-2xl text-primary">{individualRow.name}</h3>
+                        <h3 className="font-headline text-2xl text-primary">{asOfferLike(individual).name}</h3>
                         {individualRow.subtitle && <p className="text-sm text-foreground/60 mt-1">{individualRow.subtitle}</p>}
                       </div>
                       <div className="text-right flex-shrink-0">
@@ -175,7 +175,7 @@ export default async function CompressionTherapyPage() {
                   <div className="bg-card border border-accent/30 rounded-2xl p-8 shadow-xl h-full">
                     <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-border">
                       <div>
-                        <h3 className="font-headline text-2xl text-primary">{packRow.name}</h3>
+                        <h3 className="font-headline text-2xl text-primary">{asOfferLike(pack).name}</h3>
                         {packRow.subtitle && <p className="text-sm text-foreground/60 mt-1">{packRow.subtitle}</p>}
                       </div>
                       <div className="text-right flex-shrink-0">
