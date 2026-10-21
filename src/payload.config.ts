@@ -5,9 +5,7 @@ import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 
-import { ContactSubmissions } from './payload/collections/ContactSubmissions';
-import { Media } from './payload/collections/Media';
-import { Users } from './payload/collections/Users';
+import { collections } from './payload/collections';
 import { globals } from './payload/globals';
 import { supabaseStorage } from './payload/storage/supabase';
 
@@ -28,10 +26,14 @@ const payloadSecret = requireEnv('PAYLOAD_SECRET');
 const supabaseUrl = requireEnv('SUPABASE_URL');
 const supabaseServiceRoleKey = requireEnv('SUPABASE_SERVICE_ROLE_KEY');
 const supabaseBucket = requireEnv('SUPABASE_BUCKET');
+// Optional sub-folder for the media collection's objects — empty in production (bucket
+// root), set per dev worktree (e.g. dev-f0) so seed/test uploads never land in the
+// production root (step 1 of the F0 brief).
+const supabaseStoragePrefix = process.env.SUPABASE_STORAGE_PREFIX || undefined;
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
+    user: 'users',
     meta: {
       titleSuffix: ' — TAVÚ CMS',
     },
@@ -39,7 +41,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, ContactSubmissions],
+  collections,
   globals,
   editor: lexicalEditor(),
   secret: payloadSecret,
@@ -65,7 +67,7 @@ export default buildConfig({
       // large media (phone photos, video) straight to Supabase, bypassing that limit.
       clientUploads: true,
       collections: {
-        media: { disablePayloadAccessControl: true },
+        media: { disablePayloadAccessControl: true, prefix: supabaseStoragePrefix },
       },
     }),
   ],

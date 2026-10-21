@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload';
 
-import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidate';
+import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
 
 export const Media: CollectionConfig = {
   slug: 'media',
