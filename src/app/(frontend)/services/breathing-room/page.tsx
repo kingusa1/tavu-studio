@@ -169,6 +169,7 @@ export default async function BreathingRoomPage() {
                         <div>
                           <p className="font-semibold text-primary">{row.name}</p>
                           {row.description && <p className="text-sm text-foreground/60 mt-1">{row.description}</p>}
+                          {row.note && <p className="text-xs text-foreground/40 mt-1">{row.note}</p>}
                           {row.bonus && <p className="text-xs text-foreground/50 mt-1">{row.bonus}</p>}
                         </div>
                         <div className="text-right flex-shrink-0">
