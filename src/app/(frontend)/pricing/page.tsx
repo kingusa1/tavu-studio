@@ -116,7 +116,7 @@ export default async function PricingPage() {
       <main className="flex-grow pt-32 pb-16 px-4 container mx-auto relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <MotionWrapper delay={0} direction="up">
+          <MotionWrapper delay={0} direction="up" immediate>
             <div className="text-center mb-14">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">{data.header?.title}</h1>
               {data.header?.showVatNote && <VatNote className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" />}

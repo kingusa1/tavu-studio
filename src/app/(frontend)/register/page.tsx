@@ -93,7 +93,7 @@ export default async function RegisterPage() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <MotionWrapper delay={0} direction="up">
+          <MotionWrapper delay={0} direction="up" immediate>
             <div className="text-center max-w-3xl mx-auto mb-12">
               <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">{data.hero.eyebrow}</span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline mb-6 text-primary">{data.hero.title}</h1>

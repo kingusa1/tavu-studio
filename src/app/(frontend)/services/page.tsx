@@ -22,7 +22,7 @@ export default async function ServicesPage() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 flex items-center justify-center">
         <div className="container mx-auto px-4 text-center">
-          <MotionWrapper delay={0} direction="up">
+          <MotionWrapper delay={0} direction="up" immediate>
             <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">{data.hero?.eyebrow}</span>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">{data.hero?.title}</h1>
             <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">{data.hero?.intro}</p>

@@ -22,7 +22,7 @@ export default async function RecoveryPage() {
       <main className="flex-grow pt-32 pb-16 px-4">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
-            <MotionWrapper delay={0} direction="up">
+            <MotionWrapper delay={0} direction="up" immediate>
               <div className="text-center mb-14">
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">{data.title}</h1>
                 <p className="text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">{data.intro}</p>

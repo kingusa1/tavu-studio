@@ -96,7 +96,7 @@ export default function ContactView({ data, imageCardImage }: ContactViewProps):
             {/* Hero */}
             <section className="relative pt-32 pb-16">
                 <div className="container mx-auto px-6">
-                    <MotionWrapper delay={0} direction="up">
+                    <MotionWrapper delay={0} direction="up" immediate>
                         <div className="text-center max-w-2xl mx-auto">
                             <span className="inline-flex items-center gap-3 text-accent uppercase tracking-[0.3em] text-xs font-medium mb-6">
                                 <span className="w-8 h-[1px] bg-accent/50" />

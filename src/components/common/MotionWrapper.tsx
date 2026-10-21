@@ -9,7 +9,21 @@ interface MotionWrapperProps {
     delay?: number;
     direction?: "up" | "down" | "left" | "right" | "none";
     viewport?: UseInViewOptions;
+    /**
+     * First-screen content (page heroes): animate with CSS keyframes instead of framer-motion, so the
+     * text is painted on the first render and not hidden until JavaScript hydrates (that delay made the
+     * hero heading the slow Largest Contentful Paint on phones). Reduced-motion users get no animation.
+     */
+    immediate?: boolean;
 }
+
+const IMMEDIATE_CLASS = {
+    up: "motion-safe:animate-enter-up",
+    down: "motion-safe:animate-enter-down",
+    left: "motion-safe:animate-enter-left",
+    right: "motion-safe:animate-enter-right",
+    none: "motion-safe:animate-enter-fade",
+} as const;
 
 export default function MotionWrapper({
     children,
@@ -17,9 +31,21 @@ export default function MotionWrapper({
     delay = 0,
     direction = "up",
     viewport = { once: true, margin: "-100px" },
+    immediate = false,
 }: MotionWrapperProps) {
     const ref = useRef(null);
     const isInView = useInView(ref, viewport);
+
+    if (immediate) {
+        return (
+            <div
+                className={className ? `${IMMEDIATE_CLASS[direction]} ${className}` : IMMEDIATE_CLASS[direction]}
+                style={delay ? { animationDelay: `${delay}s` } : undefined}
+            >
+                {children}
+            </div>
+        );
+    }
 
     const variants = {
         hidden: {

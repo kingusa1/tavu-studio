@@ -91,7 +91,7 @@ export default async function AccountPage() {
       <main className="flex-grow pt-32 pb-20 px-4 container mx-auto relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Hero Section */}
-          <MotionWrapper delay={0} direction="up">
+          <MotionWrapper delay={0} direction="up" immediate>
             <div className="text-center mb-12">
               <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">{data.hero.eyebrow}</span>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-medium text-primary mb-6">

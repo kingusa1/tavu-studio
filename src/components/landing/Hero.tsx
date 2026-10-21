@@ -241,26 +241,21 @@ export default function Hero({ data }: HeroProps) {
       </div>
 
       {/* Content */}
-      <motion.div
-        className="container mx-auto px-6 relative z-20 pt-24"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
+      <div className="container mx-auto px-6 relative z-20 pt-24 motion-safe:animate-enter-fade">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <MotionWrapper delay={0.1} direction="up">
+          <MotionWrapper delay={0.1} direction="up" immediate>
             <span className="inline-block text-accent uppercase tracking-[0.15em] sm:tracking-[0.25em] text-[10px] sm:text-xs font-semibold mb-6 bg-background/40 backdrop-blur-md px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-accent/20 text-center max-w-[90vw] leading-tight">
               {data.badge}
             </span>
           </MotionWrapper>
 
           {/* Animated Headline */}
-          <MotionWrapper delay={0.2} direction="up">
+          <MotionWrapper delay={0.2} direction="up" immediate>
             <h1 className="text-4xl sm:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-headline font-semibold tracking-tight mb-6 leading-[1.05] drop-shadow-lg">
               <span className="text-white">{data.headlineLead}</span>{" "}
               <br />
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.em
                   key={currentSlide}
                   initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
@@ -276,7 +271,7 @@ export default function Hero({ data }: HeroProps) {
           </MotionWrapper>
 
           {/* Decorative line with progress */}
-          <MotionWrapper delay={0.3} direction="up">
+          <MotionWrapper delay={0.3} direction="up" immediate>
             <div className="relative h-[2px] w-32 bg-white/20 mx-auto my-8 rounded-full overflow-hidden">
               <motion.div
                 className="absolute inset-y-0 left-0 bg-accent rounded-full"
@@ -286,7 +281,7 @@ export default function Hero({ data }: HeroProps) {
           </MotionWrapper>
 
           {/* Subheadline */}
-          <MotionWrapper delay={0.4} direction="up">
+          <MotionWrapper delay={0.4} direction="up" immediate>
             <div className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 text-white/85 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md space-y-1 px-2">
               <p>{data.subLine1}</p>
               <p>{data.subLine2}</p>
@@ -298,7 +293,7 @@ export default function Hero({ data }: HeroProps) {
           </MotionWrapper>
 
           {/* CTA Buttons */}
-          <MotionWrapper delay={0.5} direction="up">
+          <MotionWrapper delay={0.5} direction="up" immediate>
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-24">
               <motion.a
                 href={data.primaryCta?.href || "/schedule"}
@@ -320,7 +315,7 @@ export default function Hero({ data }: HeroProps) {
           </MotionWrapper>
 
           {/* Navigation Controls - inline with content */}
-          <MotionWrapper delay={0.6} direction="up">
+          <MotionWrapper delay={0.6} direction="up" immediate>
             <div className="flex flex-col items-center gap-4">
               {/* Control buttons - centered */}
               <div className="flex items-center gap-3">
@@ -384,7 +379,7 @@ export default function Hero({ data }: HeroProps) {
             </div>
           </MotionWrapper>
         </div>
-      </motion.div>
+      </div>
 
       {/* Side navigation hints */}
       <motion.button

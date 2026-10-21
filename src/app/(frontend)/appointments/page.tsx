@@ -39,7 +39,7 @@ export default async function AppointmentsPage() {
 
       <main className="flex-grow pt-32 pb-16 px-4 container mx-auto">
         <div className="max-w-5xl mx-auto">
-          <MotionWrapper delay={0} direction="up">
+          <MotionWrapper delay={0} direction="up" immediate>
             <div className="text-center mb-12">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-headline mb-6 text-primary">{data.title}</h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">{data.intro}</p>

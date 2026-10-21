@@ -43,7 +43,7 @@ export default async function AboutPage() {
                     )}
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
-                    <MotionWrapper delay={0} direction="up">
+                    <MotionWrapper delay={0} direction="up" immediate>
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
                             {about.hero.eyebrow}
                         </span>
