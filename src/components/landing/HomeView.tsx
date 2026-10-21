@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import type { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
@@ -45,6 +46,10 @@ export type HomeViewData = {
 
 export type HomeViewProps = {
   data: HomeViewData;
+  /** Pre-rendered Server Components, passed down because this Client Component cannot import
+   * and render them directly — see `(frontend)/page.tsx`. */
+  journal: ReactNode;
+  newsletter: ReactNode;
 };
 
 /**
@@ -52,7 +57,7 @@ export type HomeViewProps = {
  * hash-reset `useEffect` and 6 `next/dynamic` sections. The server `page.tsx` now fetches
  * `home-page` + home offers + testimonials and renders this component with the data as props.
  */
-export default function HomeView({ data }: HomeViewProps) {
+export default function HomeView({ data, journal, newsletter }: HomeViewProps) {
   const { home, reformerOffers, breathingOffers, testimonials } = data;
 
   useEffect(() => {
@@ -78,6 +83,8 @@ export default function HomeView({ data }: HomeViewProps) {
         {home.testimonials && home.testimonials.enabled && testimonials.length > 0 && (
           <Testimonials data={home.testimonials} items={testimonials} />
         )}
+        {journal}
+        <div className="container mx-auto px-6 pb-24 lg:pb-32">{newsletter}</div>
         {home.contact && home.contact.enabled !== false && <Contact data={home.contact} />}
       </main>
       <Footer />

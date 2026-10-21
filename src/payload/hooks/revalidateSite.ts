@@ -10,9 +10,9 @@ import type { PayloadRequest } from 'payload';
  * Skipped entirely when `req.context.disableRevalidate` (seed scripts, migrations) — those
  * run outside a Next request context, where `revalidatePath` always throws.
  *
- * `/sitemap.xml` and `/blog/feed.xml` are route handlers / metadata routes, not pages under the
- * root layout, so `revalidatePath('/', 'layout')` does not reach them — same reasoning as
- * `/llms.txt` (package E, brief §A).
+ * `/sitemap.xml`, `/blog/feed.xml` and `/news-sitemap.xml` are route handlers / metadata routes,
+ * not pages under the root layout, so `revalidatePath('/', 'layout')` does not reach them — same
+ * reasoning as `/llms.txt` (package E, brief §A).
  */
 export const revalidateSite = ({ req }: { req: PayloadRequest }): void => {
   if (req.context?.disableRevalidate) return;
@@ -21,6 +21,7 @@ export const revalidateSite = ({ req }: { req: PayloadRequest }): void => {
     revalidatePath('/llms.txt');
     revalidatePath('/sitemap.xml');
     revalidatePath('/blog/feed.xml');
+    revalidatePath('/news-sitemap.xml');
   } catch (err) {
     req.payload.logger.warn({ err }, 'revalidate skipped (no Next request context)');
   }

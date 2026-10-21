@@ -135,6 +135,28 @@ export const getPublishedPostsForSitemap = cache(async (): Promise<Array<Pick<Po
   return (docs as Post[]).map((doc) => ({ slug: doc.slug, updatedAt: doc.updatedAt }));
 });
 
+/**
+ * Published posts whose `publishedAt` falls within the last 2 days — Google News only wants
+ * recent articles in `/news-sitemap.xml` (developers.google.com/search/docs/crawling-indexing/
+ * sitemaps/news-sitemap: "Only include recent URLs — generally we recommend including the URLs
+ * of articles published in the last two days").
+ */
+export const getRecentPublishedPostsForNewsSitemap = cache(async (): Promise<Array<Pick<Post, 'slug' | 'title' | 'publishedAt'>>> => {
+  const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString();
+  const payload = await getPayloadClient();
+  const { docs } = await payload.find({
+    collection: 'posts',
+    where: { and: [{ _status: { equals: 'published' } }, { publishedAt: { greater_than_equal: twoDaysAgo } }] },
+    depth: 0,
+    limit: 1000, // Google News sitemap cap (max 1,000 <news:news> tags per sitemap).
+    sort: '-publishedAt',
+    overrideAccess: true,
+  });
+  return (docs as Post[])
+    .filter((doc) => Boolean(doc.publishedAt))
+    .map((doc) => ({ slug: doc.slug, title: doc.title, publishedAt: doc.publishedAt }));
+});
+
 /** Slugs of every category that has at least one published post — sitemap + internal links. */
 export const getCategorySlugsWithPublishedPosts = cache(async (): Promise<Set<number>> => {
   const payload = await getPayloadClient();

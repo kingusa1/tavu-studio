@@ -33,3 +33,4 @@ Disallow: /register/
 Disallow: /admin/
 
 Sitemap: https://tavustudio.com/sitemap.xml
+Sitemap: https://tavustudio.com/news-sitemap.xml

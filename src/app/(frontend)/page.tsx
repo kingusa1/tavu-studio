@@ -1,4 +1,6 @@
 import HomeView from '@/components/landing/HomeView';
+import Journal from '@/components/landing/Journal';
+import NewsletterSignup from '@/components/newsletter/NewsletterSignup';
 import { getGlobal } from '@/lib/cms/globals';
 import { getOffers } from '@/lib/cms/offers';
 import { getTestimonials } from '@/lib/cms/testimonials';
@@ -28,6 +30,13 @@ export default async function Home() {
         breathingOffers: breathingOffers as unknown as OfferLike[],
         testimonials,
       }}
+      // `Journal` and `NewsletterSignup` are async Server Components (they fetch their own
+      // data) — `HomeView` is a Client Component (`'use client'`, for its hash-reset effect), and
+      // a Client Component cannot import and render a Server Component directly, so both are
+      // rendered here and handed down as already-resolved elements (brief: "show the blogs and
+      // the newsletter").
+      journal={<Journal />}
+      newsletter={<NewsletterSignup source="home" />}
     />
   );
 }

@@ -68,6 +68,8 @@ export default async function BlogPostPage({ params }: Props) {
       <JsonLd
         data={buildBlogPostingJsonLd({
           siteUrl,
+          publisherName: settings.brand.siteName,
+          publisherLogoUrl: settings.structuredData.logoUrl,
           post: {
             slug: post.slug,
             title: post.title,

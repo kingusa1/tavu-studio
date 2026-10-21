@@ -271,12 +271,27 @@ export type BlogPostingInput = {
   categoryNames?: string[];
 };
 
-/** `BlogPosting` for one article (brief §D5). */
+/**
+ * `BlogPosting` for one article (brief §D5), reviewed against Google's Article guidance
+ * (developers.google.com/search/docs/appearance/structured-data/article, read 2026-10-21):
+ * - `image`: an array of absolute URLs (Google shows images as a repeated list, not a bare string).
+ * - `publisher`: a full `Organization` object with `name` and a `logo` `ImageObject` — a bare
+ *   `{'@id': ...}` reference depends on a crawler merging this page's *separate* HealthClub
+ *   `<script>` block (root layout) by `@id`, which isn't guaranteed, so the name/logo are
+ *   inlined directly (the `@id` is kept alongside so a crawler that *does* support graph merging
+ *   still links the two nodes).
+ * - `author`: kept as `name` + `url` (+ `sameAs`), matching Google's recommendation.
+ * - `mainEntityOfPage`: kept — Google's own Article examples include it.
+ */
 export function buildBlogPostingJsonLd({
   siteUrl,
+  publisherName,
+  publisherLogoUrl,
   post,
 }: {
   siteUrl: string;
+  publisherName?: string | null;
+  publisherLogoUrl?: string | null;
   post: BlogPostingInput;
 }): Record<string, unknown> {
   const url = `${siteUrl}/blog/${post.slug}`;
@@ -285,7 +300,7 @@ export function buildBlogPostingJsonLd({
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: post.coverImageUrl ?? undefined,
+    image: post.coverImageUrl ? [post.coverImageUrl] : undefined,
     datePublished: post.publishedAt ? toAbuDhabiIso(post.publishedAt) : undefined,
     dateModified: toAbuDhabiIso(post.updatedAt),
     author: {
@@ -294,7 +309,17 @@ export function buildBlogPostingJsonLd({
       url: post.authorSlug ? `${siteUrl}/blog/author/${post.authorSlug}` : undefined,
       sameAs: post.authorSameAs && post.authorSameAs.length > 0 ? post.authorSameAs : undefined,
     },
-    publisher: { '@id': organizationId(siteUrl) },
+    publisher: {
+      '@type': 'Organization',
+      '@id': organizationId(siteUrl),
+      name: publisherName ?? undefined,
+      logo: publisherLogoUrl
+        ? {
+            '@type': 'ImageObject',
+            url: publisherLogoUrl,
+          }
+        : undefined,
+    },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     articleSection: post.categoryNames && post.categoryNames.length > 0 ? post.categoryNames : undefined,
     inLanguage: 'en',
