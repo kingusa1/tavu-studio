@@ -20,7 +20,8 @@ function verify(request: Request, body: string): boolean {
   const timestamp = request.headers.get('svix-timestamp');
   const header = request.headers.get('svix-signature');
   if (!secret || !id || !timestamp || !header) return false;
-  if (Math.abs(Date.now() / 1000 - Number(timestamp)) > TOLERANCE_SECONDS) return false;
+  const sent = Number(timestamp);
+  if (!Number.isFinite(sent) || Math.abs(Date.now() / 1000 - sent) > TOLERANCE_SECONDS) return false;
 
   const key = Buffer.from(secret.replace(/^whsec_/, ''), 'base64');
   const expected = createHmac('sha256', key).update(`${id}.${timestamp}.${body}`).digest();
@@ -32,7 +33,7 @@ function verify(request: Request, body: string): boolean {
   });
 }
 
-type ContactEvent = { type?: string; data?: { email?: string; unsubscribed?: boolean } };
+type ContactEvent = { type?: string; created_at?: string; data?: { email?: string; unsubscribed?: boolean } };
 
 /**
  * Resend → CMS: when someone unsubscribes through Resend's own link in a newsletter issue (or the
@@ -60,8 +61,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     depth: 0,
     overrideAccess: true,
   });
-  const subscriber = found.docs[0] as { id: number | string; status?: string } | undefined;
-  if (subscriber && subscriber.status !== 'unsubscribed') {
+  const subscriber = found.docs[0] as { id: number | string; status?: string; confirmedAt?: string | null } | undefined;
+  // A delayed or retried event from before the person (re-)confirmed must not undo that.
+  const eventAt = Date.parse(event.created_at ?? '');
+  const confirmedAt = Date.parse(subscriber?.confirmedAt ?? '');
+  const stale = Number.isFinite(eventAt) && Number.isFinite(confirmedAt) && eventAt < confirmedAt;
+  if (subscriber && subscriber.status !== 'unsubscribed' && !stale) {
     await payload.update({
       collection: 'newsletter-subscribers',
       id: subscriber.id,

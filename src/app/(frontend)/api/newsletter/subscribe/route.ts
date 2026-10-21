@@ -11,7 +11,7 @@ import { newConfirmToken } from '@/lib/email/tokens';
 /** At most one confirmation email per address per hour. */
 const RESEND_THROTTLE_MS = 60 * 60 * 1000;
 /** Site-wide brake: no more than this many confirmation emails per hour (signup floods). */
-const HOURLY_CONFIRM_LIMIT = 50;
+const HOURLY_CONFIRM_LIMIT = 300;
 
 const subscribeSchema = z
   .object({

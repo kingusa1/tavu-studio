@@ -126,7 +126,7 @@ const MindbodyWidget = ({ widgetType = "Schedules", widgetId }: MindbodyWidgetPr
           key={reactKey}
           className="w-full"
           dangerouslySetInnerHTML={{
-            __html: `<healcode-widget data-type="registrations" data-widget-partner="object" data-widget-id="${widgetId}" data-widget-version="0"></healcode-widget>`,
+            __html: `<healcode-widget data-type="registrations" data-widget-partner="object" data-widget-id="${String(widgetId).replace(/[^\w-]/g, '')}" data-widget-version="0"></healcode-widget>`,
           }}
         />
       ) : (

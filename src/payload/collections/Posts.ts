@@ -21,10 +21,15 @@ function slugify(value: string): string {
  * words joined by hyphens, so a slug can never break a URL, the sitemap or the RSS feed.
  * Runs before validation so the required check sees the generated value.
  */
-const autoSlug: CollectionBeforeValidateHook = ({ data }) => {
+const autoSlug: CollectionBeforeValidateHook = ({ data, operation, originalDoc }) => {
   if (!data) return data;
-  const source = typeof data.slug === 'string' && data.slug.trim() ? data.slug : data.title;
-  return typeof source === 'string' && source.trim() ? { ...data, slug: slugify(source) } : data;
+  if (typeof data.slug === 'string' && data.slug.trim()) return { ...data, slug: slugify(data.slug) };
+  // Only a new post (or one that never had a slug) takes its slug from the title; a published
+  // post keeps its URL when someone edits just the title.
+  if ((operation === 'create' || !originalDoc?.slug) && typeof data.title === 'string' && data.title.trim()) {
+    return { ...data, slug: slugify(data.title) };
+  }
+  return data;
 };
 
 /** `publishedAt` defaults to "now" the first time a post is published (brief §A). */

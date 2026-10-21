@@ -1,6 +1,7 @@
+import { timingSafeEqual } from 'node:crypto';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { resendAdapter } from '@payloadcms/email-resend';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { LinkFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
@@ -69,7 +70,14 @@ export default buildConfig({
   },
   collections,
   globals,
-  editor: lexicalEditor(),
+  // Default editor (fields without their own): internal links may only point at blog posts, so an
+  // editor cannot pull a private document (contact message, user) into a public page.
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures.filter((feature) => feature.key !== 'link'),
+      LinkFeature({ enabledCollections: ['posts'] }),
+    ],
+  }),
   // Admin emails (password reset, user invitations) and every website email go through Resend
   // from the verified tavustudio.com domain. Without a key (local dev) Payload logs emails instead.
   ...(process.env.RESEND_API_KEY
@@ -92,7 +100,9 @@ export default buildConfig({
       run: ({ req }) => {
         if (req.user?.role === 'admin') return true;
         const secret = process.env.CRON_SECRET;
-        return Boolean(secret) && req.headers.get('authorization') === `Bearer ${secret}`;
+        const given = Buffer.from(req.headers.get('authorization') ?? '');
+        const expected = Buffer.from(`Bearer ${secret ?? ''}`);
+        return Boolean(secret) && given.length === expected.length && timingSafeEqual(given, expected);
       },
     },
   },

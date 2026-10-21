@@ -90,8 +90,19 @@ type BroadcastSummary = { id: string; name?: string | null; status?: string | nu
 
 /** Broadcasts with exactly this name (newest first, as Resend lists them). */
 export async function findBroadcastsByName(name: string): Promise<BroadcastSummary[]> {
-  const list = await resend<{ data?: BroadcastSummary[] }>('GET', '/broadcasts?limit=100');
-  return (list.data ?? []).filter((broadcast) => broadcast.name === name);
+  const found: BroadcastSummary[] = [];
+  let after = '';
+  for (let page = 0; page < 50; page += 1) {
+    const list = await resend<{ data?: BroadcastSummary[]; has_more?: boolean }>(
+      'GET',
+      `/broadcasts?limit=100${after ? `&after=${encodeURIComponent(after)}` : ''}`,
+    );
+    const data = list.data ?? [];
+    found.push(...data.filter((broadcast) => broadcast.name === name));
+    if (!list.has_more || data.length === 0) break;
+    after = data[data.length - 1].id;
+  }
+  return found;
 }
 
 export async function deleteBroadcast(id: string): Promise<void> {

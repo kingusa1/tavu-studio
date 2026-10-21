@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
 import { getPayloadClient } from '@/lib/cms/payload';
-import { isAllowedOrigin } from '@/lib/email/newsletter';
+import { isAllowedOrigin, normaliseEmail } from '@/lib/email/newsletter';
 
 // Same validation rules as src/components/contact/ContactForm.tsx's client-side zod schema,
 // plus upper bounds (none existed before) and `.strict()` so no extra field is accepted —
@@ -52,7 +52,8 @@ export async function POST(request: Request): Promise<NextResponse> {
       // The email hook runs after the insert; without a transaction it does not hold a pooled
       // connection open while Resend answers.
       disableTransaction: true,
-      data: { name, email, message, page },
+      // Lowercased: the one-thank-you-per-address-per-day rule compares exact values.
+      data: { name, email: normaliseEmail(email), message, page },
     });
   } catch (error) {
     console.error('Failed to save contact submission:', error);

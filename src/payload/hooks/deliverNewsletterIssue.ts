@@ -1,5 +1,6 @@
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
-import { APIError, type CollectionAfterChangeHook, type CollectionBeforeChangeHook } from 'payload';
+import { sql } from '@payloadcms/db-postgres';
+import { APIError, type CollectionAfterChangeHook, type CollectionBeforeChangeHook, type PayloadRequest } from 'payload';
 
 import { loadEmailContext } from '../../lib/email/context';
 import { escapeHtml } from '../../lib/email/layout';
@@ -25,6 +26,21 @@ const broadcastName = (issueId: number | string) => `tavu-issue-${issueId}`;
 const SEND_CONTEXT_KEY = 'newsletterBroadcastToSend';
 
 /**
+ * Locks the issue row for the rest of this save's transaction and returns its stored state. A
+ * second "send" save that overlaps waits here until the first one commits, then sees "sent".
+ */
+async function lockIssue(req: PayloadRequest, id: number | string): Promise<{ status?: string; broadcast_id?: string | null } | null> {
+  const db = (req.payload.db as unknown as { sessions?: Record<string, { db?: { execute: (q: unknown) => Promise<{ rows?: unknown[] }> } }> })
+    .sessions?.[String(await req.transactionID)]?.db;
+  if (!db) throw new APIError('Could not lock the issue for sending; please try again.', 500);
+  const schema = process.env.PAYLOAD_DB_SCHEMA || 'payload';
+  const result = await db.execute(
+    sql`select "status", "broadcast_id" from ${sql.identifier(schema)}."newsletter_issues" where "id" = ${Number(id)} for update`,
+  );
+  return (result.rows?.[0] as { status?: string; broadcast_id?: string | null } | undefined) ?? null;
+}
+
+/**
  * Runs the issue's "What should happen when you save?" action: send a test to one address, or send
  * the issue to every subscriber in the Resend newsletter segment (once). The action always resets
  * to "Just save" so a later save never re-sends.
@@ -46,6 +62,12 @@ export const deliverNewsletterIssue: CollectionBeforeChangeHook = async ({ data,
   }
   if (action === 'send' && !originalDoc?.id) {
     throw new APIError('Save the issue once (and send yourself a test), then choose “Send to all subscribers”.', 400);
+  }
+  if (action === 'send') {
+    const stored = await lockIssue(req, originalDoc.id);
+    if (stored?.status === 'sent' || stored?.broadcast_id) {
+      throw new APIError('This issue was already sent to subscribers. Duplicate it to send a new one.', 400);
+    }
   }
   if (!issue.subject || !issue.heading || !issue.content) {
     throw new APIError('Add a subject, a heading and the content before sending.', 400);

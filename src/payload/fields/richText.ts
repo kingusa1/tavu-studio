@@ -45,7 +45,7 @@ export function richTextField(name: string, preset: RichTextPreset, overrides?: 
             BlockquoteFeature(),
             UploadFeature({ collections: { media: { fields: [] } } }),
           ]
-        : [ParagraphFeature(), BoldFeature(), ItalicFeature(), LinkFeature()];
+        : [ParagraphFeature(), BoldFeature(), ItalicFeature(), LinkFeature({ enabledCollections: ['posts'] })];
 
   return {
     name,
