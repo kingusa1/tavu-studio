@@ -31,6 +31,14 @@ const supabaseBucket = requireEnv('SUPABASE_BUCKET');
 // production root (step 1 of the F0 brief).
 const supabaseStoragePrefix = process.env.SUPABASE_STORAGE_PREFIX || undefined;
 
+// Falls back to the production hostname so a missing env var fails safe to a known-good
+// origin rather than to an empty string (which would make csrf/serverURL permissive).
+const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'https://tavustudio.com';
+const csrfOrigins = [serverURL];
+if (process.env.NODE_ENV !== 'production') {
+  csrfOrigins.push('http://localhost:3000');
+}
+
 export default buildConfig({
   admin: {
     user: 'users',
@@ -45,6 +53,9 @@ export default buildConfig({
   globals,
   editor: lexicalEditor(),
   secret: payloadSecret,
+  serverURL,
+  csrf: csrfOrigins,
+  graphQL: { disable: true },
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

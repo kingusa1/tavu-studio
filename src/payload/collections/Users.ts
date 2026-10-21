@@ -1,4 +1,7 @@
 import type { CollectionConfig } from 'payload';
+import { APIError } from 'payload';
+
+const MIN_PASSWORD_LENGTH = 12;
 
 /**
  * The very first user ever created has no admin to grant them the role, so
@@ -22,13 +25,32 @@ const forceFirstUserToAdmin: CollectionConfig['hooks'] = {
   ],
 };
 
+/** Payload's own minimum is 3 characters (fields/validations.js) — enforce 12+ on create and on any password change. */
+const enforcePasswordLength: CollectionConfig['hooks'] = {
+  beforeValidate: [
+    ({ data }) => {
+      if (typeof data?.password === 'string' && data.password.length < MIN_PASSWORD_LENGTH) {
+        throw new APIError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`, 400);
+      }
+      return data;
+    },
+  ],
+};
+
 export const Users: CollectionConfig = {
   slug: 'users',
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'name', 'role'],
   },
-  auth: true,
+  auth: {
+    cookies: {
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Lax',
+    },
+    maxLoginAttempts: 5,
+    lockTime: 15 * 60_000,
+  },
   access: {
     create: ({ req }) => Boolean(req.user?.role === 'admin'),
     delete: ({ req }) => Boolean(req.user?.role === 'admin'),
@@ -66,5 +88,8 @@ export const Users: CollectionConfig = {
       },
     },
   ],
-  hooks: forceFirstUserToAdmin,
+  hooks: {
+    beforeChange: [...(forceFirstUserToAdmin?.beforeChange ?? [])],
+    beforeValidate: [...(enforcePasswordLength?.beforeValidate ?? [])],
+  },
 };
