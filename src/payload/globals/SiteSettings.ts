@@ -56,7 +56,13 @@ export const SiteSettings: GlobalConfig = {
           label: 'Location',
           fields: [
             { name: 'addressLines', type: 'array', fields: [{ name: 'line', type: 'text' }] },
-            { name: 'addressShortLines', type: 'array', fields: [{ name: 'line', type: 'text' }] },
+            {
+              name: 'addressShortLines',
+              type: 'array',
+              // §7 R9: the generated parent_id index/fk names exceed 63 characters at this nesting depth.
+              dbName: 'ss_addr_short_lines',
+              fields: [{ name: 'line', type: 'text' }],
+            },
             { name: 'locality', type: 'text' },
             { name: 'region', type: 'text' },
             { name: 'country', type: 'text' },
@@ -193,6 +199,8 @@ export const SiteSettings: GlobalConfig = {
             {
               name: 'aggregates',
               type: 'array',
+              // §7 R9: the generated parent_id index/fk names exceed 63 characters at this nesting depth.
+              dbName: 'ss_struct_data_agg',
               fields: [
                 {
                   name: 'source',
@@ -206,6 +214,10 @@ export const SiteSettings: GlobalConfig = {
                 {
                   name: 'category',
                   type: 'select',
+                  // §7 R9: the full nested path (enum__site_settings_v_version_structured_data_
+                  // aggregates_category) is 65 characters — over Postgres's 63-char identifier
+                  // limit — so this needs a short dbName.
+                  dbName: 'ssd_agg_cat',
                   admin: { condition: (_, siblingData) => siblingData?.source === 'offers' },
                   options: [
                     'reformer',
@@ -254,6 +266,8 @@ export const SiteSettings: GlobalConfig = {
             {
               name: 'massageGroupIntros',
               type: 'array',
+              // §7 R9: the generated parent_id index/fk names exceed 63 characters at this nesting depth.
+              dbName: 'ss_llms_massage_intros',
               fields: [
                 { name: 'group', type: 'text' },
                 { name: 'line', type: 'text' },

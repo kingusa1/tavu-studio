@@ -69,6 +69,13 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    offers: Offer;
+    'massage-rituals': MassageRitual;
+    classes: Class;
+    policies: Policy;
+    events: Event;
+    testimonials: Testimonial;
+    'legal-pages': LegalPage;
     'contact-submissions': ContactSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -79,6 +86,13 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    offers: OffersSelect<false> | OffersSelect<true>;
+    'massage-rituals': MassageRitualsSelect<false> | MassageRitualsSelect<true>;
+    classes: ClassesSelect<false> | ClassesSelect<true>;
+    policies: PoliciesSelect<false> | PoliciesSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -89,8 +103,58 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+    header: Header;
+    footer: Footer;
+    'system-pages': SystemPage;
+    'home-page': HomePage;
+    'about-page': AboutPage;
+    'method-page': MethodPage;
+    'classes-page': ClassesPage;
+    'schedule-page': SchedulePage;
+    'appointments-page': AppointmentsPage;
+    'pricing-page': PricingPage;
+    'memberships-page': MembershipsPage;
+    'recovery-page': RecoveryPage;
+    'services-page': ServicesPage;
+    'reformer-pilates-page': ReformerPilatesPage;
+    'breathing-room-page': BreathingRoomPage;
+    'contrast-therapy-page': ContrastTherapyPage;
+    'compression-therapy-page': CompressionTherapyPage;
+    'massage-page': MassagePage;
+    'events-page': EventsPage;
+    'partnerships-page': PartnershipsPage;
+    'contact-page': ContactPage;
+    'register-page': RegisterPage;
+    'account-page': AccountPage;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    'system-pages': SystemPagesSelect<false> | SystemPagesSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'method-page': MethodPageSelect<false> | MethodPageSelect<true>;
+    'classes-page': ClassesPageSelect<false> | ClassesPageSelect<true>;
+    'schedule-page': SchedulePageSelect<false> | SchedulePageSelect<true>;
+    'appointments-page': AppointmentsPageSelect<false> | AppointmentsPageSelect<true>;
+    'pricing-page': PricingPageSelect<false> | PricingPageSelect<true>;
+    'memberships-page': MembershipsPageSelect<false> | MembershipsPageSelect<true>;
+    'recovery-page': RecoveryPageSelect<false> | RecoveryPageSelect<true>;
+    'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
+    'reformer-pilates-page': ReformerPilatesPageSelect<false> | ReformerPilatesPageSelect<true>;
+    'breathing-room-page': BreathingRoomPageSelect<false> | BreathingRoomPageSelect<true>;
+    'contrast-therapy-page': ContrastTherapyPageSelect<false> | ContrastTherapyPageSelect<true>;
+    'compression-therapy-page': CompressionTherapyPageSelect<false> | CompressionTherapyPageSelect<true>;
+    'massage-page': MassagePageSelect<false> | MassagePageSelect<true>;
+    'events-page': EventsPageSelect<false> | EventsPageSelect<true>;
+    'partnerships-page': PartnershipsPageSelect<false> | PartnershipsPageSelect<true>;
+    'contact-page': ContactPageSelect<false> | ContactPageSelect<true>;
+    'register-page': RegisterPageSelect<false> | RegisterPageSelect<true>;
+    'account-page': AccountPageSelect<false> | AccountPageSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -154,6 +218,7 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  prefix?: string | null;
   _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -166,6 +231,83 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers".
+ */
+export interface Offer {
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "massage-rituals".
+ */
+export interface MassageRitual {
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "classes".
+ */
+export interface Class {
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "policies".
+ */
+export interface Policy {
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages".
+ */
+export interface LegalPage {
+  id: number;
+  title: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -212,6 +354,34 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'offers';
+        value: number | Offer;
+      } | null)
+    | ({
+        relationTo: 'massage-rituals';
+        value: number | MassageRitual;
+      } | null)
+    | ({
+        relationTo: 'classes';
+        value: number | Class;
+      } | null)
+    | ({
+        relationTo: 'policies';
+        value: number | Policy;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'legal-pages';
+        value: number | LegalPage;
       } | null)
     | ({
         relationTo: 'contact-submissions';
@@ -290,6 +460,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  prefix?: T;
   _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -302,6 +473,76 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers_select".
+ */
+export interface OffersSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "massage-rituals_select".
+ */
+export interface MassageRitualsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "classes_select".
+ */
+export interface ClassesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "policies_select".
+ */
+export interface PoliciesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages_select".
+ */
+export interface LegalPagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -355,6 +596,1034 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  brand?: {
+    siteName?: string | null;
+    alternateName?: string | null;
+    legalName?: string | null;
+    siteUrl?: string | null;
+    logo?: (number | null) | Media;
+    logoAlt?: string | null;
+    backgroundImage?: (number | null) | Media;
+  };
+  contact?: {
+    phoneDisplay?: string | null;
+    phoneE164?: string | null;
+    whatsappNumber?: string | null;
+    email?: string | null;
+  };
+  location?: {
+    addressLines?:
+      | {
+          line?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    addressShortLines?:
+      | {
+          line?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    locality?: string | null;
+    region?: string | null;
+    country?: string | null;
+    mapsUrl?: string | null;
+    mapEmbedUrl?: string | null;
+  };
+  hours?: {
+    displayLines?:
+      | {
+          line?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    summary?: string | null;
+    opens?: string | null;
+    closes?: string | null;
+    days?: ('Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday')[] | null;
+  };
+  social?: {
+    instagramUrl?: string | null;
+    instagramHandle?: string | null;
+    tiktokUrl?: string | null;
+    facebookUrl?: string | null;
+  };
+  pricing?: {
+    vatNote?: string | null;
+    currencyLabel?: string | null;
+  };
+  priceCards?:
+    | {
+        category: 'reformer' | 'breathing-room' | 'contrast' | 'compression' | 'massage' | 'bundle' | 'membership';
+        title?: string | null;
+        subtitle?: string | null;
+        ctaLabel?: string | null;
+        ctaHref?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  mindbody?: {
+    scheduleWidgetId?: string | null;
+    appointmentsWidgetId?: string | null;
+    registrationWidgetId?: string | null;
+    loginSiteId?: string | null;
+    loginMbSiteId?: string | null;
+  };
+  facts?:
+    | {
+        key: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    titleDefault?: string | null;
+    titleTemplate?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    /**
+     * Leave empty to keep the static /opengraph-image.png (1200×630) — the OG URL does not change.
+     */
+    ogImage?: (number | null) | Media;
+    ogImageAlt?: string | null;
+    twitterTitle?: string | null;
+    twitterDescription?: string | null;
+    locale?: string | null;
+  };
+  structuredData?: {
+    description?: string | null;
+    /**
+     * Absolute URL, kept as text so JSON-LD does not switch to a Supabase URL.
+     */
+    logoUrl?: string | null;
+    imageUrl?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug} AED - {price:slug} AED.
+     */
+    priceRange?: string | null;
+    currenciesAccepted?: string | null;
+    paymentAccepted?: string | null;
+    areaServed?: string | null;
+    aggregates?:
+      | {
+          source: 'massage-rituals' | 'offers';
+          category?:
+            ('reformer' | 'breathing-room' | 'contrast' | 'compression' | 'add-on' | 'bundle' | 'membership') | null;
+          name?: string | null;
+          /**
+           * Tokens allowed.
+           */
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  llms?: {
+    title?: string | null;
+    summary?: string | null;
+    intro?: string | null;
+    keyPages?:
+      | {
+          label?: string | null;
+          path?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    sectionHeadings?:
+      | {
+          key?: string | null;
+          heading?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    massageGroupIntros?:
+      | {
+          group?: string | null;
+          line?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    policiesBlock?: string | null;
+    notesForAi?: string | null;
+  };
+  announcement?: {
+    enabled?: boolean | null;
+    text?: string | null;
+    link?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+  };
+  analytics?: {
+    metaPixelId?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  dropdowns?:
+    | {
+        label: string;
+        items?:
+          | {
+              title: string;
+              description?: string | null;
+              href: string;
+              icon?:
+                | (
+                    | 'lines'
+                    | 'chat-bubble'
+                    | 'heart'
+                    | 'bolt'
+                    | 'building'
+                    | 'mail'
+                    | 'calendar'
+                    | 'sparkles'
+                    | 'briefcase'
+                  )
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  login?: {
+    label?: string | null;
+    mobileLabel?: string | null;
+    href?: string | null;
+    ariaLabel?: string | null;
+  };
+  register?: {
+    label?: string | null;
+    mobileLabel?: string | null;
+    href?: string | null;
+  };
+  secondaryCta?: {
+    label?: string | null;
+    href?: string | null;
+    newTab?: boolean | null;
+  };
+  primaryCta?: {
+    label?: string | null;
+    href?: string | null;
+    newTab?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  taglineLines?:
+    | {
+        line?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  columns?:
+    | {
+        heading?: string | null;
+        links?:
+          | {
+              label?: string | null;
+              href?: string | null;
+              newTab?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  visitUs?: {
+    heading?: string | null;
+    mapsLinkLabel?: string | null;
+    hoursHeading?: string | null;
+  };
+  /**
+   * Tokens allowed, e.g. {year}.
+   */
+  copyright?: string | null;
+  legalLinks?:
+    | {
+        label?: string | null;
+        href?: string | null;
+        newTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "system-pages".
+ */
+export interface SystemPage {
+  id: number;
+  notFound?: {
+    code?: string | null;
+    heading?: string | null;
+    textLine1?: string | null;
+    textLine2?: string | null;
+    button?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+  };
+  error?: {
+    heading?: string | null;
+    text?: string | null;
+    retryLabel?: string | null;
+    homeLabel?: string | null;
+  };
+  loading?: {
+    text?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "method-page".
+ */
+export interface MethodPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "classes-page".
+ */
+export interface ClassesPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule-page".
+ */
+export interface SchedulePage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments-page".
+ */
+export interface AppointmentsPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pricing-page".
+ */
+export interface PricingPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "memberships-page".
+ */
+export interface MembershipsPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recovery-page".
+ */
+export interface RecoveryPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page".
+ */
+export interface ServicesPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reformer-pilates-page".
+ */
+export interface ReformerPilatesPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "breathing-room-page".
+ */
+export interface BreathingRoomPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contrast-therapy-page".
+ */
+export interface ContrastTherapyPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "compression-therapy-page".
+ */
+export interface CompressionTherapyPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "massage-page".
+ */
+export interface MassagePage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events-page".
+ */
+export interface EventsPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships-page".
+ */
+export interface PartnershipsPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page".
+ */
+export interface ContactPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "register-page".
+ */
+export interface RegisterPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "account-page".
+ */
+export interface AccountPage {
+  id: number;
+  title?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  brand?:
+    | T
+    | {
+        siteName?: T;
+        alternateName?: T;
+        legalName?: T;
+        siteUrl?: T;
+        logo?: T;
+        logoAlt?: T;
+        backgroundImage?: T;
+      };
+  contact?:
+    | T
+    | {
+        phoneDisplay?: T;
+        phoneE164?: T;
+        whatsappNumber?: T;
+        email?: T;
+      };
+  location?:
+    | T
+    | {
+        addressLines?:
+          | T
+          | {
+              line?: T;
+              id?: T;
+            };
+        addressShortLines?:
+          | T
+          | {
+              line?: T;
+              id?: T;
+            };
+        locality?: T;
+        region?: T;
+        country?: T;
+        mapsUrl?: T;
+        mapEmbedUrl?: T;
+      };
+  hours?:
+    | T
+    | {
+        displayLines?:
+          | T
+          | {
+              line?: T;
+              id?: T;
+            };
+        summary?: T;
+        opens?: T;
+        closes?: T;
+        days?: T;
+      };
+  social?:
+    | T
+    | {
+        instagramUrl?: T;
+        instagramHandle?: T;
+        tiktokUrl?: T;
+        facebookUrl?: T;
+      };
+  pricing?:
+    | T
+    | {
+        vatNote?: T;
+        currencyLabel?: T;
+      };
+  priceCards?:
+    | T
+    | {
+        category?: T;
+        title?: T;
+        subtitle?: T;
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  mindbody?:
+    | T
+    | {
+        scheduleWidgetId?: T;
+        appointmentsWidgetId?: T;
+        registrationWidgetId?: T;
+        loginSiteId?: T;
+        loginMbSiteId?: T;
+      };
+  facts?:
+    | T
+    | {
+        key?: T;
+        value?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        titleDefault?: T;
+        titleTemplate?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        ogImageAlt?: T;
+        twitterTitle?: T;
+        twitterDescription?: T;
+        locale?: T;
+      };
+  structuredData?:
+    | T
+    | {
+        description?: T;
+        logoUrl?: T;
+        imageUrl?: T;
+        priceRange?: T;
+        currenciesAccepted?: T;
+        paymentAccepted?: T;
+        areaServed?: T;
+        aggregates?:
+          | T
+          | {
+              source?: T;
+              category?: T;
+              name?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  llms?:
+    | T
+    | {
+        title?: T;
+        summary?: T;
+        intro?: T;
+        keyPages?:
+          | T
+          | {
+              label?: T;
+              path?: T;
+              description?: T;
+              id?: T;
+            };
+        sectionHeadings?:
+          | T
+          | {
+              key?: T;
+              heading?: T;
+              id?: T;
+            };
+        massageGroupIntros?:
+          | T
+          | {
+              group?: T;
+              line?: T;
+              id?: T;
+            };
+        policiesBlock?: T;
+        notesForAi?: T;
+      };
+  announcement?:
+    | T
+    | {
+        enabled?: T;
+        text?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+      };
+  analytics?:
+    | T
+    | {
+        metaPixelId?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  dropdowns?:
+    | T
+    | {
+        label?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  login?:
+    | T
+    | {
+        label?: T;
+        mobileLabel?: T;
+        href?: T;
+        ariaLabel?: T;
+      };
+  register?:
+    | T
+    | {
+        label?: T;
+        mobileLabel?: T;
+        href?: T;
+      };
+  secondaryCta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        newTab?: T;
+      };
+  primaryCta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        newTab?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  taglineLines?:
+    | T
+    | {
+        line?: T;
+        id?: T;
+      };
+  columns?:
+    | T
+    | {
+        heading?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  visitUs?:
+    | T
+    | {
+        heading?: T;
+        mapsLinkLabel?: T;
+        hoursHeading?: T;
+      };
+  copyright?: T;
+  legalLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        newTab?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "system-pages_select".
+ */
+export interface SystemPagesSelect<T extends boolean = true> {
+  notFound?:
+    | T
+    | {
+        code?: T;
+        heading?: T;
+        textLine1?: T;
+        textLine2?: T;
+        button?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+      };
+  error?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        retryLabel?: T;
+        homeLabel?: T;
+      };
+  loading?:
+    | T
+    | {
+        text?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "method-page_select".
+ */
+export interface MethodPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "classes-page_select".
+ */
+export interface ClassesPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule-page_select".
+ */
+export interface SchedulePageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appointments-page_select".
+ */
+export interface AppointmentsPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pricing-page_select".
+ */
+export interface PricingPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "memberships-page_select".
+ */
+export interface MembershipsPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recovery-page_select".
+ */
+export interface RecoveryPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page_select".
+ */
+export interface ServicesPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reformer-pilates-page_select".
+ */
+export interface ReformerPilatesPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "breathing-room-page_select".
+ */
+export interface BreathingRoomPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contrast-therapy-page_select".
+ */
+export interface ContrastTherapyPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "compression-therapy-page_select".
+ */
+export interface CompressionTherapyPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "massage-page_select".
+ */
+export interface MassagePageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events-page_select".
+ */
+export interface EventsPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerships-page_select".
+ */
+export interface PartnershipsPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-page_select".
+ */
+export interface ContactPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "register-page_select".
+ */
+export interface RegisterPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "account-page_select".
+ */
+export interface AccountPageSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
