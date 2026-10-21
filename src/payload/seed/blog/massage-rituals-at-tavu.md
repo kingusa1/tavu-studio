@@ -31,7 +31,7 @@ The **TAVÚ Recovery Escape** (AED 800, 3 hours) is the most complete ritual: ex
 
 ## Choosing a Ritual
 
-If you're not sure where to start, think in terms of what your body needs most: FLOW or RELEASE for general tension, RECOVER if you train regularly, DRAIN if you're dealing with fluid retention, one of the 30-minute targeted rituals for a specific area like the neck, feet, hands or scalp, ROOTED when you want a slower, grounding ritual, or the Recovery Escape when you want the full three-hour experience.
+If you're not sure where to start, think in terms of what your body needs most: FLOW or RELEASE for general tension, RECOVER if you train regularly, DRAIN if you're dealing with fluid retention, one of the targeted rituals for a specific area (head and neck, feet, arms and hands, scalp or face), ROOTED when you want a slower, grounding ritual, or the Recovery Escape when you want the full three-hour experience.
 
 ## What to Expect
 

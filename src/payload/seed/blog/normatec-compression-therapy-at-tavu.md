@@ -12,7 +12,7 @@ NormaTec's compression boots wrap around your legs and inflate and deflate in a 
 
 ## Who It's For
 
-Compression Therapy is most often booked by people training regularly who want a structured recovery habit, but it's just as suited to anyone on their feet all day or dealing with general tightness or swelling.
+TAVÚ recommends it after intense training and for heavy or tight legs, injury recovery, and swelling or fluid retention.
 
 ## How a Session Works
 
@@ -27,7 +27,7 @@ Compression Therapy at TAVÚ is positioned as a recovery aid rather than a treat
 - Injury recovery
 - Swelling or fluid retention
 
-TAVÚ uses it as a recovery-focused treatment that stimulates circulation and supports muscle recovery. The research is still developing: a 2024 systematic review and meta-analysis of lower-limb intermittent pneumatic compression (the technology NormaTec uses) found trivial to moderate effects on perceived pain and soreness, trivial to small benefits for muscle function, and inconsistent results for lactate clearance (see Sources below) — so think of it as a comfort and recovery aid rather than a guaranteed performance fix.
+TAVÚ offers it as a recovery session that stimulates circulation and supports muscle recovery. The research is still developing: a 2024 systematic review and meta-analysis of lower-limb intermittent pneumatic compression (the technology NormaTec uses) found trivial to moderate effects on perceived pain and soreness, trivial to small benefits for muscle function (not statistically significant), and no clear effect on lactate clearance (see Sources below) — so think of it as a comfort and recovery aid rather than a guaranteed performance fix.
 
 Compression Therapy is a wellness and recovery practice, not a medical treatment. If you have a circulation condition, a blood clot history, or any other medical concern, check with your doctor before booking.
 
