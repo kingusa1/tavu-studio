@@ -238,8 +238,171 @@ export interface Media {
  */
 export interface Offer {
   id: number;
-  title: string;
+  /**
+   * Computed automatically — "{category} — {name}" — so rows named "Drop-In" stay distinguishable in the list.
+   */
+  adminLabel?: string | null;
+  /**
+   * Row/card name, e.g. "Drop-In", "10-Class Pack".
+   */
+  name: string;
+  /**
+   * Used by price tokens, e.g. {price:slug}.
+   */
   slug: string;
+  category: 'reformer' | 'breathing-room' | 'contrast' | 'compression' | 'add-on' | 'bundle' | 'membership';
+  kind?: ('drop-in' | 'class-pack' | 'session' | 'package' | 'bundle' | 'membership' | 'add-on') | null;
+  /**
+   * AED, excluding VAT
+   */
+  price: number;
+  /**
+   * Optional. Renders "AED / {period}" instead of a bare price.
+   */
+  pricePeriod?: string | null;
+  /**
+   * e.g. "60 min", "45 min", "6 × 45 min", "20 min".
+   */
+  durationShort?: string | null;
+  /**
+   * e.g. "60 Minutes".
+   */
+  durationLong?: string | null;
+  /**
+   * e.g. "Up to 6 Guests".
+   */
+  capacityLabel?: string | null;
+  /**
+   * e.g. "2 months", "30 days", "3 consecutive months".
+   */
+  validity?: string | null;
+  /**
+   * e.g. "2 complimentary Contrast Therapy sessions".
+   */
+  complimentary?: string | null;
+  /**
+   * Main description. Leave empty for packs — the page builds "Valid X." from Validity. Tokens allowed, e.g. {price:slug}.
+   */
+  description?: string | null;
+  /**
+   * Accent line shown when not derived from Complimentary. Tokens allowed.
+   */
+  bonus?: string | null;
+  /**
+   * Small note, e.g. "Non-transferable & non-refundable". Tokens allowed.
+   */
+  note?: string | null;
+  includesHeading?: string | null;
+  includes?:
+    | {
+        /**
+         * Tokens allowed.
+         */
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  notesHeading?: string | null;
+  notes?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  benefits?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  recommendedFor?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  highlight?: {
+    enabled?: boolean | null;
+    label?: string | null;
+  };
+  /**
+   * Only fill these in when the same offer must read differently on another surface (CMS-Content-Model.md §1.3) — never to "fix" copy.
+   */
+  display?: {
+    /**
+     * Overrides Name on the pricing page / big cards.
+     */
+    fullName?: string | null;
+    /**
+     * Overrides Description on the classes page.
+     */
+    compactDescription?: string | null;
+    /**
+     * Overrides Duration (Short) on the pricing page.
+     */
+    pricingDuration?: string | null;
+    cardSubtitle?: string | null;
+  };
+  /**
+   * Full-width card (pricing, classes and service pages) instead of a row.
+   */
+  featureCard?: {
+    enabled?: boolean | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    subtitle?: string | null;
+    body?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    includesHeading?: string | null;
+    policyHeading?: string | null;
+    policyText?: string | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+  };
+  visibility?: {
+    showOnHome?: boolean | null;
+    showOnPricing?: boolean | null;
+    showOnClasses?: boolean | null;
+    showOnServicePage?: boolean | null;
+    showOnAppointments?: boolean | null;
+    showOnLlms?: boolean | null;
+  };
+  /**
+   * Scheduled return (§5.4) — the daily keep-alive cron must revalidate when this date arrives.
+   */
+  availableFrom?: string | null;
+  availableUntil?: string | null;
+  structuredData?: {
+    mode?: ('none' | 'offer') | null;
+    name?: string | null;
+    /**
+     * Tokens allowed.
+     */
+    description?: string | null;
+  };
+  /**
+   * Optional. Verbatim llms.txt line, tokens allowed. Leave empty to auto-generate "- {Name}: {price}".
+   */
+  llmsLine?: string | null;
+  active?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -249,8 +412,88 @@ export interface Offer {
  */
 export interface MassageRitual {
   id: number;
-  title: string;
-  slug: string;
+  /**
+   * e.g. "FLOW | Relaxation Massage".
+   */
+  name: string;
+  /**
+   * Used by price tokens, e.g. {price:slug}, {price:slug.pack}.
+   */
+  slug?: string | null;
+  group: 'full-body' | 'targeted' | 'signature-foot' | 'escape';
+  /**
+   * Overrides Name on the massage page card header, when worded differently there.
+   */
+  cardTitle?: string | null;
+  /**
+   * Long version, shown on the massage page. Tokens allowed.
+   */
+  description?: string | null;
+  /**
+   * Short version, shown on the pricing page. Tokens allowed.
+   */
+  shortDescription?: string | null;
+  /**
+   * e.g. "60 min".
+   */
+  durationShort?: string | null;
+  /**
+   * e.g. "60 Minutes".
+   */
+  durationLong?: string | null;
+  /**
+   * AED, excluding VAT
+   */
+  price: number;
+  /**
+   * AED, excluding VAT
+   */
+  price90?: number | null;
+  duration90Long?: string | null;
+  /**
+   * AED, excluding VAT
+   */
+  addOnPrice?: number | null;
+  /**
+   * AED, excluding VAT
+   */
+  packPrice?: number | null;
+  packFormula?: string | null;
+  packSessions?: number | null;
+  packValidity?: string | null;
+  benefits?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  includesHeading?: string | null;
+  includes?:
+    | {
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  saltBlendsHeading?: string | null;
+  saltBlends?:
+    | {
+        name?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  saltBlendsFootnote?: string | null;
+  /**
+   * Tokens allowed.
+   */
+  note?: string | null;
+  bookLabel?: string | null;
+  /**
+   * Optional. Verbatim llms.txt line, tokens allowed.
+   */
+  llmsLine?: string | null;
+  active?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -271,8 +514,14 @@ export interface Class {
  */
 export interface Policy {
   id: number;
-  title: string;
-  slug: string;
+  /**
+   * The bold lead-in, with its punctuation exactly as shown, e.g. "First time?", "Cancellation:".
+   */
+  label: string;
+  text: string;
+  showOn?: ('schedule' | 'classes' | 'appointments')[] | null;
+  active?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -479,8 +728,100 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "offers_select".
  */
 export interface OffersSelect<T extends boolean = true> {
-  title?: T;
+  adminLabel?: T;
+  name?: T;
   slug?: T;
+  category?: T;
+  kind?: T;
+  price?: T;
+  pricePeriod?: T;
+  durationShort?: T;
+  durationLong?: T;
+  capacityLabel?: T;
+  validity?: T;
+  complimentary?: T;
+  description?: T;
+  bonus?: T;
+  note?: T;
+  includesHeading?: T;
+  includes?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  notesHeading?: T;
+  notes?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  benefits?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  recommendedFor?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  highlight?:
+    | T
+    | {
+        enabled?: T;
+        label?: T;
+      };
+  display?:
+    | T
+    | {
+        fullName?: T;
+        compactDescription?: T;
+        pricingDuration?: T;
+        cardSubtitle?: T;
+      };
+  featureCard?:
+    | T
+    | {
+        enabled?: T;
+        subtitle?: T;
+        body?: T;
+        includesHeading?: T;
+        policyHeading?: T;
+        policyText?: T;
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+      };
+  visibility?:
+    | T
+    | {
+        showOnHome?: T;
+        showOnPricing?: T;
+        showOnClasses?: T;
+        showOnServicePage?: T;
+        showOnAppointments?: T;
+        showOnLlms?: T;
+      };
+  availableFrom?: T;
+  availableUntil?: T;
+  structuredData?:
+    | T
+    | {
+        mode?: T;
+        name?: T;
+        description?: T;
+      };
+  llmsLine?: T;
+  active?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -489,8 +830,49 @@ export interface OffersSelect<T extends boolean = true> {
  * via the `definition` "massage-rituals_select".
  */
 export interface MassageRitualsSelect<T extends boolean = true> {
-  title?: T;
+  name?: T;
   slug?: T;
+  group?: T;
+  cardTitle?: T;
+  description?: T;
+  shortDescription?: T;
+  durationShort?: T;
+  durationLong?: T;
+  price?: T;
+  price90?: T;
+  duration90Long?: T;
+  addOnPrice?: T;
+  packPrice?: T;
+  packFormula?: T;
+  packSessions?: T;
+  packValidity?: T;
+  benefits?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  includesHeading?: T;
+  includes?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  saltBlendsHeading?: T;
+  saltBlends?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        id?: T;
+      };
+  saltBlendsFootnote?: T;
+  note?: T;
+  bookLabel?: T;
+  llmsLine?: T;
+  active?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -509,8 +891,11 @@ export interface ClassesSelect<T extends boolean = true> {
  * via the `definition` "policies_select".
  */
 export interface PoliciesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
+  label?: T;
+  text?: T;
+  showOn?: T;
+  active?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -969,7 +1354,55 @@ export interface AppointmentsPage {
  */
 export interface PricingPage {
   id: number;
-  title?: string | null;
+  header?: {
+    /**
+     * The H1, e.g. "Choose Your Rhythm".
+     */
+    title?: string | null;
+    showVatNote?: boolean | null;
+  };
+  /**
+   * Card titles, subtitles and CTAs come from Site Settings → Price cards. Rows come from Offers and the Massage Menu.
+   */
+  cards?: {
+    compressionBenefitsHeading?: string | null;
+    compressionRecommendedHeading?: string | null;
+  };
+  memberships?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -979,7 +1412,56 @@ export interface PricingPage {
  */
 export interface MembershipsPage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    title?: string | null;
+    intro?: string | null;
+  };
+  /**
+   * Tiers come from Offers, category Membership.
+   */
+  tiers?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    showVatNote?: boolean | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -990,6 +1472,36 @@ export interface MembershipsPage {
 export interface RecoveryPage {
   id: number;
   title?: string | null;
+  intro?: string | null;
+  cards?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        href?: string | null;
+        /**
+         * Tokens allowed, e.g. "From {from:contrast} AED →".
+         */
+        priceText?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  cta?: {
+    label?: string | null;
+    href?: string | null;
+    newTab?: boolean | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1049,7 +1561,138 @@ export interface CompressionTherapyPage {
  */
 export interface MassagePage {
   id: number;
-  title?: string | null;
+  hero?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    imagePosition?: ('center' | 'center-40') | null;
+    eyebrow?: string | null;
+    title?: string | null;
+    intro?: string | null;
+  };
+  overview?: {
+    heading?: string | null;
+    paragraphs?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    badge?: string | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    card?: {
+      image?: {
+        media?: (number | null) | Media;
+        /**
+         * Overrides the image's default alt text for this spot only
+         */
+        alt?: string | null;
+      };
+      eyebrow?: string | null;
+      titleLine1?: string | null;
+      /**
+       * Rendered in italic.
+       */
+      titleLine2?: string | null;
+      bullets?:
+        | {
+            /**
+             * Tokens allowed, e.g. {price:slug}.
+             */
+            text?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  /**
+   * Rows come from the Massage Menu, group Full-Body.
+   */
+  fullBody?: {
+    heading?: string | null;
+    intro?: string | null;
+    bookLabel?: string | null;
+    bookHref?: string | null;
+  };
+  /**
+   * Rows come from the Massage Menu, group Targeted.
+   */
+  targeted?: {
+    heading?: string | null;
+    intro?: string | null;
+    addOnLabel?: string | null;
+    ritualLabel?: string | null;
+    packLabel?: string | null;
+  };
+  /**
+   * Card data comes from the Massage Menu row "ROOTED | Foot Soaking and Reflexology".
+   */
+  rooted?: {
+    heading?: string | null;
+    intro?: string | null;
+    packHeading?: string | null;
+  };
+  /**
+   * Card data comes from the Massage Menu row "TAVÚ Recovery Escape".
+   */
+  escape?: {
+    heading?: string | null;
+    intro?: string | null;
+    durationPrefix?: string | null;
+  };
+  /**
+   * Rows are computed from the Massage Menu (§2.4) — not stored here.
+   */
+  summary?: {
+    heading?: string | null;
+    columnLabels?: {
+      ritual?: string | null;
+      value?: string | null;
+      pack?: string | null;
+      saving?: string | null;
+    };
+    footnote?: string | null;
+    showVatNote?: boolean | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1490,7 +2133,55 @@ export interface AppointmentsPageSelect<T extends boolean = true> {
  * via the `definition` "pricing-page_select".
  */
 export interface PricingPageSelect<T extends boolean = true> {
-  title?: T;
+  header?:
+    | T
+    | {
+        title?: T;
+        showVatNote?: T;
+      };
+  cards?:
+    | T
+    | {
+        compressionBenefitsHeading?: T;
+        compressionRecommendedHeading?: T;
+      };
+  memberships?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1500,7 +2191,56 @@ export interface PricingPageSelect<T extends boolean = true> {
  * via the `definition` "memberships-page_select".
  */
 export interface MembershipsPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        title?: T;
+        intro?: T;
+      };
+  tiers?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        showVatNote?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1511,6 +2251,34 @@ export interface MembershipsPageSelect<T extends boolean = true> {
  */
 export interface RecoveryPageSelect<T extends boolean = true> {
   title?: T;
+  intro?: T;
+  cards?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        href?: T;
+        priceText?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        newTab?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1570,7 +2338,135 @@ export interface CompressionTherapyPageSelect<T extends boolean = true> {
  * via the `definition` "massage-page_select".
  */
 export interface MassagePageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        imagePosition?: T;
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+      };
+  overview?:
+    | T
+    | {
+        heading?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        badge?: T;
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        card?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              eyebrow?: T;
+              titleLine1?: T;
+              titleLine2?: T;
+              bullets?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+      };
+  fullBody?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        bookLabel?: T;
+        bookHref?: T;
+      };
+  targeted?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        addOnLabel?: T;
+        ritualLabel?: T;
+        packLabel?: T;
+      };
+  rooted?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        packHeading?: T;
+      };
+  escape?:
+    | T
+    | {
+        heading?: T;
+        intro?: T;
+        durationPrefix?: T;
+      };
+  summary?:
+    | T
+    | {
+        heading?: T;
+        columnLabels?:
+          | T
+          | {
+              ritual?: T;
+              value?: T;
+              pack?: T;
+              saving?: T;
+            };
+        footnote?: T;
+        showVatNote?: T;
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
