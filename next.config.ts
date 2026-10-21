@@ -30,15 +30,17 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    // EGR-03: placehold.co, picsum.photos, cdninstagram.com and fbcdn.net were unused —
+    // verified by reading SocialFeed.tsx (the only place that could render them): the
+    // Instagram/Behold feed always renders with `unoptimized={isConnected}` (next/image's
+    // optimizer, where remotePatterns is enforced, is never invoked for unoptimized images —
+    // confirmed in node_modules/next/dist/server/image-optimizer.js), and nothing else in src/
+    // references those hostnames. Only the Supabase Storage bucket actually goes through
+    // next/image, narrowed from the whole public object tree to the real bucket name.
     remotePatterns: [
-      { protocol: 'https', hostname: 'placehold.co', port: '', pathname: '/**' },
-      { protocol: 'https', hostname: 'picsum.photos', port: '', pathname: '/**' },
-      { protocol: 'https', hostname: '**.cdninstagram.com', port: '', pathname: '/**' },
-      { protocol: 'https', hostname: '**.fbcdn.net', port: '', pathname: '/**' },
-      { protocol: 'https', hostname: 'behold.pictures', port: '', pathname: '/**' },
       // Supabase Storage public bucket — Payload Media `url` values are
       // direct Supabase public-object URLs (see src/payload/storage/supabase.ts).
-      { protocol: 'https', hostname: 'armumywprajdpyyfpvoz.supabase.co', port: '', pathname: '/storage/v1/object/public/**' },
+      { protocol: 'https', hostname: 'armumywprajdpyyfpvoz.supabase.co', port: '', pathname: '/storage/v1/object/public/media/**' },
     ],
   },
   async headers() {
