@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useAnimationFrame, useInView, useReducedMotion } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
-import { Instagram, Heart, ExternalLink, Play, Loader2, MessageCircle } from "lucide-react";
+import { Instagram, ExternalLink, Play, Pause, Loader2 } from "lucide-react";
 
 interface InstagramPost {
   id: string;
@@ -14,8 +14,6 @@ interface InstagramPost {
   permalink: string;
   caption?: string;
   timestamp: string;
-  likesCount?: number;
-  commentsCount?: number;
 }
 
 interface InstagramProfile {
@@ -25,33 +23,64 @@ interface InstagramProfile {
   mediaCount?: number;
 }
 
+interface FeedItem {
+  src: string;
+  alt: string;
+  permalink: string;
+  isVideo: boolean;
+}
+
 // Fallback images when Instagram is not connected — real TAVÚ photos
 const fallbackImages = [
-  { src: "/hero-reformer-studio.webp", alt: "TAVÚ Reformer Pilates studio", likes: 234, comments: 12 },
-  { src: "/service-reformer-mirror.webp", alt: "Reformer studio with backlit mirror", likes: 189, comments: 8 },
-  { src: "/service-sauna.webp", alt: "Himalayan salt sauna at TAVÚ", likes: 267, comments: 11 },
-  { src: "/service-ice-baths.webp", alt: "Contrast Therapy ice baths", likes: 312, comments: 15 },
-  { src: "/service-breathing-props.webp", alt: "Breathing Room props", likes: 198, comments: 9 },
-  { src: "/gallery-breathing-room.webp", alt: "The TAVÚ Breathing Room", likes: 156, comments: 7 },
-  { src: "/service-massage-towels.webp", alt: "TAVÚ branded towels", likes: 223, comments: 10 },
-  { src: "/about-reception.webp", alt: "TAVÚ reception desk", likes: 289, comments: 14 },
-  { src: "/about-lounge.webp", alt: "TAVÚ lounge space", likes: 254, comments: 11 },
-  { src: "/about-exterior.webp", alt: "TAVÚ studio exterior", likes: 211, comments: 9 },
-  { src: "/gallery-sauna-infrared.webp", alt: "Infrared sauna at TAVÚ", likes: 198, comments: 8 },
-  { src: "/about-entrance.webp", alt: "TAVÚ entrance", likes: 244, comments: 13 },
-  { src: "/gallery-sauna-salt.webp", alt: "Himalayan salt sauna ritual at TAVÚ", likes: 167, comments: 6 },
-  { src: "/amenity-coffee.webp", alt: "By the Beach meets TAVÚ coffee", likes: 187, comments: 10 },
-  { src: "/reformer-room-new.webp", alt: "Reformer class at TAVÚ", likes: 132, comments: 5 },
-  { src: "/service-recovery-equipment.webp", alt: "Recovery equipment", likes: 176, comments: 7 },
+  { src: "/hero-reformer-studio.webp", alt: "TAVÚ Reformer Pilates studio" },
+  { src: "/service-reformer-mirror.webp", alt: "Reformer studio with backlit mirror" },
+  { src: "/service-sauna.webp", alt: "Himalayan salt sauna at TAVÚ" },
+  { src: "/service-ice-baths.webp", alt: "Contrast Therapy ice baths" },
+  { src: "/service-breathing-props.webp", alt: "Breathing Room props" },
+  { src: "/gallery-breathing-room.webp", alt: "The TAVÚ Breathing Room" },
+  { src: "/service-massage-towels.webp", alt: "TAVÚ branded towels" },
+  { src: "/about-reception.webp", alt: "TAVÚ reception desk" },
+  { src: "/about-lounge.webp", alt: "TAVÚ lounge space" },
+  { src: "/about-exterior.webp", alt: "TAVÚ studio exterior" },
+  { src: "/gallery-sauna-infrared.webp", alt: "Infrared sauna at TAVÚ" },
+  { src: "/about-entrance.webp", alt: "TAVÚ entrance" },
+  { src: "/gallery-sauna-salt.webp", alt: "Himalayan salt sauna ritual at TAVÚ" },
+  { src: "/amenity-coffee.webp", alt: "By the Beach meets TAVÚ coffee" },
+  { src: "/reformer-room-new.webp", alt: "Reformer class at TAVÚ" },
+  { src: "/service-recovery-equipment.webp", alt: "Recovery equipment" },
 ];
 
+const INSTAGRAM_URL = "https://www.instagram.com/tavuwellness.studio";
+// Strip speed in pixels per second.
+const SCROLL_SPEED = 40;
+
+/** Behold serves a JPEG poster as mediaUrl for videos; only fall back to the small thumbnail for raw .mp4 URLs. */
+function postImage(post: InstagramPost): string {
+  const isMp4 = /\.mp4(\?|$)/i.test(post.mediaUrl);
+  return post.mediaType === "VIDEO" && isMp4 ? post.thumbnailUrl || post.mediaUrl : post.mediaUrl;
+}
+
+function postAlt(post: InstagramPost): string {
+  const caption = post.caption?.replace(/\s+/g, " ").trim();
+  return caption ? `Instagram post: ${caption.slice(0, 100)}` : "TAVÚ Instagram post";
+}
+
 export default function SocialFeed() {
-  const [isPaused, setIsPaused] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isHoverPaused, setIsHoverPaused] = useState(false);
+  const [isUserPaused, setIsUserPaused] = useState(false);
   const [instagramPosts, setInstagramPosts] = useState<InstagramPost[]>([]);
   const [profile, setProfile] = useState<InstagramProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
+  const [failedSrcs, setFailedSrcs] = useState<ReadonlySet<string>>(new Set());
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  // Mount the strip (and start loading every image) shortly before it scrolls into view,
+  // so cards never appear empty while lazy images catch up with the moving strip.
+  const isNearView = useInView(sectionRef, { once: true, margin: "600px 0px" });
+  const prefersReducedMotion = useReducedMotion();
 
   // Fetch Instagram posts on mount
   useEffect(() => {
@@ -64,8 +93,8 @@ export default function SocialFeed() {
           setProfile(data.profile);
           setIsConnected(true);
         }
-      } catch (error) {
-        console.log("Instagram feed not connected, using fallback images");
+      } catch {
+        // Feed unavailable: the fallback photos are shown instead.
       } finally {
         setIsLoading(false);
       }
@@ -74,25 +103,39 @@ export default function SocialFeed() {
     fetchInstagramPosts();
   }, []);
 
-  // Use Instagram posts if available, otherwise use fallback
-  const displayImages = isConnected
-    ? instagramPosts.map((post) => ({
-        src: post.mediaType === "VIDEO" ? (post.thumbnailUrl || post.mediaUrl) : post.mediaUrl,
-        alt: post.caption?.slice(0, 50) || "Instagram post",
-        permalink: post.permalink,
-        isVideo: post.mediaType === "VIDEO",
-        likes: post.likesCount || 0,
-        comments: post.commentsCount || 0,
-      }))
-    : fallbackImages.map((img) => ({ ...img, permalink: "https://instagram.com/tavuwellness.studio", isVideo: false }));
+  const displayImages: FeedItem[] = (
+    isConnected
+      ? instagramPosts.map((post) => ({
+          src: postImage(post),
+          alt: postAlt(post),
+          permalink: post.permalink,
+          isVideo: post.mediaType === "VIDEO",
+        }))
+      : fallbackImages.map((img) => ({ ...img, permalink: INSTAGRAM_URL, isVideo: false }))
+  ).filter((item) => !failedSrcs.has(item.src));
 
-  // Duplicate for seamless loop
-  const allImages = [...displayImages, ...displayImages];
+  const isPaused = isHoverPaused || isUserPaused;
+  const isAnimated = !prefersReducedMotion;
 
+  // Seamless loop: the track holds the items twice, so it scrolls exactly half its width, then wraps.
+  useAnimationFrame((_, delta) => {
+    const track = trackRef.current;
+    if (!track || !isAnimated || isPaused) return;
+    const loopWidth = track.scrollWidth / 2;
+    if (loopWidth <= 0) return;
+    offsetRef.current = (offsetRef.current + (Math.min(delta, 100) / 1000) * SCROLL_SPEED) % loopWidth;
+    track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
+  });
+
+  const markFailed = (src: string) =>
+    setFailedSrcs((prev) => (prev.has(src) ? prev : new Set([...prev, src])));
+
+  const loops = isAnimated ? [0, 1] : [0];
   const instagramHandle = profile?.username || "tavuwellness.studio";
+  const showSetupGuide = process.env.NODE_ENV !== "production" && !isLoading && !isConnected;
 
   return (
-    <section className="py-16 lg:py-24 bg-primary/5 relative overflow-hidden">
+    <section ref={sectionRef} className="py-16 lg:py-24 bg-primary/5 relative overflow-hidden">
       <div className="container mx-auto px-6 mb-12">
         <MotionWrapper delay={0} direction="up">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -103,24 +146,13 @@ export default function SocialFeed() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-medium text-primary flex items-center gap-3">
                 @{instagramHandle}
                 {isLoading && (
-                  <Loader2 className="w-5 h-5 animate-spin text-foreground/40" />
-                )}
-                {!isLoading && isConnected && (
-                  <span className="inline-flex items-center gap-1 text-xs font-normal bg-green-500/10 text-green-600 px-2 py-1 rounded-full">
-                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                    Live Feed
-                  </span>
+                  <Loader2 className="w-5 h-5 animate-spin text-foreground/40" aria-hidden="true" />
                 )}
               </h2>
-              {!isLoading && !isConnected && (
-                <p className="text-sm text-foreground/50 mt-2">
-                  Connect your Instagram to show live posts
-                </p>
-              )}
             </div>
             <div className="mt-6 md:mt-0 flex flex-wrap gap-3">
               <motion.a
-                href={`https://instagram.com/${instagramHandle}`}
+                href={`https://www.instagram.com/${instagramHandle}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow TAVÚ on Instagram"
@@ -128,7 +160,7 @@ export default function SocialFeed() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-5 h-5" aria-hidden="true" />
                 Instagram
               </motion.a>
               <motion.a
@@ -150,151 +182,93 @@ export default function SocialFeed() {
         </MotionWrapper>
       </div>
 
-      {/* Infinite Scrolling Strip */}
+      {/* Scrolling strip — hover or keyboard focus pauses it; reduced-motion users get a static, swipeable row */}
       <div
-        className="relative overflow-hidden"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        className={`relative ${isAnimated ? "overflow-hidden" : "overflow-x-auto"}`}
+        onMouseEnter={() => setIsHoverPaused(true)}
+        onMouseLeave={() => setIsHoverPaused(false)}
+        onFocusCapture={() => setIsHoverPaused(true)}
+        onBlurCapture={() => setIsHoverPaused(false)}
       >
         {/* Gradient overlays for fade effect */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-primary/5 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-primary/5 to-transparent z-10 pointer-events-none" />
 
-        <motion.div
-          className="flex gap-4"
-          animate={{
-            x: isPaused ? undefined : [0, -50 * displayImages.length * 16],
-          }}
-          transition={{
-            x: {
-              duration: 40,
-              repeat: Infinity,
-              ease: "linear",
-            },
-          }}
-          style={{ willChange: "transform" }}
-        >
-          {allImages.map((image, index) => (
-            <motion.a
-              key={index}
-              href={image.permalink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative flex-shrink-0 w-64 h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden cursor-pointer group"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{ scale: 1.05, zIndex: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                sizes="288px"
-                unoptimized={isConnected} // Behold proxied URLs via behold.pictures
-              />
-
-              {/* Video indicator */}
-              {image.isVideo && (
-                <div className="absolute top-3 left-3 bg-black/60 rounded-full p-2 z-10">
-                  <Play className="w-4 h-4 text-white fill-white" />
-                </div>
-              )}
-
-              {/* Hover overlay */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col items-center justify-end pb-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="flex items-center gap-4 text-white">
-                  <motion.div
-                    className="flex items-center gap-2"
-                    animate={hoveredIndex === index ? { scale: [1, 1.2, 1] } : {}}
-                    transition={{ duration: 0.5 }}
+        {isNearView && !isLoading && displayImages.length > 0 ? (
+          <div ref={trackRef} className="flex w-max" style={{ willChange: isAnimated ? "transform" : undefined }}>
+            {loops.map((loop) => (
+              <div key={loop} className="flex gap-4 pr-4" aria-hidden={loop === 1 ? true : undefined}>
+                {displayImages.map((image) => (
+                  <a
+                    key={`${loop}-${image.src}`}
+                    href={image.permalink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    tabIndex={loop === 1 ? -1 : undefined}
+                    aria-label={`${image.alt} (opens Instagram)`}
+                    className="relative flex-shrink-0 w-64 h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden bg-primary/10 cursor-pointer group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
-                    <Heart className="w-5 h-5 fill-red-500 text-red-500" />
-                    <span className="text-sm font-medium">{image.likes}</span>
-                  </motion.div>
-                  <div className="flex items-center gap-2">
-                    <MessageCircle className="w-5 h-5 text-white" />
-                    <span className="text-sm font-medium">{image.comments}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-white/80">
-                    <ExternalLink className="w-4 h-4" />
-                  </div>
-                </div>
-              </motion.div>
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      loading="eager"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      sizes="288px"
+                      unoptimized={isConnected} // Behold proxied URLs via behold.pictures
+                      onError={() => markFailed(image.src)}
+                    />
 
-              {/* Corner decoration */}
-              <motion.div
-                className="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-white/0 rounded-tr-lg"
-                animate={hoveredIndex === index ? { borderColor: "rgba(255,255,255,0.5)" } : {}}
-              />
-              <motion.div
-                className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-white/0 rounded-bl-lg"
-                animate={hoveredIndex === index ? { borderColor: "rgba(255,255,255,0.5)" } : {}}
-              />
-            </motion.a>
-          ))}
-        </motion.div>
-      </div>
+                    {/* Video indicator */}
+                    {image.isVideo && (
+                      <div className="absolute top-3 left-3 bg-black/60 rounded-full p-2 z-10" aria-hidden="true">
+                        <Play className="w-4 h-4 text-white fill-white" />
+                      </div>
+                    )}
 
-      {/* Pause indicator */}
-      <div className="container mx-auto px-6 mt-6">
-        <p className="text-center text-sm text-foreground/40">
-          {isPaused ? "Paused - move mouse away to continue" : "Hover to pause"}
-        </p>
-      </div>
-
-      {/* Setup Instructions (only show when not connected) */}
-      {!isLoading && !isConnected && (
-        <MotionWrapper delay={0.3} direction="up">
-          <div className="container mx-auto px-6 mt-8">
-            <div className="bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-orange-500/10 border border-pink-500/20 rounded-xl p-6 max-w-2xl mx-auto">
-              <h3 className="text-primary font-semibold mb-3 flex items-center gap-2">
-                <Instagram className="w-5 h-5" />
-                Connect Your Instagram Feed
-              </h3>
-              <p className="text-sm text-foreground/70 mb-4">
-                Display your real Instagram posts using Behold.so (free & easy):
-              </p>
-              <ol className="text-sm text-foreground/60 space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent text-xs flex items-center justify-center font-bold">1</span>
-                  <span>Go to <a href="https://behold.so" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-medium">behold.so</a> and create a free account</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent text-xs flex items-center justify-center font-bold">2</span>
-                  <span>Click &quot;Add Feed&quot; and connect your Instagram account</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent text-xs flex items-center justify-center font-bold">3</span>
-                  <span>Copy your <strong>Feed ID</strong> from the Behold dashboard</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent text-xs flex items-center justify-center font-bold">4</span>
-                  <div>
-                    <span>Add to your <code className="bg-black/10 px-1.5 py-0.5 rounded text-xs">.env.local</code> file:</span>
-                    <code className="block mt-2 bg-black/10 px-3 py-2 rounded text-xs">BEHOLD_FEED_ID=your_feed_id_here</code>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent text-xs flex items-center justify-center font-bold">5</span>
-                  <span>Restart your dev server and your posts will appear!</span>
-                </li>
-              </ol>
-              <div className="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-                <p className="text-xs text-green-700 flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  <strong>Free tier includes:</strong> 1 feed, 12 posts, updates every 6 hours
-                </p>
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
+                      <span className="inline-flex items-center gap-2 text-sm font-medium text-white">
+                        View on Instagram
+                        <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                ))}
               </div>
-            </div>
+            ))}
           </div>
-        </MotionWrapper>
+        ) : (
+          <div className="h-64 md:h-72" aria-hidden="true" />
+        )}
+      </div>
+
+      {isAnimated && displayImages.length > 0 && (
+        <div className="container mx-auto px-6 mt-6 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setIsUserPaused((paused) => !paused)}
+            aria-pressed={isUserPaused}
+            aria-label={isUserPaused ? "Play the Instagram strip" : "Pause the Instagram strip"}
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-primary/20 bg-background/80 text-primary hover:bg-background transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            {isUserPaused ? <Play className="w-4 h-4" aria-hidden="true" /> : <Pause className="w-4 h-4" aria-hidden="true" />}
+          </button>
+        </div>
+      )}
+
+      {/* Setup instructions — development only, never shown to visitors */}
+      {showSetupGuide && (
+        <div className="container mx-auto px-6 mt-8">
+          <div className="border border-pink-500/20 rounded-xl p-6 max-w-2xl mx-auto text-sm text-foreground/70">
+            <p className="font-semibold text-primary mb-2">Instagram feed not connected (dev only)</p>
+            <p>
+              Set <code className="bg-black/10 px-1.5 py-0.5 rounded text-xs">BEHOLD_FEED_ID</code> in{" "}
+              <code className="bg-black/10 px-1.5 py-0.5 rounded text-xs">.env.local</code> (feed id from behold.so) and
+              restart the dev server.
+            </p>
+          </div>
+        </div>
       )}
     </section>
   );
