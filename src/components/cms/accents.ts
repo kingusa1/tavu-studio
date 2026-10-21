@@ -46,11 +46,16 @@ export const pillarAccents: Record<string, PillarAccent> = {
 };
 
 /**
- * Services index / service detail accent colors (blue|emerald|amber|cyan|rose per
- * CMS-Content-Model.md §3.5 services-page). `services/page.tsx` is not converted yet (package
- * C) — left empty; that package adds its keys when it converts the page.
+ * Services index accent gradients (blue|emerald|amber|cyan|rose per CMS-Content-Model.md
+ * §3.5 services-page; pre-CMS source: services/page.tsx:15-47, key `accent`).
  */
-export const serviceAccents: Record<string, string> = {};
+export const serviceAccents: Record<string, string> = {
+  blue: 'from-blue-500/20',
+  emerald: 'from-emerald-500/20',
+  amber: 'from-amber-500/20',
+  cyan: 'from-cyan-500/20',
+  rose: 'from-rose-500/20',
+};
 
 export const accents = { hero: heroAccents, pillar: pillarAccents, service: serviceAccents } as const;
 
