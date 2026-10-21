@@ -7,20 +7,27 @@ import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
 import type { GlobalSlug } from 'payload';
 
+import ServiceFaqSection from '@/components/services/ServiceFaqSection';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
+import JsonLd from '@/components/seo/JsonLd';
 import { getRituals, getPackageSummary } from '@/lib/cms/massageRituals';
 import { massagePageRitualRow } from '@/lib/cms/offerText';
 import type { RitualLike } from '@/lib/cms/offerText';
 import { formatAed } from '@/lib/cms/format';
 import { getGlobal } from '@/lib/cms/globals';
+import { buildServiceJsonLd } from '@/lib/cms/jsonLd';
 import { resolveImage } from '@/lib/cms/media';
+import { getSiteData } from '@/lib/cms/site';
 import type { MassagePage as MassagePageData } from '@/payload-types';
 
 export default async function MassagePage() {
-  const [data, allRituals, packageSummary] = await Promise.all([
+  const [data, allRituals, packageSummary, { settings }] = await Promise.all([
     getGlobal<MassagePageData>('massage-page' as GlobalSlug),
     getRituals(),
     getPackageSummary(),
+    getSiteData(),
   ]);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   const fullBodyRituals = allRituals.filter((r) => r.group === 'full-body');
   const targetedRituals = allRituals.filter((r) => r.group === 'targeted');
@@ -39,6 +46,15 @@ export default async function MassagePage() {
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
       <BackgroundImage />
       <Header />
+      <JsonLd
+        data={buildServiceJsonLd({
+          siteUrl,
+          name: 'Massage',
+          description: data.seo?.description,
+          areaServed: settings.structuredData.areaServed,
+          offers: allRituals.map((ritual) => ({ name: ritual.name, price: ritual.price })),
+        })}
+      />
 
       {/* Hero Section */}
       <section className="tone-dark relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
@@ -59,6 +75,14 @@ export default async function MassagePage() {
         {/* Overview Section */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
+            <Breadcrumbs
+              siteUrl={siteUrl}
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Services', path: '/services' },
+                { name: 'Massage', path: '/services/massage' },
+              ]}
+            />
             <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               <MotionWrapper delay={0.1} direction="left">
                 <div>
@@ -364,6 +388,8 @@ export default async function MassagePage() {
             </MotionWrapper>
           </div>
         </section>
+
+        <ServiceFaqSection topic="massage" categorySlug="massage" categoryLabel="Massage" />
 
         {/* CTA Section */}
         {data.cta?.enabled && (

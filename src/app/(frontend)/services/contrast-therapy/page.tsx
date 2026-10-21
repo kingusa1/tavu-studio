@@ -7,11 +7,16 @@ import VatNote from '@/components/common/VatNote';
 import { getIcon } from '@/components/icons/cmsIcons';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
+import ServiceFaqSection from '@/components/services/ServiceFaqSection';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
+import JsonLd from '@/components/seo/JsonLd';
 import { getGlobal } from '@/lib/cms/globals';
+import { buildServiceJsonLd } from '@/lib/cms/jsonLd';
 import { resolveImage } from '@/lib/cms/media';
 import { getOffers } from '@/lib/cms/offers';
 import { offerRow } from '@/lib/cms/offerText';
 import type { OfferLike } from '@/lib/cms/offerText';
+import { getSiteData } from '@/lib/cms/site';
 import type { ContrastTherapyPage as ContrastTherapyPageData } from '@/payload-types';
 
 // `getOffers()` is still a package B stub returning `[]`, typed against the stub Offers
@@ -22,18 +27,29 @@ function asOfferLike(offer: unknown): OfferLike {
 }
 
 export default async function ContrastTherapyPage() {
-  const [data, sessions] = await Promise.all([
+  const [data, sessions, { settings }] = await Promise.all([
     getGlobal<ContrastTherapyPageData>('contrast-therapy-page'),
     getOffers({ category: 'contrast', surface: 'servicePage' }),
+    getSiteData(),
   ]);
 
   const heroImage = resolveImage(data.hero?.image);
   const cardImage = resolveImage(data.overview?.card?.image);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
       <BackgroundImage />
       <Header />
+      <JsonLd
+        data={buildServiceJsonLd({
+          siteUrl,
+          name: 'Contrast Therapy',
+          description: data.seo?.description,
+          areaServed: settings.structuredData.areaServed,
+          offers: sessions.map((offer) => ({ name: offerRow(asOfferLike(offer), 'contrastPage').name, price: (offer as { price: number }).price })),
+        })}
+      />
 
       {/* Hero Section */}
       <section className="tone-dark relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
@@ -62,6 +78,14 @@ export default async function ContrastTherapyPage() {
         {/* Overview */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
+            <Breadcrumbs
+              siteUrl={siteUrl}
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Services', path: '/services' },
+                { name: 'Contrast Therapy', path: '/services/contrast-therapy' },
+              ]}
+            />
             <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               <MotionWrapper delay={0.1} direction="left">
                 <div>
@@ -192,6 +216,8 @@ export default async function ContrastTherapyPage() {
             </div>
           </div>
         </section>
+
+        <ServiceFaqSection topic="contrast-therapy" categorySlug="recovery" categoryLabel="Recovery" />
 
         {/* CTA */}
         {data.cta?.enabled && (
