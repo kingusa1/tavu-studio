@@ -12,8 +12,10 @@ export function seo(overrides?: Partial<Field>): Field {
       description: 'Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.',
     },
     fields: [
-      { name: 'title', type: 'text' },
-      { name: 'description', type: 'textarea' },
+      // Package E (SEO brief §D2): guide editors toward the lengths Google renders without
+      // truncating — the root title template adds " | TAVÚ Studio" (14 chars) on top of this.
+      { name: 'title', type: 'text', admin: { description: 'Aim for 50-60 characters (including " | TAVÚ Studio").' } },
+      { name: 'description', type: 'textarea', admin: { description: 'Aim for 120-160 characters.' } },
       { name: 'keywords', type: 'text', hasMany: true },
       { name: 'ogTitle', type: 'text' },
       { name: 'ogDescription', type: 'textarea' },

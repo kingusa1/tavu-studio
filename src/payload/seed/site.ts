@@ -85,10 +85,14 @@ export async function seedSite(payload: Payload): Promise<void> {
         { key: 'cold-plunge-temp', value: '5–8°C' },
       ],
       seo: {
-        titleDefault: "TAVÚ | Abu Dhabi's First Private Reformer Pilates & Contrast Therapy Studio",
+        // Package E (SEO brief §D2): rendered title was 75 chars (audit 2026-10-21, >60 limit) —
+        // shortened while keeping brand, main services and "Abu Dhabi". `titleDefault` is used
+        // as-is by the root layout (never passed through `titleTemplate`), so it alone must fit.
+        titleDefault: 'TAVÚ | Reformer Pilates & Contrast Therapy, Abu Dhabi',
         titleTemplate: '%s | TAVÚ Studio',
+        // Was 196 chars (audit); 120-160 target.
         description:
-          "TAVÚ — Abu Dhabi's first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat, release & stretch classes, sauna + ice bath, NormaTec compression & massage in Al Raha.",
+          "TAVÚ is Abu Dhabi's first private space for Reformer Pilates and Contrast Therapy — small-group classes, sauna, ice bath, compression and massage in Al Raha.",
         keywords: [
           'Reformer Pilates Abu Dhabi',
           'Contrast Therapy Abu Dhabi',

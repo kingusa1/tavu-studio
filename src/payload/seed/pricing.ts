@@ -904,9 +904,11 @@ async function seedPageGlobals(payload: Payload): Promise<void> {
         ],
       },
       seo: {
-        title: 'Pricing | Reformer, Contrast Therapy, Massage & Memberships',
+        // Package E (SEO brief §D2): rendered title was 73 chars, description 261 (audit
+        // 2026-10-21); both shortened to fit <= 60 / 120-160.
+        title: 'Pricing | Reformer, Contrast Therapy & Massage',
         description:
-          'TAVÚ pricing — Reformer Pilates from {price:reformer-drop-in} AED, Contrast Therapy from {price:contrast-individual} AED (couple {price:contrast-couple} AED, trio {price:contrast-trio} AED, groups up to six {price:contrast-group} AED), NormaTec Compression Therapy {price:compression-individual} AED, Ladies-only Massage from {from:massage} AED, and memberships from {price:membership-reset} AED. All prices exclude VAT.',
+          'TAVÚ pricing for Reformer Pilates, Breathing Room, Contrast Therapy, Compression Therapy, Massage and memberships in Al Raha, Abu Dhabi. All prices exclude VAT.',
         keywords: [
           'Reformer Pilates price Abu Dhabi',
           'Contrast Therapy price Abu Dhabi',
@@ -979,9 +981,11 @@ async function seedPageGlobals(payload: Payload): Promise<void> {
       ],
       cta: { label: 'View All Pricing', href: '/pricing', newTab: false },
       seo: {
-        title: 'Recovery — Contrast Therapy, Compression Therapy & Massage',
+        // Package E (SEO brief §D2): rendered title was 72 chars, description 179 (audit
+        // 2026-10-21); both shortened to fit <= 60 / 120-160.
+        title: 'Recovery | Contrast, Compression & Massage',
         description:
-          'Recovery at TAVÚ in Al Raha, Abu Dhabi: Contrast Therapy (infrared sauna + ice bath) from {from:contrast} AED, NormaTec Compression Therapy from {from:compression} AED, and ladies-only massage from {from:massage} AED.',
+          'Recovery at TAVÚ in Al Raha, Abu Dhabi — Contrast Therapy, Compression Therapy and ladies-only massage to help you restore, recover and rejuvenate.',
         keywords: ['recovery studio Abu Dhabi', 'ice bath Abu Dhabi', 'infrared sauna Abu Dhabi', 'NormaTec compression Abu Dhabi', 'sports recovery Al Raha'],
         ogTitle: 'Recovery at TAVÚ',
         ogDescription: 'Restore, recover and rejuvenate — Contrast Therapy, Compression Therapy and Massage.',
@@ -1062,8 +1066,9 @@ async function seedPageGlobals(payload: Payload): Promise<void> {
       },
       seo: {
         title: 'Massage in Abu Dhabi | Ladies-Only at TAVÚ',
+        // Package E (SEO brief §D2): was 291 chars (audit 2026-10-21); 120-160 target.
         description:
-          'Ladies-only massage at TAVÚ in Al Raha, Abu Dhabi. FLOW, RELEASE, RECOVER and DRAIN full-body rituals — 60 minutes from {price:flow-relaxation} AED or 90 minutes {price:flow-relaxation.ninety} AED. Targeted recovery rituals from {from:massage} AED, ROOTED foot reflexology {price:rooted-foot-reflexology} AED and the 3-hour Recovery Escape {price:recovery-escape} AED. Ritual Packs 5 + 1 included.',
+          'Ladies-only massage at TAVÚ in Al Raha, Abu Dhabi — FLOW, RELEASE, RECOVER and DRAIN rituals, targeted treatments, reflexology and the Recovery Escape.',
         keywords: [
           'Massage Abu Dhabi',
           'Ladies massage Al Raha',
