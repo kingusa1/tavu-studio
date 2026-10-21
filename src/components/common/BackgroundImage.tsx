@@ -17,7 +17,7 @@ export default function BackgroundImage() {
         sizes="100vw"
       />
       {/* Softer overlay for better background visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/35 to-white/55" />
     </div>
   );
 }

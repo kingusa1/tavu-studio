@@ -126,7 +126,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+    <section className="tone-dark relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Carousel Background */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="sync" custom={direction}>
@@ -260,7 +260,7 @@ export default function Hero() {
           {/* Animated Headline */}
           <MotionWrapper delay={0.2} direction="up">
             <h1 className="text-4xl sm:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-headline font-semibold tracking-tight mb-6 leading-[1.05] drop-shadow-lg">
-              <span className="text-white">Wellness</span>
+              <span className="text-white">Wellness</span>{" "}
               <br />
               <AnimatePresence mode="wait">
                 <motion.em

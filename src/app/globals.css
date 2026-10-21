@@ -174,3 +174,16 @@
     @apply text-transparent bg-clip-text bg-gradient-to-r from-accent via-accent/80 to-accent;
   }
 }
+/* Readable accent text (WCAG AA). The brand sky-blue (--accent) stays on buttons, fills, hovers and on dark
+   surfaces; static accent text on the light, photo-backed sections uses a deeper shade of the same hue
+   (measured ~1.9:1 before on white -> ~7:1). Dark containers opt back in with .bg-primary or .tone-dark. */
+:root {
+  --accent-ink: 204 66% 27%;
+}
+.text-accent {
+  color: hsl(var(--accent-ink));
+}
+.bg-primary .text-accent,
+.tone-dark .text-accent {
+  color: hsl(var(--accent));
+}

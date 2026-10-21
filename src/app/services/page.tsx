@@ -138,7 +138,7 @@ export default function ServicesPage() {
                             <div className="max-w-4xl mx-auto text-center glass p-10 md:p-16 rounded-3xl">
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline text-primary mb-4">Ready to Begin?</h2>
                                 <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
-                                    Start your wellness journey with our pre-opening packages. Limited spots available.
+                                    Start your wellness journey with one of our packages. Limited spots available.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                     <Link

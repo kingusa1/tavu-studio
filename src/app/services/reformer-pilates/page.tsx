@@ -66,7 +66,7 @@ export default function ReformerPilatesPage() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+            <section className="tone-dark relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/reformer-room-new.webp"
@@ -129,7 +129,7 @@ export default function ReformerPilatesPage() {
                                         className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-                                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                                    <div className="tone-dark absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                                         <p className="text-sm uppercase tracking-[0.2em] text-accent font-medium mb-2">TAVÚ</p>
                                         <h3 className="text-2xl md:text-3xl font-headline text-white mb-1">Reformer</h3>
                                         <h3 className="text-2xl md:text-3xl font-headline italic font-light text-white/90 mb-4">Pilates Classes</h3>

@@ -145,7 +145,7 @@ export default function RegisterPage() {
                                 <MotionWrapper delay={0.15} direction="up">
                                     <div className="bg-card border border-border rounded-3xl overflow-hidden shadow-xl">
                                         {/* Form Header */}
-                                        <div className="bg-gradient-to-r from-primary to-primary/80 px-6 py-8 text-primary-foreground">
+                                        <div className="tone-dark bg-gradient-to-r from-primary to-primary/80 px-6 py-8 text-primary-foreground">
                                             <h2 className="text-2xl font-headline mb-2">Create Your Account</h2>
                                             <p className="text-primary-foreground/80 text-sm">
                                                 Fill in your details below to get started. It only takes a minute.

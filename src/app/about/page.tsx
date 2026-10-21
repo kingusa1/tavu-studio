@@ -25,7 +25,7 @@ export default function AboutPage() {
             <Header />
 
             {/* Hero Section */}
-            <section className="relative h-[70vh] min-h-[520px] flex items-center justify-center overflow-hidden">
+            <section className="tone-dark relative h-[70vh] min-h-[520px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70 z-10" />
                 <div className="absolute inset-0">
                     <Image
@@ -85,7 +85,7 @@ export default function AboutPage() {
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
-                                    <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
+                                    <div className="tone-dark absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
                                         <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">TA</span>
                                         <h3 className="text-2xl md:text-3xl font-headline mb-3">Grounds the body.</h3>
                                         <p className="text-white/80 text-base leading-relaxed max-w-md">
@@ -107,7 +107,7 @@ export default function AboutPage() {
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
-                                    <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
+                                    <div className="tone-dark absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
                                         <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">VU</span>
                                         <h3 className="text-2xl md:text-3xl font-headline mb-3">Lifts the spirit.</h3>
                                         <p className="text-white/80 text-base leading-relaxed max-w-md">

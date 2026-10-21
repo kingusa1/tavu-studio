@@ -128,7 +128,7 @@ export default function ClassesPage() {
             <Header />
 
             {/* Hero Section with Image */}
-            <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+            <section className="tone-dark relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-primary/20 z-10" />
                 <div className="absolute inset-0">
                     <Image
