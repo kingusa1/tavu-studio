@@ -5,9 +5,13 @@ import { getPayloadClient } from '@/lib/cms/payload';
 import { loadEmailContext } from '@/lib/email/context';
 import { cleanFirstName, isAllowedOrigin, normaliseEmail } from '@/lib/email/newsletter';
 import { newsletterConfirmEmail } from '@/lib/email/templates';
+import { getContact } from '@/lib/email/resendApi';
 import { newConfirmToken } from '@/lib/email/tokens';
 
-const RESEND_THROTTLE_MS = 2 * 60 * 1000;
+/** At most one confirmation email per address per hour. */
+const RESEND_THROTTLE_MS = 60 * 60 * 1000;
+/** Site-wide brake: no more than this many confirmation emails per hour (signup floods). */
+const HOURLY_CONFIRM_LIMIT = 50;
 
 const subscribeSchema = z
   .object({
@@ -26,7 +30,7 @@ const subscribeSchema = z
  * already subscribed, so the form cannot be used to find out who is on the list.
  */
 export async function POST(request: Request): Promise<NextResponse> {
-  if (!isAllowedOrigin(request)) {
+  if (!isAllowedOrigin(request, { requireOrigin: true })) {
     return NextResponse.json({ ok: false, error: 'Forbidden' }, { status: 403 });
   }
 
@@ -57,8 +61,22 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
     const existing = found.docs[0] as { id: number | string; status?: string; confirmEmailSentAt?: string | null } | undefined;
 
-    if (existing?.status === 'subscribed') return NextResponse.json({ ok: true });
+    if (existing?.status === 'subscribed') {
+      // Someone who left through Resend's own unsubscribe link is still "subscribed" here until the
+      // webhook catches up; let them re-join instead of silently doing nothing.
+      const contact = await getContact(email).catch(() => null);
+      if (!contact?.unsubscribed) return NextResponse.json({ ok: true });
+    }
     if (existing?.confirmEmailSentAt && Date.now() - new Date(existing.confirmEmailSentAt).getTime() < RESEND_THROTTLE_MS) {
+      return NextResponse.json({ ok: true });
+    }
+    const lastHour = await payload.count({
+      collection: 'newsletter-subscribers',
+      overrideAccess: true,
+      where: { confirmEmailSentAt: { greater_than: new Date(Date.now() - 60 * 60 * 1000).toISOString() } },
+    });
+    if (lastHour.totalDocs >= HOURLY_CONFIRM_LIMIT) {
+      payload.logger.warn({ msg: 'Newsletter signup flood: confirmation emails paused', lastHour: lastHour.totalDocs });
       return NextResponse.json({ ok: true });
     }
 

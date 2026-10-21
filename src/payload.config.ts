@@ -85,6 +85,17 @@ export default buildConfig({
   serverURL,
   csrf: csrfOrigins,
   graphQL: { disable: true },
+  // Scheduled publishing (Posts: drafts.schedulePublish) queues jobs; Vercel Cron runs them via
+  // GET /api/payload-jobs/run every 15 minutes (vercel.json), authorised with CRON_SECRET.
+  jobs: {
+    access: {
+      run: ({ req }) => {
+        if (req.user?.role === 'admin') return true;
+        const secret = process.env.CRON_SECRET;
+        return Boolean(secret) && req.headers.get('authorization') === `Bearer ${secret}`;
+      },
+    },
+  },
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

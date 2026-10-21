@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload';
 
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { richTextField } from '../fields/richText';
-import { deliverNewsletterIssue } from '../hooks/deliverNewsletterIssue';
+import { deliverNewsletterIssue, sendNewsletterIssueAfterSave } from '../hooks/deliverNewsletterIssue';
 
 /**
  * Newsletter issues written in the CMS and sent through Resend to everyone in the newsletter
@@ -24,7 +24,7 @@ export const NewsletterIssues: CollectionConfig = {
     delete: isAdminOrEditor,
   },
   versions: { maxPerDoc: 25 },
-  hooks: { beforeChange: [deliverNewsletterIssue] },
+  hooks: { beforeChange: [deliverNewsletterIssue], afterChange: [sendNewsletterIssueAfterSave] },
   fields: [
     { name: 'subject', type: 'text', required: true, maxLength: 120, admin: { description: 'The email subject line. Aim for under 50 characters.' } },
     { name: 'preheader', label: 'Preview text', type: 'text', maxLength: 140, admin: { description: 'Shown next to the subject in most inboxes.' } },

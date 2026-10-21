@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
 import { getPayloadClient } from '@/lib/cms/payload';
+import { isAllowedOrigin } from '@/lib/email/newsletter';
 
 // Same validation rules as src/components/contact/ContactForm.tsx's client-side zod schema,
 // plus upper bounds (none existed before) and `.strict()` so no extra field is accepted —
@@ -18,15 +19,9 @@ const contactSchema = z
   })
   .strict();
 
-function isAllowedOrigin(origin: string | null): boolean {
-  if (!origin) return true; // same-origin requests and non-browser clients send no Origin header
-  if (origin === process.env.NEXT_PUBLIC_SERVER_URL) return true;
-  if (process.env.NODE_ENV !== 'production' && /^http:\/\/localhost(:\d+)?$/.test(origin)) return true;
-  return false;
-}
-
 export async function POST(request: Request): Promise<NextResponse> {
-  if (!isAllowedOrigin(request.headers.get('origin'))) {
+  // Browsers always send Origin on this POST; header-less scripts are refused (see isAllowedOrigin).
+  if (!isAllowedOrigin(request, { requireOrigin: true })) {
     return NextResponse.json({ ok: false, error: 'Forbidden' }, { status: 403 });
   }
 
@@ -54,6 +49,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     await payload.create({
       collection: 'contact-submissions',
       overrideAccess: true,
+      // The email hook runs after the insert; without a transaction it does not hold a pooled
+      // connection open while Resend answers.
+      disableTransaction: true,
       data: { name, email, message, page },
     });
   } catch (error) {

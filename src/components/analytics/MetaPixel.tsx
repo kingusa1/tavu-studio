@@ -1,10 +1,15 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import Script from 'next/script';
 
 const PIXEL_ID = '1164915742135661';
 
 export default function MetaPixel() {
+  // The newsletter pages carry a subscriber's email address or a confirmation token in the URL;
+  // the pixel reports full page URLs to Meta, so it does not load there.
+  const pathname = usePathname();
+  if (pathname?.startsWith('/newsletter')) return null;
   return (
     <>
       <Script

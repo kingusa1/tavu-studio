@@ -15,10 +15,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-type SearchParams = Promise<{ status?: string; e?: string; s?: string }>;
+type SearchParams = Promise<{ status?: string; e?: string; s?: string; token?: string }>;
 
 export default async function NewsletterPage({ searchParams }: { searchParams: SearchParams }) {
-  const { status, e, s } = await searchParams;
+  const { status, e, s, token } = await searchParams;
   const { settings } = await loadEmailContext(await getPayloadClient());
   const nl = settings.newsletter;
 
@@ -35,7 +35,21 @@ export default async function NewsletterPage({ searchParams }: { searchParams: S
       <BackgroundImage />
       <Header />
       <main className="flex-grow container mx-auto px-4 pt-36 pb-24">
-        {status === 'unsubscribe' && e && s ? (
+        {status === 'confirm' && token ? (
+          <section className="bg-card border border-border rounded-2xl shadow-sm p-8 md:p-10 max-w-xl mx-auto text-center">
+            <h1 className="text-3xl md:text-4xl font-headline text-primary mb-4">Confirm your subscription</h1>
+            <p className="text-foreground/70 mb-8">One click and you are on the TAVÚ newsletter.</p>
+            <form method="post" action="/api/newsletter/confirm">
+              <input type="hidden" name="token" value={token} />
+              <button
+                type="submit"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 font-semibold text-primary-foreground hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+              >
+                Confirm subscription
+              </button>
+            </form>
+          </section>
+        ) : status === 'unsubscribe' && e && s ? (
           <section className="bg-card border border-border rounded-2xl shadow-sm p-8 md:p-10 max-w-xl mx-auto text-center">
             <h1 className="text-3xl md:text-4xl font-headline text-primary mb-4">Unsubscribe from the newsletter?</h1>
             <p className="text-foreground/70 mb-8 break-words">

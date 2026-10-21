@@ -25,7 +25,7 @@ export async function GET(): Promise<Response> {
   const items = posts
     .map((post) => {
       const pubDate = post.publishedAt ? new Date(post.publishedAt).toUTCString() : new Date(post.createdAt).toUTCString();
-      const url = `${siteUrl}/blog/${post.slug}`;
+      const url = escapeXml(`${siteUrl}/blog/${post.slug}`);
       return [
         '    <item>',
         `      <title>${escapeXml(post.title)}</title>`,

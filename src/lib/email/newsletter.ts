@@ -30,18 +30,20 @@ export function cleanFirstName(value: string | null | undefined): string | undef
 }
 
 /**
- * Browser form posts must come from this site. Requests without an Origin header (server-to-server,
- * mail clients' one-click unsubscribe) are allowed; the routes have their own checks.
+ * Browser form posts must come from this site (compared by host, so a trailing slash or `www.` in
+ * an env value cannot lock real visitors out). Every browser sends `Origin` on a form POST, so the
+ * public form endpoints pass `requireOrigin` and refuse header-less scripts outright.
  */
-export function isAllowedOrigin(request: Request): boolean {
+export function isAllowedOrigin(request: Request, options: { requireOrigin?: boolean } = {}): boolean {
   const origin = request.headers.get('origin');
-  if (!origin) return true;
+  if (!origin) return !options.requireOrigin;
   try {
     const originHost = new URL(origin).host;
     const allowed = new Set<string>([new URL(request.url).host]);
     const forwarded = request.headers.get('x-forwarded-host');
     if (forwarded) allowed.add(forwarded);
     if (process.env.NEXT_PUBLIC_SERVER_URL) allowed.add(new URL(process.env.NEXT_PUBLIC_SERVER_URL).host);
+    if (process.env.NODE_ENV !== 'production' && /^localhost(:\d+)?$/.test(originHost)) return true;
     return allowed.has(originHost);
   } catch {
     return false;

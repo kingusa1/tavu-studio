@@ -1,10 +1,10 @@
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
-import { APIError, type CollectionBeforeChangeHook } from 'payload';
+import { APIError, type CollectionAfterChangeHook, type CollectionBeforeChangeHook } from 'payload';
 
 import { loadEmailContext } from '../../lib/email/context';
 import { escapeHtml } from '../../lib/email/layout';
 import { getNewsletterSegmentId } from '../../lib/email/newsletter';
-import { sendBroadcast } from '../../lib/email/resendApi';
+import { createBroadcast, deleteBroadcast, findBroadcastsByName, sendExistingBroadcast } from '../../lib/email/resendApi';
 import { newsletterIssueEmail } from '../../lib/email/templates';
 
 type IssueData = {
@@ -20,10 +20,20 @@ type IssueData = {
   status?: 'draft' | 'sent' | null;
 };
 
+/** Resend broadcast name for an issue: fixed per issue, so Resend itself can tell us it was sent. */
+const broadcastName = (issueId: number | string) => `tavu-issue-${issueId}`;
+const SEND_CONTEXT_KEY = 'newsletterBroadcastToSend';
+
 /**
  * Runs the issue's "What should happen when you save?" action: send a test to one address, or send
  * the issue to every subscriber in the Resend newsletter segment (once). The action always resets
  * to "Just save" so a later save never re-sends.
+ *
+ * Sending is two-step so a failed save can never lead to a second broadcast: this hook (before the
+ * save) only creates a DRAFT broadcast named `tavu-issue-<id>`; `sendNewsletterIssueAfterSave` sends
+ * it once the issue is stored as "sent". If the send fails, that hook throws, the save rolls back
+ * and nothing went out. Before creating anything, Resend is asked whether a broadcast with this
+ * issue's name was already sent.
  */
 export const deliverNewsletterIssue: CollectionBeforeChangeHook = async ({ data, originalDoc, req }) => {
   const issue = { ...(originalDoc ?? {}), ...data } as IssueData;
@@ -31,8 +41,11 @@ export const deliverNewsletterIssue: CollectionBeforeChangeHook = async ({ data,
   const next = { ...data, action: 'none' };
   if (action === 'none') return next;
 
-  if (originalDoc?.status === 'sent') {
+  if (originalDoc?.status === 'sent' || (action === 'send' && originalDoc?.broadcastId)) {
     throw new APIError('This issue was already sent to subscribers. Duplicate it to send a new one.', 400);
+  }
+  if (action === 'send' && !originalDoc?.id) {
+    throw new APIError('Save the issue once (and send yourself a test), then choose “Send to all subscribers”.', 400);
   }
   if (!issue.subject || !issue.heading || !issue.content) {
     throw new APIError('Add a subject, a heading and the content before sending.', 400);
@@ -84,16 +97,41 @@ export const deliverNewsletterIssue: CollectionBeforeChangeHook = async ({ data,
     throw new APIError('There are no confirmed subscribers yet, so nothing was sent.', 400);
   }
 
+  const name = broadcastName(originalDoc.id);
+  const previous = await findBroadcastsByName(name);
+  const alreadySent = previous.find((broadcast) => broadcast.status && broadcast.status !== 'draft');
+  if (alreadySent) {
+    // Sent before but the CMS never recorded it (e.g. the save failed afterwards): record, don't resend.
+    return { ...next, status: 'sent', sentAt: alreadySent.sent_at ?? new Date().toISOString(), broadcastId: alreadySent.id };
+  }
+  // Unsent drafts from an earlier attempt that rolled back: remove them so only one exists.
+  await Promise.all(previous.map((broadcast) => deleteBroadcast(broadcast.id).catch(() => undefined)));
+
   const segmentId = await getNewsletterSegmentId(req.payload, ctx);
-  const sentAt = new Date();
-  const broadcastId = await sendBroadcast({
+  const broadcastId = await createBroadcast({
     segmentId,
     from: ctx.from,
     replyTo: ctx.fromAddress,
-    name: `${email.subject} — ${sentAt.toISOString().slice(0, 10)}`,
+    name,
     subject: email.subject,
     html: email.html,
     text: email.text,
   });
-  return { ...next, status: 'sent', sentAt: sentAt.toISOString(), broadcastId };
+  req.context[SEND_CONTEXT_KEY] = broadcastId;
+  return { ...next, status: 'sent', sentAt: new Date().toISOString(), broadcastId };
+};
+
+/** Second step of "Send to all subscribers": runs after the issue was saved as "sent". */
+export const sendNewsletterIssueAfterSave: CollectionAfterChangeHook = async ({ doc, req }) => {
+  const broadcastId = req.context[SEND_CONTEXT_KEY];
+  if (typeof broadcastId !== 'string' || doc.broadcastId !== broadcastId) return doc;
+  delete req.context[SEND_CONTEXT_KEY];
+  try {
+    await sendExistingBroadcast(broadcastId);
+  } catch (error) {
+    req.payload.logger.error({ msg: 'Newsletter broadcast send failed', issueId: doc.id, err: String(error) });
+    // Throwing rolls the save back, so the issue stays a draft and can be sent again.
+    throw new APIError('Resend could not send the issue just now. Nothing was sent; please try again in a minute.', 502);
+  }
+  return doc;
 };

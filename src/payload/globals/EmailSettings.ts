@@ -87,6 +87,8 @@ export const EmailSettings: GlobalConfig = {
           name: 'segmentId',
           label: 'Resend segment ID',
           type: 'text',
+          // Written only by the server (overrideAccess); nobody can repoint broadcasts via the API.
+          access: { update: () => false },
           admin: { readOnly: true, description: 'Filled in automatically when the first subscriber confirms. Newsletter issues are sent to this segment.' },
         },
         text('segmentName', 'Resend segment name', EMAIL_DEFAULTS.newsletter.segmentName),

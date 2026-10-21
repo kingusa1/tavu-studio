@@ -24,7 +24,13 @@ function buildConverters(boldClassName?: string): JSXConvertersFunction {
     ...defaultConverters,
     link: ({ node, nodesToJSX }) => {
       const children = nodesToJSX({ nodes: node.children });
-      const href = node.fields.url ?? '#';
+      const linked = node.fields.doc?.value as { slug?: string } | number | string | undefined;
+      const href =
+        node.fields.linkType === 'internal'
+          ? typeof linked === 'object' && linked?.slug
+            ? `/blog/${linked.slug}`
+            : '#'
+          : (node.fields.url ?? '#');
       if (node.fields.newTab) {
         return (
           <a href={href} target="_blank" rel="noopener noreferrer">

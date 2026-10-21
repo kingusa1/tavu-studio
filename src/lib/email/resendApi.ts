@@ -11,7 +11,7 @@ export class ResendError extends Error {
   }
 }
 
-async function resend<T>(method: 'GET' | 'POST' | 'PATCH', path: string, body?: unknown): Promise<T> {
+async function resend<T>(method: 'GET' | 'POST' | 'PATCH' | 'DELETE', path: string, body?: unknown): Promise<T> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) throw new ResendError('RESEND_API_KEY is not set', 0);
   const response = await fetch(`${RESEND_API}${path}`, {
@@ -66,8 +66,40 @@ export async function unsubscribeContact(email: string): Promise<void> {
   await resend('PATCH', `/contacts/${encodeURIComponent(email)}`, { unsubscribed: true });
 }
 
-/** Creates a broadcast to the segment and sends it straight away; returns the broadcast id. */
-export async function sendBroadcast(input: {
+/** The Resend contact for an address, or null when Resend has none. */
+export async function getContact(email: string): Promise<{ id: string; unsubscribed: boolean } | null> {
+  try {
+    return await resend<{ id: string; unsubscribed: boolean }>('GET', `/contacts/${encodeURIComponent(email)}`);
+  } catch (error) {
+    if (error instanceof ResendError && error.status === 404) return null;
+    throw error;
+  }
+}
+
+/** Removes the contact from Resend entirely (used when a subscriber is deleted in the CMS). */
+export async function deleteContact(email: string): Promise<void> {
+  try {
+    await resend('DELETE', `/contacts/${encodeURIComponent(email)}`);
+  } catch (error) {
+    if (error instanceof ResendError && error.status === 404) return;
+    throw error;
+  }
+}
+
+type BroadcastSummary = { id: string; name?: string | null; status?: string | null; sent_at?: string | null };
+
+/** Broadcasts with exactly this name (newest first, as Resend lists them). */
+export async function findBroadcastsByName(name: string): Promise<BroadcastSummary[]> {
+  const list = await resend<{ data?: BroadcastSummary[] }>('GET', '/broadcasts?limit=100');
+  return (list.data ?? []).filter((broadcast) => broadcast.name === name);
+}
+
+export async function deleteBroadcast(id: string): Promise<void> {
+  await resend('DELETE', `/broadcasts/${encodeURIComponent(id)}`);
+}
+
+/** Creates a DRAFT broadcast to the segment (nothing is sent yet); returns its id. */
+export async function createBroadcast(input: {
   segmentId: string;
   from: string;
   replyTo: string;
@@ -84,7 +116,11 @@ export async function sendBroadcast(input: {
     subject: input.subject,
     html: input.html,
     text: input.text,
-    send: true,
   });
   return created.id;
+}
+
+/** Sends a draft broadcast now. */
+export async function sendExistingBroadcast(id: string): Promise<void> {
+  await resend('POST', `/broadcasts/${encodeURIComponent(id)}/send`, {});
 }

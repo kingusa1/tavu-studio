@@ -4141,7 +4141,7 @@ export interface AccountPage {
      */
     signInLabel?: string | null;
     /**
-     * Mindbody widget link text, e.g. "Sign In".
+     * Mindbody widget link text, e.g. "Sign In". Admins only; plain words only.
      */
     widgetInnerText?: string | null;
     /**

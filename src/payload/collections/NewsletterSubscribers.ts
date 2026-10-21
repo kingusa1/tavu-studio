@@ -1,6 +1,6 @@
-import type { CollectionAfterChangeHook, CollectionConfig, FieldAccess } from 'payload';
+import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionConfig, FieldAccess } from 'payload';
 
-import { unsubscribeContact } from '../../lib/email/resendApi';
+import { deleteContact, unsubscribeContact } from '../../lib/email/resendApi';
 import { isAdmin } from '../access/isAdmin';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 
@@ -16,6 +16,19 @@ const syncUnsubscribe: CollectionAfterChangeHook = async ({ doc, previousDoc, op
     } catch (error) {
       req.payload.logger.error({ msg: 'Resend unsubscribe sync failed', subscriberId: doc.id, err: String(error) });
     }
+  }
+  return doc;
+};
+
+/**
+ * Deleting someone in the CMS (e.g. an erasure request) removes them from Resend too; otherwise
+ * they would stay in the newsletter segment and keep receiving issues.
+ */
+const removeFromResend: CollectionAfterDeleteHook = async ({ doc, req }) => {
+  try {
+    await deleteContact(doc.email);
+  } catch (error) {
+    req.payload.logger.error({ msg: 'Resend contact delete failed', subscriberId: doc.id, err: String(error) });
   }
   return doc;
 };
@@ -40,9 +53,18 @@ export const NewsletterSubscribers: CollectionConfig = {
     update: isAdminOrEditor,
     delete: isAdmin,
   },
-  hooks: { afterChange: [syncUnsubscribe] },
+  hooks: { afterChange: [syncUnsubscribe], afterDelete: [removeFromResend] },
   fields: [
-    { name: 'email', type: 'email', required: true, unique: true, index: true },
+    {
+      name: 'email',
+      type: 'email',
+      required: true,
+      unique: true,
+      index: true,
+      // Fixed after signup: the Resend contact and the consent record belong to this address. A new
+      // address signs up again through the website.
+      access: { update: deny },
+    },
     { name: 'firstName', label: 'First name', type: 'text' },
     {
       name: 'status',

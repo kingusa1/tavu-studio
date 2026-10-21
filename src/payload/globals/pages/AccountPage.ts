@@ -2,6 +2,7 @@ import type { GlobalConfig } from 'payload';
 
 import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
+import { isAdminField } from '../../access/isAdmin';
 import { link } from '../../fields/link';
 import { iconSelect } from '../../fields/options';
 import { seo } from '../../fields/seo';
@@ -60,7 +61,17 @@ export const AccountPage: GlobalConfig = {
             { name: 'heading', type: 'text' },
             { name: 'subheading', type: 'text' },
             { name: 'signInLabel', type: 'text', admin: { description: 'Visible button text, e.g. "Sign In to Your Account".' } },
-            { name: 'widgetInnerText', type: 'text', admin: { description: 'Mindbody widget link text, e.g. "Sign In".' } },
+            {
+              name: 'widgetInnerText',
+              type: 'text',
+              maxLength: 40,
+              // Mindbody's widget puts this text into the page as HTML, so only admins may change it
+              // and only plain words are accepted (no <, >, &, quotes).
+              access: { update: isAdminField },
+              validate: (value: string | null | undefined) =>
+                !value || /^[\p{L}\p{N} .,!?:’-]{1,40}$/u.test(value) || 'Use plain words only (letters, numbers, spaces and . , ! ? : -).',
+              admin: { description: 'Mindbody widget link text, e.g. "Sign In". Admins only; plain words only.' },
+            },
             { name: 'dividerLabel', type: 'text', admin: { description: 'e.g. "or".' } },
             link({ name: 'createAccount' }),
             { name: 'helpPrefix', type: 'text', admin: { description: 'e.g. "Need help?".' } },

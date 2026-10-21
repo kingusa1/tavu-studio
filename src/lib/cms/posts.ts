@@ -75,6 +75,23 @@ export const getPublishedPosts = cache(
 );
 
 /** One published post by slug, depth 2 so `relatedPosts`/`author`/`reviewedBy` are populated. */
+type LexicalNode = { type?: string; fields?: { doc?: { value?: unknown } }; children?: LexicalNode[] };
+
+/**
+ * Internal links in the article body come back with the whole linked document populated (depth 2,
+ * overrideAccess). The body is handed to a client component, so keep only what the link needs.
+ */
+function trimLinkedDocs(node: LexicalNode): LexicalNode {
+  const children = node.children?.map(trimLinkedDocs);
+  const value = node.fields?.doc?.value;
+  if ((node.type === 'link' || node.type === 'autolink') && value && typeof value === 'object') {
+    const { id, slug, _status } = value as { id?: unknown; slug?: unknown; _status?: unknown };
+    const doc = { ...node.fields!.doc, value: _status === 'published' ? { id, slug } : { id } };
+    return { ...node, fields: { ...node.fields, doc }, ...(children ? { children } : {}) };
+  }
+  return children ? { ...node, children } : node;
+}
+
 export const getPostBySlug = cache(async (slug: string): Promise<Post | null> => {
   const payload = await getPayloadClient();
   const { docs } = await payload.find({
@@ -88,8 +105,10 @@ export const getPostBySlug = cache(async (slug: string): Promise<Post | null> =>
   if (!post) return post;
   // Defensive: a manually-curated relatedPosts row could point at a post that was since
   // unpublished. Never surface it.
+  const body = post.body as { root?: LexicalNode } | null | undefined;
   return {
     ...post,
+    body: body?.root ? ({ ...body, root: trimLinkedDocs(body.root) } as Post['body']) : post.body,
     relatedPosts: (post.relatedPosts ?? []).filter(
       (related) => typeof related !== 'number' && related._status === 'published',
     ),

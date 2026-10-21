@@ -38,6 +38,17 @@ const enforcePasswordLength: CollectionConfig['hooks'] = {
       return data;
     },
   ],
+  // "Reset password" hashes the new password before beforeValidate runs (payload
+  // auth/operations/resetPassword.js), so the same rule is enforced on the operation's input.
+  beforeOperation: [
+    ({ args, operation }) => {
+      const password = (args as { data?: { password?: unknown } })?.data?.password;
+      if (operation === 'resetPassword' && (typeof password !== 'string' || password.length < MIN_PASSWORD_LENGTH)) {
+        throw new APIError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`, 400);
+      }
+      return args;
+    },
+  ],
 };
 
 export const Users: CollectionConfig = {
@@ -106,6 +117,7 @@ export const Users: CollectionConfig = {
   ],
   hooks: {
     beforeChange: [...(forceFirstUserToAdmin?.beforeChange ?? [])],
+    beforeOperation: [...(enforcePasswordLength?.beforeOperation ?? [])],
     beforeValidate: [...(enforcePasswordLength?.beforeValidate ?? [])],
   },
 };

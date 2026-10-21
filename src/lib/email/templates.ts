@@ -106,7 +106,9 @@ export function contactThankYouEmail(msg: ContactMessage, ctx: EmailContext): Bu
     preheader: singleLine(body, 140),
     eyebrow: 'Message received',
     heading,
-    bodyHtml: `${paragraphsToHtml(body)}${quoteBlock('Your message', msg.message)}`,
+    // The visitor's own message is deliberately not repeated: an attacker could otherwise use the
+    // form to send their text to any address, branded and from connect@tavustudio.com.
+    bodyHtml: paragraphsToHtml(body),
     cta,
     closingHtml: signOffHtml(ctx),
     footer: ctx.footer,
@@ -115,7 +117,7 @@ export function contactThankYouEmail(msg: ContactMessage, ctx: EmailContext): Bu
   });
   const text = renderEmailText({
     heading,
-    bodyText: `${body}\n\nYour message:\n${msg.message}\n\n${ctx.settings.signOff}`,
+    bodyText: `${body}\n\n${ctx.settings.signOff}`,
     cta,
     footer: ctx.footer,
     smallPrint: 'You are receiving this email because you contacted TAVÚ Wellness Studio through tavustudio.com.',

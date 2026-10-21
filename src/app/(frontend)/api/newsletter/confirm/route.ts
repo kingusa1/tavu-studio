@@ -15,12 +15,28 @@ function redirectTo(request: Request, status: 'confirmed' | 'invalid' | 'error')
 }
 
 /**
- * Newsletter signup, step 2: the link in the confirmation email. Marks the person as subscribed,
+ * The link in the confirmation email only opens a "Confirm subscription" page: company mail
+ * scanners open every link automatically, and a GET that subscribed people would let them (or
+ * someone abusing the signup form) confirm on a person's behalf, defeating double opt-in.
+ */
+export async function GET(request: Request): Promise<NextResponse> {
+  const token = new URL(request.url).searchParams.get('token') ?? '';
+  if (!token || token.length > 200) return redirectTo(request, 'invalid');
+  const base = process.env.NEXT_PUBLIC_SERVER_URL || new URL(request.url).origin;
+  const target = new URL('/newsletter', base);
+  target.searchParams.set('status', 'confirm');
+  target.searchParams.set('token', token);
+  return NextResponse.redirect(target, 303);
+}
+
+/**
+ * Newsletter signup, step 2: the button on the confirmation page. Marks the person as subscribed,
  * adds them to the Resend newsletter segment and sends the welcome email. Tokens are single-use
  * and expire after 48 hours.
  */
-export async function GET(request: Request): Promise<NextResponse> {
-  const token = new URL(request.url).searchParams.get('token');
+export async function POST(request: Request): Promise<NextResponse> {
+  const form = await request.formData().catch(() => null);
+  const token = String(form?.get('token') ?? '');
   if (!token || token.length > 200) return redirectTo(request, 'invalid');
 
   const payload = await getPayloadClient();

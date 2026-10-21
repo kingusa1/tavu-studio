@@ -1,4 +1,4 @@
-import type { CollectionAfterChangeHook } from 'payload';
+import type { CollectionAfterChangeHook, PayloadRequest } from 'payload';
 
 import { loadEmailContext } from '../../lib/email/context';
 import { contactTeamEmail, contactThankYouEmail } from '../../lib/email/templates';
@@ -13,6 +13,43 @@ function withTimeout<T>(promise: Promise<T>, label: string): Promise<T> {
 }
 
 type EmailStatus = 'sent' | 'partial' | 'failed' | 'skipped';
+
+/** One thank-you per address per day, and none at all while the form is being flooded. */
+const THANK_YOU_WINDOW_MS = 24 * 60 * 60 * 1000;
+const FLOOD_WINDOW_MS = 10 * 60 * 1000;
+const FLOOD_LIMIT = 20;
+
+/**
+ * The thank-you goes to an address the visitor typed, so the form must not become a way to send
+ * mail to strangers: skip it when that address already had one in the last 24 hours, or when more
+ * than FLOOD_LIMIT messages arrived in the last 10 minutes. The team is still notified either way.
+ */
+async function thankYouAllowed(req: PayloadRequest, doc: { id: number | string; email: string }): Promise<boolean> {
+  const now = Date.now();
+  const [sameAddress, recent] = await Promise.all([
+    req.payload.count({
+      collection: 'contact-submissions',
+      overrideAccess: true,
+      where: {
+        and: [
+          { email: { equals: doc.email } },
+          { id: { not_equals: doc.id } },
+          { createdAt: { greater_than: new Date(now - THANK_YOU_WINDOW_MS).toISOString() } },
+        ],
+      },
+    }),
+    req.payload.count({
+      collection: 'contact-submissions',
+      overrideAccess: true,
+      where: { createdAt: { greater_than: new Date(now - FLOOD_WINDOW_MS).toISOString() } },
+    }),
+  ]);
+  if (recent.totalDocs > FLOOD_LIMIT) {
+    req.payload.logger.warn({ msg: 'Contact form flood: thank-you emails paused', lastTenMinutes: recent.totalDocs });
+    return false;
+  }
+  return sameAddress.totalDocs === 0;
+}
 
 /**
  * After a new contact-form message is saved: email the TAVÚ team (Reply-To = visitor) and send the
@@ -39,7 +76,7 @@ export const sendContactEmails: CollectionAfterChangeHook = async ({ doc, operat
         ),
       );
     }
-    if (cf.sendThankYou) {
+    if (cf.sendThankYou && (await thankYouAllowed(req, doc))) {
       const email = contactThankYouEmail(message, ctx);
       jobs.push(withTimeout(req.payload.sendEmail({ from: ctx.from, to: doc.email, replyTo: ctx.fromAddress, ...email }), 'thank-you'));
     }

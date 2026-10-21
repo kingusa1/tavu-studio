@@ -37,16 +37,21 @@ export default function MindbodyLoginWidget({ siteId, mbSiteId, innerText, label
 
   useEffect(() => {
     if (!containerRef.current) return;
+    // HealCode renders data-inner-html as HTML, so only plain characters may reach it; the ids are
+    // admin-only but get the same treatment (defence in depth).
+    const label = innerText.replace(/[^\p{L}\p{N} .,!?:’-]/gu, '').slice(0, 40) || 'Sign In';
+    const safeSiteId = String(siteId).replace(/[^\w-]/g, '');
+    const safeMbSiteId = String(mbSiteId).replace(/[^\w-]/g, '');
 
     containerRef.current.innerHTML = `
             <healcode-widget
                 data-version="0.2"
                 data-link-class="healcode-login-text-link"
-                data-site-id="${siteId}"
-                data-mb-site-id="${mbSiteId}"
+                data-site-id="${safeSiteId}"
+                data-mb-site-id="${safeMbSiteId}"
                 data-bw-identity-site="true"
                 data-type="login-link"
-                data-inner-html="${innerText}"
+                data-inner-html="${label}"
             ></healcode-widget>
         `;
   }, [siteId, mbSiteId, innerText]);

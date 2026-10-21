@@ -1,4 +1,4 @@
-import type { CollectionBeforeChangeHook, CollectionConfig, Field, GroupField } from 'payload';
+import type { CollectionBeforeChangeHook, CollectionBeforeValidateHook, CollectionConfig, Field, GroupField } from 'payload';
 
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { image } from '../fields/image';
@@ -16,13 +16,15 @@ function slugify(value: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-/** Auto-fills `slug` from `title` on first save when the editor left it empty (brief §A). */
-const autoSlug: CollectionBeforeChangeHook = ({ data }) => {
+/**
+ * Fills `slug` from `title` when empty and normalises whatever the editor typed to lowercase
+ * words joined by hyphens, so a slug can never break a URL, the sitemap or the RSS feed.
+ * Runs before validation so the required check sees the generated value.
+ */
+const autoSlug: CollectionBeforeValidateHook = ({ data }) => {
   if (!data) return data;
-  if (!data.slug && data.title) {
-    return { ...data, slug: slugify(data.title) };
-  }
-  return data;
+  const source = typeof data.slug === 'string' && data.slug.trim() ? data.slug : data.title;
+  return typeof source === 'string' && source.trim() ? { ...data, slug: slugify(source) } : data;
 };
 
 /** `publishedAt` defaults to "now" the first time a post is published (brief §A). */
@@ -63,8 +65,8 @@ export const Posts: CollectionConfig = {
   },
   versions: { drafts: { schedulePublish: true }, maxPerDoc: 50 },
   hooks: {
-    beforeValidate: [validateTokensCollection],
-    beforeChange: [autoSlug, setPublishedAt],
+    beforeValidate: [autoSlug, validateTokensCollection],
+    beforeChange: [setPublishedAt],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },

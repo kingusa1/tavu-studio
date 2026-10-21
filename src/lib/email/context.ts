@@ -88,5 +88,8 @@ export async function loadEmailContext(payload: Payload): Promise<EmailContext> 
 
 /** First name for greetings ("Sara Ahmed" → "Sara"); empty when unknown (see fillTokens). */
 export function firstNameOf(name: string | null | undefined): string {
-  return singleLine(name, 80).split(' ')[0] || '';
+  const first = singleLine(name, 80).split(' ')[0] || '';
+  // Only letters (any script), apostrophes and hyphens, max 30 characters. Anything else (URLs,
+  // digits, "WIN-AED-5000.example") is dropped so the greeting cannot carry someone's spam.
+  return /^\p{L}[\p{L}\p{M}'’-]{0,29}$/u.test(first) ? first : '';
 }
