@@ -1,56 +1,33 @@
-'use client';
+import HomeView from '@/components/landing/HomeView';
+import { getGlobal } from '@/lib/cms/globals';
+import { getOffers } from '@/lib/cms/offers';
+import { getTestimonials } from '@/lib/cms/testimonials';
+import type { OfferLike } from '@/lib/cms/offerText';
+import type { GlobalSlug } from 'payload';
+import type { HomePage as HomePageData } from '@/payload-types';
 
-import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import Header from '@/components/landing/Header';
-import Hero from '@/components/landing/Hero';
-import Footer from '@/components/landing/Footer';
-import BackgroundImage from '@/components/common/BackgroundImage';
+// The home page has no route layout today (§3.5 home-page.seo) — metadata keeps falling back
+// to the root `(frontend)/layout.tsx`'s `site-settings.seo` defaults, unchanged.
 
-// Below-the-fold sections are dynamically imported to cut initial JS
-// bundle size (framer-motion, heavy section components). They still
-// render client-side; just deferred until the main bundle is parsed.
-const Packages = dynamic(() => import('@/components/landing/Packages'), {
-  loading: () => <div className="py-20" />,
-});
-const ServicesExplorer = dynamic(() => import('@/components/landing/ServicesExplorer'), {
-  loading: () => <div className="py-20" />,
-});
-const About = dynamic(() => import('@/components/landing/About'), {
-  loading: () => <div className="py-20" />,
-});
-const Method = dynamic(() => import('@/components/landing/Method'), {
-  loading: () => <div className="py-20" />,
-});
-const SocialFeed = dynamic(() => import('@/components/landing/SocialFeed'), {
-  loading: () => <div className="py-20" />,
-});
-const Contact = dynamic(() => import('@/components/landing/Contact'), {
-  loading: () => <div className="py-20" />,
-});
-
-export default function Home() {
-  useEffect(() => {
-    if (window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname);
-      window.scrollTo(0, 0);
-    }
-  }, []);
+export default async function Home() {
+  const [home, reformerOffers, breathingOffers, testimonials] = await Promise.all([
+    getGlobal<HomePageData>('home-page' as GlobalSlug),
+    getOffers({ category: 'reformer', surface: 'home' }),
+    getOffers({ category: 'breathing-room', surface: 'home' }),
+    getTestimonials(),
+  ]);
 
   return (
-    <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
-      <BackgroundImage />
-      <Header />
-      <main className="flex-grow">
-        <Hero />
-        <Packages />
-        <ServicesExplorer />
-        <About />
-        <Method />
-        <SocialFeed />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <HomeView
+      data={{
+        home,
+        // `getOffers` is a package B stub returning `[]` until Offers is built (§6) — the
+        // formatter-shaped cast is a no-op today and becomes exact once B's real Offer type
+        // (a structural superset of `OfferLike`) lands.
+        reformerOffers: reformerOffers as unknown as OfferLike[],
+        breathingOffers: breathingOffers as unknown as OfferLike[],
+        testimonials,
+      }}
+    />
   );
 }

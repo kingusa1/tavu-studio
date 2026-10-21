@@ -5,65 +5,21 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 
-const pillars = [
-  {
-    number: "01",
-    title: "Movement",
-    subtitle: "Reformer Pilates",
-    description: "Controlled, intentional movement that builds strength from the inside out. Using the resistance of the Reformer, we create length, stability, and power.",
-    benefits: ["Core Strength", "Flexibility", "Posture", "Mind-Body"],
-    image: "/about-lounge.webp",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 8c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 12 0" />
-        <circle cx="12" cy="8" r="2" />
-      </svg>
-    ),
-    color: "blue",
-    stats: { classes: "15+", duration: "50 min", level: "All Levels" }
-  },
-  {
-    number: "02",
-    title: "Breath",
-    subtitle: "Breathing Room",
-    description: "Breath-led practices designed to restore balance, release tension, and reconnect you to your body. Inviting softness, presence, and quiet strength.",
-    benefits: ["Stress Relief", "Energy", "Clarity", "Release"],
-    image: "/hero-entrance-sign.webp",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22c-4.2 0-8-3.8-8-8.5 0-4.5 8-11.5 8-11.5s8 7 8 11.5c0 4.7-3.8 8.5-8 8.5z" />
-      </svg>
-    ),
-    color: "emerald",
-    stats: { classes: "10+", duration: "45-60 min", level: "All Levels" }
-  }
-];
+import { accents } from "@/components/cms/accents";
+import { getIcon } from "@/components/icons/cmsIcons";
+import { resolveImage } from "@/lib/cms/media";
+import type { HomePage } from "@/payload-types";
 
-const colorClasses = {
-  blue: {
-    bg: "bg-blue-500",
-    text: "text-blue-400",
-    border: "border-blue-500/30",
-    glow: "shadow-blue-500/20",
-    gradient: "from-blue-600/90 via-blue-800/70 to-transparent"
-  },
-  emerald: {
-    bg: "bg-emerald-500",
-    text: "text-emerald-400",
-    border: "border-emerald-500/30",
-    glow: "shadow-emerald-500/20",
-    gradient: "from-emerald-600/90 via-emerald-800/70 to-transparent"
-  },
-  amber: {
-    bg: "bg-amber-500",
-    text: "text-amber-400",
-    border: "border-amber-500/30",
-    glow: "shadow-amber-500/20",
-    gradient: "from-amber-600/90 via-amber-800/70 to-transparent"
-  }
+export type MethodData = NonNullable<HomePage["method"]>;
+
+export type MethodProps = {
+  data: MethodData;
 };
 
-export default function Method() {
+export default function Method({ data }: MethodProps) {
+  const pillars = data.pillars ?? [];
+  const pillarCount = pillars.length || 1;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -72,7 +28,7 @@ export default function Method() {
 
   // Auto-rotate pillars
   useEffect(() => {
-    if (!isAutoPlaying) {
+    if (!isAutoPlaying || pillars.length === 0) {
       progressRef.current = 0;
       setProgress(0);
       return;
@@ -83,7 +39,7 @@ export default function Method() {
 
       if (progressRef.current >= 100) {
         progressRef.current = 0;
-        setActiveIndex((current) => (current + 1) % pillars.length);
+        setActiveIndex((current) => (current + 1) % pillarCount);
       }
 
       setProgress(progressRef.current);
@@ -92,7 +48,7 @@ export default function Method() {
     return () => {
       clearInterval(interval);
     };
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, pillarCount, pillars.length]);
 
   // Reset progress when slide changes manually
   useEffect(() => {
@@ -104,11 +60,11 @@ export default function Method() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") {
-        setActiveIndex((prev) => (prev + 1) % pillars.length);
+        setActiveIndex((prev) => (prev + 1) % pillarCount);
         setIsAutoPlaying(false);
         setProgress(0);
       } else if (e.key === "ArrowLeft") {
-        setActiveIndex((prev) => (prev - 1 + pillars.length) % pillars.length);
+        setActiveIndex((prev) => (prev - 1 + pillarCount) % pillarCount);
         setIsAutoPlaying(false);
         setProgress(0);
       }
@@ -116,7 +72,7 @@ export default function Method() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [pillarCount]);
 
   const handlePillarClick = (index: number) => {
     setActiveIndex(index);
@@ -125,7 +81,11 @@ export default function Method() {
   };
 
   const currentPillar = pillars[activeIndex];
-  const colors = colorClasses[currentPillar.color as keyof typeof colorClasses];
+  if (!currentPillar) return null;
+
+  const colors = accents.pillar[currentPillar.accent ?? 'blue'] ?? accents.pillar.blue;
+  const resolvedImage = resolveImage(currentPillar.image);
+  const imageAlt = currentPillar.image?.alt || currentPillar.title || resolvedImage?.alt || '';
 
   return (
     <section
@@ -170,14 +130,14 @@ export default function Method() {
           <div className="text-center mb-12 lg:mb-16">
             <span className="inline-flex items-center gap-3 text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4">
               <span className="w-10 h-[1px] bg-accent/50" />
-              The Philosophy
+              {data.eyebrow}
               <span className="w-10 h-[1px] bg-accent/50" />
             </span>
             <h2 className="text-4xl sm:text-4xl sm:text-5xl md:text-6xl font-headline font-semibold text-white mb-4">
-              The TAVÚ <em className="italic font-light text-accent">Method</em>
+              {data.headingLead} <em className="italic font-light text-accent">{data.headingEmphasis}</em>
             </h2>
             <p className="text-base md:text-lg text-white/50 max-w-xl mx-auto">
-              Two foundations working in harmony to transform how you move and breathe.
+              {data.intro}
             </p>
           </div>
         </MotionWrapper>
@@ -187,12 +147,13 @@ export default function Method() {
           {/* Left Sidebar - Pillar Cards */}
           <div className="lg:col-span-4 space-y-3">
             {pillars.map((pillar, index) => {
-              const pillarColors = colorClasses[pillar.color as keyof typeof colorClasses];
+              const pillarColors = accents.pillar[pillar.accent ?? 'blue'] ?? accents.pillar.blue;
               const isActive = activeIndex === index;
+              const Icon = getIcon('pillar', pillar.icon ?? '');
 
               return (
                 <motion.button
-                  key={index}
+                  key={pillar.id ?? index}
                   onClick={() => handlePillarClick(index)}
                   className={`w-full text-left p-5 rounded-2xl transition-all duration-500 relative overflow-hidden group ${
                     isActive
@@ -215,7 +176,7 @@ export default function Method() {
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                       isActive ? `${pillarColors.bg} text-white` : "bg-white/10 text-white/60"
                     }`}>
-                      {pillar.icon}
+                      {Icon && <Icon width={24} height={24} />}
                     </div>
 
                     <div className="flex-1 min-w-0">
@@ -259,14 +220,14 @@ export default function Method() {
                     <rect x="6" y="4" width="4" height="16" />
                     <rect x="14" y="4" width="4" height="16" />
                   </svg>
-                  Auto-playing
+                  {data.autoPlayingLabel}
                 </>
               ) : (
                 <>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
-                  Resume auto-play
+                  {data.resumeLabel}
                 </>
               )}
             </motion.button>
@@ -276,7 +237,7 @@ export default function Method() {
           <div className="lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeIndex}
+                key={currentPillar.id ?? activeIndex}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -285,14 +246,16 @@ export default function Method() {
               >
                 {/* Main Image Card */}
                 <div className="relative aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl">
-                  <Image
-                    src={currentPillar.image}
-                    alt={currentPillar.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 60vw"
-                    priority
-                  />
+                  {resolvedImage && (
+                    <Image
+                      src={resolvedImage.src}
+                      alt={imageAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 60vw"
+                      priority
+                    />
+                  )}
 
                   {/* Gradient overlay */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${colors.gradient}`} />
@@ -313,15 +276,15 @@ export default function Method() {
 
                       {/* Stats badges */}
                       <div className="flex flex-wrap gap-2 justify-end">
-                        {Object.entries(currentPillar.stats).map(([key, value], i) => (
+                        {(currentPillar.stats ?? []).map((stat, i) => (
                           <motion.div
-                            key={key}
+                            key={stat.id ?? i}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 + i * 0.1 }}
                             className="bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs text-white/80"
                           >
-                            <span className="font-semibold">{value}</span>
+                            <span className="font-semibold">{stat.value}</span>
                           </motion.div>
                         ))}
                       </div>
@@ -346,27 +309,27 @@ export default function Method() {
 
                         {/* Benefits */}
                         <div className="flex flex-wrap gap-2 mb-6">
-                          {currentPillar.benefits.map((benefit, i) => (
+                          {(currentPillar.benefits ?? []).map((benefit, i) => (
                             <motion.span
-                              key={i}
+                              key={benefit.id ?? i}
                               initial={{ opacity: 0, scale: 0.8 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ delay: 0.4 + i * 0.1 }}
                               className={`px-4 py-2 rounded-full text-sm font-medium bg-white/10 backdrop-blur-sm text-white border ${colors.border}`}
                             >
-                              {benefit}
+                              {benefit.text}
                             </motion.span>
                           ))}
                         </div>
 
                         {/* CTA Button */}
                         <motion.a
-                          href="/classes"
+                          href={data.cta?.href || '/classes'}
                           className={`inline-flex items-center gap-2 h-12 px-6 rounded-full ${colors.bg} text-white font-medium transition-all hover:scale-105 shadow-lg ${colors.glow}`}
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          Explore Classes
+                          {data.cta?.label}
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                           </svg>
@@ -391,10 +354,10 @@ export default function Method() {
         {/* Bottom Navigation Dots */}
         <div className="flex justify-center items-center gap-4 mt-10">
           {pillars.map((pillar, index) => {
-            const dotColors = colorClasses[pillar.color as keyof typeof colorClasses];
+            const dotColors = accents.pillar[pillar.accent ?? 'blue'] ?? accents.pillar.blue;
             return (
               <button
-                key={index}
+                key={pillar.id ?? index}
                 onClick={() => handlePillarClick(index)}
                 aria-label={`Go to ${pillar.title} pillar`}
                 className={`relative w-3 h-3 rounded-full transition-all duration-300 ${
@@ -415,7 +378,7 @@ export default function Method() {
 
         {/* Keyboard hint */}
         <p className="text-center text-white/30 text-xs mt-4 hidden lg:block">
-          Use ← → arrow keys to navigate
+          {data.keyboardHint}
         </p>
       </div>
     </section>

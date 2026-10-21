@@ -1,23 +1,18 @@
 import type { Metadata } from 'next';
+import type { GlobalSlug } from 'payload';
 
-export const metadata: Metadata = {
-  title: 'The Method — TA (Grounding) & VÚ (Flow)',
-  description:
-    'The TAVÚ method: rooted in TA (grounding) and VÚ (flow), a curated practice designed to soothe the nervous system, restore clarity and build strength through a structured progression system.',
-  keywords: [
-    'TAVU method',
-    'Reformer Pilates progression',
-    'nervous system regulation Abu Dhabi',
-    'breathwork method',
-  ],
-  alternates: { canonical: '/method' },
-  openGraph: {
-    title: 'The TAVÚ Method',
-    description:
-      'TA — stillness. VÚ — flow. A single curated method built on a structured progression system.',
-    url: '/method',
-  },
-};
+import { getGlobal } from '@/lib/cms/globals';
+import { getSiteData } from '@/lib/cms/site';
+import { buildMetadata } from '@/lib/cms/metadata';
+import type { MethodPage as MethodPageData } from '@/payload-types';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [method, { settings }] = await Promise.all([
+    getGlobal<MethodPageData>('method-page' as GlobalSlug),
+    getSiteData(),
+  ]);
+  return buildMetadata(method.seo, { path: '/method', fallback: settings.seo });
+}
 
 export default function MethodLayout({ children }: { children: React.ReactNode }) {
   return children;

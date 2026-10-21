@@ -6,31 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import MotionWrapper from "@/components/common/MotionWrapper";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 
-const slides = [
-  {
-    image: "/hero-reformer-studio.webp",
-    title: "Movement",
-    subtitle: "Reformer Pilates",
-    description: "Strengthen your body with precision and grace",
-    accent: "from-blue-500/30",
-  },
-  {
-    image: "/hero-ice-baths.webp",
-    title: "Recovery",
-    subtitle: "Contrast Therapy",
-    description: "Sauna and ice bath to reset and restore",
-    accent: "from-cyan-500/30",
-  },
-  {
-    image: "/hero-entrance-sign.webp",
-    title: "Sanctuary",
-    subtitle: "By the Beach",
-    description: "Your private wellness escape in Al Raha",
-    accent: "from-amber-500/30",
-  },
-];
+import { accents } from "@/components/cms/accents";
+import { resolveImage } from "@/lib/cms/media";
+import type { HomePage } from "@/payload-types";
 
-export default function Hero() {
+export type HeroData = NonNullable<HomePage["hero"]>;
+
+export type HeroProps = {
+  data: HeroData;
+};
+
+export default function Hero({ data }: HeroProps) {
+  const slides = data.slides ?? [];
+  const slideCount = slides.length || 1;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -38,15 +27,15 @@ export default function Hero() {
 
   const nextSlide = useCallback(() => {
     setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % slideCount);
     setProgress(0);
-  }, []);
+  }, [slideCount]);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
     setProgress(0);
-  }, []);
+  }, [slideCount]);
 
   const goToSlide = useCallback((index: number) => {
     setDirection(index > currentSlide ? 1 : -1);
@@ -125,6 +114,13 @@ export default function Hero() {
     },
   };
 
+  const slide = slides[currentSlide];
+  const resolvedImage = slide ? resolveImage(slide.image) : null;
+  // Parity with pre-CMS Hero.tsx:150-151 — the image alt defaults to the slide title, not the
+  // media doc's own alt (§3.5 home-page.hero.slides note).
+  const slideAlt = slide?.image?.alt || slide?.title || resolvedImage?.alt || "";
+  const gradientClass = (slide?.accent && accents.hero[slide.accent]) || accents.hero.blue;
+
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Carousel Background */}
@@ -146,18 +142,20 @@ export default function Hero() {
               animate="animate"
               key={`ken-${currentSlide}`}
             >
-              <Image
-                src={slides[currentSlide].image}
-                alt={slides[currentSlide].title}
-                fill
-                className="object-cover"
-                priority
-                sizes="100vw"
-              />
+              {resolvedImage && (
+                <Image
+                  src={resolvedImage.src}
+                  alt={slideAlt}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="100vw"
+                />
+              )}
             </motion.div>
 
             {/* Dynamic gradient overlay based on slide */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].accent} to-transparent opacity-60`} />
+            <div className={`absolute inset-0 bg-gradient-to-br ${gradientClass} to-transparent opacity-60`} />
           </motion.div>
         </AnimatePresence>
 
@@ -232,10 +230,10 @@ export default function Hero() {
             <div className="w-1 h-12 bg-accent rounded-full" />
             <div>
               <p className="text-accent text-xs uppercase tracking-[0.3em] font-semibold drop-shadow">
-                {slides[currentSlide].subtitle}
+                {slide?.subtitle}
               </p>
               <p className="text-white/80 text-sm font-light mt-1 drop-shadow max-w-[200px]">
-                {slides[currentSlide].description}
+                {slide?.description}
               </p>
             </div>
           </motion.div>
@@ -253,14 +251,14 @@ export default function Hero() {
           {/* Badge */}
           <MotionWrapper delay={0.1} direction="up">
             <span className="inline-block text-accent uppercase tracking-[0.15em] sm:tracking-[0.25em] text-[10px] sm:text-xs font-semibold mb-6 bg-background/40 backdrop-blur-md px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-accent/20 text-center max-w-[90vw] leading-tight">
-              Abu Dhabi&apos;s First Private Space for Reformer Pilates &amp; Contrast Therapy
+              {data.badge}
             </span>
           </MotionWrapper>
 
           {/* Animated Headline */}
           <MotionWrapper delay={0.2} direction="up">
             <h1 className="text-4xl sm:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-headline font-semibold tracking-tight mb-6 leading-[1.05] drop-shadow-lg">
-              <span className="text-white">Wellness</span>
+              <span className="text-white">{data.headlineLead}</span>
               <br />
               <AnimatePresence mode="wait">
                 <motion.em
@@ -271,7 +269,7 @@ export default function Hero() {
                   transition={{ duration: 0.5 }}
                   className="italic font-light text-white/90"
                 >
-                  {slides[currentSlide].title}
+                  {slide?.title}
                 </motion.em>
               </AnimatePresence>
             </h1>
@@ -290,12 +288,12 @@ export default function Hero() {
           {/* Subheadline */}
           <MotionWrapper delay={0.4} direction="up">
             <div className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 text-white/85 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-md space-y-1 px-2">
-              <p>Where movement is practiced</p>
-              <p>and recovery is part of the method</p>
-              <p className="text-sm sm:text-base md:text-lg text-white/70 italic pt-1">Reformer, mat, release, and stretch</p>
-              <p className="pt-4">Supported by contrast and compression</p>
-              <p className="pt-3"><span className="text-accent font-medium">TA</span> — stillness</p>
-              <p><span className="text-accent font-medium">VÚ</span> — flow</p>
+              <p>{data.subLine1}</p>
+              <p>{data.subLine2}</p>
+              <p className="text-sm sm:text-base md:text-lg text-white/70 italic pt-1">{data.subLineItalic}</p>
+              <p className="pt-4">{data.subLineSupport}</p>
+              <p className="pt-3"><span className="text-accent font-medium">{data.taLabel}</span> {data.taText}</p>
+              <p><span className="text-accent font-medium">{data.vuLabel}</span> {data.vuText}</p>
             </div>
           </MotionWrapper>
 
@@ -303,20 +301,20 @@ export default function Hero() {
           <MotionWrapper delay={0.5} direction="up">
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-24">
               <motion.a
-                href="/schedule"
+                href={data.primaryCta?.href || "/schedule"}
                 className="inline-flex h-14 items-center justify-center rounded-full bg-accent px-10 font-medium text-accent-foreground transition-all duration-300 hover:bg-accent/90 shadow-lg hover:shadow-xl hover:shadow-accent/25"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Book a Class
+                {data.primaryCta?.label}
               </motion.a>
               <motion.a
-                href="#packages"
+                href={data.secondaryCta?.href || "#packages"}
                 className="inline-flex h-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/30 px-10 font-medium text-white transition-all duration-300 hover:bg-white/20 hover:border-accent hover:text-accent"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Check Our Packages
+                {data.secondaryCta?.label}
               </motion.a>
             </div>
           </MotionWrapper>
