@@ -100,8 +100,10 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     manifest: '/manifest.json',
+    // Search Console / Bing Webmaster Tools ownership tags, set per environment (empty = no tag).
     verification: {
-      // Add Google Search Console verification when available
+      ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+      ...(process.env.BING_SITE_VERIFICATION ? { other: { 'msvalidate.01': process.env.BING_SITE_VERIFICATION } } : {}),
     },
   };
 }

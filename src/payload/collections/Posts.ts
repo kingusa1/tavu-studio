@@ -4,6 +4,7 @@ import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { image } from '../fields/image';
 import { richTextField } from '../fields/richText';
 import { seo } from '../fields/seo';
+import { pingIndexNowAfterChange, pingIndexNowAfterDelete } from '../hooks/pingIndexNow';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
 import { validateTokensCollection } from '../hooks/validateTokens';
 
@@ -72,8 +73,8 @@ export const Posts: CollectionConfig = {
   hooks: {
     beforeValidate: [autoSlug, validateTokensCollection],
     beforeChange: [setPublishedAt],
-    afterChange: [revalidateAfterChange],
-    afterDelete: [revalidateAfterDelete],
+    afterChange: [revalidateAfterChange, pingIndexNowAfterChange],
+    afterDelete: [revalidateAfterDelete, pingIndexNowAfterDelete],
   },
   fields: [
     { name: 'title', type: 'text', required: true },
