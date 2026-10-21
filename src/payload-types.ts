@@ -293,8 +293,32 @@ export interface Event {
  */
 export interface Testimonial {
   id: number;
-  title: string;
-  slug: string;
+  name: string;
+  /**
+   * E.g. "Wellness Enthusiast". Shown as "{role} • {location}".
+   */
+  role?: string | null;
+  /**
+   * E.g. "Abu Dhabi". Shown as "{role} • {location}".
+   */
+  location?: string | null;
+  quote: string;
+  /**
+   * Number of stars shown, 1–5.
+   */
+  rating?: number | null;
+  image?: {
+    media?: (number | null) | Media;
+    /**
+     * Overrides the image's default alt text for this spot only
+     */
+    alt?: string | null;
+  };
+  /**
+   * Only active testimonials can appear on the home page (the section itself is also off by default).
+   */
+  active?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -529,8 +553,19 @@ export interface EventsSelect<T extends boolean = true> {
  * via the `definition` "testimonials_select".
  */
 export interface TestimonialsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
+  name?: T;
+  role?: T;
+  location?: T;
+  quote?: T;
+  rating?: T;
+  image?:
+    | T
+    | {
+        media?: T;
+        alt?: T;
+      };
+  active?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -904,32 +939,492 @@ export interface SystemPage {
   createdAt?: string | null;
 }
 /**
+ * The home page (/). Sections appear in this fixed order; turn a section off with its "Show this section" toggle instead of deleting its content.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-page".
  */
 export interface HomePage {
   id: number;
-  title?: string | null;
+  hero?: {
+    /**
+     * The rotating background slides behind the headline.
+     */
+    slides?:
+      | {
+          image?: {
+            media?: (number | null) | Media;
+            /**
+             * Overrides the image's default alt text for this spot only
+             */
+            alt?: string | null;
+          };
+          /**
+           * The word that animates in after "Wellness", e.g. "Movement".
+           */
+          title: string;
+          subtitle?: string | null;
+          description?: string | null;
+          accent?: ('blue' | 'cyan' | 'amber') | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Small pill above the headline.
+     */
+    badge?: string | null;
+    /**
+     * The static first word of the headline (today "Wellness").
+     */
+    headlineLead?: string | null;
+    subLine1?: string | null;
+    subLine2?: string | null;
+    subLineItalic?: string | null;
+    subLineSupport?: string | null;
+    taLabel?: string | null;
+    taText?: string | null;
+    vuLabel?: string | null;
+    vuText?: string | null;
+    primaryCta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    secondaryCta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+  };
+  packages?: {
+    /**
+     * Show this section on the home page.
+     */
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    heading?: string | null;
+    intro?: string | null;
+    /**
+     * Show the "prices exclude VAT" note under the heading.
+     */
+    showVatNote?: boolean | null;
+    /**
+     * Card titles, subtitles and "Book" buttons come from Site Settings → Price Cards. Rows come from Prices & Packages items marked "Show on Home".
+     */
+    note?: string | null;
+  };
+  servicesExplorer?: {
+    /**
+     * Show this section on the home page.
+     */
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    heading?: string | null;
+    intro?: string | null;
+    /**
+     * Button label under each service, e.g. "Learn More".
+     */
+    ctaLabel?: string | null;
+    /**
+     * One tab per service. They rotate automatically every 5 seconds.
+     */
+    items?:
+      | {
+          name: string;
+          tagline?: string | null;
+          description?: string | null;
+          image?: {
+            media?: (number | null) | Media;
+            /**
+             * Overrides the image's default alt text for this spot only
+             */
+            alt?: string | null;
+          };
+          /**
+           * Use "Center (40%)" for a tall image that needs to crop higher, e.g. a mirror wall.
+           */
+          imagePosition?: ('center' | 'center-40') | null;
+          highlights?:
+            | {
+                text?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          href: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  about?: {
+    /**
+     * Show this section on the home page.
+     */
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    headingLine1?: string | null;
+    headingLead?: string | null;
+    /**
+     * Rendered in italic, e.g. "pause".
+     */
+    headingEmphasis?: string | null;
+    headingTail?: string | null;
+    /**
+     * Bold text renders in the brand accent colour.
+     */
+    body?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    link?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    /**
+     * Exactly 3 images for the photo collage.
+     */
+    images?:
+      | {
+          image?: {
+            media?: (number | null) | Media;
+            /**
+             * Overrides the image's default alt text for this spot only
+             */
+            alt?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  method?: {
+    /**
+     * Show this section on the home page.
+     */
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    headingLead?: string | null;
+    headingEmphasis?: string | null;
+    intro?: string | null;
+    /**
+     * Up to 3 pillar cards (today: Movement and Breath). They rotate automatically.
+     */
+    pillars?:
+      | {
+          /**
+           * E.g. "01".
+           */
+          number?: string | null;
+          title: string;
+          subtitle?: string | null;
+          description?: string | null;
+          benefits?:
+            | {
+                text?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          image?: {
+            media?: (number | null) | Media;
+            /**
+             * Overrides the image's default alt text for this spot only
+             */
+            alt?: string | null;
+          };
+          icon?: ('pin' | 'drop') | null;
+          accent?: ('blue' | 'emerald' | 'amber') | null;
+          /**
+           * Up to 3 small stat badges, e.g. "15+", "50 min", "All Levels".
+           */
+          stats?:
+            | {
+                value?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    cta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    autoPlayingLabel?: string | null;
+    resumeLabel?: string | null;
+    keyboardHint?: string | null;
+  };
+  socialFeed?: {
+    /**
+     * Show this section on the home page.
+     */
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    instagramButtonLabel?: string | null;
+    tiktokButtonLabel?: string | null;
+    /**
+     * Shows a development-only reminder to connect Instagram when no live feed is configured. Never shown to site visitors in production (fix/social-feed hotfix).
+     */
+    showSetupGuide?: boolean | null;
+    /**
+     * Shown whenever the live Instagram feed is not connected.
+     */
+    fallbackImages?:
+      | {
+          image?: {
+            media?: (number | null) | Media;
+            /**
+             * Overrides the image's default alt text for this spot only
+             */
+            alt?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contact?: {
+    /**
+     * Show this section on the home page.
+     */
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    headingLead?: string | null;
+    headingEmphasis?: string | null;
+    addressHeading?: string | null;
+    addressTitleLine?: string | null;
+    hoursHeading?: string | null;
+    contactHeading?: string | null;
+    /**
+     * The map iframe's accessibility title.
+     */
+    mapTitle?: string | null;
+    /**
+     * Address, hours, email, WhatsApp and the map link come from Site Settings.
+     */
+    note?: string | null;
+  };
+  testimonials?: {
+    /**
+     * Off by default — this section is not shown on the live site today. Turn on once real testimonials are added.
+     */
+    enabled?: boolean | null;
+    eyebrow?: string | null;
+    headingLead?: string | null;
+    headingEmphasis?: string | null;
+    headingTail?: string | null;
+    intro?: string | null;
+    ctaHeading?: string | null;
+    ctaText?: string | null;
+    primaryCta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    secondaryCta?: {
+      label?: string | null;
+      href?: string | null;
+      newTab?: boolean | null;
+    };
+    /**
+     * The testimonials themselves are managed under Classes & Events → Testimonials.
+     */
+    note?: string | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
+ * The /about page — the studio's story.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-page".
  */
 export interface AboutPage {
   id: number;
-  title?: string | null;
+  hero: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    eyebrow?: string | null;
+    title: string;
+    intro?: string | null;
+    tagline?: string | null;
+  };
+  philosophy?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    /**
+     * Short lines under the heading, e.g. "TA is the grounding…".
+     */
+    lines?:
+      | {
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Exactly 2 panels — the TA and VU split cards.
+     */
+    panels?:
+      | {
+          image?: {
+            media?: (number | null) | Media;
+            /**
+             * Overrides the image's default alt text for this spot only
+             */
+            alt?: string | null;
+          };
+          /**
+           * The large letters on the card, e.g. "TA".
+           */
+          label?: string | null;
+          heading?: string | null;
+          text?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  journey?: {
+    image?: {
+      media?: (number | null) | Media;
+      /**
+       * Overrides the image's default alt text for this spot only
+       */
+      alt?: string | null;
+    };
+    eyebrow?: string | null;
+    heading?: string | null;
+    intro?: string | null;
+    taLabel?: string | null;
+    taText?: string | null;
+    vuLabel?: string | null;
+    vuText?: string | null;
+    paragraph2?: string | null;
+    paragraph3?: string | null;
+    closingLine1?: string | null;
+    closingLine2?: string | null;
+  };
+  gallery?: {
+    eyebrow?: string | null;
+    heading?: string | null;
+    intro?: string | null;
+    /**
+     * Studio photo grid.
+     */
+    images?:
+      | {
+          image?: {
+            media?: (number | null) | Media;
+            /**
+             * Overrides the image's default alt text for this spot only
+             */
+            alt?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  cta?: {
+    enabled?: boolean | null;
+    heading?: string | null;
+    /**
+     * Tokens allowed, e.g. {price:slug}.
+     */
+    text?: string | null;
+    buttons?:
+      | {
+          link: {
+            label: string;
+            href: string;
+            newTab?: boolean | null;
+          };
+          style?: ('primary' | 'outline') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
 /**
+ * The /method page — the 5-level progression system.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "method-page".
  */
 export interface MethodPage {
   id: number;
-  title?: string | null;
+  title: string;
+  intro?: string | null;
+  progressionHeading?: string | null;
+  progressionIntro?: string | null;
+  /**
+   * The 5 progression levels, in order.
+   */
+  levels?:
+    | {
+        /**
+         * E.g. "Level 1".
+         */
+        label?: string | null;
+        /**
+         * E.g. "Foundation".
+         */
+        name?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
+   */
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    keywords?: string[] | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    robots?: ('index-follow' | 'noindex-follow' | 'noindex-nofollow') | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1430,7 +1925,239 @@ export interface SystemPagesSelect<T extends boolean = true> {
  * via the `definition` "home-page_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        slides?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              title?: T;
+              subtitle?: T;
+              description?: T;
+              accent?: T;
+              id?: T;
+            };
+        badge?: T;
+        headlineLead?: T;
+        subLine1?: T;
+        subLine2?: T;
+        subLineItalic?: T;
+        subLineSupport?: T;
+        taLabel?: T;
+        taText?: T;
+        vuLabel?: T;
+        vuText?: T;
+        primaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        secondaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+      };
+  packages?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        heading?: T;
+        intro?: T;
+        showVatNote?: T;
+        note?: T;
+      };
+  servicesExplorer?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        heading?: T;
+        intro?: T;
+        ctaLabel?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              tagline?: T;
+              description?: T;
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              imagePosition?: T;
+              highlights?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              href?: T;
+              id?: T;
+            };
+      };
+  about?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        headingLine1?: T;
+        headingLead?: T;
+        headingEmphasis?: T;
+        headingTail?: T;
+        body?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        images?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              id?: T;
+            };
+      };
+  method?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        headingLead?: T;
+        headingEmphasis?: T;
+        intro?: T;
+        pillars?:
+          | T
+          | {
+              number?: T;
+              title?: T;
+              subtitle?: T;
+              description?: T;
+              benefits?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              icon?: T;
+              accent?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        cta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        autoPlayingLabel?: T;
+        resumeLabel?: T;
+        keyboardHint?: T;
+      };
+  socialFeed?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        instagramButtonLabel?: T;
+        tiktokButtonLabel?: T;
+        showSetupGuide?: T;
+        fallbackImages?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              id?: T;
+            };
+      };
+  contact?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        headingLead?: T;
+        headingEmphasis?: T;
+        addressHeading?: T;
+        addressTitleLine?: T;
+        hoursHeading?: T;
+        contactHeading?: T;
+        mapTitle?: T;
+        note?: T;
+      };
+  testimonials?:
+    | T
+    | {
+        enabled?: T;
+        eyebrow?: T;
+        headingLead?: T;
+        headingEmphasis?: T;
+        headingTail?: T;
+        intro?: T;
+        ctaHeading?: T;
+        ctaText?: T;
+        primaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        secondaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              newTab?: T;
+            };
+        note?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1440,7 +2167,116 @@ export interface HomePageSelect<T extends boolean = true> {
  * via the `definition` "about-page_select".
  */
 export interface AboutPageSelect<T extends boolean = true> {
-  title?: T;
+  hero?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        eyebrow?: T;
+        title?: T;
+        intro?: T;
+        tagline?: T;
+      };
+  philosophy?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        lines?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        panels?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              label?: T;
+              heading?: T;
+              text?: T;
+              id?: T;
+            };
+      };
+  journey?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              media?: T;
+              alt?: T;
+            };
+        eyebrow?: T;
+        heading?: T;
+        intro?: T;
+        taLabel?: T;
+        taText?: T;
+        vuLabel?: T;
+        vuText?: T;
+        paragraph2?: T;
+        paragraph3?: T;
+        closingLine1?: T;
+        closingLine2?: T;
+      };
+  gallery?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        intro?: T;
+        images?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    media?: T;
+                    alt?: T;
+                  };
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        enabled?: T;
+        heading?: T;
+        text?: T;
+        buttons?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    newTab?: T;
+                  };
+              style?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1451,6 +2287,28 @@ export interface AboutPageSelect<T extends boolean = true> {
  */
 export interface MethodPageSelect<T extends boolean = true> {
   title?: T;
+  intro?: T;
+  progressionHeading?: T;
+  progressionIntro?: T;
+  levels?:
+    | T
+    | {
+        label?: T;
+        name?: T;
+        description?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+        robots?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
