@@ -261,9 +261,11 @@ export async function seedClasses(payload: Payload): Promise<void> {
         buttons: [{ link: { label: 'View Schedule & Book', href: '/schedule' }, style: 'primary' }],
       },
       seo: {
-        title: 'Classes | Reformer Pilates & Breathing Room (Mat, Release, Stretch)',
+        // Package E (SEO brief §D2): rendered title was 81 chars, description 206 (audit
+        // 2026-10-21); both shortened to fit <= 60 / 120-160.
+        title: 'Classes | Reformer Pilates & Breathing Room',
         description:
-          'Explore all classes at TAVÚ Studio in Al Raha, Abu Dhabi — Reformer Pilates (TA, VÚ and specialty classes) and Breathing Room TAVÚ MAT, RELEASE and STRETCH classes. Small-group sessions throughout the week.',
+          'Explore Reformer Pilates and Breathing Room classes at TAVÚ in Al Raha, Abu Dhabi — TAVÚ MAT, RELEASE and STRETCH sessions throughout the week.',
         ogTitle: 'TAVÚ Classes | Reformer, Mat, Release & Stretch',
         ogDescription: 'Small-group classes for every rhythm — strength, flow, breath and stillness.',
       },
@@ -298,7 +300,8 @@ export async function seedClasses(payload: Payload): Promise<void> {
       packagesHeading: 'Appointment Packages',
       info: { heading: 'Appointment Information' },
       seo: {
-        title: 'Appointments | Book Contrast, NormaTec & Massage',
+        // Package E (SEO brief §D2): rendered title was 62 chars (audit 2026-10-21).
+        title: 'Appointments | Contrast, NormaTec & Massage',
         description:
           'Book private appointments at TAVÚ Studio — Contrast Therapy, NormaTec Compression Therapy and Massage in Al Raha, Abu Dhabi.',
         ogTitle: 'Book an Appointment at TAVÚ',
@@ -390,7 +393,8 @@ export async function seedClasses(payload: Payload): Promise<void> {
         ],
       },
       seo: {
-        title: 'Services | Pilates, Contrast Therapy, Recovery & Massage',
+        // Package E (SEO brief §D2): rendered title was 70 chars (audit 2026-10-21).
+        title: 'Services | Pilates, Therapy & Massage',
         description:
           'Explore all TAVÚ services — Reformer Pilates, Breathing Room, Contrast Therapy, NormaTec Compression Therapy and Massage in Al Raha, Abu Dhabi.',
         ogTitle: 'TAVÚ Services | Movement, Recovery, Breath',
@@ -581,8 +585,9 @@ export async function seedClasses(payload: Payload): Promise<void> {
       },
       seo: {
         title: 'Contrast Therapy (Sauna + Ice Bath) in Abu Dhabi',
+        // Package E (SEO brief §D2): was 175 chars (audit 2026-10-21); 120-160 target.
         description:
-          'Sauna plus ice bath contrast therapy at TAVÚ in Al Raha, Abu Dhabi. Private individual drop-in 275 AED, couple 456 AED, trio 600 AED, groups up to six 1,050 AED. VAT excluded.',
+          'Sauna plus ice bath Contrast Therapy at TAVÚ in Al Raha, Abu Dhabi — private individual, couple, trio and group sessions. All prices exclude VAT.',
         keywords: ['Contrast Therapy Abu Dhabi', 'Ice bath Abu Dhabi', 'Sauna Abu Dhabi', 'Infrared Sauna Al Raha', 'Recovery Abu Dhabi'],
         ogTitle: 'Contrast Therapy at TAVÚ | Sauna + Ice Bath',
         ogDescription: 'Private individual drop-in 275 AED, couple 456 AED, trio 600 AED, groups up to six 1,050 AED.',
@@ -646,8 +651,9 @@ export async function seedClasses(payload: Payload): Promise<void> {
       },
       seo: {
         title: 'Compression Therapy (NormaTec) in Abu Dhabi',
+        // Package E (SEO brief §D2): was 194 chars (audit 2026-10-21); 120-160 target.
         description:
-          'NormaTec compression therapy for faster recovery at TAVÚ in Al Raha, Abu Dhabi. 45-minute session 160 AED, Recovery Pack (5+1) 660 AED. Boosts circulation, reduces swelling, flushes lactic acid.',
+          'NormaTec compression therapy for faster recovery at TAVÚ in Al Raha, Abu Dhabi — boosts circulation, reduces swelling and flushes lactic acid.',
         keywords: ['NormaTec Abu Dhabi', 'Compression Therapy Abu Dhabi', 'Recovery Al Raha', 'Pulsing compression', 'Lymphatic drainage Abu Dhabi'],
         ogTitle: 'Compression Therapy at TAVÚ | NormaTec Recovery',
         ogDescription: 'NormaTec pulsing compression for faster muscle recovery. 45 min — 160 AED, Recovery Pack (5+1) 660 AED.',

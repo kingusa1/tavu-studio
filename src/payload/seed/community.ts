@@ -156,8 +156,9 @@ async function seedPageGlobals(payload: Payload): Promise<void> {
       },
       seo: {
         title: 'Events & Collaborations',
+        // Package E (SEO brief §D2): was 187 chars (audit 2026-10-21); 120-160 target.
         description:
-          'Special events and collaborations at TAVÚ in Al Raha, Abu Dhabi — ALO x TAVÚ collaborations, private events, BeyondLeFifth running club gatherings, and Full Moon & New Moon sound healing.',
+          'Special events and collaborations at TAVÚ in Al Raha, Abu Dhabi — brand partnerships, private events, community gatherings and sound healing.',
         keywords: ['wellness events Abu Dhabi', 'sound healing Abu Dhabi', 'running club Al Raha', 'private events Abu Dhabi'],
         ogTitle: 'Events & Collaborations at TAVÚ',
         ogDescription: 'ALO x TAVÚ collaborations, private events, BeyondLeFifth running club and Full Moon / New Moon sound healing.',
@@ -301,7 +302,10 @@ async function seedPageGlobals(payload: Payload): Promise<void> {
       },
       map: { title: 'TAVÚ Wellness Studio' },
       seo: {
-        title: 'Contact TAVÚ Studio | Al Raha, Abu Dhabi',
+        // Package E (SEO brief §D2): rendered today as "Contact TAVÚ Studio | Al Raha, Abu
+        // Dhabi | TAVÚ Studio" — the brand appeared twice because this field already included
+        // it alongside the root title template's own " | TAVÚ Studio" suffix.
+        title: 'Contact | Al Raha, Abu Dhabi',
         description:
           "Get in touch with TAVÚ Studio in Al Raha, Abu Dhabi. WhatsApp, email, Instagram @tavuwellness.studio. We're here to help you start your wellness journey.",
         ogTitle: 'Contact TAVÚ Studio',
@@ -483,8 +487,9 @@ async function seedLegalPages(payload: Payload): Promise<void> {
     },
     seo: {
       title: 'Terms of Service',
+      // Package E (SEO brief §D2): was 171 chars (audit 2026-10-21); 120-160 target.
       description:
-        'Terms and conditions for classes, appointments, packages and memberships at TAVÚ Wellness Studio, Al Raha, Abu Dhabi — including booking, cancellation and refund policies.',
+        'Terms and conditions for classes, appointments, packages and memberships at TAVÚ Wellness Studio in Al Raha, Abu Dhabi, including booking policies.',
       ogTitle: 'Terms of Service | TAVÚ Studio',
       ogDescription: 'Booking, cancellation, membership and refund terms for TAVÚ Wellness Studio.',
       robots: 'index-follow',

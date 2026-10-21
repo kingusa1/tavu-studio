@@ -85,10 +85,14 @@ export async function seedSite(payload: Payload): Promise<void> {
         { key: 'cold-plunge-temp', value: '5–8°C' },
       ],
       seo: {
-        titleDefault: "TAVÚ | Abu Dhabi's First Private Reformer Pilates & Contrast Therapy Studio",
+        // Package E (SEO brief §D2): rendered title was 75 chars (audit 2026-10-21, >60 limit) —
+        // shortened while keeping brand, main services and "Abu Dhabi". `titleDefault` is used
+        // as-is by the root layout (never passed through `titleTemplate`), so it alone must fit.
+        titleDefault: 'TAVÚ | Reformer Pilates & Contrast Therapy, Abu Dhabi',
         titleTemplate: '%s | TAVÚ Studio',
+        // Was 196 chars (audit); 120-160 target.
         description:
-          "TAVÚ — Abu Dhabi's first private space for Reformer Pilates and Contrast Therapy. Small-group reformer, mat, release & stretch classes, sauna + ice bath, NormaTec compression & massage in Al Raha.",
+          "TAVÚ is Abu Dhabi's first private space for Reformer Pilates and Contrast Therapy — small-group classes, sauna, ice bath, compression and massage in Al Raha.",
         keywords: [
           'Reformer Pilates Abu Dhabi',
           'Contrast Therapy Abu Dhabi',
@@ -103,8 +107,12 @@ export async function seedSite(payload: Payload): Promise<void> {
         ],
         ogTitle: "TAVÚ | Abu Dhabi's First Private Reformer Pilates & Contrast Therapy Studio",
         ogDescription: 'Reformer Pilates paired with Contrast Therapy as part of the method. TA — stillness. VU — flow. The balance of both.',
-        // Seeded empty on purpose (§3.1) — metadata keeps the static /opengraph-image.png so the OG URL does not change.
-        ogImage: null,
+        // Package E (SEO brief §D1): seeded with the same image the static /opengraph-image.png
+        // served before the CMS — og:image/twitter:image was missing on 19 of 20 live routes
+        // because every route's own `openGraph` object replaces the root one instead of
+        // merging with it (Next.js shallow-merge behaviour). `buildMetadata()`'s fallback now
+        // carries this image onto every route that doesn't set its own.
+        ogImage: mediaId('opengraph-image.png'),
         ogImageAlt: 'TAVÚ Studio — Abu Dhabi',
         twitterTitle: "TAVÚ | Abu Dhabi's First Private Reformer Pilates & Contrast Therapy Studio",
         twitterDescription: 'Reformer Pilates paired with Contrast Therapy as part of the method. Book your session at TAVÚ.',
@@ -156,6 +164,9 @@ export async function seedSite(payload: Payload): Promise<void> {
           { label: 'About', path: 'https://tavustudio.com/about', description: 'The studio, the space and the philosophy.' },
           { label: 'Method', path: 'https://tavustudio.com/method', description: 'The TAVÚ progression system.' },
           { label: 'Contact', path: 'https://tavustudio.com/contact', description: 'Location, hours and enquiries.' },
+          { label: 'Blog', path: 'https://tavustudio.com/blog', description: 'Articles on Reformer Pilates, Breathing Room, Contrast Therapy, Compression Therapy and recovery.' },
+          { label: 'FAQ', path: 'https://tavustudio.com/faq', description: 'Answers about classes, sessions, memberships, pricing and booking.' },
+          { label: 'Editorial Policy', path: 'https://tavustudio.com/editorial-policy', description: 'How TAVÚ writes, reviews and corrects its blog articles.' },
         ],
         sectionHeadings: [
           { key: 'servicesPricing', heading: 'Services & Pricing (AED, VAT excluded)' },
@@ -217,6 +228,7 @@ export async function seedSite(payload: Payload): Promise<void> {
           label: 'About',
           items: [
             { title: 'Our Story', description: 'The TAVU philosophy & vision', href: '/about', icon: 'building' },
+            { title: 'Blog', description: 'Articles on wellness & recovery', href: '/blog', icon: 'sparkles' },
             { title: 'Contact', description: 'Get in touch with us', href: '/contact', icon: 'mail' },
           ],
         },
@@ -249,6 +261,7 @@ export async function seedSite(payload: Payload): Promise<void> {
             { label: 'About', href: '/about', newTab: false },
             { label: 'Services', href: '/services', newTab: false },
             { label: 'Classes', href: '/classes', newTab: false },
+            { label: 'Blog', href: '/blog', newTab: false },
           ],
         },
         {
@@ -266,6 +279,7 @@ export async function seedSite(payload: Payload): Promise<void> {
       legalLinks: [
         { label: 'Privacy Policy', href: '/privacy-policy', newTab: false },
         { label: 'Terms of Service', href: '/terms-of-service', newTab: false },
+        { label: 'Editorial Policy', href: '/editorial-policy', newTab: false },
       ],
     },
   });

@@ -7,6 +7,7 @@ import { getPayload } from 'payload';
 
 import config from '@payload-config';
 
+import { seedBlog } from './blog';
 import { seedClasses } from './classes';
 import { seedCommunity } from './community';
 import { seedHome } from './home';
@@ -25,6 +26,7 @@ async function seed() {
   await seedPricing(payload);
   await seedClasses(payload);
   await seedCommunity(payload);
+  await seedBlog(payload);
 
   payload.logger.info('Seed complete.');
 }

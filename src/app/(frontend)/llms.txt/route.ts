@@ -6,6 +6,7 @@ import { offerLlmsLine } from '@/lib/cms/offerText';
 import type { OfferLike } from '@/lib/cms/offerText';
 import { getRituals } from '@/lib/cms/massageRituals';
 import { getClasses } from '@/lib/cms/classes';
+import { getLatestPublishedPosts } from '@/lib/cms/posts';
 import { getSiteData } from '@/lib/cms/site';
 import type { Offer } from '@/payload-types';
 
@@ -39,7 +40,7 @@ function heading(sectionHeadings: Array<{ key?: string | null; heading?: string 
 }
 
 async function buildLlmsText(): Promise<string> {
-  const [{ settings }, reformerOffers, breathingOffers, contrastOffers, addOnOffers, compressionOffers, bundleOffers, membershipOffers, rituals, classes] =
+  const [{ settings }, reformerOffers, breathingOffers, contrastOffers, addOnOffers, compressionOffers, bundleOffers, membershipOffers, rituals, classes, latestPosts] =
     await Promise.all([
       getSiteData(),
       getOffers({ category: 'reformer', surface: 'llms' }),
@@ -51,6 +52,7 @@ async function buildLlmsText(): Promise<string> {
       getOffers({ category: 'membership', surface: 'llms' }),
       getRituals(),
       getClasses(),
+      getLatestPublishedPosts(10),
     ]);
 
   const llms = settings.llms;
@@ -134,6 +136,12 @@ async function buildLlmsText(): Promise<string> {
       `- Reformer: ${reformerClasses.map((c) => c.name).join(', ')}`,
       `- Breathing Room — ${breathingByFamily.map((group) => `${FAMILY_LABELS[group.family]}: ${group.names.join(', ')}`).join(' · ')}`,
     ].join('\n'),
+    '',
+    '## Latest Blog Posts',
+    '',
+    latestPosts.length > 0
+      ? latestPosts.map((post) => `- [${post.title}](https://tavustudio.com/blog/${post.slug}): ${post.excerpt}`).join('\n')
+      : '(no published articles yet — see https://tavustudio.com/blog)',
     '',
     '## Booking & Policies',
     '',

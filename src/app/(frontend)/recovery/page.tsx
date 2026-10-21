@@ -6,13 +6,16 @@ import Link from 'next/link';
 import type { GlobalSlug } from 'payload';
 
 import { getGlobal } from '@/lib/cms/globals';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
+import { getSiteData } from '@/lib/cms/site';
 import type { RecoveryPage as RecoveryPageData } from '@/payload-types';
 
 const CARD_DELAYS = [0.1, 0.15, 0.2];
 
 export default async function RecoveryPage() {
-  const data = await getGlobal<RecoveryPageData>('recovery-page' as GlobalSlug);
+  const [data, { settings }] = await Promise.all([getGlobal<RecoveryPageData>('recovery-page' as GlobalSlug), getSiteData()]);
   const cards = data.cards ?? [];
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
@@ -22,6 +25,7 @@ export default async function RecoveryPage() {
       <main className="flex-grow pt-32 pb-16 px-4">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
+            <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'Recovery', path: '/recovery' }]} />
             <MotionWrapper delay={0} direction="up" immediate>
               <div className="text-center mb-14">
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">{data.title}</h1>

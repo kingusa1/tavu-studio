@@ -39,6 +39,7 @@ export const LegalPages: CollectionConfig = {
       options: [
         { label: 'Terms of Service (/terms-of-service)', value: 'terms-of-service' },
         { label: 'Privacy Policy (/privacy-policy)', value: 'privacy-policy' },
+        { label: 'Editorial Policy (/editorial-policy)', value: 'editorial-policy' },
       ],
     },
     {

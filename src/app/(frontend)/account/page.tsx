@@ -7,6 +7,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { getIcon } from '@/components/icons/cmsIcons';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getGlobal } from '@/lib/cms/globals';
 import type { SeoFieldValue } from '@/lib/cms/metadata';
 import { getSiteData } from '@/lib/cms/site';
@@ -90,6 +91,10 @@ export default async function AccountPage() {
 
       <main className="flex-grow pt-32 pb-20 px-4 container mx-auto relative z-10">
         <div className="max-w-5xl mx-auto">
+          <Breadcrumbs
+            siteUrl={settings.brand.siteUrl ?? 'https://tavustudio.com'}
+            items={[{ name: 'Home', path: '/' }, { name: 'Account', path: '/account' }]}
+          />
           {/* Hero Section */}
           <MotionWrapper delay={0} direction="up" immediate>
             <div className="text-center mb-12">

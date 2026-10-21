@@ -12,15 +12,19 @@ import { offerRow } from '@/lib/cms/offerText';
 import type { OfferLike } from '@/lib/cms/offerText';
 import { getGlobal } from '@/lib/cms/globals';
 import { resolveImage } from '@/lib/cms/media';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
+import { getSiteData } from '@/lib/cms/site';
 import type { MembershipsPage as MembershipsPageData } from '@/payload-types';
 
 export default async function MembershipsPage() {
-  const [data, offers] = await Promise.all([
+  const [data, offers, { settings }] = await Promise.all([
     getGlobal<MembershipsPageData>('memberships-page' as GlobalSlug),
     getOffers({ category: 'membership', surface: 'pricing' }),
+    getSiteData(),
   ]);
 
   const image = resolveImage(data.hero?.image);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
@@ -45,6 +49,7 @@ export default async function MembershipsPage() {
         {/* Membership Tiers */}
         <section className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4">
+            <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'Memberships', path: '/memberships' }]} />
             <MotionWrapper delay={0.1} direction="up">
               <div className="text-center mb-16">
                 <span className="text-accent font-medium text-sm tracking-wider uppercase">{data.tiers?.eyebrow}</span>

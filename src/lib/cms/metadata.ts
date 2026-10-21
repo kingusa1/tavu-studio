@@ -22,6 +22,9 @@ export type SeoDefaults = {
   description?: string | null;
   keywords?: string[] | null;
   ogImage?: Media | number | null;
+  ogImageAlt?: string | null;
+  twitterTitle?: string | null;
+  twitterDescription?: string | null;
 } | null | undefined;
 
 function nonEmpty(values: (string[] | null | undefined)[]): string[] | undefined {
@@ -43,7 +46,12 @@ export function buildMetadata(seo: SeoFieldValue, { path, fallback }: { path: st
   const keywords = nonEmpty([seo?.keywords, fallback?.keywords]);
   const ogTitle = seo?.ogTitle || title;
   const ogDescription = seo?.ogDescription || description;
-  const resolvedOgImage = resolveImage({ media: seo?.ogImage ?? fallback?.ogImage });
+  const resolvedOgImage = resolveImage({
+    media: seo?.ogImage ?? fallback?.ogImage,
+    alt: fallback?.ogImageAlt,
+  });
+  const twitterTitle = ogTitle || fallback?.twitterTitle || undefined;
+  const twitterDescription = ogDescription || fallback?.twitterDescription || undefined;
 
   const metadata: Metadata = {
     title,
@@ -56,6 +64,12 @@ export function buildMetadata(seo: SeoFieldValue, { path, fallback }: { path: st
       ...(resolvedOgImage
         ? { images: [{ url: resolvedOgImage.src, width: resolvedOgImage.width, height: resolvedOgImage.height, alt: resolvedOgImage.alt }] }
         : {}),
+    },
+    twitter: {
+      card: resolvedOgImage ? 'summary_large_image' : 'summary',
+      title: twitterTitle,
+      description: twitterDescription,
+      ...(resolvedOgImage ? { images: [resolvedOgImage.src] } : {}),
     },
   };
 

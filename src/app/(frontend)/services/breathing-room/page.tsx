@@ -6,12 +6,17 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import VatNote from '@/components/common/VatNote';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
+import ServiceFaqSection from '@/components/services/ServiceFaqSection';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
+import JsonLd from '@/components/seo/JsonLd';
 import { getClasses } from '@/lib/cms/classes';
 import { getGlobal } from '@/lib/cms/globals';
+import { buildServiceJsonLd } from '@/lib/cms/jsonLd';
 import { resolveImage } from '@/lib/cms/media';
 import { getOffers } from '@/lib/cms/offers';
 import { offerRow } from '@/lib/cms/offerText';
 import type { OfferLike } from '@/lib/cms/offerText';
+import { getSiteData } from '@/lib/cms/site';
 import type { BreathingRoomPage as BreathingRoomPageData, Class } from '@/payload-types';
 
 // `getOffers()` is still a package B stub returning `[]`, typed against the stub Offers
@@ -22,19 +27,30 @@ function asOfferLike(offer: unknown): OfferLike {
 }
 
 export default async function BreathingRoomPage() {
-  const [data, classes, offers] = await Promise.all([
+  const [data, classes, offers, { settings }] = await Promise.all([
     getGlobal<BreathingRoomPageData>('breathing-room-page'),
     getClasses('breathing-room'),
     getOffers({ category: 'breathing-room', surface: 'servicePage' }),
+    getSiteData(),
   ]);
 
   const heroImage = resolveImage(data.hero?.image);
   const cardImage = resolveImage(data.overview?.card?.image);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
       <BackgroundImage />
       <Header />
+      <JsonLd
+        data={buildServiceJsonLd({
+          siteUrl,
+          name: 'Breathing Room',
+          description: data.seo?.description,
+          areaServed: settings.structuredData.areaServed,
+          offers: offers.map((offer) => ({ name: offerRow(asOfferLike(offer), 'servicePage').name, price: (offer as { price: number }).price })),
+        })}
+      />
 
       {/* Hero Section */}
       <section className="tone-dark relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
@@ -63,6 +79,14 @@ export default async function BreathingRoomPage() {
         {/* Overview Section */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
+            <Breadcrumbs
+              siteUrl={siteUrl}
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Services', path: '/services' },
+                { name: 'Breathing Room', path: '/services/breathing-room' },
+              ]}
+            />
             <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               <MotionWrapper delay={0.1} direction="left">
                 <div>
@@ -192,6 +216,8 @@ export default async function BreathingRoomPage() {
             </MotionWrapper>
           </div>
         </section>
+
+        <ServiceFaqSection topic="breathing-room" categorySlug="breathing-room" categoryLabel="Breathing Room" />
 
         {/* CTA Section */}
         {data.cta?.enabled && (

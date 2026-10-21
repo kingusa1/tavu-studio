@@ -6,6 +6,7 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import VatNote from '@/components/common/VatNote';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getClasses } from '@/lib/cms/classes';
 import { getGlobal } from '@/lib/cms/globals';
 import { resolveImage } from '@/lib/cms/media';
@@ -13,6 +14,7 @@ import { getOffers } from '@/lib/cms/offers';
 import { offerRow } from '@/lib/cms/offerText';
 import type { OfferLike } from '@/lib/cms/offerText';
 import { getPolicies } from '@/lib/cms/policies';
+import { getSiteData } from '@/lib/cms/site';
 import type { Class, ClassesPage as ClassesPageData } from '@/payload-types';
 
 // `getOffers()` is still a package B stub returning `[]`, typed against the stub Offers
@@ -51,16 +53,18 @@ function getLevelColor(level?: string | null) {
 }
 
 export default async function ClassesPage() {
-  const [data, reformerOffers, breathingOffers, reformerClasses, breathingClasses, policies] = await Promise.all([
+  const [data, reformerOffers, breathingOffers, reformerClasses, breathingClasses, policies, { settings }] = await Promise.all([
     getGlobal<ClassesPageData>('classes-page'),
     getOffers({ category: 'reformer', surface: 'classes' }),
     getOffers({ category: 'breathing-room', surface: 'classes' }),
     getClasses('reformer'),
     getClasses('breathing-room'),
     getPolicies('classes'),
+    getSiteData(),
   ]);
 
   const hero = resolveImage(data.hero?.image);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
@@ -85,6 +89,7 @@ export default async function ClassesPage() {
         {/* Pricing Section */}
         <section className="py-16 bg-accent/5 border-b border-accent/20">
           <div className="container mx-auto px-4">
+            <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'Classes', path: '/classes' }]} />
             <MotionWrapper delay={0.1} direction="up">
               <div className="text-center mb-10">
                 <span className="text-accent uppercase tracking-[0.3em] text-xs font-semibold mb-4 block">{data.packages?.eyebrow}</span>

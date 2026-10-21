@@ -6,12 +6,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { GlobalSlug } from 'payload';
 
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getGlobal } from '@/lib/cms/globals';
 import { resolveImage } from '@/lib/cms/media';
+import { getSiteData } from '@/lib/cms/site';
 import type { AboutPage as AboutPageData } from '@/payload-types';
 
 export default async function AboutPage() {
-    const about = await getGlobal<AboutPageData>('about-page' as GlobalSlug);
+    const [about, { settings }] = await Promise.all([getGlobal<AboutPageData>('about-page' as GlobalSlug), getSiteData()]);
+    const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
     const heroImage = resolveImage(about.hero.image);
     const panels = about.philosophy?.panels ?? [];
@@ -62,6 +65,7 @@ export default async function AboutPage() {
                 {/* TA vs VU split */}
                 <section className="py-20 lg:py-28 bg-background">
                     <div className="container mx-auto px-4">
+                        <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]} />
                         <MotionWrapper delay={0} direction="up">
                             <div className="text-center max-w-2xl mx-auto mb-16">
                                 <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">

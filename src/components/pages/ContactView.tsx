@@ -5,6 +5,7 @@ import ContactForm from '@/components/contact/ContactForm';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import MotionWrapper from '@/components/common/MotionWrapper';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { useSiteData } from '@/components/providers/SiteDataProvider';
 import type { ResolvedImage } from '@/lib/cms/media';
 import { motion } from 'framer-motion';
@@ -116,6 +117,10 @@ export default function ContactView({ data, imageCardImage }: ContactViewProps):
 
             <main className="flex-grow pb-20">
                 <div className="container mx-auto px-6">
+                    <Breadcrumbs
+                        siteUrl={settings.brand.siteUrl ?? 'https://tavustudio.com'}
+                        items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]}
+                    />
                     <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 max-w-6xl mx-auto">
 
                         {/* Left - Info */}

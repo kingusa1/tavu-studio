@@ -8,6 +8,7 @@ import { SystemPages } from './SystemPages';
 import { AboutPage } from './pages/AboutPage';
 import { AccountPage } from './pages/AccountPage';
 import { AppointmentsPage } from './pages/AppointmentsPage';
+import { BlogPage } from './pages/BlogPage';
 import { BreathingRoomPage } from './pages/BreathingRoomPage';
 import { ClassesPage } from './pages/ClassesPage';
 import { CompressionTherapyPage } from './pages/CompressionTherapyPage';
@@ -57,4 +58,5 @@ export const globals: GlobalConfig[] = [
   RegisterPage,
   AccountPage,
   EmailSettings,
+  BlogPage,
 ];

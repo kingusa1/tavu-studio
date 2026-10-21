@@ -4,12 +4,15 @@ import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getGlobal } from '@/lib/cms/globals';
+import { getSiteData } from '@/lib/cms/site';
 import type { MethodPage as MethodPageData } from '@/payload-types';
 
 export default async function MethodPage() {
-    const method = await getGlobal<MethodPageData>('method-page' as GlobalSlug);
+    const [method, { settings }] = await Promise.all([getGlobal<MethodPageData>('method-page' as GlobalSlug), getSiteData()]);
     const levels = method.levels ?? [];
+    const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
     return (
         <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
@@ -17,6 +20,7 @@ export default async function MethodPage() {
             <Header />
             <main className="flex-grow pt-32 pb-16 px-4 container mx-auto relative z-10">
                 <div className="max-w-4xl mx-auto">
+                    <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'Method', path: '/method' }]} />
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-headline mb-8 text-primary">{method.title}</h1>
                     <div className="prose prose-xl prose-stone dark:prose-invert">
                         <p className="font-serif text-xl leading-relaxed mb-12 text-muted-foreground">

@@ -6,13 +6,16 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import { serviceAccents } from '@/components/cms/accents';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getGlobal } from '@/lib/cms/globals';
 import { resolveImage } from '@/lib/cms/media';
+import { getSiteData } from '@/lib/cms/site';
 import type { ServicesPage as ServicesPageData } from '@/payload-types';
 
 export default async function ServicesPage() {
-  const data = await getGlobal<ServicesPageData>('services-page');
+  const [data, { settings }] = await Promise.all([getGlobal<ServicesPageData>('services-page'), getSiteData()]);
   const items = data.items ?? [];
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
@@ -34,6 +37,7 @@ export default async function ServicesPage() {
         {/* Services Grid */}
         <section className="py-12">
           <div className="container mx-auto px-4">
+            <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }]} />
             <div className="grid gap-8 max-w-6xl mx-auto">
               {items.map((service, index) => {
                 const image = resolveImage(service.image);

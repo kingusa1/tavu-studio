@@ -370,7 +370,8 @@ async function seedAboutPage(payload: Payload): Promise<void> {
         ],
       },
       seo: {
-        title: "About TAVÚ | Abu Dhabi's Private Wellness Studio",
+        // Package E (SEO brief §D2): rendered title was 62 chars (audit 2026-10-21).
+        title: 'About TAVÚ | Private Studio, Abu Dhabi',
         description:
           "TAVÚ is Abu Dhabi's first private space pairing Reformer Pilates with Contrast Therapy. Learn about our method, our space in Al Raha, and the team.",
         ogTitle: 'About TAVÚ Studio',
@@ -405,8 +406,9 @@ async function seedMethodPage(payload: Payload): Promise<void> {
       ],
       seo: {
         title: 'The Method — TA (Grounding) & VÚ (Flow)',
+        // Package E (SEO brief §D2): was 190 chars (audit 2026-10-21); 120-160 target.
         description:
-          'The TAVÚ method: rooted in TA (grounding) and VÚ (flow), a curated practice designed to soothe the nervous system, restore clarity and build strength through a structured progression system.',
+          'The TAVÚ method: TA (grounding) and VÚ (flow) — a curated practice to soothe the nervous system, restore clarity and build strength.',
         keywords: ['TAVU method', 'Reformer Pilates progression', 'nervous system regulation Abu Dhabi', 'breathwork method'],
         ogTitle: 'The TAVÚ Method',
         ogDescription: 'TA — stillness. VÚ — flow. A single curated method built on a structured progression system.',

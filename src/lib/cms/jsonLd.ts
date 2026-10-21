@@ -34,7 +34,7 @@ export type JsonLdAggregate = {
 export type JsonLdSettings = {
   brand?: { siteName?: string | null; alternateName?: string | null; siteUrl?: string | null } | null;
   contact?: { phoneE164?: string | null; email?: string | null } | null;
-  location?: { locality?: string | null; region?: string | null; country?: string | null } | null;
+  location?: { locality?: string | null; region?: string | null; country?: string | null; mapsUrl?: string | null } | null;
   social?: { instagramUrl?: string | null; tiktokUrl?: string | null } | null;
   hours?: { days?: string[] | null; opens?: string | null; closes?: string | null } | null;
   structuredData?: {
@@ -70,6 +70,8 @@ export function buildJsonLd({
   rituals: JsonLdRitual[];
 }): Record<string, unknown> {
   const sd = settings.structuredData ?? {};
+  const siteUrl = settings.brand?.siteUrl ?? 'https://tavustudio.com';
+  const orgId = `${siteUrl}#organization`;
 
   const offerItems = offers
     .filter((offer) => offer.active && offer.structuredData?.mode === 'offer')
@@ -112,10 +114,12 @@ export function buildJsonLd({
   return {
     '@context': 'https://schema.org',
     '@type': 'HealthClub',
+    '@id': orgId,
     name: settings.brand?.siteName,
     alternateName: settings.brand?.alternateName,
     description: sd.description,
-    url: settings.brand?.siteUrl,
+    url: siteUrl,
+    ...(settings.location?.mapsUrl ? { hasMap: settings.location.mapsUrl } : {}),
     logo: sd.logoUrl,
     image: sd.imageUrl,
     telephone: settings.contact?.phoneE164,
@@ -144,5 +148,192 @@ export function buildJsonLd({
       name: 'TAVÚ Services',
       itemListElement: [...offerItems, ...aggregateItems],
     },
+  };
+}
+
+/** The HealthClub node's `@id`, reusable by every other JSON-LD node's `provider`/`publisher`. */
+export function organizationId(siteUrl: string): string {
+  return `${siteUrl}#organization`;
+}
+
+/**
+ * Sitewide `WebSite` node (brief §D5) — deliberately no `potentialAction`/`SearchAction`, since
+ * the site has no search feature.
+ */
+export function buildWebSiteJsonLd({ settings }: { settings: JsonLdSettings }): Record<string, unknown> {
+  const siteUrl = settings.brand?.siteUrl ?? 'https://tavustudio.com';
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: settings.brand?.siteName,
+    url: siteUrl,
+    publisher: { '@id': organizationId(siteUrl) },
+  };
+}
+
+/** `BreadcrumbList` for one route — every item after Home gets `path` resolved against `siteUrl` (brief §D5). */
+export function buildBreadcrumbJsonLd({
+  siteUrl,
+  items,
+}: {
+  siteUrl: string;
+  items: Array<{ name: string; path: string }>;
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${siteUrl}${item.path}`,
+    })),
+  };
+}
+
+export type ServiceOffer = { name: string; price: number };
+
+/** One `Service` node per service page (brief §D5) — `provider` points at the HealthClub `@id`. */
+export function buildServiceJsonLd({
+  siteUrl,
+  name,
+  description,
+  areaServed,
+  offers,
+}: {
+  siteUrl: string;
+  name: string;
+  description?: string | null;
+  areaServed?: string | null;
+  offers: ServiceOffer[];
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name,
+    description: description ?? undefined,
+    provider: { '@id': organizationId(siteUrl) },
+    areaServed: areaServed ?? undefined,
+    offers: offers.map((offer) => ({
+      '@type': 'Offer',
+      name: offer.name,
+      priceCurrency: 'AED',
+      price: formatAed(offer.price, 'schema'),
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        priceCurrency: 'AED',
+        price: formatAed(offer.price, 'schema'),
+        valueAddedTaxIncluded: false,
+      },
+    })),
+  };
+}
+
+/** `Blog` node for `/blog` (brief §D5). */
+export function buildBlogJsonLd({ siteUrl, name }: { siteUrl: string; name: string }): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name,
+    url: `${siteUrl}/blog`,
+    publisher: { '@id': organizationId(siteUrl) },
+  };
+}
+
+/**
+ * UAE has no daylight saving, so Abu Dhabi local time is always UTC+4 — this reformats a stored
+ * UTC timestamp into an ISO 8601 string carrying an explicit `+04:00` offset (brief §D5, Google's
+ * Article guidance: https://developers.google.com/search/docs/appearance/structured-data/article).
+ */
+export function toAbuDhabiIso(value: string | Date): string {
+  const date = typeof value === 'string' ? new Date(value) : value;
+  const shifted = new Date(date.getTime() + 4 * 60 * 60 * 1000);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const y = shifted.getUTCFullYear();
+  const m = pad(shifted.getUTCMonth() + 1);
+  const d = pad(shifted.getUTCDate());
+  const hh = pad(shifted.getUTCHours());
+  const mm = pad(shifted.getUTCMinutes());
+  const ss = pad(shifted.getUTCSeconds());
+  return `${y}-${m}-${d}T${hh}:${mm}:${ss}+04:00`;
+}
+
+export type BlogPostingInput = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  coverImageUrl?: string | null;
+  publishedAt?: string | null;
+  updatedAt: string;
+  authorName: string;
+  authorSlug?: string | null;
+  authorSameAs?: string[];
+  categoryNames?: string[];
+};
+
+/** `BlogPosting` for one article (brief §D5). */
+export function buildBlogPostingJsonLd({
+  siteUrl,
+  post,
+}: {
+  siteUrl: string;
+  post: BlogPostingInput;
+}): Record<string, unknown> {
+  const url = `${siteUrl}/blog/${post.slug}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImageUrl ?? undefined,
+    datePublished: post.publishedAt ? toAbuDhabiIso(post.publishedAt) : undefined,
+    dateModified: toAbuDhabiIso(post.updatedAt),
+    author: {
+      '@type': 'Person',
+      name: post.authorName,
+      url: post.authorSlug ? `${siteUrl}/blog/author/${post.authorSlug}` : undefined,
+      sameAs: post.authorSameAs && post.authorSameAs.length > 0 ? post.authorSameAs : undefined,
+    },
+    publisher: { '@id': organizationId(siteUrl) },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    articleSection: post.categoryNames && post.categoryNames.length > 0 ? post.categoryNames : undefined,
+    inLanguage: 'en',
+  };
+}
+
+/** `FAQPage` for exactly the FAQ items visible on the page (brief §C/§D5). */
+export function buildFaqPageJsonLd(faqs: Array<{ question: string; answer: string }>): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+    })),
+  };
+}
+
+export type JsonLdEventInput = {
+  name: string;
+  description?: string | null;
+  startDate: string;
+  endDate?: string | null;
+  imageUrl?: string | null;
+};
+
+/** `Event` node — brief §D5: only for events on `/events` that have a real `startDate` in the CMS. */
+export function buildEventJsonLd({ siteUrl, event }: { siteUrl: string; event: JsonLdEventInput }): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.name,
+    description: event.description ?? undefined,
+    startDate: toAbuDhabiIso(event.startDate),
+    endDate: event.endDate ? toAbuDhabiIso(event.endDate) : undefined,
+    image: event.imageUrl ?? undefined,
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+    location: { '@id': organizationId(siteUrl) },
   };
 }

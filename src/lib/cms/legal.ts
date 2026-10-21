@@ -6,7 +6,7 @@ import type { LegalPage } from '@/payload-types';
 
 import { getPayloadClient } from './payload';
 
-export type LegalPageSlug = 'terms-of-service' | 'privacy-policy';
+export type LegalPageSlug = 'terms-of-service' | 'privacy-policy' | 'editorial-policy';
 
 /** The one `legal-pages` doc matching `slug`, or `null` if it has not been seeded yet. */
 export const getLegalPage = cache(async (slug: LegalPageSlug): Promise<LegalPage | null> => {

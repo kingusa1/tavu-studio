@@ -6,11 +6,16 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import VatNote from '@/components/common/VatNote';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
+import ServiceFaqSection from '@/components/services/ServiceFaqSection';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
+import JsonLd from '@/components/seo/JsonLd';
 import { getGlobal } from '@/lib/cms/globals';
+import { buildServiceJsonLd } from '@/lib/cms/jsonLd';
 import { resolveImage } from '@/lib/cms/media';
 import { getOffers } from '@/lib/cms/offers';
 import { offerRow } from '@/lib/cms/offerText';
 import type { OfferLike } from '@/lib/cms/offerText';
+import { getSiteData } from '@/lib/cms/site';
 import type { CompressionTherapyPage as CompressionTherapyPageData } from '@/payload-types';
 
 // `getOffers()` is still a package B stub returning `[]`, typed against the stub Offers
@@ -21,9 +26,10 @@ function asOfferLike(offer: unknown): OfferLike {
 }
 
 export default async function CompressionTherapyPage() {
-  const [data, packages] = await Promise.all([
+  const [data, packages, { settings }] = await Promise.all([
     getGlobal<CompressionTherapyPageData>('compression-therapy-page'),
     getOffers({ category: 'compression', surface: 'servicePage' }),
+    getSiteData(),
   ]);
 
   const heroImage = resolveImage(data.hero?.image);
@@ -31,11 +37,21 @@ export default async function CompressionTherapyPage() {
   const [individual, pack] = packages;
   const individualRow = individual ? offerRow(asOfferLike(individual), 'bigCard') : undefined;
   const packRow = pack ? offerRow(asOfferLike(pack), 'bigCard') : undefined;
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
       <BackgroundImage />
       <Header />
+      <JsonLd
+        data={buildServiceJsonLd({
+          siteUrl,
+          name: 'Compression Therapy',
+          description: data.seo?.description,
+          areaServed: settings.structuredData.areaServed,
+          offers: packages.map((offer) => ({ name: offerRow(asOfferLike(offer), 'bigCard').name, price: (offer as { price: number }).price })),
+        })}
+      />
 
       {/* Hero Section */}
       <section className="tone-dark relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
@@ -64,6 +80,14 @@ export default async function CompressionTherapyPage() {
         {/* Overview */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4">
+            <Breadcrumbs
+              siteUrl={siteUrl}
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Services', path: '/services' },
+                { name: 'Compression Therapy', path: '/services/compression-therapy' },
+              ]}
+            />
             <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               <MotionWrapper delay={0.1} direction="left">
                 <div>
@@ -245,6 +269,8 @@ export default async function CompressionTherapyPage() {
             </div>
           </section>
         )}
+
+        <ServiceFaqSection topic="compression-therapy" categorySlug="recovery" categoryLabel="Recovery" />
 
         {/* CTA */}
         {data.cta?.enabled && (
