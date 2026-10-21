@@ -6,11 +6,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { getIcon } from '@/components/icons/cmsIcons';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
+import JsonLd from '@/components/seo/JsonLd';
 import { getEvents } from '@/lib/cms/events';
 import { getGlobal } from '@/lib/cms/globals';
+import { buildEventJsonLd } from '@/lib/cms/jsonLd';
 import { resolveImage } from '@/lib/cms/media';
 import type { ImageFieldValue } from '@/lib/cms/media';
 import type { SeoFieldValue } from '@/lib/cms/metadata';
+import { getSiteData } from '@/lib/cms/site';
 import type { LinkValue } from '@/lib/cms/site';
 import type { Event } from '@/payload-types';
 
@@ -33,18 +37,31 @@ export type EventsPageData = {
 };
 
 export default async function EventsPage() {
-  const [data, upcomingEvents, highlightEvents] = await Promise.all([
+  const [data, upcomingEvents, highlightEvents, { settings }] = await Promise.all([
     getGlobal<EventsPageData>('events-page'),
     getEvents('upcoming'),
     getEvents('highlight'),
+    getSiteData(),
   ]);
 
   const heroImage = resolveImage(data.hero.image);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
+  // brief §D5: Event JSON-LD only for events that have a real date in the CMS.
+  const datedEvents = upcomingEvents.filter((event): event is Event & { startDate: string } => Boolean(event.startDate));
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
       <BackgroundImage />
       <Header />
+      {datedEvents.map((event) => (
+        <JsonLd
+          key={event.id}
+          data={buildEventJsonLd({
+            siteUrl,
+            event: { name: event.title, description: event.description, startDate: event.startDate, endDate: event.endDate },
+          })}
+        />
+      ))}
 
       {/* Hero Section */}
       <section className="tone-dark relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
@@ -66,6 +83,7 @@ export default async function EventsPage() {
         {/* Upcoming Events */}
         <section className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4">
+            <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'Events', path: '/events' }]} />
             <MotionWrapper delay={0.1} direction="up">
               <div className="text-center mb-16">
                 <span className="text-accent font-medium text-sm tracking-wider uppercase">{data.upcoming.eyebrow}</span>

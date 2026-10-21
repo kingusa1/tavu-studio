@@ -6,10 +6,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getGlobal } from '@/lib/cms/globals';
 import { resolveImage } from '@/lib/cms/media';
 import type { ImageFieldValue } from '@/lib/cms/media';
 import type { SeoFieldValue } from '@/lib/cms/metadata';
+import { getSiteData } from '@/lib/cms/site';
 import type { LinkValue } from '@/lib/cms/site';
 
 export type PartnershipsPageData = {
@@ -68,9 +70,10 @@ const PARTNERSHIP_ICONS: Record<string, ReactNode> = {
 };
 
 export default async function PartnershipsPage() {
-  const data = await getGlobal<PartnershipsPageData>('partnerships-page');
+  const [data, { settings }] = await Promise.all([getGlobal<PartnershipsPageData>('partnerships-page'), getSiteData()]);
   const heroImage = resolveImage(data.hero.image);
   const whyPartnerImage = resolveImage(data.whyPartner.image);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
 
   return (
     <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
@@ -97,6 +100,7 @@ export default async function PartnershipsPage() {
         {/* Partnership Types */}
         <section className="py-20 lg:py-28 bg-background">
           <div className="container mx-auto px-4">
+            <Breadcrumbs siteUrl={siteUrl} items={[{ name: 'Home', path: '/' }, { name: 'Partnerships', path: '/partnerships' }]} />
             <MotionWrapper delay={0.1} direction="up">
               <div className="text-center mb-16">
                 <span className="text-accent font-medium text-sm tracking-wider uppercase">{data.types.eyebrow}</span>

@@ -6,6 +6,7 @@ import MindbodyWidget from '@/components/mindbody/MindbodyWidget';
 import type { ReactNode } from 'react';
 
 import { getIcon } from '@/components/icons/cmsIcons';
+import Breadcrumbs from '@/components/seo/Breadcrumbs';
 import { getGlobal } from '@/lib/cms/globals';
 import type { SeoFieldValue } from '@/lib/cms/metadata';
 import { getSiteData } from '@/lib/cms/site';
@@ -105,6 +106,10 @@ export default async function RegisterPage() {
 
       <main className="flex-grow pb-20">
         <div className="container mx-auto px-4">
+          <Breadcrumbs
+            siteUrl={settings.brand.siteUrl ?? 'https://tavustudio.com'}
+            items={[{ name: 'Home', path: '/' }, { name: 'Register', path: '/register' }]}
+          />
           <div className="max-w-7xl mx-auto">
             {/* Main Content Grid */}
             <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
