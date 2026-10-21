@@ -61,8 +61,29 @@ const poolSsl = supabaseDbCaCert
 export default buildConfig({
   admin: {
     user: 'users',
+    // TAVÚ branding instead of Payload's (logo, icon, favicon, share card); colours in
+    // src/app/(payload)/custom.scss. Light theme only: the brand is paper + navy.
+    theme: 'light',
+    components: {
+      graphics: {
+        Logo: '/payload/admin/Logo',
+        Icon: '/payload/admin/Icon',
+      },
+    },
     meta: {
       titleSuffix: ' — TAVÚ CMS',
+      description: 'TAVÚ Wellness Studio content management.',
+      icons: [
+        { rel: 'icon', type: 'image/png', url: '/favicon.png' },
+        { rel: 'apple-touch-icon', url: '/apple-touch-icon.png' },
+      ],
+      openGraph: {
+        title: 'TAVÚ CMS',
+        description: 'TAVÚ Wellness Studio content management.',
+        siteName: 'TAVÚ Wellness Studio',
+        images: [{ url: '/opengraph-image.png', width: 1200, height: 630 }],
+      },
+      robots: 'noindex, nofollow',
     },
     importMap: {
       baseDir: path.resolve(dirname),
