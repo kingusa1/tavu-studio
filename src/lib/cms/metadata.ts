@@ -36,11 +36,14 @@ function nonEmpty(values: (string[] | null | undefined)[]): string[] | undefined
 
 /**
  * `title` stays a plain string (not `{ default, template }`) so the root `title.template`
- * ("%s | TAVÚ Studio") still applies (§4.1, R6). `openGraph` carries only `title`,
- * `description` and `url` — `images`/`type`/`siteName` are added only when `ogImage` is set,
- * matching today's route-level `openGraph` objects that replace the root one entirely.
+ * ("%s | TAVÚ Studio") still applies (§4.1, R6). A route-level `openGraph` replaces the root one
+ * entirely, so `type` is set here (`website`, or what `openGraph` passes — e.g. `article` with its
+ * publish/modify times for a blog post); `images` are added only when an image resolves.
  */
-export function buildMetadata(seo: SeoFieldValue, { path, fallback }: { path: string; fallback?: SeoDefaults }): Metadata {
+export function buildMetadata(
+  seo: SeoFieldValue,
+  { path, fallback, openGraph }: { path: string; fallback?: SeoDefaults; openGraph?: Metadata['openGraph'] },
+): Metadata {
   const title = seo?.title || fallback?.titleDefault || undefined;
   const description = seo?.description || fallback?.description || undefined;
   const keywords = nonEmpty([seo?.keywords, fallback?.keywords]);
@@ -58,13 +61,15 @@ export function buildMetadata(seo: SeoFieldValue, { path, fallback }: { path: st
     description,
     alternates: { canonical: path },
     openGraph: {
+      type: 'website',
       title: ogTitle,
       description: ogDescription,
       url: path,
       ...(resolvedOgImage
         ? { images: [{ url: resolvedOgImage.src, width: resolvedOgImage.width, height: resolvedOgImage.height, alt: resolvedOgImage.alt }] }
         : {}),
-    },
+      ...openGraph,
+    } as Metadata['openGraph'],
     twitter: {
       card: resolvedOgImage ? 'summary_large_image' : 'summary',
       title: twitterTitle,

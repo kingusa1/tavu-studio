@@ -35,6 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const [post, { settings }] = await Promise.all([getPostBySlug(slug), getSiteData()]);
   if (!post) return {};
   const cover = resolveImage(post.coverImage);
+  const siteUrl = settings.brand.siteUrl ?? 'https://tavustudio.com';
+  const author = post.author && typeof post.author !== 'number' ? post.author : null;
+  const section = (post.categories ?? []).find((category) => typeof category !== 'number');
   return buildMetadata(post.seo, {
     path: `/blog/${slug}`,
     fallback: {
@@ -42,6 +45,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       ogImage: cover ? post.coverImage.media : settings.seo.ogImage,
       ogImageAlt: cover?.alt,
+    },
+    openGraph: {
+      type: 'article',
+      siteName: settings.brand.siteName ?? undefined,
+      locale: settings.seo.locale ?? 'en_AE',
+      publishedTime: post.publishedAt ?? undefined,
+      modifiedTime: post.updatedAt,
+      authors: author ? [`${siteUrl}/blog/author/${author.slug}`] : undefined,
+      section: section && typeof section !== 'number' ? section.title : undefined,
     },
   });
 }
