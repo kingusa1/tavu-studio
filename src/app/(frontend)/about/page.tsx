@@ -1,24 +1,27 @@
-"use client";
-
 import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { GlobalSlug } from 'payload';
 
-const gallery = [
-    { src: '/about-reception.webp', alt: 'TAVÚ stone reception desk' },
-    { src: '/service-reformer-logo.webp', alt: 'Reformer studio with TAVÚ branded wall' },
-    { src: '/service-sauna.webp', alt: 'Himalayan salt sauna interior' },
-    { src: '/hero-ice-baths.webp', alt: 'Contrast Therapy ice baths at TAVÚ' },
-    { src: '/about-lounge.webp', alt: 'TAVÚ arched stone lounge' },
-    { src: '/gallery-breathing-room.webp', alt: 'The TAVÚ Breathing Room with mats, arched mirror and warm light' },
-    { src: '/gallery-sauna-infrared.webp', alt: 'Guest relaxing in the TAVÚ infrared sauna' },
-    { src: '/gallery-sauna-salt.webp', alt: 'Guest resting in the TAVÚ Himalayan salt sauna' },
-];
+import { getGlobal } from '@/lib/cms/globals';
+import { resolveImage } from '@/lib/cms/media';
+import type { AboutPage as AboutPageData } from '@/payload-types';
 
-export default function AboutPage() {
+export default async function AboutPage() {
+    const about = await getGlobal<AboutPageData>('about-page' as GlobalSlug);
+
+    const heroImage = resolveImage(about.hero.image);
+    const panels = about.philosophy?.panels ?? [];
+    const panel1 = panels[0];
+    const panel2 = panels[1];
+    const panel1Image = resolveImage(panel1?.image);
+    const panel2Image = resolveImage(panel2?.image);
+    const journeyImage = resolveImage(about.journey?.image);
+    const galleryImages = (about.gallery?.images ?? []).map((row) => resolveImage(row.image));
+
     return (
         <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
             <BackgroundImage />
@@ -28,26 +31,28 @@ export default function AboutPage() {
             <section className="relative h-[70vh] min-h-[520px] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70 z-10" />
                 <div className="absolute inset-0">
-                    <Image
-                        src="/about-exterior.webp"
-                        alt="TAVÚ Studio exterior"
-                        fill
-                        className="object-cover"
-                        priority
-                        sizes="100vw"
-                    />
+                    {heroImage && (
+                        <Image
+                            src={heroImage.src}
+                            alt={heroImage.alt}
+                            fill
+                            className="object-cover"
+                            priority
+                            sizes="100vw"
+                        />
+                    )}
                 </div>
                 <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
                     <MotionWrapper delay={0} direction="up">
                         <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
-                            Our Story
+                            {about.hero.eyebrow}
                         </span>
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">A room built for return</h1>
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-white">{about.hero.title}</h1>
                         <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-4">
-                            Reformer Pilates and contrast therapy, held as one ritual. The first of its kind in Abu Dhabi.
+                            {about.hero.intro}
                         </p>
                         <p className="text-lg md:text-xl text-white/80 leading-relaxed">
-                            TA grounds the body. VU lifts the spirit.
+                            {about.hero.tagline}
                         </p>
                     </MotionWrapper>
                 </div>
@@ -60,15 +65,15 @@ export default function AboutPage() {
                         <MotionWrapper delay={0} direction="up">
                             <div className="text-center max-w-2xl mx-auto mb-16">
                                 <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
-                                    The Philosophy
+                                    {about.philosophy?.eyebrow}
                                 </span>
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mb-4">
-                                    From stillness into motion
+                                    {about.philosophy?.heading}
                                 </h2>
                                 <div className="space-y-3 text-lg text-foreground/70">
-                                    <p>TA is the grounding. Reformer and Mat bring the body back to itself.</p>
-                                    <p>VÚ is the rise. Contrast and massage restore, release, and renew.</p>
-                                    <p>The ritual is the passage between them — and what the body learns there, it keeps.</p>
+                                    {(about.philosophy?.lines ?? []).map((line, i) => (
+                                        <p key={line.id ?? i}>{line.text}</p>
+                                    ))}
                                 </div>
                             </div>
                         </MotionWrapper>
@@ -77,20 +82,21 @@ export default function AboutPage() {
                             {/* TA — grounds the body */}
                             <MotionWrapper delay={0.1} direction="left">
                                 <div className="group relative rounded-3xl overflow-hidden h-[520px] shadow-2xl">
-                                    <Image
-                                        src="/ta-grounds-reformer.webp"
-                                        alt="TA — the TAVÚ Reformer studio, grounding the body"
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                    />
+                                    {panel1Image && (
+                                        <Image
+                                            src={panel1Image.src}
+                                            alt={panel1Image.alt}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
+                                    )}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
                                     <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
-                                        <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">TA</span>
-                                        <h3 className="text-2xl md:text-3xl font-headline mb-3">Grounds the body.</h3>
+                                        <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">{panel1?.label}</span>
+                                        <h3 className="text-2xl md:text-3xl font-headline mb-3">{panel1?.heading}</h3>
                                         <p className="text-white/80 text-base leading-relaxed max-w-md">
-                                            Strength, stability, presence. Built on the Reformer and the Mat —
-                                            slow, intentional, repeated until it becomes part of you.
+                                            {panel1?.text}
                                         </p>
                                     </div>
                                 </div>
@@ -99,20 +105,21 @@ export default function AboutPage() {
                             {/* VU — lifts the spirit */}
                             <MotionWrapper delay={0.15} direction="right">
                                 <div className="group relative rounded-3xl overflow-hidden h-[520px] shadow-2xl">
-                                    <Image
-                                        src="/hero-entrance-sign.webp"
-                                        alt="VU — evening sky lifting the spirit at TAVÚ"
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                    />
+                                    {panel2Image && (
+                                        <Image
+                                            src={panel2Image.src}
+                                            alt={panel2Image.alt}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
+                                    )}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/20" />
                                     <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 text-white">
-                                        <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">VU</span>
-                                        <h3 className="text-2xl md:text-3xl font-headline mb-3">Lifts the spirit.</h3>
+                                        <span className="font-headline text-8xl md:text-9xl leading-none mb-2 text-accent">{panel2?.label}</span>
+                                        <h3 className="text-2xl md:text-3xl font-headline mb-3">{panel2?.heading}</h3>
                                         <p className="text-white/80 text-base leading-relaxed max-w-md">
-                                            Heat, cold, touch, stillness. Contrast therapy and massage restore, release,
-                                            and renew. What you carry out, lighter than what you brought in.
+                                            {panel2?.text}
                                         </p>
                                     </div>
                                 </div>
@@ -127,40 +134,38 @@ export default function AboutPage() {
                         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                             <MotionWrapper delay={0.1} direction="left">
                                 <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-xl">
-                                    <Image
-                                        src="/about-reception.webp"
-                                        alt="TAVÚ Studio reception"
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 1024px) 100vw, 50vw"
-                                    />
+                                    {journeyImage && (
+                                        <Image
+                                            src={journeyImage.src}
+                                            alt={journeyImage.alt}
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 1024px) 100vw, 50vw"
+                                        />
+                                    )}
                                 </div>
                             </MotionWrapper>
                             <MotionWrapper delay={0.2} direction="right">
                                 <div>
-                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">The Journey</span>
-                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2 mb-6">The TAVÚ Journey</h2>
+                                    <span className="text-accent font-medium text-sm tracking-wider uppercase">{about.journey?.eyebrow}</span>
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mt-2 mb-6">{about.journey?.heading}</h2>
                                     <div className="space-y-4 text-lg text-foreground/70">
                                         <p>
-                                            TAVÚ was created from a simple belief: balance is not found in extremes, but in integration.
+                                            {about.journey?.intro}
                                         </p>
                                         <p className="font-medium text-foreground/80">
-                                            <span className="text-accent">TA</span> — grounding on the Reformer and the Mat.<br />
-                                            <span className="text-accent">VU</span> — the rise, through contrast and massage.
+                                            <span className="text-accent">{about.journey?.taLabel}</span> {about.journey?.taText}<br />
+                                            <span className="text-accent">{about.journey?.vuLabel}</span> {about.journey?.vuText}
                                         </p>
                                         <p>
-                                            Together, they form TAVÚ: a space where the body is supported, the breath is honored,
-                                            and practice becomes ritual.
+                                            {about.journey?.paragraph2}
                                         </p>
                                         <p>
-                                            Rooted in Abu Dhabi, we bring Reformer Pilates, mat classes, contrast therapy and massage
-                                            into one considered experience. Every class is designed with intention —
-                                            to build strength without force, to restore without escape, and to reconnect you to
-                                            yourself through consistency, not urgency.
+                                            {about.journey?.paragraph3}
                                         </p>
                                         <p className="text-foreground/80 italic">
-                                            This is not a place to rush through movement.<br />
-                                            It is a place to arrive.
+                                            {about.journey?.closingLine1}<br />
+                                            {about.journey?.closingLine2}
                                         </p>
                                     </div>
                                 </div>
@@ -175,28 +180,30 @@ export default function AboutPage() {
                         <MotionWrapper delay={0} direction="up">
                             <div className="text-center max-w-2xl mx-auto mb-14">
                                 <span className="text-accent uppercase tracking-[0.3em] text-xs font-bold mb-4 block">
-                                    The Space
+                                    {about.gallery?.eyebrow}
                                 </span>
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline text-primary mb-4">
-                                    Designed as a sanctuary
+                                    {about.gallery?.heading}
                                 </h2>
                                 <p className="text-lg text-foreground/70">
-                                    Natural stone, warm light, small groups. Every detail tuned so your body and mind can settle.
+                                    {about.gallery?.intro}
                                 </p>
                             </div>
                         </MotionWrapper>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
-                            {gallery.map((img, i) => (
+                            {galleryImages.map((img, i) => (
                                 <MotionWrapper key={i} delay={0.05 * i} direction="up">
                                     <div className="relative aspect-square overflow-hidden rounded-2xl group">
-                                        <Image
-                                            src={img.src}
-                                            alt={img.alt}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                            sizes="(max-width: 768px) 50vw, 25vw"
-                                        />
+                                        {img && (
+                                            <Image
+                                                src={img.src}
+                                                alt={img.alt}
+                                                fill
+                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 50vw, 25vw"
+                                            />
+                                        )}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                     </div>
                                 </MotionWrapper>
@@ -206,30 +213,33 @@ export default function AboutPage() {
                 </section>
 
                 {/* CTA */}
-                <section className="py-20 bg-primary text-primary-foreground">
-                    <div className="container mx-auto px-4 text-center">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline mb-6">Begin When Ready</h2>
-                            <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-                                Explore the schedule and book your class.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link
-                                    href="/schedule"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
-                                >
-                                    View Schedule &amp; Book
-                                </Link>
-                                <Link
-                                    href="/contact"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-transparent border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/10 transition-all text-lg"
-                                >
-                                    Contact Us
-                                </Link>
-                            </div>
-                        </MotionWrapper>
-                    </div>
-                </section>
+                {about.cta?.enabled !== false && (
+                    <section className="py-20 bg-primary text-primary-foreground">
+                        <div className="container mx-auto px-4 text-center">
+                            <MotionWrapper delay={0.1} direction="up">
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-headline mb-6">{about.cta?.heading}</h2>
+                                <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
+                                    {about.cta?.text}
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                    {(about.cta?.buttons ?? []).map((button, i) => (
+                                        <Link
+                                            key={button.id ?? i}
+                                            href={button.link.href}
+                                            className={
+                                                button.style === 'outline'
+                                                    ? 'inline-flex items-center justify-center h-14 px-10 rounded-full bg-transparent border-2 border-primary-foreground text-primary-foreground font-semibold hover:bg-primary-foreground/10 transition-all text-lg'
+                                                    : 'inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg'
+                                            }
+                                        >
+                                            {button.link.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </MotionWrapper>
+                        </div>
+                    </section>
+                )}
             </main>
 
             <Footer />

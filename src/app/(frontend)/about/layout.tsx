@@ -1,16 +1,18 @@
 import type { Metadata } from 'next';
+import type { GlobalSlug } from 'payload';
 
-export const metadata: Metadata = {
-  title: 'About TAVÚ | Abu Dhabi\'s Private Wellness Studio',
-  description:
-    'TAVÚ is Abu Dhabi\'s first private space pairing Reformer Pilates with Contrast Therapy. Learn about our method, our space in Al Raha, and the team.',
-  alternates: { canonical: '/about' },
-  openGraph: {
-    title: 'About TAVÚ Studio',
-    description: 'Abu Dhabi\'s first private space for Reformer Pilates and Contrast Therapy.',
-    url: '/about',
-  },
-};
+import { getGlobal } from '@/lib/cms/globals';
+import { getSiteData } from '@/lib/cms/site';
+import { buildMetadata } from '@/lib/cms/metadata';
+import type { AboutPage as AboutPageData } from '@/payload-types';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [about, { settings }] = await Promise.all([
+    getGlobal<AboutPageData>('about-page' as GlobalSlug),
+    getSiteData(),
+  ]);
+  return buildMetadata(about.seo, { path: '/about', fallback: settings.seo });
+}
 
 export default function AboutLayout({ children }: { children: React.ReactNode }) {
   return children;
