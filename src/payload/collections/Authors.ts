@@ -29,6 +29,17 @@ export const Authors: CollectionConfig = {
   },
   fields: [
     { name: 'name', type: 'text', required: true },
+    {
+      name: 'kind',
+      type: 'select',
+      required: true,
+      defaultValue: 'person',
+      options: [
+        { label: 'A person', value: 'person' },
+        { label: 'The studio (an organisation)', value: 'organization' },
+      ],
+      admin: { description: 'Search engines label the byline as a person or as an organisation — pick the one that is true.' },
+    },
     { name: 'slug', type: 'text', required: true, unique: true, index: true, admin: { description: 'Used in the URL: /blog/author/<slug>.' } },
     { name: 'role', type: 'text', admin: { description: 'e.g. "Reformer instructor".' } },
     { name: 'credentials', type: 'text', admin: { description: 'e.g. certifications. Optional.' } },

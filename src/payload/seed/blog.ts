@@ -94,6 +94,7 @@ async function seedCategories(payload: Payload): Promise<Record<string, number>>
 async function seedAuthor(payload: Payload): Promise<number> {
   const doc = await upsertAuthor(payload, 'tavu-studio', {
     name: 'TAVÚ Studio',
+    kind: 'organization',
     role: 'TAVÚ Studio Team',
     bio: 'Written by the team at TAVÚ Wellness Studio, Al Raha, Abu Dhabi.',
     photo: { media: mediaId('logo.png'), alt: 'TAVÚ Wellness logo' },

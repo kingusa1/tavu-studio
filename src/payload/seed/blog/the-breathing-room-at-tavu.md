@@ -4,7 +4,7 @@
 
 The Breathing Room at TAVÚ is a mat-based studio space dedicated to slowing down — home to the signature TAVÚ MAT, RELEASE and STRETCH classes, designed to restore balance, release tension and reconnect you to your own body.
 
-Unlike the Reformer Room's machine-based work, every Breathing Room class happens on the mat, so the only equipment you need is yourself (and whatever props the instructor brings into class).
+Unlike the Reformer Room's machine-based work, every Breathing Room class is mat-based.
 
 ## Who It's For
 

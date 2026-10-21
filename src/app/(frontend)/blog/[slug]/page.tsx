@@ -78,6 +78,7 @@ export default async function BlogPostPage({ params }: Props) {
             publishedAt: post.publishedAt,
             updatedAt: post.updatedAt,
             authorName: author?.name ?? 'TAVÚ Studio',
+            authorKind: author ? author.kind : 'organization',
             authorSlug: author?.slug,
             authorSameAs: (author?.sameAs ?? []).map((row) => row.url).filter((url): url is string => Boolean(url)),
             categoryNames: categories.map((category) => category.title),

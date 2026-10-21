@@ -4,11 +4,11 @@
 
 Contrast Therapy at TAVÚ is a 60-minute recovery session that moves you back and forth between sauna heat and a 5–8°C ice bath, using the studio's Himalayan Salt Sauna, Infrared Sauna and Ice Bath facilities.
 
-The idea behind "contrast" is in the name: heat opens the body up, cold immersion closes it back down, and the switch between the two is the whole point of the session. At TAVÚ it's offered as a stand-alone recovery ritual and as the foundation of both recovery memberships.
+The idea behind "contrast" is in the name: the session alternates between heat and cold, and moving between the two is the whole point. At TAVÚ it's offered as a stand-alone recovery ritual and as the foundation of both recovery memberships.
 
 ## The Heat and the Cold
 
-TAVÚ's sauna facilities give you two ways to warm up before the plunge: a traditional Himalayan Salt Sauna and an Infrared Sauna, both designed to raise your body temperature and open circulation ahead of the cold. From there, the Ice Bath sits at a steady 5–8°C — cold enough to trigger the "contrast" response, timed in short, guided rounds rather than one long plunge.
+TAVÚ's sauna facilities give you two ways to warm up before the ice bath: a Himalayan Salt Sauna and an Infrared Sauna. From there, the Ice Bath sits at a steady 5–8°C.
 
 ## Who It's For
 
@@ -16,7 +16,7 @@ Contrast Therapy suits anyone who trains regularly and wants a structured recove
 
 ## What a Session Includes
 
-Every Contrast Therapy session runs for 60 minutes and moves between the saunas and the ice bath at your own pace, with a member of the team on hand to guide timing if it's your first visit. Sessions are available as:
+Every Contrast Therapy session runs for 60 minutes and moves between the saunas and the ice bath at your own pace. Sessions are available as:
 
 - **Individual** — a private session for one
 - **Couple** — for two, with a choice of a private or shared suite
@@ -43,12 +43,12 @@ If you'd rather make Contrast Therapy a regular habit than book it session by se
 
 ## Why Hot-Cold Contrast, in Brief
 
-Hot-cold contrast is a long-used recovery practice, and the research on its cold-water half is modest but real. A Cochrane systematic review of cold-water immersion after exercise found some evidence that it can reduce delayed-onset muscle soreness compared with passive rest, though the authors are clear that the evidence is limited and protocols vary a great deal between studies (see Sources below).
+Hot-cold contrast is a long-used recovery practice, and the research on its cold-water half is modest but real. A Cochrane systematic review of cold-water immersion after exercise found some evidence that it can reduce delayed-onset muscle soreness compared with passive rest, though the authors rate the study quality as low and say the best method and its safety are not yet clear. The same review found no difference in pain between contrast immersion (alternating hot and cold) and cold water alone (see Sources below).
 
 Contrast Therapy at TAVÚ is a wellness and recovery practice, not a medical treatment. If you have a heart condition, are pregnant, or have any medical concern, check with your doctor before booking a session.
 
 ## How to Book
 
-Contrast Therapy is booked as an appointment rather than a class — through the website or the [Mindbody app](/appointments) (cancellation and rescheduling terms are listed on the [Appointments page](/appointments)). Please arrive at least 10 minutes before your session.
+Contrast Therapy is booked as an appointment rather than a class — on the [Appointments page](/appointments) or in the Mindbody app. Cancellation and rescheduling terms are listed on the Appointments page. Please arrive at least 10 minutes before your session.
 
 Full session details live on the [Contrast Therapy page](/services/contrast-therapy); for every price on one page, see [pricing](/pricing). Ready to book? Head to [Appointments](/appointments).

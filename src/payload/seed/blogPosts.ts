@@ -73,7 +73,7 @@ const ARTICLES: ArticleSeed[] = [
     markdownFile: 'what-is-contrast-therapy.md',
     faq: [
       { question: 'How long is a Contrast Therapy session?', answer: 'Every Contrast Therapy session at TAVÚ runs for 60 minutes, alternating between sauna heat and the ice bath.' },
-      { question: 'How cold is the ice bath at TAVÚ?', answer: "TAVÚ's ice bath sits at 5–8°C, used in short, guided rounds rather than one long plunge." },
+      { question: 'How cold is the ice bath at TAVÚ?', answer: "TAVÚ's ice bath sits at 5–8°C." },
       {
         question: 'Can I book Contrast Therapy with a partner or group?',
         answer: 'Yes — Couple, Trio (AED 600) and Group sessions for up to six guests (AED 1,050) are all available, with a choice of private or shared suites. Current prices are on the pricing page.',
@@ -119,7 +119,7 @@ const ARTICLES: ArticleSeed[] = [
         answer: 'TA: Gentle Flow is the slowest, most controlled class and the best starting point for anyone new to the reformer.',
       },
     ],
-    sources: [{ title: 'Pilates for beginners — NHS', url: 'https://www.nhs.uk/live-well/exercise/pilates-and-yoga/pilates-for-beginners/' }],
+    sources: [{ title: 'Pilates video for beginners — NHS', url: 'https://www.nhs.uk/live-well/exercise/pilates-and-yoga/pilates-for-beginners/' }],
     relatedSlugs: ['the-breathing-room-at-tavu', 'what-is-contrast-therapy'],
   },
   {
@@ -193,7 +193,7 @@ const ARTICLES: ArticleSeed[] = [
         answer: 'FLOW, RELEASE, RECOVER and DRAIN full-body rituals; RESET, GROUND, LIFT and two RECOVER/RELEASE targeted rituals; ROOTED foot reflexology; and the Recovery Escape.',
       },
       { question: 'How long are the full-body rituals?', answer: 'Sixty or ninety minutes, from AED 350.' },
-      { question: 'Is there a pack option?', answer: 'Yes — every ritual has a 5+1 Ritual Pack, valid 45 days.' },
+      { question: 'Is there a pack option?', answer: 'Yes — every ritual except the Recovery Escape has a 5+1 Ritual Pack, valid 45 days.' },
       {
         question: 'What is the TAVÚ Recovery Escape?',
         answer: 'A 3-hour ritual combining exclusive Main Contrast Suite access with a 60-minute full-body massage, for AED 800. Appointments are limited.',

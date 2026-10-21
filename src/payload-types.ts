@@ -982,6 +982,10 @@ export interface Author {
   id: number;
   name: string;
   /**
+   * Search engines label the byline as a person or as an organisation — pick the one that is true.
+   */
+  kind: 'person' | 'organization';
+  /**
    * Used in the URL: /blog/author/<slug>.
    */
   slug: string;
@@ -1722,6 +1726,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface AuthorsSelect<T extends boolean = true> {
   name?: T;
+  kind?: T;
   slug?: T;
   role?: T;
   credentials?: T;

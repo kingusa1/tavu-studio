@@ -266,6 +266,8 @@ export type BlogPostingInput = {
   publishedAt?: string | null;
   updatedAt: string;
   authorName: string;
+  /** `organization` for a studio/team byline — Google: use Person only for people. */
+  authorKind?: 'person' | 'organization' | null;
   authorSlug?: string | null;
   authorSameAs?: string[];
   categoryNames?: string[];
@@ -280,7 +282,8 @@ export type BlogPostingInput = {
  *   `<script>` block (root layout) by `@id`, which isn't guaranteed, so the name/logo are
  *   inlined directly (the `@id` is kept alongside so a crawler that *does* support graph merging
  *   still links the two nodes).
- * - `author`: kept as `name` + `url` (+ `sameAs`), matching Google's recommendation.
+ * - `author`: `name` + `url` (+ `sameAs`), typed `Organization` for a studio byline and `Person`
+ *   only for a person (Google: "don't use the wrong type").
  * - `mainEntityOfPage`: kept — Google's own Article examples include it.
  */
 export function buildBlogPostingJsonLd({
@@ -304,7 +307,7 @@ export function buildBlogPostingJsonLd({
     datePublished: post.publishedAt ? toAbuDhabiIso(post.publishedAt) : undefined,
     dateModified: toAbuDhabiIso(post.updatedAt),
     author: {
-      '@type': 'Person',
+      '@type': post.authorKind === 'organization' ? 'Organization' : 'Person',
       name: post.authorName,
       url: post.authorSlug ? `${siteUrl}/blog/author/${post.authorSlug}` : undefined,
       sameAs: post.authorSameAs && post.authorSameAs.length > 0 ? post.authorSameAs : undefined,

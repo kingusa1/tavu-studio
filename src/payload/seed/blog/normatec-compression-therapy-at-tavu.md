@@ -12,7 +12,7 @@ NormaTec's compression boots wrap around your legs and inflate and deflate in a 
 
 ## Who It's For
 
-Compression Therapy is most often booked by people training regularly who want a structured recovery habit, but it's just as suited to anyone on their feet all day or dealing with general tightness or swelling. At TAVÚ, it's also commonly paired with a Contrast Therapy session rather than booked completely on its own.
+Compression Therapy is most often booked by people training regularly who want a structured recovery habit, but it's just as suited to anyone on their feet all day or dealing with general tightness or swelling.
 
 ## How a Session Works
 
@@ -27,7 +27,7 @@ Compression Therapy at TAVÚ is positioned as a recovery aid rather than a treat
 - Injury recovery
 - Swelling or fluid retention
 
-The general benefits most often cited are boosted circulation, flushing out lactic acid, reduced swelling and faster recovery. The research is still developing: a 2024 systematic review and meta-analysis of lower-limb intermittent pneumatic compression (the technology NormaTec uses) found it provides "at best moderate beneficial effects" on perceived pain and soreness, with smaller, less consistent effects on measurable muscle function (see Sources below) — so think of it as a comfort and recovery aid rather than a guaranteed performance fix.
+TAVÚ uses it as a recovery-focused treatment that stimulates circulation and supports muscle recovery. The research is still developing: a 2024 systematic review and meta-analysis of lower-limb intermittent pneumatic compression (the technology NormaTec uses) found trivial to moderate effects on perceived pain and soreness, trivial to small benefits for muscle function, and inconsistent results for lactate clearance (see Sources below) — so think of it as a comfort and recovery aid rather than a guaranteed performance fix.
 
 Compression Therapy is a wellness and recovery practice, not a medical treatment. If you have a circulation condition, a blood clot history, or any other medical concern, check with your doctor before booking.
 
@@ -43,8 +43,8 @@ Full pricing for every service, including the Reset and Ritual Unlimited members
 
 ## Pairing With Contrast Therapy
 
-Compression Therapy is designed to work alongside Contrast Therapy rather than instead of it — add the 20-minute Compression Flush to any Contrast Therapy session for a more complete recovery visit, or book the standalone 45-minute session on its own.
+Compression Therapy works as a standalone recovery session, and it can also be added to a Contrast Therapy visit: add the 20-minute Compression Flush to any Contrast Therapy session, or book the 45-minute session on its own.
 
 ## How to Book
 
-Compression Therapy is booked as an appointment — through the website or the [Mindbody app](/appointments) (cancellation and rescheduling terms are listed on the [Appointments page](/appointments)), and please arrive 10 minutes before your session. Read more on the [Compression Therapy page](/services/compression-therapy).
+Compression Therapy is booked as an appointment — on the [Appointments page](/appointments) or in the Mindbody app; cancellation and rescheduling terms are listed there. Please arrive 10 minutes before your session. Read more on the [Compression Therapy page](/services/compression-therapy).

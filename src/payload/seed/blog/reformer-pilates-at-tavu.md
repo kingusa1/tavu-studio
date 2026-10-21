@@ -1,4 +1,4 @@
-> **TL;DR:** Reformer Pilates at TAVÚ is a small-group class on the reformer machine, capped at 8 participants and run for 50 minutes, moving from gentle TA flow through to advanced VÚ strength work. Drop-in is AED 160, with class packs from AED 1,550. Book through the website or the Mindbody app.
+> **TL;DR:** Reformer Pilates at TAVÚ is a small-group class on the reformer machine, capped at 8 participants and run for 50 minutes, moving from the gentle TA: Gentle Flow through to the advanced TAVÚ: Power Pulse. Drop-in is AED 160, with class packs from AED 1,550. Book through the website or the Mindbody app.
 
 ## What Is Reformer Pilates at TAVÚ?
 
@@ -8,9 +8,9 @@ The class names reflect the TAVÚ method itself: **TA** for stillness, **VÚ** f
 
 ## Inside the Reformer Room
 
-The Reformer Room is an intimate studio space built around the reformer machine's spring-based resistance, with every class kept to 8 participants so instructors can correct form and adjust resistance individually. Sessions run 50 minutes and are designed to be adaptable — precise and quietly challenging rather than high-impact.
+The Reformer Room is an intimate studio space built around the reformer machine's spring-based resistance, with every class kept to 8 participants. Sessions run 50 minutes and are designed to be adaptable — precise and quietly challenging rather than high-impact.
 
-A reformer is a sliding carriage attached to a set of springs: the springs supply the resistance, and the carriage lets you move through a full range of motion under constant, controlled tension. That combination is why reformer-based Pilates can feel both gentler on the joints than free weights and more demanding on stability and control than it looks from the outside.
+A reformer is a sliding carriage attached to a set of springs: the springs supply the resistance, and the carriage lets you move through a full range of motion under constant, controlled tension.
 
 ## Who It's For
 
@@ -46,4 +46,4 @@ Every reformer pack bundles in complimentary [Contrast Therapy](/blog/what-is-co
 
 ## How to Book
 
-Reformer Pilates classes are booked through the website or the [Mindbody app](/schedule), the same way as every other class at TAVÚ. Check class times and reserve your spot on the [schedule](/schedule), or read more on the [Reformer Pilates page](/services/reformer-pilates).
+Reformer Pilates classes are booked through the website or the Mindbody app, the same way as every other class at TAVÚ. Check class times and reserve your spot on the [schedule](/schedule), or read more on the [Reformer Pilates page](/services/reformer-pilates).

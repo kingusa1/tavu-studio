@@ -1,4 +1,4 @@
-> **TL;DR:** TAVÚ's massage rituals are ladies-only treatments performed by certified therapists — full-body FLOW, RELEASE, RECOVER and DRAIN rituals, four targeted 30-minute treatments, the ROOTED foot ritual and the 3-hour Recovery Escape. Full-body rituals run 60 or 90 minutes from AED 350. Book through the website or the Mindbody app.
+> **TL;DR:** TAVÚ's massage rituals are ladies-only treatments performed by certified therapists — full-body FLOW, RELEASE, RECOVER and DRAIN rituals, five targeted recovery rituals (60 minutes, or 30-minute add-ons), the ROOTED foot ritual and the 3-hour Recovery Escape. Full-body rituals run 60 or 90 minutes from AED 350. Book through the website or the Mindbody app.
 
 ## What Are TAVÚ's Massage Rituals?
 
@@ -39,4 +39,4 @@ Massage at TAVÚ is ladies-only, performed by certified therapists in private tr
 
 ## How to Book
 
-Massage rituals are booked as appointments — through the website or the [Mindbody app](/appointments) (cancellation and rescheduling terms are listed on the [Appointments page](/appointments)). Full pricing for every ritual and pack is on the [pricing page](/pricing); read more on the [Massage page](/services/massage).
+Massage rituals are booked as appointments — on the [Appointments page](/appointments) or in the Mindbody app. Cancellation and rescheduling terms are listed on the Appointments page. Full pricing for every ritual and pack is on the [pricing page](/pricing); read more on the [Massage page](/services/massage).
