@@ -63,15 +63,16 @@ export default function About({ data }: AboutProps) {
             </div>
           </MotionWrapper>
 
-          {/* Image Grid - Organized layout with effects */}
+          {/* Image Grid - each MotionWrapper is itself the absolutely positioned box, so its
+              entrance transform never changes the containing block of the photo inside it */}
           <div className="relative h-[500px] lg:h-[600px]">
             {/* Background glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-accent/10 rounded-full blur-[100px] -z-10" />
 
             {/* Main large image - left side */}
-            <MotionWrapper delay={0.2} direction="up">
+            <MotionWrapper delay={0.2} direction="up" className="absolute left-0 top-[10%] w-[55%] aspect-[3/4]">
               <motion.div
-                className="absolute left-0 top-[10%] w-[55%] aspect-[3/4] group"
+                className="relative w-full h-full group"
                 style={{ y: y1 }}
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
@@ -92,9 +93,9 @@ export default function About({ data }: AboutProps) {
             </MotionWrapper>
 
             {/* Top right image */}
-            <MotionWrapper delay={0.3} direction="right">
+            <MotionWrapper delay={0.3} direction="right" className="absolute right-0 top-0 w-[50%] aspect-[4/3]">
               <motion.div
-                className="absolute right-0 top-0 w-[50%] aspect-[4/3] group"
+                className="relative w-full h-full group"
                 style={{ y: y2 }}
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
@@ -113,9 +114,9 @@ export default function About({ data }: AboutProps) {
             </MotionWrapper>
 
             {/* Bottom right image */}
-            <MotionWrapper delay={0.4} direction="up">
+            <MotionWrapper delay={0.4} direction="up" className="absolute right-[5%] bottom-[5%] w-[45%] aspect-square">
               <motion.div
-                className="absolute right-[5%] bottom-[5%] w-[45%] aspect-square group"
+                className="relative w-full h-full group"
                 style={{ y: y3 }}
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl">
