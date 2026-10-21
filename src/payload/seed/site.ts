@@ -103,8 +103,12 @@ export async function seedSite(payload: Payload): Promise<void> {
         ],
         ogTitle: "TAVÚ | Abu Dhabi's First Private Reformer Pilates & Contrast Therapy Studio",
         ogDescription: 'Reformer Pilates paired with Contrast Therapy as part of the method. TA — stillness. VU — flow. The balance of both.',
-        // Seeded empty on purpose (§3.1) — metadata keeps the static /opengraph-image.png so the OG URL does not change.
-        ogImage: null,
+        // Package E (SEO brief §D1): seeded with the same image the static /opengraph-image.png
+        // served before the CMS — og:image/twitter:image was missing on 19 of 20 live routes
+        // because every route's own `openGraph` object replaces the root one instead of
+        // merging with it (Next.js shallow-merge behaviour). `buildMetadata()`'s fallback now
+        // carries this image onto every route that doesn't set its own.
+        ogImage: mediaId('opengraph-image.png'),
         ogImageAlt: 'TAVÚ Studio — Abu Dhabi',
         twitterTitle: "TAVÚ | Abu Dhabi's First Private Reformer Pilates & Contrast Therapy Studio",
         twitterDescription: 'Reformer Pilates paired with Contrast Therapy as part of the method. Book your session at TAVÚ.',
@@ -217,6 +221,7 @@ export async function seedSite(payload: Payload): Promise<void> {
           label: 'About',
           items: [
             { title: 'Our Story', description: 'The TAVU philosophy & vision', href: '/about', icon: 'building' },
+            { title: 'Blog', description: 'Articles on wellness & recovery', href: '/blog', icon: 'sparkles' },
             { title: 'Contact', description: 'Get in touch with us', href: '/contact', icon: 'mail' },
           ],
         },
@@ -249,6 +254,7 @@ export async function seedSite(payload: Payload): Promise<void> {
             { label: 'About', href: '/about', newTab: false },
             { label: 'Services', href: '/services', newTab: false },
             { label: 'Classes', href: '/classes', newTab: false },
+            { label: 'Blog', href: '/blog', newTab: false },
           ],
         },
         {
@@ -266,6 +272,7 @@ export async function seedSite(payload: Payload): Promise<void> {
       legalLinks: [
         { label: 'Privacy Policy', href: '/privacy-policy', newTab: false },
         { label: 'Terms of Service', href: '/terms-of-service', newTab: false },
+        { label: 'Editorial Policy', href: '/editorial-policy', newTab: false },
       ],
     },
   });

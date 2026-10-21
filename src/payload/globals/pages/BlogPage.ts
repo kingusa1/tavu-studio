@@ -2,6 +2,7 @@ import type { GlobalConfig } from 'payload';
 
 import { seo } from '../../fields/seo';
 import { revalidateGlobalAfterChange } from '../../hooks/revalidateSite';
+import { validateTokensGlobal } from '../../hooks/validateTokens';
 
 /**
  * Fixed copy for `/blog` (hero + empty-state), package E brief §A. Read is logged-in only
@@ -16,7 +17,10 @@ export const BlogPage: GlobalConfig = {
     update: ({ req }) => Boolean(req.user),
   },
   versions: { max: 25 },
-  hooks: { afterChange: [revalidateGlobalAfterChange] },
+  hooks: {
+    beforeValidate: [validateTokensGlobal],
+    afterChange: [revalidateGlobalAfterChange],
+  },
   fields: [
     {
       name: 'hero',

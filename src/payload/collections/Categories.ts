@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { seo } from '../fields/seo';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
+import { validateTokensCollection } from '../hooks/validateTokens';
 
 /**
  * Blog categories (package E, brief §A). Read is logged-in only (brief §0 security rule) —
@@ -23,6 +24,7 @@ export const Categories: CollectionConfig = {
   },
   versions: { maxPerDoc: 25 },
   hooks: {
+    beforeValidate: [validateTokensCollection],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },

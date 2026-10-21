@@ -9,9 +9,10 @@ import { SiteDataProvider } from '@/components/providers/SiteDataProvider';
 import { getSiteData } from '@/lib/cms/site';
 import { getOffers } from '@/lib/cms/offers';
 import { getRituals } from '@/lib/cms/massageRituals';
-import { buildJsonLd } from '@/lib/cms/jsonLd';
+import { buildJsonLd, buildWebSiteJsonLd } from '@/lib/cms/jsonLd';
 import type { JsonLdOffer, JsonLdRitual } from '@/lib/cms/jsonLd';
 import { resolveImage } from '@/lib/cms/media';
+import JsonLd from '@/components/seo/JsonLd';
 
 const fontHeadline = Cormorant_Garamond({
   subsets: ['latin'],
@@ -118,6 +119,7 @@ export default async function RootLayout({
     offers: offers as unknown as JsonLdOffer[],
     rituals: rituals as unknown as JsonLdRitual[],
   });
+  const websiteJsonLd = buildWebSiteJsonLd({ settings: siteData.settings });
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -140,12 +142,8 @@ export default async function RootLayout({
             `,
           }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLd),
-          }}
-        />
+        <JsonLd data={jsonLd} />
+        <JsonLd data={websiteJsonLd} />
       </head>
       <body className={cn("font-body antialiased", fontHeadline.variable, fontBody.variable)} suppressHydrationWarning>
         {/* MetaPixel.tsx itself is not in F0's file list (§6) — it keeps its own hardcoded

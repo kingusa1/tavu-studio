@@ -1,10 +1,11 @@
-import type { CollectionBeforeChangeHook, CollectionConfig, Field } from 'payload';
+import type { CollectionBeforeChangeHook, CollectionConfig, Field, GroupField } from 'payload';
 
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { image } from '../fields/image';
 import { richTextField } from '../fields/richText';
 import { seo } from '../fields/seo';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
+import { validateTokensCollection } from '../hooks/validateTokens';
 
 function slugify(value: string): string {
   return value
@@ -36,12 +37,10 @@ const setPublishedAt: CollectionBeforeChangeHook = ({ data }) => {
 // coverImage is required, and its alt text must be required too (brief §A) — image() leaves
 // `alt` optional by default, so the nested field is replaced here rather than editing the
 // shared helper for every other caller.
-const coverImage = image({ name: 'coverImage', required: true });
-if (Array.isArray(coverImage.fields)) {
-  coverImage.fields = coverImage.fields.map((field) =>
-    'name' in field && field.name === 'alt' ? ({ ...field, required: true } as Field) : field,
-  );
-}
+const coverImage = image({ name: 'coverImage', required: true }) as GroupField;
+coverImage.fields = coverImage.fields.map((field: Field) =>
+  'name' in field && field.name === 'alt' ? ({ ...field, required: true } as Field) : field,
+);
 
 /**
  * Blog posts (package E, brief §A). Read is logged-in only (brief §0) — public blog pages read
@@ -64,6 +63,7 @@ export const Posts: CollectionConfig = {
   },
   versions: { drafts: { schedulePublish: true }, maxPerDoc: 50 },
   hooks: {
+    beforeValidate: [validateTokensCollection],
     beforeChange: [autoSlug, setPublishedAt],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],

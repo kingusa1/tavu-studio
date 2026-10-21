@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload';
 
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
+import { validateTokensCollection } from '../hooks/validateTokens';
 
 /**
  * Answer-engine FAQ content (package E, brief §C). Grouped by `topic`, shown on `/faq` and as a
@@ -24,6 +25,7 @@ export const Faqs: CollectionConfig = {
   },
   versions: { maxPerDoc: 25 },
   hooks: {
+    beforeValidate: [validateTokensCollection],
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
   },
@@ -56,7 +58,7 @@ export const Faqs: CollectionConfig = {
     {
       name: 'sourceNote',
       type: 'text',
-      access: { read: isAdminOrEditor },
+      access: { read: ({ req }) => Boolean(req.user) },
       admin: { position: 'sidebar', description: 'Internal only — where this fact comes from. Never shown publicly.' },
     },
   ],
