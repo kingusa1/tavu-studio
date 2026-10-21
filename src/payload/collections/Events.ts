@@ -24,6 +24,8 @@ export const Events: CollectionConfig = {
     delete: isAdminOrEditor,
   },
   versions: { maxPerDoc: 25 },
+  // DB-04: the frontend's hottest query filters/sorts on active+sortOrder on every page render.
+  indexes: [{ fields: ['active', 'sortOrder'] }],
   hooks: {
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
@@ -35,6 +37,7 @@ export const Events: CollectionConfig = {
       name: 'kind',
       type: 'select',
       required: true,
+      index: true,
       options: [
         { label: 'Upcoming event', value: 'upcoming' },
         { label: 'Past highlight', value: 'highlight' },

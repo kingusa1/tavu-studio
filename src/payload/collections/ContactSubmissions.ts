@@ -45,6 +45,7 @@ export const ContactSubmissions: CollectionConfig = {
       name: 'status',
       type: 'select',
       defaultValue: 'new',
+      index: true,
       options: [
         { label: 'New', value: 'new' },
         { label: 'Read', value: 'read' },

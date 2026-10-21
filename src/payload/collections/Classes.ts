@@ -19,6 +19,8 @@ export const Classes: CollectionConfig = {
     delete: isAdminOrEditor,
   },
   versions: { maxPerDoc: 25 },
+  // DB-04: the frontend's hottest query filters/sorts on active+sortOrder on every page render.
+  indexes: [{ fields: ['active', 'sortOrder'] }],
   hooks: {
     afterChange: [revalidateAfterChange],
     afterDelete: [revalidateAfterDelete],
@@ -35,6 +37,7 @@ export const Classes: CollectionConfig = {
       name: 'type',
       type: 'select',
       required: true,
+      index: true,
       options: [
         { label: 'Reformer', value: 'reformer' },
         { label: 'Breathing Room', value: 'breathing-room' },

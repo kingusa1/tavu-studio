@@ -47,6 +47,8 @@ export const Offers: CollectionConfig = {
     delete: isAdminOrEditor,
   },
   versions: { maxPerDoc: 25 },
+  // DB-04: the frontend's hottest query filters/sorts on active+sortOrder on every page render.
+  indexes: [{ fields: ['active', 'sortOrder'] }],
   hooks: {
     beforeChange: [setAdminLabel(computeAdminLabel)],
     beforeValidate: [validateTokensCollection],
@@ -65,7 +67,7 @@ export const Offers: CollectionConfig = {
     },
     { name: 'name', type: 'text', required: true, admin: { description: 'Row/card name, e.g. "Drop-In", "10-Class Pack".' } },
     { name: 'slug', type: 'text', required: true, unique: true, index: true, admin: { description: 'Used by price tokens, e.g. {price:slug}.' } },
-    { name: 'category', type: 'select', required: true, options: [...CATEGORY_OPTIONS] },
+    { name: 'category', type: 'select', required: true, index: true, options: [...CATEGORY_OPTIONS] },
     {
       name: 'kind',
       type: 'select',
