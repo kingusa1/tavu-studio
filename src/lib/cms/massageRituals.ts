@@ -1,20 +1,50 @@
-// Server-only — STUB (package B owns the real implementation, §5.2).
+// Server-only (package B, §5.2).
 
 import { cache } from 'react';
 
 import type { MassageRitual } from '@/payload-types';
-import type { PackageSummaryRow } from './offerText';
+
+import { buildPackageSummary } from './offerText';
+import type { PackageSummaryRow, RitualLike } from './offerText';
+import { getPayloadClient } from './payload';
+import { buildTokenIndex, resolveTokensDeep } from './tokens';
+import type { TokenFact, TokenOffer, TokenRitual } from './tokens';
 
 export type GetRitualsArgs = {
   group?: 'full-body' | 'targeted' | 'signature-foot' | 'escape';
 };
 
-/** STUB — returns `[]` until package B implements the real MassageRituals collection (§2.4). */
-export const getRituals = cache(async (_args: GetRitualsArgs = {}): Promise<MassageRitual[]> => {
-  return [];
+/**
+ * Tokens (§4.5) are resolved here exactly like `getOffers()` — a ritual's `llmsLine` is
+ * self-referencing (e.g. `{price:flow-relaxation.pack}`), so the index needs every offer and
+ * ritual, not just the ones this call returns.
+ */
+export const getRituals = cache(async ({ group }: GetRitualsArgs = {}): Promise<MassageRitual[]> => {
+  const payload = await getPayloadClient();
+
+  const [allOffers, allRituals, settings] = await Promise.all([
+    payload.find({ collection: 'offers', sort: ['sortOrder', 'createdAt'], limit: 0, depth: 1, overrideAccess: true }),
+    payload.find({ collection: 'massage-rituals', sort: ['sortOrder', 'createdAt'], limit: 0, depth: 1, overrideAccess: true }),
+    payload.findGlobal({ slug: 'site-settings', depth: 0 }).catch(() => null),
+  ]);
+
+  const index = buildTokenIndex({
+    offers: allOffers.docs as unknown as TokenOffer[],
+    rituals: allRituals.docs as unknown as TokenRitual[],
+    settings: settings as unknown as { facts?: TokenFact[] | null } | null,
+  });
+
+  const filtered = allRituals.docs.filter((ritual) => {
+    if (ritual.active === false) return false;
+    if (group && ritual.group !== group) return false;
+    return true;
+  });
+
+  return filtered.map((ritual) => resolveTokensDeep(ritual, index));
 });
 
-/** STUB — returns `[]`; the real implementation computes the Package Pricing Summary (§2.4). */
+/** The Package Pricing Summary table (§2.4) — computed from active rituals, never stored. */
 export const getPackageSummary = cache(async (): Promise<PackageSummaryRow[]> => {
-  return [];
+  const rituals = await getRituals();
+  return buildPackageSummary(rituals as unknown as RitualLike[]);
 });

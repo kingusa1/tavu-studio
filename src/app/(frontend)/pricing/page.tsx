@@ -1,5 +1,3 @@
-"use client";
-
 import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
@@ -7,293 +5,312 @@ import MotionWrapper from '@/components/common/MotionWrapper';
 import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
 
-const reformerPackages = [
-    { name: 'Reformer Drop-In', price: '160', description: 'Single reformer session. VAT excluded.' },
-    { name: '10-Class Pack', price: '1,550', description: 'Valid 2 months.', bonus: 'Includes 2 complimentary Contrast Therapy sessions' },
-    { name: '20-Class Pack', price: '3,000', description: 'Valid 3 months.', bonus: 'Includes 4 complimentary Contrast Therapy sessions' },
-    { name: '50-Class Pack', price: '7,100', description: 'Valid 6 months.', bonus: 'Includes 8 complimentary Contrast Therapy sessions' },
-];
+import { FeaturedOfferCard } from '@/components/pricing/FeaturedOfferCard';
+import { getOffers } from '@/lib/cms/offers';
+import { getRituals } from '@/lib/cms/massageRituals';
+import { offerRow, pricingRitualRow } from '@/lib/cms/offerText';
+import type { OfferLike, RitualLike } from '@/lib/cms/offerText';
+import { getGlobal } from '@/lib/cms/globals';
+import { getSiteData } from '@/lib/cms/site';
+import type { PricingPage as PricingPageData } from '@/payload-types';
+import type { GlobalSlug } from 'payload';
 
-const breathingPackages = [
-    { name: 'Drop-In', price: '120', description: 'Single session valid for any Breathing Room class (TAVÚ MAT, RELEASE and STRETCH).', note: 'Non-transferable & non-refundable' },
-    { name: '10-Class Pack', price: '1,100', description: 'Valid 2 months.', bonus: 'Includes 2 complimentary Contrast Therapy sessions' },
-    { name: '20-Class Pack', price: '2,100', description: 'Valid 3 months.', bonus: 'Includes 4 complimentary Contrast Therapy sessions' },
-    { name: '50-Class Pack', price: '5,100', description: 'Valid 6 months.', bonus: 'Includes 8 complimentary Contrast Therapy sessions' },
-];
-
-const contrastPackages = [
-    { name: 'Individual Drop-In', price: '275', duration: '60 min', description: 'A private Contrast Therapy session for one, combining sauna heat and a 5–8°C cold plunge to support recovery, circulation, and overall wellbeing.', note: 'Add-on: Compression Flush (20 min) — 50 AED' },
-    { name: 'Couple', price: '456', duration: '60 min', description: 'A 60-minute Contrast Therapy session for two, with the choice of a private or shared experience. Move together between sauna heat and cold immersion for a restorative recovery experience.' },
-    { name: 'Trio', price: '600', duration: '60 min', description: 'A 60-minute Contrast Therapy session for three, with the choice of a private or shared experience. Enjoy the heat-and-cold recovery ritual together, designed for a longer shared reset.' },
-    { name: 'Group', price: '1,050', duration: '60 min · Up to 6 guests', description: 'A 60-minute Contrast Therapy experience for groups of up to six, with the choice of a private or shared experience. A shared recovery ritual combining sauna heat and cold immersion.' },
-];
-
-const massageServices = [
-    { name: 'FLOW | Relaxation Massage', price: '350', description: 'Slow full-body ritual to soften tension, calm the nervous system and restore balance.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
-    { name: 'RELEASE | Deep Tissue Massage', price: '350', description: 'Deeper pressure to release muscular tightness, improve mobility and support recovery.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
-    { name: 'RECOVER | Sports Massage', price: '350', description: 'Therapeutic full-body massage for active bodies, targeting fatigue and restricted movement.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 1,890 AED · Valid 45 days' },
-    { name: 'DRAIN | Lymphatic Massage', price: '450', description: 'Gentle treatment to support lymphatic drainage, reduce fluid retention and feel lighter.', duration: '60 min', bonus: '90 min — 500 AED', note: 'Ritual Pack 5 + 1 Included — 2,430 AED · Valid 45 days' },
-    { name: 'RESET | Head, Neck & Shoulders', price: '300', description: 'Releases tension through the scalp, neck, shoulders and upper back.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
-    { name: 'RECOVER | Deep Foot Recovery', price: '320', description: 'Therapeutic massage, percussion therapy and targeted pressure-point techniques.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,728 AED' },
-    { name: 'RELEASE | Arm & Hand Recovery', price: '300', description: 'Relieves tightness through the hands, wrists, forearms and arms.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
-    { name: 'GROUND | Scalp Therapy', price: '300', description: 'Calming scalp ritual for deep relaxation and release of mental and physical tension.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,620 AED' },
-    { name: 'LIFT | Facial Recovery', price: '350', description: 'Sculpting facial massage that supports lymphatic drainage and restores a natural glow.', duration: '60 min', note: '30-min add-on 150 AED · Ritual Pack 5 + 1 — 1,890 AED' },
-    { name: 'ROOTED | Foot Soaking & Reflexology', price: '320', description: '20-min therapeutic foot soak with your choice of salt blend, hot towel ritual, 30-min reflexology and herbal tea.', duration: '60 min', note: 'Ritual Pack 5 + 1 Included — 1,728 AED · Valid 45 days' },
-    { name: 'TAVÚ Recovery Escape', price: '800', description: 'Exclusive Main Contrast Suite access (sauna + ice bath) followed by a 60-min full-body therapeutic massage.', duration: '3 hours', note: 'Limited appointments available' },
-];
-
-const bundles = [
-    { name: 'TA Reset', price: '480', description: 'Contrast + RESET Head, Neck & Shoulders' },
-    { name: 'TA Deep Calm', price: '520', description: 'Contrast + FLOW Relaxation Massage' },
-    { name: 'VU Athlete', price: '560', description: 'Contrast + RELEASE Deep Tissue Massage' },
-    { name: 'VU Mobility Flow', price: '580', description: 'Contrast + RECOVER Sports Massage' },
-    { name: 'VIP Flow', price: '660', description: 'Private Contrast + Any Massage' },
-    { name: 'Express Recovery', price: '420', description: 'Contrast + 30-min Targeted Recovery Add-On' },
-];
-
-const memberships = [
-    {
-        name: 'Reset Membership',
-        price: '820',
-        validity: 'Valid for 30 days',
-        description: 'Four Contrast Therapy sessions to use throughout the month whenever you need a reset.',
-        includes: [
-            '4 × Contrast Therapy sessions',
-            'Choice of Main or Private Contrast',
-            '1 × 30 minute Compression Therapy session',
-            '1 × complimentary 15-minute Head, Neck & Shoulder Chair Massage (subject to therapist availability)',
-            '10% off one Massage service',
-            'Bring one friend for AED 95 once during the membership',
-        ],
-    },
-    {
-        name: 'Ritual Unlimited Membership',
-        price: '1,390',
-        validity: 'Valid for 45 days',
-        description: 'Our most complete recovery membership, designed for those who want to make Contrast Therapy a consistent part of their routine.',
-        includes: [
-            '2 × 30 minute Compression Therapy sessions',
-            'Choice of Main or Private Contrast',
-            '10% off Massage services',
-            '2 complimentary Head, Neck + Shoulder Chair Massage (30 minutes)',
-            'Bring one friend for AED 95 once during the membership',
-        ],
-    },
-];
-
-function PriceRow({ name, price, description, note, bonus, duration, period }: {
-    name: string; price: string; description: string; note?: string; bonus?: string; duration?: string; period?: string;
+function PriceRow({
+  name,
+  price,
+  description,
+  note,
+  bonus,
+  duration,
+  period,
+}: {
+  name: string;
+  price: string;
+  description?: string;
+  note?: string;
+  bonus?: string;
+  duration?: string;
+  period?: string;
 }) {
-    return (
-        <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
-            <div className="flex-grow">
-                <p className="font-semibold text-primary">{name}</p>
-                <p className="text-sm text-foreground/60 mt-1">
-                    {duration && <span className="text-foreground/50">({duration}) </span>}
-                    {description}
-                </p>
-                {bonus && <p className="text-xs text-accent font-medium mt-1.5">{bonus}</p>}
-                {note && <p className="text-xs text-foreground/40 mt-1">{note}</p>}
-            </div>
-            <div className="text-right flex-shrink-0">
-                <p className="font-headline text-xl text-accent">{price}</p>
-                <p className="text-xs text-foreground/50 whitespace-nowrap">{period ? `AED / ${period}` : 'AED'}</p>
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex items-start justify-between gap-4 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors">
+      <div className="flex-grow">
+        <p className="font-semibold text-primary">{name}</p>
+        <p className="text-sm text-foreground/60 mt-1">
+          {duration && <span className="text-foreground/50">({duration}) </span>}
+          {description}
+        </p>
+        {bonus && <p className="text-xs text-accent font-medium mt-1.5">{bonus}</p>}
+        {note && <p className="text-xs text-foreground/40 mt-1">{note}</p>}
+      </div>
+      <div className="text-right flex-shrink-0">
+        <p className="font-headline text-xl text-accent">{price}</p>
+        <p className="text-xs text-foreground/50 whitespace-nowrap">{period ? `AED / ${period}` : 'AED'}</p>
+      </div>
+    </div>
+  );
 }
 
-function PricingCard({ title, subtitle, children, bookLabel, bookHref }: {
-    title: string; subtitle?: string; children: React.ReactNode; bookLabel: string; bookHref: string;
+function PricingCard({
+  title,
+  subtitle,
+  children,
+  bookLabel,
+  bookHref,
+}: {
+  title: string;
+  subtitle?: string;
+  children: React.ReactNode;
+  bookLabel: string;
+  bookHref: string;
 }) {
-    return (
-        <div className="bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col">
-            <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
-                <h2 className="font-headline text-2xl mb-0.5">{title}</h2>
-                {subtitle && <p className="text-sm text-primary-foreground/70">{subtitle}</p>}
-            </div>
-            <div className="p-5 flex flex-col gap-3 flex-grow">
-                {children}
-            </div>
-            <div className="px-5 pb-5 mt-auto">
-                <Link
-                    href={bookHref}
-                    className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
-                >
-                    {bookLabel}
-                </Link>
-            </div>
-        </div>
-    );
+  return (
+    <div className="bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col">
+      <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
+        <h2 className="font-headline text-2xl mb-0.5">{title}</h2>
+        {subtitle && <p className="text-sm text-primary-foreground/70">{subtitle}</p>}
+      </div>
+      <div className="p-5 flex flex-col gap-3 flex-grow">{children}</div>
+      <div className="px-5 pb-5 mt-auto">
+        <Link
+          href={bookHref}
+          className="flex items-center justify-center w-full h-12 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+        >
+          {bookLabel}
+        </Link>
+      </div>
+    </div>
+  );
 }
 
-export default function PricingPage() {
-    return (
-        <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
-            <BackgroundImage />
-            <Header />
-            <main className="flex-grow pt-32 pb-16 px-4 container mx-auto relative z-10">
-                <div className="max-w-6xl mx-auto">
-                    {/* Header */}
-                    <MotionWrapper delay={0} direction="up">
-                        <div className="text-center mb-14">
-                            <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">Choose Your Rhythm</h1>
-                            <VatNote className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" />
-                        </div>
-                    </MotionWrapper>
+export default async function PricingPage() {
+  const [data, { settings }, reformerOffers, breathingOffers, contrastOffers, compressionOffers, bundleOffers, membershipOffers, rituals] =
+    await Promise.all([
+      getGlobal<PricingPageData>('pricing-page' as GlobalSlug),
+      getSiteData(),
+      getOffers({ category: 'reformer', surface: 'pricing' }),
+      getOffers({ category: 'breathing-room', surface: 'pricing' }),
+      getOffers({ category: 'contrast', surface: 'pricing' }),
+      getOffers({ category: 'compression', surface: 'pricing' }),
+      getOffers({ category: 'bundle', surface: 'pricing' }),
+      getOffers({ category: 'membership', surface: 'pricing' }),
+      getRituals(),
+    ]);
 
-                    {/* Reformer & Breathing Room */}
-                    <div className="grid lg:grid-cols-2 gap-8 mb-12">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <PricingCard title="Reformer" subtitle="Small-group reformer classes" bookLabel="Book Reformer" bookHref="/schedule">
-                                {reformerPackages.map((pkg, i) => (
-                                    <PriceRow key={i} {...pkg} />
-                                ))}
-                            </PricingCard>
-                        </MotionWrapper>
-                        <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Breathing Room" subtitle="TAVÚ MAT, RELEASE and STRETCH" bookLabel="Book Your Mat" bookHref="/schedule">
-                                {breathingPackages.map((pkg, i) => (
-                                    <PriceRow key={i} {...pkg} />
-                                ))}
-                            </PricingCard>
-                        </MotionWrapper>
-                    </div>
+  const priceCard = (category: string) => settings.priceCards?.find((card) => card.category === category);
+  const reformerCard = priceCard('reformer');
+  const breathingCard = priceCard('breathing-room');
+  const contrastCard = priceCard('contrast');
+  const compressionCard = priceCard('compression');
+  const massageCard = priceCard('massage');
+  const bundleCard = priceCard('bundle');
+  const membershipCard = priceCard('membership');
 
-                    {/* Contrast Therapy & Compression */}
-                    <div className="grid lg:grid-cols-2 gap-8 mb-12">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <PricingCard title="Contrast Therapy" subtitle="Sauna + Ice Bath" bookLabel="Book Contrast Therapy" bookHref="/appointments">
-                                {contrastPackages.map((pkg, i) => (
-                                    <PriceRow key={i} {...pkg} />
-                                ))}
-                            </PricingCard>
-                        </MotionWrapper>
-                        <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Compression Therapy" subtitle="NormaTec" bookLabel="Book Compression Therapy" bookHref="/appointments">
-                                <PriceRow
-                                    name="NormaTec Compression Therapy | Individual Session"
-                                    price="160"
-                                    description="A 45-minute Compression Therapy session designed to support circulation, reduce muscle fatigue, and promote recovery through targeted compression."
-                                    duration="45 min"
-                                    note="Validity: 7 days"
-                                />
-                                <PriceRow
-                                    name="NormaTec Compression Therapy | Recovery Pack — 5 + 1"
-                                    price="660"
-                                    description="A recovery pack for consistent care, including five Compression Therapy sessions plus one complimentary session."
-                                    duration="6 × 45 min"
-                                    bonus="Total: 6 Sessions · Validity: 45 days"
-                                    note="Non-transferable · Non-refundable"
-                                />
-                                <div className="p-4 rounded-xl bg-muted/20">
-                                    <p className="text-sm font-medium text-primary mb-2">Benefits:</p>
-                                    <ul className="space-y-1 text-sm text-foreground/60">
-                                        <li>- Boosts circulation</li>
-                                        <li>- Flushes out lactic acid</li>
-                                        <li>- Reduces swelling</li>
-                                        <li>- Speeds up recovery</li>
-                                    </ul>
-                                </div>
-                                <div className="p-4 rounded-xl bg-muted/20">
-                                    <p className="text-sm font-medium text-primary mb-2">Recommended for:</p>
-                                    <ul className="space-y-1 text-sm text-foreground/60">
-                                        <li>- After intense training</li>
-                                        <li>- Heavy or tight legs</li>
-                                        <li>- Injury recovery</li>
-                                        <li>- Swelling or fluid retention</li>
-                                    </ul>
-                                </div>
-                            </PricingCard>
-                        </MotionWrapper>
-                    </div>
+  const compressionIndividual = compressionOffers.find((offer) => offer.slug === 'compression-individual');
+  const featuredBreathing = breathingOffers.find((offer) => offer.featureCard?.enabled);
 
-                    {/* Massage & Bundles */}
-                    <div className="grid lg:grid-cols-2 gap-8 mb-12">
-                        <MotionWrapper delay={0.1} direction="up">
-                            <PricingCard title="Massage" subtitle="Ladies Only" bookLabel="Book Massage" bookHref="/appointments">
-                                {massageServices.map((pkg, i) => (
-                                    <PriceRow key={i} {...pkg} />
-                                ))}
-                            </PricingCard>
-                        </MotionWrapper>
-                        <MotionWrapper delay={0.15} direction="up">
-                            <PricingCard title="Bundles" subtitle="Ladies Only" bookLabel="Book a Bundle" bookHref="/contact">
-                                {bundles.map((pkg, i) => (
-                                    <PriceRow key={i} {...pkg} />
-                                ))}
-                            </PricingCard>
-                        </MotionWrapper>
-                    </div>
+  return (
+    <div className="flex flex-col min-h-dvh bg-transparent text-foreground">
+      <BackgroundImage />
+      <Header />
+      <main className="flex-grow pt-32 pb-16 px-4 container mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <MotionWrapper delay={0} direction="up">
+            <div className="text-center mb-14">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-headline mb-6 text-primary">{data.header?.title}</h1>
+              {data.header?.showVatNote && <VatNote className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed" />}
+            </div>
+          </MotionWrapper>
 
-                    {/* Memberships */}
-                    <MotionWrapper delay={0.1} direction="up">
-                        <div className="bg-card border border-border rounded-2xl overflow-hidden mb-12">
-                            <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
-                                <h2 className="font-headline text-2xl mb-0.5">Memberships</h2>
-                            </div>
-                            <div className="p-6">
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    {memberships.map((tier) => (
-                                        <div key={tier.name} className="p-5 rounded-xl bg-muted/30 flex flex-col">
-                                            <p className="font-semibold text-primary text-lg mb-1">{tier.name}</p>
-                                            <p className="mb-3">
-                                                <span className="text-xs text-foreground/50 mr-1">AED</span>
-                                                <span className="font-headline text-3xl text-accent">{tier.price}</span>
-                                                <span className="text-xs text-foreground/50 ml-2">| {tier.validity}</span>
-                                            </p>
-                                            <p className="text-sm text-foreground/70 mb-4">{tier.description}</p>
-                                            <ul className="space-y-2">
-                                                {tier.includes.map((item) => (
-                                                    <li key={item} className="flex items-start gap-2 text-sm text-foreground/70">
-                                                        <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        {item}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="mt-6 text-center">
-                                    <Link
-                                        href="/contact"
-                                        className="inline-flex items-center justify-center h-12 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
-                                    >
-                                        Inquire About Memberships
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </MotionWrapper>
+          {/* Reformer & Breathing Room */}
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            <MotionWrapper delay={0.1} direction="up">
+              <PricingCard
+                title={reformerCard?.title ?? ''}
+                subtitle={reformerCard?.subtitle ?? undefined}
+                bookLabel={reformerCard?.ctaLabel ?? ''}
+                bookHref={reformerCard?.ctaHref ?? '#'}
+              >
+                {reformerOffers.map((offer) => (
+                  <PriceRow key={offer.id} {...offerRow(offer as unknown as OfferLike, 'pricing')} />
+                ))}
+              </PricingCard>
+            </MotionWrapper>
+            <MotionWrapper delay={0.15} direction="up">
+              <PricingCard
+                title={breathingCard?.title ?? ''}
+                subtitle={breathingCard?.subtitle ?? undefined}
+                bookLabel={breathingCard?.ctaLabel ?? ''}
+                bookHref={breathingCard?.ctaHref ?? '#'}
+              >
+                {breathingOffers
+                  .filter((offer) => !offer.featureCard?.enabled)
+                  .map((offer) => (
+                    <PriceRow key={offer.id} {...offerRow(offer as unknown as OfferLike, 'pricing')} />
+                  ))}
+              </PricingCard>
+            </MotionWrapper>
+          </div>
 
-                    {/* CTA */}
-                    <MotionWrapper delay={0.2} direction="up">
-                        <div className="text-center p-10 glass rounded-3xl">
-                            <h3 className="text-2xl md:text-3xl font-headline mb-4 text-primary">Start Your TAVU Experience</h3>
-                            <p className="text-lg text-foreground/80 mb-8 max-w-2xl mx-auto">
-                                Inquire via DM to reserve your access.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link
-                                    href="/schedule"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg"
-                                >
-                                    View Schedule & Book
-                                </Link>
-                                <Link
-                                    href="/contact"
-                                    className="inline-flex items-center justify-center h-14 px-10 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-all text-lg"
-                                >
-                                    Get in Touch
-                                </Link>
-                            </div>
-                        </div>
-                    </MotionWrapper>
+          {/* Featured offers (e.g. the Unlimited 3-Month Membership, when active) */}
+          {featuredBreathing?.featureCard && (
+            <MotionWrapper delay={0.1} direction="up">
+              <FeaturedOfferCard offer={{ ...featuredBreathing, featureCard: featuredBreathing.featureCard }} />
+            </MotionWrapper>
+          )}
+
+          {/* Contrast Therapy & Compression */}
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            <MotionWrapper delay={0.1} direction="up">
+              <PricingCard
+                title={contrastCard?.title ?? ''}
+                subtitle={contrastCard?.subtitle ?? undefined}
+                bookLabel={contrastCard?.ctaLabel ?? ''}
+                bookHref={contrastCard?.ctaHref ?? '#'}
+              >
+                {contrastOffers.map((offer) => (
+                  <PriceRow key={offer.id} {...offerRow(offer as unknown as OfferLike, 'pricing')} />
+                ))}
+              </PricingCard>
+            </MotionWrapper>
+            <MotionWrapper delay={0.15} direction="up">
+              <PricingCard
+                title={compressionCard?.title ?? ''}
+                subtitle={compressionCard?.subtitle ?? undefined}
+                bookLabel={compressionCard?.ctaLabel ?? ''}
+                bookHref={compressionCard?.ctaHref ?? '#'}
+              >
+                {compressionOffers.map((offer) => (
+                  <PriceRow key={offer.id} {...offerRow(offer as unknown as OfferLike, 'pricing')} />
+                ))}
+                {compressionIndividual?.benefits && compressionIndividual.benefits.length > 0 && (
+                  <div className="p-4 rounded-xl bg-muted/20">
+                    <p className="text-sm font-medium text-primary mb-2">{data.cards?.compressionBenefitsHeading}</p>
+                    <ul className="space-y-1 text-sm text-foreground/60">
+                      {compressionIndividual.benefits.map((item) => (
+                        <li key={item.id}>{`- ${item.text}`}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {compressionIndividual?.recommendedFor && compressionIndividual.recommendedFor.length > 0 && (
+                  <div className="p-4 rounded-xl bg-muted/20">
+                    <p className="text-sm font-medium text-primary mb-2">{data.cards?.compressionRecommendedHeading}</p>
+                    <ul className="space-y-1 text-sm text-foreground/60">
+                      {compressionIndividual.recommendedFor.map((item) => (
+                        <li key={item.id}>{`- ${item.text}`}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </PricingCard>
+            </MotionWrapper>
+          </div>
+
+          {/* Massage & Bundles */}
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            <MotionWrapper delay={0.1} direction="up">
+              <PricingCard
+                title={massageCard?.title ?? ''}
+                subtitle={massageCard?.subtitle ?? undefined}
+                bookLabel={massageCard?.ctaLabel ?? ''}
+                bookHref={massageCard?.ctaHref ?? '#'}
+              >
+                {rituals.map((ritual) => {
+                  const row = pricingRitualRow(ritual as unknown as RitualLike);
+                  return <PriceRow key={ritual.id} name={ritual.name} price={String(ritual.price)} {...row} />;
+                })}
+              </PricingCard>
+            </MotionWrapper>
+            <MotionWrapper delay={0.15} direction="up">
+              <PricingCard
+                title={bundleCard?.title ?? ''}
+                subtitle={bundleCard?.subtitle ?? undefined}
+                bookLabel={bundleCard?.ctaLabel ?? ''}
+                bookHref={bundleCard?.ctaHref ?? '#'}
+              >
+                {bundleOffers.map((offer) => (
+                  <PriceRow key={offer.id} {...offerRow(offer as unknown as OfferLike, 'pricing')} />
+                ))}
+              </PricingCard>
+            </MotionWrapper>
+          </div>
+
+          {/* Memberships */}
+          {data.memberships?.enabled && (
+            <MotionWrapper delay={0.1} direction="up">
+              <div className="bg-card border border-border rounded-2xl overflow-hidden mb-12">
+                <div className="bg-primary text-primary-foreground px-8 py-5 text-center">
+                  <h2 className="font-headline text-2xl mb-0.5">{data.memberships.heading}</h2>
                 </div>
-            </main>
-            <Footer />
+                <div className="p-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {membershipOffers.map((offer) => {
+                      const row = offerRow(offer as unknown as OfferLike, 'membership');
+                      return (
+                        <div key={offer.id} className="p-5 rounded-xl bg-muted/30 flex flex-col">
+                          <p className="font-semibold text-primary text-lg mb-1">{row.name}</p>
+                          <p className="mb-3">
+                            <span className="text-xs text-foreground/50 mr-1">AED</span>
+                            <span className="font-headline text-3xl text-accent">{row.price}</span>
+                            <span className="text-xs text-foreground/50 ml-2">| {row.validityLine}</span>
+                          </p>
+                          <p className="text-sm text-foreground/70 mb-4">{row.description}</p>
+                          <ul className="space-y-2">
+                            {(row.includes ?? []).map((item, itemIndex) => (
+                              <li key={itemIndex} className="flex items-start gap-2 text-sm text-foreground/70">
+                                <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                {item.text}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-6 text-center">
+                    <Link
+                      href={membershipCard?.ctaHref ?? '/contact'}
+                      className="inline-flex items-center justify-center h-12 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all shadow-lg shadow-accent/20"
+                    >
+                      {membershipCard?.ctaLabel}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </MotionWrapper>
+          )}
+
+          {/* CTA */}
+          {data.cta?.enabled && (
+            <MotionWrapper delay={0.2} direction="up">
+              <div className="text-center p-10 glass rounded-3xl">
+                <h3 className="text-2xl md:text-3xl font-headline mb-4 text-primary">{data.cta.heading}</h3>
+                <p className="text-lg text-foreground/80 mb-8 max-w-2xl mx-auto">{data.cta.text}</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  {(data.cta.buttons ?? []).map((button) => (
+                    <Link
+                      key={button.id ?? button.link.href}
+                      href={button.link.href}
+                      className={
+                        button.style === 'outline'
+                          ? 'inline-flex items-center justify-center h-14 px-10 rounded-full border-2 border-primary text-primary font-semibold hover:bg-primary/5 transition-all text-lg'
+                          : 'inline-flex items-center justify-center h-14 px-10 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent/90 transition-all text-lg'
+                      }
+                    >
+                      {button.link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </MotionWrapper>
+          )}
         </div>
-    );
+      </main>
+      <Footer />
+    </div>
+  );
 }
