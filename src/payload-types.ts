@@ -725,7 +725,13 @@ export interface LegalPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -825,7 +831,13 @@ export interface Post {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -859,7 +871,13 @@ export interface Category {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2281,7 +2299,13 @@ export interface HomePage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2410,7 +2434,13 @@ export interface AboutPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2454,7 +2484,13 @@ export interface MethodPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2572,7 +2608,13 @@ export interface ClassesPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2598,7 +2640,13 @@ export interface SchedulePage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2625,7 +2673,13 @@ export interface AppointmentsPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2683,7 +2737,13 @@ export interface PricingPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2742,7 +2802,13 @@ export interface MembershipsPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2782,7 +2848,13 @@ export interface RecoveryPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2861,7 +2933,13 @@ export interface ServicesPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -2981,7 +3059,13 @@ export interface ReformerPilatesPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3098,7 +3182,13 @@ export interface BreathingRoomPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3219,7 +3309,13 @@ export interface ContrastTherapyPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3335,7 +3431,13 @@ export interface CompressionTherapyPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3476,7 +3578,13 @@ export interface MassagePage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3554,7 +3662,13 @@ export interface EventsPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3647,7 +3761,13 @@ export interface PartnershipsPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3732,7 +3852,13 @@ export interface ContactPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3830,7 +3956,13 @@ export interface RegisterPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3933,7 +4065,13 @@ export interface AccountPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
@@ -3966,7 +4104,13 @@ export interface BlogPage {
    * Leave empty to use Site Settings defaults. Prices can be written as {price:slug}.
    */
   seo?: {
+    /**
+     * Aim for 50-60 characters (including " | TAVÚ Studio").
+     */
     title?: string | null;
+    /**
+     * Aim for 120-160 characters.
+     */
     description?: string | null;
     keywords?: string[] | null;
     ogTitle?: string | null;
