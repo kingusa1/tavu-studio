@@ -1,16 +1,14 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Schedule | Book Pilates & Recovery Classes',
-  description:
-    'View TAVÚ Studio class schedule and book Reformer Pilates, Mat, Release and Stretch classes and recovery sessions in Al Raha, Abu Dhabi.',
-  alternates: { canonical: '/schedule' },
-  openGraph: {
-    title: 'TAVÚ Schedule | Book Your Next Class',
-    description: 'Reserve your spot in Reformer, Mat, Release, Stretch and more.',
-    url: '/schedule',
-  },
-};
+import { getGlobal } from '@/lib/cms/globals';
+import { buildMetadata } from '@/lib/cms/metadata';
+import { getSiteData } from '@/lib/cms/site';
+import type { SchedulePage } from '@/payload-types';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [page, { settings }] = await Promise.all([getGlobal<SchedulePage>('schedule-page'), getSiteData()]);
+  return buildMetadata(page.seo, { path: '/schedule', fallback: settings.seo });
+}
 
 export default function ScheduleLayout({ children }: { children: React.ReactNode }) {
   return children;
