@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -275,6 +276,16 @@ function MobileAccordion({ label, items, onClose }: MobileAccordionProps) {
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Logo: on the home page scroll smoothly back to the top; elsewhere Link navigates to "/" (opens at the top).
+  const handleLogoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    setMobileMenuOpen(false);
+    if (pathname === '/') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -299,7 +310,9 @@ export default function Header() {
           {/* Left Section - Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 cursor-pointer transition-all duration-300 hover:opacity-80"
+            aria-label="TAVÚ — back to the top of the home page"
+            onClick={handleLogoClick}
+            className="flex items-center gap-2 cursor-pointer transition-all duration-300 hover:opacity-80 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             <Image
               src="/logo.png"
@@ -396,7 +409,9 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center cursor-pointer"
+            aria-label="TAVÚ — back to the top of the home page"
+            onClick={handleLogoClick}
+            className="flex items-center cursor-pointer rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             <Image
               src="/logo.png"
@@ -442,8 +457,8 @@ export default function Header() {
                   <div className="px-6 py-5 border-b border-gray-100">
                     <Link
                       href="/"
-                      className="flex items-center gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                      onClick={handleLogoClick}
                     >
                       <Image
                         src="/logo.png"
