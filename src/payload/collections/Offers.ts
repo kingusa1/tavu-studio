@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
 import { link, priceField, richTextField, visibilityFields } from '../fields';
-import { anyone } from '../access/anyone';
+import { authenticated } from '../access/authenticated';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
 import { setAdminLabel } from '../hooks/setAdminLabel';
@@ -41,7 +41,7 @@ export const Offers: CollectionConfig = {
     listSearchableFields: ['name', 'slug'],
   },
   access: {
-    read: anyone,
+    read: authenticated,
     create: isAdminOrEditor,
     update: isAdminOrEditor,
     delete: isAdminOrEditor,

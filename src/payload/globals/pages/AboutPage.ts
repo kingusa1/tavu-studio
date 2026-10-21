@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { ctaSection } from '../../fields/ctaSection';
 import { image } from '../../fields/image';
@@ -17,7 +18,7 @@ export const AboutPage: GlobalConfig = {
     description: 'The /about page — the studio\'s story.',
   },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

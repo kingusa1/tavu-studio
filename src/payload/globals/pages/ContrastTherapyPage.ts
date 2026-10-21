@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { ctaSection } from '../../fields/ctaSection';
 import { link } from '../../fields/link';
@@ -15,7 +16,7 @@ export const ContrastTherapyPage: GlobalConfig = {
   slug: 'contrast-therapy-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

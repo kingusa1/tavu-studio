@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload';
 
-import { anyone } from '../access/anyone';
+import { authenticated } from '../access/authenticated';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { image } from '../fields/image';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
@@ -18,7 +18,7 @@ export const Testimonials: CollectionConfig = {
     defaultColumns: ['name', 'role', 'rating', 'active', 'sortOrder'],
   },
   access: {
-    read: anyone,
+    read: authenticated,
     create: isAdminOrEditor,
     update: isAdminOrEditor,
     delete: isAdminOrEditor,

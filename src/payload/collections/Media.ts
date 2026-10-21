@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload';
 
+import { authenticated } from '../access/authenticated';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
 
 export const Media: CollectionConfig = {
@@ -8,7 +9,7 @@ export const Media: CollectionConfig = {
     useAsTitle: 'alt',
   },
   access: {
-    read: () => true,
+    read: authenticated,
   },
   upload: {
     mimeTypes: ['image/*', 'video/mp4', 'application/pdf'],

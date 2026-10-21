@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { image } from '../../fields/image';
 import { seo } from '../../fields/seo';
@@ -11,7 +12,7 @@ export const ContactPage: GlobalConfig = {
   slug: 'contact-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

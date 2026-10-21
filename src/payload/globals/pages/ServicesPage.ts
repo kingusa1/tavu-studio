@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { accentSelect } from '../../fields/options';
 import { ctaSection } from '../../fields/ctaSection';
@@ -13,7 +14,7 @@ export const ServicesPage: GlobalConfig = {
   slug: 'services-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

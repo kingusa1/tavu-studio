@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { ctaSection } from '../../fields/ctaSection';
 import { image } from '../../fields/image';
@@ -27,7 +28,7 @@ export const PartnershipsPage: GlobalConfig = {
   slug: 'partnerships-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

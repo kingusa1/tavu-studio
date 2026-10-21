@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
 import { priceField } from '../fields';
-import { anyone } from '../access/anyone';
+import { authenticated } from '../access/authenticated';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
 import { validateTokensCollection } from '../hooks/validateTokens';
@@ -18,7 +18,7 @@ export const MassageRituals: CollectionConfig = {
     defaultColumns: ['name', 'group', 'price', 'packPrice', 'active', 'sortOrder'],
   },
   access: {
-    read: anyone,
+    read: authenticated,
     create: isAdminOrEditor,
     update: isAdminOrEditor,
     delete: isAdminOrEditor,

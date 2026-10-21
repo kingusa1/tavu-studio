@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload';
 
+import { authenticated } from '../../access/authenticated';
 import { isAdminOrEditor } from '../../access/isAdminOrEditor';
 import { link } from '../../fields/link';
 import { iconSelect } from '../../fields/options';
@@ -30,7 +31,7 @@ export const AccountPage: GlobalConfig = {
   slug: 'account-page',
   admin: { group: 'Pages' },
   access: {
-    read: () => true,
+    read: authenticated,
     update: isAdminOrEditor,
   },
   versions: { max: 25 },

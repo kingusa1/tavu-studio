@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload';
 
-import { anyone } from '../access/anyone';
+import { authenticated } from '../access/authenticated';
 import { isAdminOrEditor } from '../access/isAdminOrEditor';
 import { revalidateAfterChange, revalidateAfterDelete } from '../hooks/revalidateSite';
 
@@ -17,7 +17,7 @@ export const Policies: CollectionConfig = {
     defaultColumns: ['label', 'showOn', 'sortOrder'],
   },
   access: {
-    read: anyone,
+    read: authenticated,
     create: isAdminOrEditor,
     update: isAdminOrEditor,
     delete: isAdminOrEditor,
