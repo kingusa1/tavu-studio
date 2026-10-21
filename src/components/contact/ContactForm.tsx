@@ -6,11 +6,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { motion } from 'framer-motion';
 import { Loader2, Send } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
   message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  // Honeypot: real visitors never see or fill this field (visually hidden below).
+  website: z.string().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -19,6 +22,7 @@ const WHATSAPP_NUMBER = "971522755551";
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const pathname = usePathname();
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -26,6 +30,7 @@ export default function ContactForm() {
       name: "",
       email: "",
       message: "",
+      website: "",
     },
   });
 
@@ -48,7 +53,21 @@ Sent from tavustudio.com`;
     const encodedMessage = encodeURIComponent(whatsappMessage);
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
+    // Open WhatsApp synchronously, in the same tick as the click, so browser popup
+    // blockers don't block it — never await anything before this call.
     window.open(whatsappUrl, '_blank');
+
+    // Fire-and-forget: record the submission in the CMS without ever blocking or
+    // delaying the WhatsApp handoff above.
+    fetch('/api/contact', {
+      method: 'POST',
+      keepalive: true,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...data, page: pathname }),
+    }).catch(() => {
+      // Non-fatal — the visitor already has WhatsApp open; losing the CMS copy of
+      // this submission isn't worth surfacing an error for.
+    });
 
     setIsSubmitting(false);
     form.reset();
@@ -57,6 +76,12 @@ Sent from tavustudio.com`;
   return (
     <div className="bg-card/80 backdrop-blur-sm border border-border/50 p-8 md:p-10 rounded-3xl shadow-xl">
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {/* Honeypot — visually hidden from sighted users, left out of the tab order, but
+            still present in the DOM for simple bots that fill every input. */}
+        <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+          <label htmlFor="website">Website</label>
+          <input id="website" type="text" tabIndex={-1} autoComplete="off" {...form.register('website')} />
+        </div>
         <div className="space-y-2">
           <label htmlFor="name" className="text-xs uppercase tracking-[0.15em] text-foreground/50 font-medium">
             Name
