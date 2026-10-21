@@ -30,6 +30,8 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    // Next 16 only serves listed qualities; 70 = the full-page background (BackgroundImage), 75 = default.
+    qualities: [70, 75],
     // EGR-03: placehold.co, picsum.photos, cdninstagram.com and fbcdn.net were unused —
     // verified by reading SocialFeed.tsx (the only place that could render them): the
     // Instagram/Behold feed always renders with `unoptimized={isConnected}` (next/image's
