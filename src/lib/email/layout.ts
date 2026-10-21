@@ -79,7 +79,7 @@ export function paragraphStyle(): string {
  * comma/space ("Welcome, {name}" → "Welcome"); unknown tokens stay visible so typos show in tests.
  */
 export function fillTokens(template: string, tokens: Record<string, string>): string {
-  return template.replace(/(,?[ 	]*)\{(\w+)\}/g, (match, lead: string, key: string) => {
+  return template.replace(/(,?[ \t]*)\{(\w+)\}/g, (match, lead: string, key: string) => {
     if (!(key in tokens)) return match;
     return tokens[key] ? `${lead}${tokens[key]}` : '';
   });
