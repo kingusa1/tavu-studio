@@ -29,3 +29,12 @@ export function useSiteData(): SiteData {
   }
   return context;
 }
+
+/**
+ * Non-throwing variant for components that may render outside the provider —
+ * `src/app/global-not-found.tsx` bypasses both route groups entirely (R2) and so has no
+ * `(frontend)/layout.tsx` above it to supply one. Callers fall back to a static default.
+ */
+export function useSiteDataOptional(): SiteData | null {
+  return useContext(SiteDataContext);
+}

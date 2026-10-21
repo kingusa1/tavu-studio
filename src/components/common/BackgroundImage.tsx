@@ -2,11 +2,13 @@
 
 import Image from 'next/image';
 
-import { useSiteData } from '@/components/providers/SiteDataProvider';
+import { useSiteDataOptional } from '@/components/providers/SiteDataProvider';
 
 export default function BackgroundImage() {
-  const { settings } = useSiteData();
-  const backgroundImage = settings.brand.backgroundImage;
+  // Optional: src/app/global-not-found.tsx renders this outside the (frontend) route group,
+  // so there is no SiteDataProvider above it there — fall back to the static asset (R2).
+  const siteData = useSiteDataOptional();
+  const backgroundImage = siteData?.settings.brand.backgroundImage;
   const src = backgroundImage && typeof backgroundImage === 'object' && backgroundImage.url ? backgroundImage.url : '/background.webp';
 
   return (
