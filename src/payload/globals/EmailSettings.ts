@@ -62,6 +62,8 @@ export const EmailSettings: GlobalConfig = {
           name: 'teamRecipients',
           label: 'Team recipients',
           type: 'array',
+          // Short table name: the generated version-table indexes would pass Postgres's 63-character limit.
+          dbName: 'email_cf_team_recipients',
           minRows: 1,
           defaultValue: EMAIL_DEFAULTS.contactForm.teamRecipients.map((row) => ({ ...row })),
           admin: { description: 'Every address here receives the message. Pressing “Reply” answers the visitor directly.' },
