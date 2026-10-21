@@ -242,7 +242,6 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
-  prefix?: string | null;
   _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -1296,7 +1295,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  prefix?: T;
   _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -2128,6 +2126,9 @@ export interface SystemPage {
     retryLabel?: string | null;
     homeLabel?: string | null;
   };
+  /**
+   * Not shown at the moment: the site has no loading screen, because a loading screen made missing blog pages answer "200 OK" instead of "404 Not Found" to search engines.
+   */
   loading?: {
     text?: string | null;
   };
