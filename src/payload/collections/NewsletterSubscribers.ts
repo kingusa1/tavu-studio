@@ -1,4 +1,6 @@
-import { APIError, type CollectionAfterChangeHook, type CollectionAfterDeleteHook, type CollectionConfig, type FieldAccess } from 'payload';
+import { type CollectionAfterChangeHook, type CollectionAfterDeleteHook, type CollectionConfig, type FieldAccess } from 'payload';
+
+import { editorError } from '../errors';
 
 import { deleteContact, unsubscribeContact } from '../../lib/email/resendApi';
 import { isAdmin } from '../access/isAdmin';
@@ -30,7 +32,7 @@ const removeFromResend: CollectionAfterDeleteHook = async ({ doc, req }) => {
   } catch (error) {
     req.payload.logger.error({ msg: 'Resend contact delete failed', subscriberId: doc.id, err: String(error) });
     // Throwing rolls the delete back, so the person is never left on the Resend list unseen.
-    throw new APIError('Could not remove this person from Resend just now, so nothing was deleted. Please try again.', 502);
+    throw editorError('Could not remove this person from Resend just now, so nothing was deleted. Please try again.', 502);
   }
   return doc;
 };

@@ -1,10 +1,13 @@
-import type { CollectionConfig } from 'payload';
-import { APIError } from 'payload';
+import type { CollectionAfterChangeHook, CollectionConfig } from 'payload';
 
 const MIN_PASSWORD_LENGTH = 12;
 
 import { loadEmailContext } from '../../lib/email/context';
-import { passwordResetEmail } from '../../lib/email/templates';
+import { passwordResetEmail, userInvitationEmail } from '../../lib/email/templates';
+import { fieldError } from '../errors';
+
+const INVITE_CONTEXT_KEY = 'sendCmsInvitation';
+const INVITE_VALID_HOURS = 72;
 
 /**
  * The very first user ever created has no admin to grant them the role, so
@@ -33,7 +36,7 @@ const enforcePasswordLength: CollectionConfig['hooks'] = {
   beforeValidate: [
     ({ data }) => {
       if (typeof data?.password === 'string' && data.password.length < MIN_PASSWORD_LENGTH) {
-        throw new APIError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`, 400);
+        throw fieldError('users', 'password', `Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
       }
       return data;
     },
@@ -44,11 +47,55 @@ const enforcePasswordLength: CollectionConfig['hooks'] = {
     ({ args, operation }) => {
       const password = (args as { data?: { password?: unknown } })?.data?.password;
       if (operation === 'resetPassword' && (typeof password !== 'string' || password.length < MIN_PASSWORD_LENGTH)) {
-        throw new APIError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`, 400);
+        throw fieldError('users', 'password', `Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
       }
       return args;
     },
   ],
+};
+
+/**
+ * "Email this person a sign-in invitation": a virtual (never stored) tick box. beforeChange notes the
+ * request, afterChange creates a one-time set-your-password link (72 hours) and sends the branded
+ * invitation. The password itself is never emailed; a failed email never undoes the save.
+ */
+const noteInvitation: NonNullable<CollectionConfig['hooks']>['beforeChange'] = [
+  ({ data, req }) => {
+    if (data?.sendInvite === true && req.user?.role === 'admin') req.context[INVITE_CONTEXT_KEY] = true;
+    return data;
+  },
+];
+
+const sendInvitation: CollectionAfterChangeHook = async ({ doc, req }) => {
+  if (!req.context[INVITE_CONTEXT_KEY]) return doc;
+  delete req.context[INVITE_CONTEXT_KEY];
+  try {
+    const token = await req.payload.forgotPassword({
+      collection: 'users',
+      data: { email: String(doc.email) },
+      disableEmail: true,
+      expiration: INVITE_VALID_HOURS * 60 * 60 * 1000,
+      req,
+    });
+    if (!token) throw new Error('no token returned');
+    const ctx = await loadEmailContext(req.payload);
+    const email = userInvitationEmail(
+      {
+        name: doc.name,
+        email: String(doc.email),
+        role: doc.role,
+        setPasswordUrl: `${ctx.siteUrl}/admin/reset/${encodeURIComponent(token)}`,
+        loginUrl: `${ctx.siteUrl}/admin`,
+        validHours: INVITE_VALID_HOURS,
+      },
+      ctx,
+    );
+    await req.payload.sendEmail({ to: String(doc.email), subject: email.subject, html: email.html, text: email.text });
+    req.payload.logger.info({ msg: 'CMS invitation sent', userId: doc.id });
+  } catch (error) {
+    req.payload.logger.error({ msg: 'CMS invitation failed', userId: doc.id, err: String(error) });
+  }
+  return doc;
 };
 
 export const Users: CollectionConfig = {
@@ -98,6 +145,22 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'sendInvite',
+      type: 'checkbox',
+      label: 'Email this person a sign-in invitation when I save',
+      virtual: true,
+      defaultValue: false,
+      admin: {
+        description:
+          'They receive a TAVÚ email with their sign-in address and a button to choose their own password (the link works for 72 hours; after that they can use “Forgot password?”). Their password is never sent by email.',
+      },
+      access: {
+        read: ({ req }) => req.user?.role === 'admin',
+        create: ({ req }) => req.user?.role === 'admin',
+        update: ({ req }) => req.user?.role === 'admin',
+      },
+    },
+    {
       name: 'role',
       type: 'select',
       required: true,
@@ -116,7 +179,8 @@ export const Users: CollectionConfig = {
     },
   ],
   hooks: {
-    beforeChange: [...(forceFirstUserToAdmin?.beforeChange ?? [])],
+    beforeChange: [...(forceFirstUserToAdmin?.beforeChange ?? []), ...noteInvitation],
+    afterChange: [sendInvitation],
     beforeOperation: [...(enforcePasswordLength?.beforeOperation ?? [])],
     beforeValidate: [...(enforcePasswordLength?.beforeValidate ?? [])],
   },

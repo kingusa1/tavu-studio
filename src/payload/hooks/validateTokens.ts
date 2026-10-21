@@ -1,5 +1,6 @@
-import { APIError } from 'payload';
 import type { CollectionBeforeValidateHook, GlobalBeforeValidateHook, PayloadRequest } from 'payload';
+
+import { editorError } from '../errors';
 
 /**
  * Matches the token grammar from CMS-Content-Model.md §4.5: `{price:<slug>}`,
@@ -88,14 +89,14 @@ async function assertKnownTokens(data: unknown, req: PayloadRequest): Promise<vo
 
     if (kind === 'fact') {
       if (factKeys.size > 0 && !factKeys.has(key)) {
-        throw new APIError(`Unknown price token ${token}`, 400);
+        throw editorError(`Unknown price token ${token}`, 400);
       }
       continue;
     }
 
     if (kind === 'from') {
       if (!KNOWN_CATEGORIES.has(key)) {
-        throw new APIError(`Unknown price token ${token}`, 400);
+        throw editorError(`Unknown price token ${token}`, 400);
       }
       continue;
     }
@@ -104,7 +105,7 @@ async function assertKnownTokens(data: unknown, req: PayloadRequest): Promise<vo
     if (offersTotal === 0 && ritualsTotal === 0) continue;
     const baseSlug = key.split('.')[0];
     if (!priceSlugs.has(baseSlug)) {
-      throw new APIError(`Unknown price token ${token}`, 400);
+      throw editorError(`Unknown price token ${token}`, 400);
     }
   }
 }

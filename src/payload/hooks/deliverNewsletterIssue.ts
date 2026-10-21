@@ -1,6 +1,8 @@
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html';
 import { sql } from '@payloadcms/db-postgres';
-import { APIError, type CollectionAfterChangeHook, type CollectionBeforeChangeHook, type PayloadRequest } from 'payload';
+import { type CollectionAfterChangeHook, type CollectionBeforeChangeHook, type PayloadRequest } from 'payload';
+
+import { editorError } from '../errors';
 
 import { loadEmailContext } from '../../lib/email/context';
 import { escapeHtml } from '../../lib/email/layout';
@@ -32,7 +34,7 @@ const SEND_CONTEXT_KEY = 'newsletterBroadcastToSend';
 async function lockIssue(req: PayloadRequest, id: number | string): Promise<{ status?: string; broadcast_id?: string | null } | null> {
   const db = (req.payload.db as unknown as { sessions?: Record<string, { db?: { execute: (q: unknown) => Promise<{ rows?: unknown[] }> } }> })
     .sessions?.[String(await req.transactionID)]?.db;
-  if (!db) throw new APIError('Could not lock the issue for sending; please try again.', 500);
+  if (!db) throw editorError('Could not lock the issue for sending; please try again.', 500);
   const schema = process.env.PAYLOAD_DB_SCHEMA || 'payload';
   const result = await db.execute(
     sql`select "status", "broadcast_id" from ${sql.identifier(schema)}."newsletter_issues" where "id" = ${Number(id)} for update`,
@@ -58,19 +60,19 @@ export const deliverNewsletterIssue: CollectionBeforeChangeHook = async ({ data,
   if (action === 'none') return next;
 
   if (originalDoc?.status === 'sent' || (action === 'send' && originalDoc?.broadcastId)) {
-    throw new APIError('This issue was already sent to subscribers. Duplicate it to send a new one.', 400);
+    throw editorError('This issue was already sent to subscribers. Duplicate it to send a new one.', 400);
   }
   if (action === 'send' && !originalDoc?.id) {
-    throw new APIError('Save the issue once (and send yourself a test), then choose “Send to all subscribers”.', 400);
+    throw editorError('Save the issue once (and send yourself a test), then choose “Send to all subscribers”.', 400);
   }
   if (action === 'send') {
     const stored = await lockIssue(req, originalDoc.id);
     if (stored?.status === 'sent' || stored?.broadcast_id) {
-      throw new APIError('This issue was already sent to subscribers. Duplicate it to send a new one.', 400);
+      throw editorError('This issue was already sent to subscribers. Duplicate it to send a new one.', 400);
     }
   }
   if (!issue.subject || !issue.heading || !issue.content) {
-    throw new APIError('Add a subject, a heading and the content before sending.', 400);
+    throw editorError('Add a subject, a heading and the content before sending.', 400);
   }
 
   const ctx = await loadEmailContext(req.payload);
@@ -97,7 +99,7 @@ export const deliverNewsletterIssue: CollectionBeforeChangeHook = async ({ data,
   );
 
   if (action === 'test') {
-    if (!issue.testEmail) throw new APIError('Add a test address in the sidebar first.', 400);
+    if (!issue.testEmail) throw editorError('Add a test address in the sidebar first.', 400);
     const preview = `${ctx.siteUrl}/newsletter`;
     await req.payload.sendEmail({
       from: ctx.from,
@@ -116,7 +118,7 @@ export const deliverNewsletterIssue: CollectionBeforeChangeHook = async ({ data,
     overrideAccess: true,
   });
   if (subscribers.totalDocs === 0) {
-    throw new APIError('There are no confirmed subscribers yet, so nothing was sent.', 400);
+    throw editorError('There are no confirmed subscribers yet, so nothing was sent.', 400);
   }
 
   const name = broadcastName(originalDoc.id);
@@ -153,7 +155,7 @@ export const sendNewsletterIssueAfterSave: CollectionAfterChangeHook = async ({ 
   } catch (error) {
     req.payload.logger.error({ msg: 'Newsletter broadcast send failed', issueId: doc.id, err: String(error) });
     // Throwing rolls the save back, so the issue stays a draft and can be sent again.
-    throw new APIError('Resend could not send the issue just now. Nothing was sent; please try again in a minute.', 502);
+    throw editorError('Resend could not send the issue just now. Nothing was sent; please try again in a minute.', 502);
   }
   return doc;
 };

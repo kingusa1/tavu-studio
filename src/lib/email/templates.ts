@@ -214,6 +214,41 @@ export function newsletterIssueEmail(
 }
 
 /** CMS "Forgot password?" email (Payload calls this from the Users collection). */
+/** Sent when an admin ticks "Email this person a sign-in invitation" on a CMS user. Never contains a password. */
+export function userInvitationEmail(
+  input: { name?: string | null; email: string; role?: string | null; setPasswordUrl: string; loginUrl: string; validHours: number },
+  ctx: EmailContext,
+): BuiltEmail {
+  const greeting = input.name ? `Hi ${firstNameOf(input.name)},` : 'Hello,';
+  const role = input.role === 'admin' ? 'an Admin' : 'an Editor';
+  const body =
+    `${greeting}
+
+You now have access to the TAVÚ website editor (the CMS) as ${role}. Your sign-in email is ${input.email}.
+
+` +
+    `Press the button below to choose your own password. The link works for ${input.validHours} hours and can be used once.
+
+` +
+    `After that, sign in any time at ${input.loginUrl}. If the link has expired, open that page and use “Forgot password?” to get a new one.`;
+  const cta = { label: 'Choose your password', url: input.setPasswordUrl };
+  const small = 'If you were not expecting this invitation, you can ignore this email. For your security, never forward it or share the link.';
+  return {
+    subject: 'Your access to the TAVÚ CMS',
+    html: renderEmailHtml({
+      preheader: 'Choose your password to start editing the TAVÚ website.',
+      eyebrow: 'TAVÚ CMS',
+      heading: 'Welcome to the TAVÚ CMS',
+      bodyHtml: paragraphsToHtml(body),
+      cta,
+      footer: ctx.footer,
+      logoUrl: ctx.logoUrl,
+      smallPrintHtml: escapeHtml(small),
+    }),
+    text: renderEmailText({ heading: 'Welcome to the TAVÚ CMS', bodyText: body, cta, footer: ctx.footer, smallPrint: small }),
+  };
+}
+
 export function passwordResetEmail(input: { name?: string | null; email: string; resetUrl: string }, ctx: EmailContext): BuiltEmail {
   const greeting = input.name ? `Hi ${firstNameOf(input.name)},` : 'Hello,';
   const body =
