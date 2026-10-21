@@ -6,7 +6,7 @@ import type { Payload } from 'payload';
 
 import { mediaId } from './media';
 
-const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as const;
 
 export async function seedSite(payload: Payload): Promise<void> {
   const context = { disableRevalidate: true };
@@ -49,7 +49,7 @@ export async function seedSite(payload: Payload): Promise<void> {
         summary: '9:00 AM – 9:00 PM, 7 days a week',
         opens: '09:00',
         closes: '21:00',
-        days: WEEKDAYS,
+        days: [...WEEKDAYS],
       },
       social: {
         instagramUrl: 'https://www.instagram.com/tavuwellness.studio',

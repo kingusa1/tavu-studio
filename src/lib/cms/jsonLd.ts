@@ -25,7 +25,7 @@ export type JsonLdRitual = {
 };
 
 export type JsonLdAggregate = {
-  source: 'massage-rituals' | 'offers';
+  source?: string | null;
   category?: string | null;
   name?: string | null;
   description?: string | null;

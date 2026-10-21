@@ -1,4 +1,4 @@
-import type { SVGProps } from 'react';
+import type { JSX, SVGProps } from 'react';
 
 export type IconComponent = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 export type IconSet = Record<string, IconComponent>;
