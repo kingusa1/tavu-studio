@@ -1,5 +1,6 @@
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
+import PlusVat from '@/components/common/PlusVat';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import MindbodyWidget from '@/components/mindbody/MindbodyWidget';
@@ -72,7 +73,7 @@ export default async function AppointmentsPage() {
                         </div>
                         <div className="text-right flex-shrink-0">
                           <p className="font-headline text-3xl text-accent">{row.price}</p>
-                          <p className="text-xs text-foreground/50">AED</p>
+                          <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
                         </div>
                       </div>
 

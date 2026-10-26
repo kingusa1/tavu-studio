@@ -4,6 +4,7 @@
 // page's copy at the expense of another's.
 
 import { formatAed } from './format';
+import { PLUS_VAT } from '@/lib/vat';
 
 export type TextRow = { text: string };
 
@@ -207,10 +208,10 @@ export function pricingRitualRow(ritual: RitualLike): RitualPricingRow {
     case 'signature-foot':
       return {
         ...base,
-        bonus: ritual.price90 != null ? `90 min — ${formatAed(ritual.price90)} AED` : undefined,
+        bonus: ritual.price90 != null ? `90 min — ${formatAed(ritual.price90)} AED ${PLUS_VAT}` : undefined,
         note:
           ritual.packPrice != null
-            ? `Ritual Pack ${ritual.packFormula} Included — ${formatAed(ritual.packPrice)} AED · Valid ${ritual.packValidity}`
+            ? `Ritual Pack ${ritual.packFormula} Included — ${formatAed(ritual.packPrice)} AED ${PLUS_VAT} · Valid ${ritual.packValidity}`
             : undefined,
       };
     case 'targeted':
@@ -218,7 +219,7 @@ export function pricingRitualRow(ritual: RitualLike): RitualPricingRow {
         ...base,
         note:
           ritual.addOnPrice != null && ritual.packPrice != null
-            ? `30-min add-on ${formatAed(ritual.addOnPrice)} AED · Ritual Pack ${ritual.packFormula} — ${formatAed(ritual.packPrice)} AED`
+            ? `30-min add-on ${formatAed(ritual.addOnPrice)} AED ${PLUS_VAT} · Ritual Pack ${ritual.packFormula} — ${formatAed(ritual.packPrice)} AED ${PLUS_VAT}`
             : undefined,
       };
     case 'escape':
@@ -251,9 +252,9 @@ export function massagePageRitualRow(ritual: RitualLike): RitualMassagePageRow {
   switch (ritual.group) {
     case 'full-body':
       return {
-        price: `${price} AED`,
-        price90: ritual.price90 != null ? `${formatAed(ritual.price90)} AED` : undefined,
-        packLine: ritual.packPrice != null ? `Ritual Pack | ${ritual.packFormula} Included — ${formatAed(ritual.packPrice)} AED` : undefined,
+        price: `${price} AED ${PLUS_VAT}`,
+        price90: ritual.price90 != null ? `${formatAed(ritual.price90)} AED ${PLUS_VAT}` : undefined,
+        packLine: ritual.packPrice != null ? `Ritual Pack | ${ritual.packFormula} Included — ${formatAed(ritual.packPrice)} AED ${PLUS_VAT}` : undefined,
         packNote:
           ritual.packPrice != null && ritual.packSessions != null
             ? `Six-session value ${formatAed(ritual.price * ritual.packSessions)} AED · Valid for ${ritual.packValidity}`
@@ -269,12 +270,12 @@ export function massagePageRitualRow(ritual: RitualLike): RitualMassagePageRow {
     case 'signature-foot':
       return {
         price,
-        header: ritual.durationLong ? `${ritual.durationLong} · ${price} AED` : undefined,
+        header: ritual.durationLong ? `${ritual.durationLong} · ${price} AED ${PLUS_VAT}` : undefined,
       };
     case 'escape':
     default:
       return {
-        price: `${price} AED`,
+        price: `${price} AED ${PLUS_VAT}`,
         note: ritual.note ? `${ritual.note}.` : undefined,
       };
   }

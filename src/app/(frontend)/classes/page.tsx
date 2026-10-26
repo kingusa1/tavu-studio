@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
+import PlusVat from '@/components/common/PlusVat';
 import VatNote from '@/components/common/VatNote';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
@@ -114,7 +115,7 @@ export default async function ClassesPage() {
                             {row.bonus && <p className="text-xs text-accent mt-0.5">{row.bonus}</p>}
                           </div>
                           <p className="font-headline text-lg text-accent">
-                            {row.price} <span className="text-xs text-foreground/50">AED</span>
+                            {row.price} <span className="text-xs text-foreground/50">AED <PlusVat /></span>
                           </p>
                         </div>
                       );
@@ -146,7 +147,7 @@ export default async function ClassesPage() {
                             {row.bonus && <p className="text-xs text-accent mt-0.5">{row.bonus}</p>}
                           </div>
                           <p className="font-headline text-lg text-accent">
-                            {row.price} <span className="text-xs text-foreground/50">AED</span>
+                            {row.price} <span className="text-xs text-foreground/50">AED <PlusVat /></span>
                           </p>
                         </div>
                       );

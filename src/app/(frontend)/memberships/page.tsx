@@ -2,6 +2,7 @@ import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
+import PlusVat from '@/components/common/PlusVat';
 import Link from 'next/link';
 import Image from 'next/image';
 import VatNote from '@/components/common/VatNote';
@@ -72,7 +73,7 @@ export default async function MembershipsPage() {
                       <h3 className="text-2xl font-headline text-primary mb-2">{row.name}</h3>
                       <div className="mb-4">
                         <span className="text-sm text-foreground/60">AED </span>
-                        <span className="text-4xl font-headline text-accent">{row.price}</span>
+                        <span className="text-4xl font-headline text-accent">{row.price}</span> <PlusVat className="text-sm text-foreground/60" />
                         <span className="text-sm text-foreground/60 ml-2">| {row.validityLine}</span>
                       </div>
                       <p className="text-foreground/70 mb-6">{row.description}</p>

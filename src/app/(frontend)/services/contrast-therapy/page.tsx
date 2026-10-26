@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
+import PlusVat from '@/components/common/PlusVat';
 import VatNote from '@/components/common/VatNote';
 import { getIcon } from '@/components/icons/cmsIcons';
 import Footer from '@/components/landing/Footer';
@@ -186,7 +187,7 @@ export default async function ContrastTherapyPage() {
                           </div>
                           <div className="text-right flex-shrink-0">
                             <p className="font-headline text-xl text-accent">{row.price}</p>
-                            <p className="text-xs text-foreground/50">AED</p>
+                            <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
                           </div>
                         </div>
                       );

@@ -2,6 +2,7 @@ import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
+import PlusVat from '@/components/common/PlusVat';
 import Image from 'next/image';
 import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
@@ -215,19 +216,19 @@ export default async function MassagePage() {
                         <div className="p-3 rounded-xl bg-muted/30">
                           <p className="text-xs text-foreground/50 uppercase tracking-wide">{data.targeted?.addOnLabel}</p>
                           <p className="font-headline text-lg text-accent">
-                            {row.addOn} <span className="text-xs text-foreground/50">AED</span>
+                            {row.addOn} <span className="text-xs text-foreground/50">AED <PlusVat /></span>
                           </p>
                         </div>
                         <div className="p-3 rounded-xl bg-muted/30">
                           <p className="text-xs text-foreground/50 uppercase tracking-wide">{data.targeted?.ritualLabel}</p>
                           <p className="font-headline text-lg text-accent">
-                            {row.ritual} <span className="text-xs text-foreground/50">AED</span>
+                            {row.ritual} <span className="text-xs text-foreground/50">AED <PlusVat /></span>
                           </p>
                         </div>
                         <div className="p-3 rounded-xl bg-muted/30">
                           <p className="text-xs text-foreground/50 uppercase tracking-wide">{data.targeted?.packLabel}</p>
                           <p className="font-headline text-lg text-accent">
-                            {row.pack} <span className="text-xs text-foreground/50">AED</span>
+                            {row.pack} <span className="text-xs text-foreground/50">AED <PlusVat /></span>
                           </p>
                         </div>
                       </div>
@@ -254,7 +255,7 @@ export default async function MassagePage() {
                 <div className="max-w-5xl mx-auto bg-card border border-accent/30 rounded-2xl overflow-hidden">
                   <div className="bg-primary text-primary-foreground px-6 py-5 text-center">
                     <h3 className="font-headline text-2xl">{rooted.cardTitle || rooted.name}</h3>
-                    <p className="text-sm text-primary-foreground/70 mt-1">{`${rooted.durationLong} · ${formatAed(rooted.price)} AED`}</p>
+                    <p className="text-sm text-primary-foreground/70 mt-1">{`${rooted.durationLong} · ${formatAed(rooted.price)} AED`} <PlusVat /></p>
                   </div>
                   <div className="p-6 md:p-8">
                     <p className="text-sm text-foreground/80 leading-relaxed mb-6">{rooted.description}</p>
@@ -274,7 +275,7 @@ export default async function MassagePage() {
                       <div className="p-5 rounded-xl bg-muted/30">
                         <p className="text-sm font-semibold text-primary mb-3 underline underline-offset-4">{data.rooted?.packHeading}</p>
                         <p className="font-headline text-2xl text-accent mb-1">
-                          {rootedPackPrice} <span className="text-xs text-foreground/50">AED</span>
+                          {rootedPackPrice} <span className="text-xs text-foreground/50">AED <PlusVat /></span>
                         </p>
                         <p className="text-sm text-foreground/70">{`Ritual Pack | ${rooted.packFormula} Included`}</p>
                         <p className="text-xs text-foreground/50 mt-1">{`Six-session value ${rootedSixValue} AED · Valid for ${rooted.packValidity}`}</p>
@@ -326,7 +327,7 @@ export default async function MassagePage() {
                       <p className="text-sm text-primary-foreground/70">{`${data.escape?.durationPrefix} ${escape.durationLong}`}</p>
                     </div>
                     <p className="font-headline text-3xl text-accent">
-                      {formatAed(escape.price)} <span className="text-sm text-primary-foreground/60">AED</span>
+                      {formatAed(escape.price)} <span className="text-sm text-primary-foreground/60">AED <PlusVat /></span>
                     </p>
                   </div>
                   <div className="p-6 md:p-8">
@@ -373,9 +374,9 @@ export default async function MassagePage() {
                     <tbody>
                       {packageSummary.map((row) => (
                         <tr key={row.ritualPrice} className="border-t border-border">
-                          <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.ritualPrice)}</td>
+                          <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.ritualPrice)} <PlusVat className="text-xs text-foreground/50" /></td>
                           <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.sixSessionValue)}</td>
-                          <td className="px-4 py-3 font-semibold text-accent">AED {formatAed(row.packagePrice)}</td>
+                          <td className="px-4 py-3 font-semibold text-accent">AED {formatAed(row.packagePrice)} <PlusVat className="text-xs font-normal text-foreground/50" /></td>
                           <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.saving)}</td>
                         </tr>
                       ))}

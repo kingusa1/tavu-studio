@@ -2,6 +2,7 @@ import Header from '@/components/landing/Header';
 import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
+import PlusVat from '@/components/common/PlusVat';
 import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
 
@@ -46,7 +47,7 @@ function PriceRow({
       </div>
       <div className="text-right flex-shrink-0">
         <p className="font-headline text-xl text-accent">{price}</p>
-        <p className="text-xs text-foreground/50 whitespace-nowrap">{period ? `AED / ${period}` : 'AED'}</p>
+        <p className="text-xs text-foreground/50 whitespace-nowrap">{period ? `AED / ${period}` : 'AED'} <PlusVat /></p>
       </div>
     </div>
   );
@@ -258,7 +259,7 @@ export default async function PricingPage() {
                           <p className="font-semibold text-primary text-lg mb-1">{row.name}</p>
                           <p className="mb-3">
                             <span className="text-xs text-foreground/50 mr-1">AED</span>
-                            <span className="font-headline text-3xl text-accent">{row.price}</span>
+                            <span className="font-headline text-3xl text-accent">{row.price}</span> <PlusVat className="text-xs text-foreground/50" />
                             <span className="text-xs text-foreground/50 ml-2">| {row.validityLine}</span>
                           </p>
                           <p className="text-sm text-foreground/70 mb-4">{row.description}</p>

@@ -1,6 +1,7 @@
 "use client";
 
 import MotionWrapper from '@/components/common/MotionWrapper';
+import PlusVat from '@/components/common/PlusVat';
 import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
 
@@ -70,7 +71,7 @@ export default function Packages({ data, reformerOffers, breathingOffers }: Pack
                                             </div>
                                             <div className="text-right flex-shrink-0">
                                                 <p className="font-headline text-xl text-accent">{row.price}</p>
-                                                <p className="text-xs text-foreground/50">AED</p>
+                                                <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
                                             </div>
                                         </div>
                                     );
@@ -115,7 +116,7 @@ export default function Packages({ data, reformerOffers, breathingOffers }: Pack
                                             <div className="text-right flex-shrink-0">
                                                 <p className="font-headline text-xl text-accent">{row.price}</p>
                                                 <p className="text-xs text-foreground/50 whitespace-nowrap">
-                                                    {row.period ? `AED / ${row.period}` : 'AED'}
+                                                    {row.period ? `AED / ${row.period}` : 'AED'} <PlusVat />
                                                 </p>
                                             </div>
                                         </div>
