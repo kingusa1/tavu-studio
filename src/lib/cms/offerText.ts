@@ -241,9 +241,9 @@ export type RitualMassagePageRow = {
 };
 
 /**
- * `ritualRow(r, 'massagePage')` — the massage page's cards (§4.6). Returns bare values
- * (prices without an "AED" suffix — the page renders "AED" as a separate, smaller span, per
- * services/massage/page.tsx:292,296,300,400); labels and connecting words that live on the
+ * `ritualRow(r, 'massagePage')` — the massage page's cards (§4.6). The `targeted` branch returns bare
+ * numbers (the page adds "AED + 5% VAT" as a smaller span); every other branch already ends its
+ * prices with "AED + 5% VAT" (PLUS_VAT), so callers must not append it again; labels and connecting words that live on the
  * page global itself (e.g. `escape.durationPrefix`) are composed by the page, not here.
  */
 export function massagePageRitualRow(ritual: RitualLike): RitualMassagePageRow {

@@ -374,9 +374,9 @@ export default async function MassagePage() {
                     <tbody>
                       {packageSummary.map((row) => (
                         <tr key={row.ritualPrice} className="border-t border-border">
-                          <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.ritualPrice)} <PlusVat className="text-xs text-foreground/50" /></td>
+                          <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.ritualPrice)} <PlusVat className="block text-xs text-foreground/50" /></td>
                           <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.sixSessionValue)}</td>
-                          <td className="px-4 py-3 font-semibold text-accent">AED {formatAed(row.packagePrice)} <PlusVat className="text-xs font-normal text-foreground/50" /></td>
+                          <td className="px-4 py-3 font-semibold text-accent">AED {formatAed(row.packagePrice)} <PlusVat className="block text-xs font-normal text-foreground/50" /></td>
                           <td className="px-4 py-3 text-foreground/70">AED {formatAed(row.saving)}</td>
                         </tr>
                       ))}

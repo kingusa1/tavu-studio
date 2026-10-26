@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
-import PlusVat from '@/components/common/PlusVat';
+import PriceStack from '@/components/common/PriceStack';
 import VatNote from '@/components/common/VatNote';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
@@ -215,10 +215,7 @@ export default async function ReformerPilatesPage() {
                           {row.description && <p className="text-sm text-foreground/60 mt-1">{row.description}</p>}
                           {row.bonus && <p className="text-xs text-accent font-medium mt-1.5">{row.bonus}</p>}
                         </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="font-headline text-xl text-accent">{row.price}</p>
-                          <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
-                        </div>
+                        <PriceStack price={row.price} />
                       </div>
                     );
                   })}

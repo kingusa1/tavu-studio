@@ -1,6 +1,6 @@
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
-import PlusVat from '@/components/common/PlusVat';
+import PriceStack from '@/components/common/PriceStack';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import MindbodyWidget from '@/components/mindbody/MindbodyWidget';
@@ -71,10 +71,7 @@ export default async function AppointmentsPage() {
                           <h3 className="font-headline text-2xl text-primary">{row.name}</h3>
                           {row.subtitle && <p className="text-sm text-foreground/60 mt-1">{row.subtitle}</p>}
                         </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="font-headline text-3xl text-accent">{row.price}</p>
-                          <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
-                        </div>
+                        <PriceStack price={row.price} priceClassName="text-3xl" />
                       </div>
 
                       {row.description && <p className="text-sm text-foreground/70 mb-6">{row.description}</p>}

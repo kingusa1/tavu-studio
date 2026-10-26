@@ -1,7 +1,7 @@
 "use client";
 
 import MotionWrapper from '@/components/common/MotionWrapper';
-import PlusVat from '@/components/common/PlusVat';
+import PriceStack from '@/components/common/PriceStack';
 import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
 
@@ -69,10 +69,7 @@ export default function Packages({ data, reformerOffers, breathingOffers }: Pack
                                                     <p className="text-xs text-accent font-medium mt-1.5">{row.bonus}</p>
                                                 )}
                                             </div>
-                                            <div className="text-right flex-shrink-0">
-                                                <p className="font-headline text-xl text-accent">{row.price}</p>
-                                                <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
-                                            </div>
+                                            <PriceStack price={row.price} />
                                         </div>
                                     );
                                 })}
@@ -113,12 +110,7 @@ export default function Packages({ data, reformerOffers, breathingOffers }: Pack
                                                     <p className="text-xs text-foreground/40 mt-1">{row.note}</p>
                                                 )}
                                             </div>
-                                            <div className="text-right flex-shrink-0">
-                                                <p className="font-headline text-xl text-accent">{row.price}</p>
-                                                <p className="text-xs text-foreground/50 whitespace-nowrap">
-                                                    {row.period ? `AED / ${row.period}` : 'AED'} <PlusVat />
-                                                </p>
-                                            </div>
+                                            <PriceStack price={row.price} unit={row.period ? `AED / ${row.period}` : 'AED'} />
                                         </div>
                                     );
                                 })}

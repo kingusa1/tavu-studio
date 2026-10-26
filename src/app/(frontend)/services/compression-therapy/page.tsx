@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
-import PlusVat from '@/components/common/PlusVat';
+import PriceStack from '@/components/common/PriceStack';
 import VatNote from '@/components/common/VatNote';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
@@ -148,10 +148,7 @@ export default async function CompressionTherapyPage() {
                         <h3 className="font-headline text-2xl text-primary">{asOfferLike(individual).name}</h3>
                         {individualRow.subtitle && <p className="text-sm text-foreground/60 mt-1">{individualRow.subtitle}</p>}
                       </div>
-                      <div className="text-right flex-shrink-0">
-                        <p className="font-headline text-3xl text-accent">{individualRow.price}</p>
-                        <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
-                      </div>
+                      <PriceStack price={individualRow.price} priceClassName="text-3xl" />
                     </div>
 
                     {individualRow.description && <p className="text-sm text-foreground/70 mb-6">{individualRow.description}</p>}
@@ -203,10 +200,7 @@ export default async function CompressionTherapyPage() {
                         <h3 className="font-headline text-2xl text-primary">{asOfferLike(pack).name}</h3>
                         {packRow.subtitle && <p className="text-sm text-foreground/60 mt-1">{packRow.subtitle}</p>}
                       </div>
-                      <div className="text-right flex-shrink-0">
-                        <p className="font-headline text-3xl text-accent">{packRow.price}</p>
-                        <p className="text-xs text-foreground/50 whitespace-nowrap">AED <PlusVat /></p>
-                      </div>
+                      <PriceStack price={packRow.price} priceClassName="text-3xl" />
                     </div>
 
                     {packRow.description && <p className="text-sm text-foreground/70 mb-6">{packRow.description}</p>}

@@ -3,6 +3,7 @@ import Footer from '@/components/landing/Footer';
 import BackgroundImage from '@/components/common/BackgroundImage';
 import MotionWrapper from '@/components/common/MotionWrapper';
 import PlusVat from '@/components/common/PlusVat';
+import PriceStack from '@/components/common/PriceStack';
 import Link from 'next/link';
 import VatNote from '@/components/common/VatNote';
 
@@ -45,10 +46,7 @@ function PriceRow({
         {bonus && <p className="text-xs text-accent font-medium mt-1.5">{bonus}</p>}
         {note && <p className="text-xs text-foreground/40 mt-1">{note}</p>}
       </div>
-      <div className="text-right flex-shrink-0">
-        <p className="font-headline text-xl text-accent">{price}</p>
-        <p className="text-xs text-foreground/50 whitespace-nowrap">{period ? `AED / ${period}` : 'AED'} <PlusVat /></p>
-      </div>
+      <PriceStack price={price} unit={period ? `AED / ${period}` : 'AED'} />
     </div>
   );
 }
