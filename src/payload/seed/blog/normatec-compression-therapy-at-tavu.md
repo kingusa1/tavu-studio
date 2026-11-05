@@ -1,4 +1,4 @@
-> **TL;DR:** NormaTec Compression Therapy at TAVÚ uses pulsing air compression to support circulation and recovery. A full Individual Session runs 45 minutes for AED 160, with a 20-minute Compression Flush add-on and a 6-session Recovery Pack. Book through the website or the Mindbody app.
+> **TL;DR:** NormaTec Compression Therapy at TAVÚ uses pulsing air compression to support circulation and recovery. A full Individual Session runs 45 minutes for AED 160, with a 15-minute Compression Flush add-on and a 6-session Recovery Pack. Book through the website or the Mindbody app.
 
 ## What Is Compression Therapy at TAVÚ?
 
@@ -16,7 +16,7 @@ TAVÚ recommends it after intense training and for heavy or tight legs, injury r
 
 ## How a Session Works
 
-A full Individual Session runs 45 minutes, with pressure customized to you. For a quicker option, the 20-minute **Compression Flush** add-on can be booked onto any [Contrast Therapy](/blog/what-is-contrast-therapy) session for AED 50 — see what that session includes on the [Contrast Therapy page](/services/contrast-therapy).
+A full Individual Session runs 45 minutes, with pressure customized to you. For a quicker option, the 15-minute **Compression Flush** add-on can be booked onto any [Contrast Therapy](/blog/what-is-contrast-therapy) session for AED 50 — see what that session includes on the [Contrast Therapy page](/services/contrast-therapy).
 
 ## What It's Used For
 
@@ -37,13 +37,13 @@ All prices exclude VAT:
 
 - **Individual Session** — AED 160 (45 minutes, valid 7 days)
 - **Recovery Pack — 5 + 1** — AED 660 (5 sessions plus 1 complimentary, 6 × 45-minute sessions total, valid 45 days, non-transferable and non-refundable)
-- **Compression Flush add-on** — AED 50 (20 minutes, added to any Contrast Therapy session)
+- **Compression Flush add-on** — AED 50 (15 minutes, added to any Contrast Therapy session)
 
 Full pricing for every service, including the Reset and Ritual Unlimited memberships that bundle in Compression Therapy sessions, is on the [pricing page](/pricing).
 
 ## Pairing With Contrast Therapy
 
-Compression Therapy works as a standalone recovery session, and it can also be added to a Contrast Therapy visit: add the 20-minute Compression Flush to any Contrast Therapy session, or book the 45-minute session on its own.
+Compression Therapy works as a standalone recovery session, and it can also be added to a Contrast Therapy visit: add the 15-minute Compression Flush to any Contrast Therapy session, or book the 45-minute session on its own.
 
 ## How to Book
 

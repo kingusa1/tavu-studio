@@ -270,7 +270,7 @@ const FAQS: FaqSeed[] = [
   {
     question: 'How long is a Compression Therapy session?',
     answer:
-      'A full Individual Session is 45 minutes. A shorter 20-minute Compression Flush is also available as an add-on.',
+      'A full Individual Session is 45 minutes. A shorter 15-minute Compression Flush is also available as an add-on.',
     topic: 'compression-therapy',
     sortOrder: 2,
     sourceNote: 'site-settings.facts.compression-duration; seed/pricing.ts compression-flush durationShort',

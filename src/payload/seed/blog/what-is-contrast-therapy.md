@@ -32,7 +32,7 @@ All prices exclude VAT:
 - **Trio** — AED 600 (three guests, private or shared)
 - **Group** — AED 1,050 (up to six guests, private or shared)
 
-A **Compression Flush** (20 minutes) can be added to any session for AED 50 — see [NormaTec Compression Therapy](/blog/normatec-compression-therapy-at-tavu) for what that involves. Full pricing, including the Reset and Ritual Unlimited recovery memberships, is on the [pricing page](/pricing).
+A **Compression Flush** (15 minutes) can be added to any session for AED 50 — see [NormaTec Compression Therapy](/blog/normatec-compression-therapy-at-tavu) for what that involves. Full pricing, including the Reset and Ritual Unlimited recovery memberships, is on the [pricing page](/pricing).
 
 ## Memberships Built Around Contrast Therapy
 

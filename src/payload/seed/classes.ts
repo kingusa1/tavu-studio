@@ -624,7 +624,7 @@ export async function seedClasses(payload: Payload): Promise<void> {
           bullets: [
             { text: '{fact:compression-duration}-minute session' },
             { text: 'Customizable pressure' },
-            { text: 'Add-on Compression Flush (20 min — {price:compression-flush} AED)' },
+            { text: 'Add-on Compression Flush (15 min — {price:compression-flush} AED)' },
           ],
         },
       },
@@ -640,7 +640,7 @@ export async function seedClasses(payload: Payload): Promise<void> {
       },
       pairWith: {
         heading: 'Pair with Contrast Therapy',
-        text: 'Add Compression Flush (20 min — {price:compression-flush} AED) to any Contrast Therapy session for the ultimate recovery combo.',
+        text: 'Add Compression Flush (15 min — {price:compression-flush} AED) to any Contrast Therapy session for the ultimate recovery combo.',
         link: { label: 'Explore Contrast Therapy →', href: '/services/contrast-therapy' },
       },
       cta: {

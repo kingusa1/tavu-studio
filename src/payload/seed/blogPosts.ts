@@ -155,11 +155,11 @@ const ARTICLES: ArticleSeed[] = [
     coverAlt: 'NormaTec compression therapy equipment at TAVÚ Studio',
     markdownFile: 'normatec-compression-therapy-at-tavu.md',
     faq: [
-      { question: 'How long is a Compression Therapy session at TAVÚ?', answer: 'A full Individual Session is 45 minutes. A shorter 20-minute Compression Flush add-on is also available.' },
+      { question: 'How long is a Compression Therapy session at TAVÚ?', answer: 'A full Individual Session is 45 minutes. A shorter 15-minute Compression Flush add-on is also available.' },
       { question: 'What does Compression Therapy cost?', answer: 'An Individual Session is AED 160, valid 7 days. A Recovery Pack of 6 sessions (5+1) is AED 660, valid 45 days.' },
       {
         question: 'Can I add Compression Therapy to a Contrast Therapy session?',
-        answer: 'Yes — the 20-minute Compression Flush add-on can be booked onto any Contrast Therapy session for AED 50.',
+        answer: 'Yes — the 15-minute Compression Flush add-on can be booked onto any Contrast Therapy session for AED 50.',
       },
       {
         question: 'What is Compression Therapy used for?',

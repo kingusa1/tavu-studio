@@ -304,7 +304,7 @@ const OFFERS: OfferSeed[] = [
     durationLong: '60 Minutes',
     description:
       'A private Contrast Therapy session for one, combining sauna heat and a 5–8°C cold plunge to support recovery, circulation, and overall wellbeing.',
-    note: 'Add-on: Compression Flush (20 min) — {price:compression-flush} AED',
+    note: 'Add-on: Compression Flush (15 min) — {price:compression-flush} AED',
     visibility: { showOnHome: false, showOnPricing: true, showOnClasses: false, showOnServicePage: true, showOnAppointments: false, showOnLlms: true },
     structuredData: {
       mode: 'offer',
@@ -385,9 +385,9 @@ const OFFERS: OfferSeed[] = [
     category: 'add-on',
     kind: 'add-on',
     price: 50,
-    durationShort: '20 min',
+    durationShort: '15 min',
     visibility: { showOnHome: false, showOnPricing: false, showOnClasses: false, showOnServicePage: false, showOnAppointments: false, showOnLlms: true },
-    llmsLine: '- Add-on Compression Flush (20 min): {price:compression-flush}',
+    llmsLine: '- Add-on Compression Flush (15 min): {price:compression-flush}',
     active: true,
     sortOrder: 10,
   },
