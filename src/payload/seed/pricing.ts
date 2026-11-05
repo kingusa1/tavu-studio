@@ -12,6 +12,8 @@ import type { Payload } from 'payload';
 
 import type { MassageRitual, Offer, Policy } from '@/payload-types';
 
+import { contrastIntroOffer } from '../data/contrastIntroOffer';
+
 type OfferSeed = Omit<Offer, 'id' | 'updatedAt' | 'createdAt' | 'adminLabel'>;
 type RitualSeed = Omit<MassageRitual, 'id' | 'updatedAt' | 'createdAt'>;
 type PolicySeed = Omit<Policy, 'id' | 'updatedAt' | 'createdAt'>;
@@ -377,6 +379,8 @@ const OFFERS: OfferSeed[] = [
     active: true,
     sortOrder: 40,
   },
+
+  contrastIntroOffer,
 
   // Add-on (referenced by token; no card of its own — renders inside the Contrast llms section) -
   {

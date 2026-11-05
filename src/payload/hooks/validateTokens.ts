@@ -57,9 +57,9 @@ async function assertKnownTokens(data: unknown, req: PayloadRequest): Promise<vo
 
   try {
     const [offers, rituals, settings] = await Promise.all([
-      req.payload.find({ collection: 'offers', depth: 0, limit: 0, overrideAccess: true }),
-      req.payload.find({ collection: 'massage-rituals', depth: 0, limit: 0, overrideAccess: true }),
-      req.payload.findGlobal({ slug: 'site-settings', depth: 0, overrideAccess: true }).catch(() => null),
+      req.payload.find({ collection: 'offers', depth: 0, limit: 0, overrideAccess: true, req }),
+      req.payload.find({ collection: 'massage-rituals', depth: 0, limit: 0, overrideAccess: true, req }),
+      req.payload.findGlobal({ slug: 'site-settings', depth: 0, overrideAccess: true, req }).catch(() => null),
     ]);
     offersTotal = offers.totalDocs;
     ritualsTotal = rituals.totalDocs;
